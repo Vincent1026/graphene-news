@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>归档 · GrapheneDaily</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .archive-tabs {
+      display: flex;
+      gap: 0;
+      border-bottom: 1px solid var(--card-border);
+      margin: 28px 0 0;
+    }
+    .archive-tab {
+      padding: 12px 24px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+      margin-bottom: -1px;
+    }
+    .archive-tab:hover { color: var(--text); }
+    .archive-tab.active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 600; }
+
+    .tab-panel { display: none; padding: 32px 0; }
+    .tab-panel.active { display: block; }
+
+    /* === 年视图 === */
+    .year-section { margin-bottom: 48px; }
+    .year-heading {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+    }
+    .year-heading .y-count { font-size: 0.9rem; color: var(--text-muted); font-weight: 400; }
+    .month-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 14px;
+    }
+    .m-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 20px;
+      cursor: pointer;
+      transition: all 0.22s;
+      position: relative;
+      overflow: hidden;
+    }
+    .m-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--gradient);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s;
+    }
+    .m-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); border-color: rgba(0,198,255,0.25); }
+    .m-card:hover::after { transform: scaleX(1); }
+    .m-name { font-size: 1.1rem; font-weight: 700; color: #fff; }
+    .m-stats { font-size: 0.8rem; color: var(--text-muted); margin-top: 6px; }
+    .m-bar { margin-top: 12px; height: 3px; background: var(--card-border); border-radius: 2px; overflow: hidden; }
+    .m-bar-fill { height: 100%; background: var(--gradient); border-radius: 2px; }
+
+    /* === 月视图 === */
+    .month-archive { margin-bottom: 40px; }
+    .month-archive-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--card-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      cursor: pointer;
+    }
+    .month-archive-title a { font-size: 0.82rem; color: var(--text-muted); font-weight: 400; }
+    .month-archive-title a:hover { color: var(--accent); }
+    .month-days-list { display: flex; flex-direction: column; gap: 8px; }
+    .day-archive-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 18px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .day-archive-row:hover { border-color: rgba(0,198,255,0.3); background: var(--hover); }
+    .dar-date {
+      width: 80px;
+      flex-shrink: 0;
+    }
+    .dar-day { font-size: 1.4rem; font-weight: 800; color: var(--accent); line-height: 1; }
+    .dar-weekday { font-size: 0.72rem; color: var(--text-muted); }
+    .dar-divider { width: 1px; height: 40px; background: var(--card-border); flex-shrink: 0; }
+    .dar-preview { flex: 1; }
+    .dar-headline { font-size: 0.9rem; color: var(--text); font-weight: 500; margin-bottom: 3px; }
+    .dar-meta { font-size: 0.78rem; color: var(--text-muted); }
+    .dar-count {
+      flex-shrink: 0;
+      background: var(--tag-bg);
+      border: 1px solid rgba(0,198,255,0.15);
+      border-radius: 50px;
+      padding: 4px 12px;
+      font-size: 0.78rem;
+      color: var(--accent);
+    }
+
+    /* === 周视图 === */
+    .week-section { margin-bottom: 40px; }
+    .week-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .week-title .w-badge {
+      background: rgba(0,198,255,0.1);
+      border: 1px solid rgba(0,198,255,0.2);
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 0.75rem;
+      color: var(--accent);
+    }
+    .week-days-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 8px;
+    }
+    .wdc {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 14px 10px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .wdc:hover, .wdc.has-data { cursor: pointer; }
+    .wdc:hover { border-color: rgba(0,198,255,0.3); background: var(--hover); }
+    .wdc.today-mark { border-color: var(--accent); background: rgba(0,198,255,0.07); }
+    .wdc.empty { opacity: 0.35; cursor: default; }
+    .wdc .wdc-label { font-size: 0.68rem; color: var(--text-muted); margin-bottom: 4px; }
+    .wdc .wdc-num { font-size: 1.1rem; font-weight: 700; color: #fff; }
+    .wdc .wdc-count { font-size: 0.7rem; color: var(--text-muted); margin-top: 5px; }
+    .wdc.today-mark .wdc-count { color: var(--accent); font-weight: 600; }
+    @media (max-width: 600px) { .week-days-grid { grid-template-columns: repeat(4, 1fr); } }
+  </style>
+</head>
+<body>
+<div id="navbar-root"></div>
+
+<section style="padding: 40px 24px 0; background: var(--gradient-dark); border-bottom: 1px solid var(--card-border);">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div style="font-size:0.85rem; color:var(--text-muted); margin-bottom:8px;">
+      <a href="index.html" style="color:var(--text-muted)">首页</a>
+      <span style="margin:0 6px; opacity:0.4">/</span>
+      <span>归档</span>
+    </div>
+    <h1 style="font-size:1.9rem; font-weight:800; margin-bottom:8px;">新闻归档</h1>
+    <p style="color:var(--text-muted); font-size:0.95rem; padding-bottom:24px;">按年 / 月 / 周 / 日浏览全部石墨烯资讯</p>
+
+    <div class="archive-tabs">
+      <div class="archive-tab active" data-tab="year">📅 按年</div>
+      <div class="archive-tab" data-tab="month">🗓 按月</div>
+      <div class="archive-tab" data-tab="week">📋 按周</div>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+
+  <!-- 年视图 -->
+  <div class="tab-panel active" id="tab-year">
+    <div class="year-section">
+      <div class="year-heading">
+        2026 <span class="y-count">38条新闻</span>
+      </div>
+      <div class="month-cards-grid" id="year-2026-months"></div>
+    </div>
+  </div>
+
+  <!-- 月视图 -->
+  <div class="tab-panel" id="tab-month">
+    <div id="month-panel-container"></div>
+  </div>
+
+  <!-- 周视图 -->
+  <div class="tab-panel" id="tab-week">
+    <div id="week-panel-container"></div>
+  </div>
+
+</div>
+
+<div id="footer-root"></div>
+
+<script src="js/data.js"></script>
+<script src="js/ui.js"></script>
+<script>
+  document.getElementById('navbar-root').innerHTML = renderNavbarHome('archive');
+  document.getElementById('footer-root').innerHTML = renderFooter().replace(/href="index\.html"/g, 'href="index.html"');
+
+  // 标签页切换
+  document.querySelectorAll('.archive-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.archive-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+    });
+  });
+
+  // 处理 hash 跳转
+  if (location.hash === '#month-2026-03') {
+    document.querySelector('[data-tab="month"]').click();
+  } else if (location.hash === '#week-11') {
+    document.querySelector('[data-tab="week"]').click();
+  }
+
+  const months = [
+    { key: '03', name: '3月', full: '2026年3月', days: ['2026-03-17','2026-03-16','2026-03-15','2026-03-14','2026-03-13','2026-03-12','2026-03-11','2026-03-10'] },
+    { key: '02', name: '2月', full: '2026年2月', days: [] }
+  ];
+
+  // ========= 年视图 =========
+  document.getElementById('year-2026-months').innerHTML = months.map(m => {
+    const count = m.days.reduce((s, d) => s + getNewsByDate(d).length, 0);
+    const pct = Math.round(count / 40 * 100);
+    return `<div class="m-card" onclick="location.href='archive.html#${m.key}'; document.querySelector('[data-tab=month]').click();">
+      <div class="m-name">${m.full}</div>
+      <div class="m-stats">${m.days.length} 天 · ${count} 条新闻</div>
+      <div class="m-bar"><div class="m-bar-fill" style="width:${pct}%"></div></div>
+    </div>`;
+  }).join('');
+
+  // ========= 月视图 =========
+  const weekdayNames = ['周日','周一','周二','周三','周四','周五','周六'];
+  document.getElementById('month-panel-container').innerHTML = months.map(m => {
+    if (m.days.length === 0) {
+      return `<div class="month-archive" id="month-${m.key}">
+        <div class="month-archive-title">${m.full}<a href="#">暂无数据</a></div>
+      </div>`;
+    }
+    const daysHtml = m.days.map(d => {
+      const news = getNewsByDate(d);
+      const dayNum = d.split('-')[2];
+      const wdIdx = new Date(d+'T00:00:00').getDay();
+      const headline = news.length > 0 ? news[0].title : '暂无内容';
+      const year = d.substring(0,4); const mon = d.substring(5,7); const day = d.substring(8,10);
+      return `<div class="day-archive-row" onclick="location.href='news/${year}/${mon}/${year}${mon}${day}.html'">
+        <div class="dar-date">
+          <div class="dar-day">${parseInt(dayNum)}</div>
+          <div class="dar-weekday">${weekdayNames[wdIdx]}</div>
+        </div>
+        <div class="dar-divider"></div>
+        <div class="dar-preview">
+          <div class="dar-headline">${headline}</div>
+          <div class="dar-meta">${news.length > 1 ? `及 ${news.length - 1} 条其他新闻` : '共 1 条新闻'}</div>
+        </div>
+        <div class="dar-count">${news.length} 条</div>
+      </div>`;
+    }).join('');
+    return `<div class="month-archive" id="month-${m.key}">
+      <div class="month-archive-title">
+        ${m.full}
+        <a href="#">共 ${m.days.reduce((s,d)=>s+getNewsByDate(d).length,0)} 条新闻</a>
+      </div>
+      <div class="month-days-list">${daysHtml}</div>
+    </div>`;
+  }).join('');
+
+  // ========= 周视图 =========
+  const weeks = [
+    {
+      num: 11,
+      label: '第11周',
+      range: '3月11日 - 3月17日',
+      days: [
+        { date: '2026-03-11', label: '周三' },
+        { date: '2026-03-12', label: '周四' },
+        { date: '2026-03-13', label: '周五' },
+        { date: '2026-03-14', label: '周六' },
+        { date: '2026-03-15', label: '周日' },
+        { date: '2026-03-16', label: '周一' },
+        { date: '2026-03-17', label: '周二' },
+      ]
+    },
+    {
+      num: 10,
+      label: '第10周',
+      range: '3月4日 - 3月10日',
+      days: [
+        { date: '2026-03-04', label: '周三' },
+        { date: '2026-03-05', label: '周四' },
+        { date: '2026-03-06', label: '周五' },
+        { date: '2026-03-07', label: '周六' },
+        { date: '2026-03-08', label: '周日' },
+        { date: '2026-03-09', label: '周一' },
+        { date: '2026-03-10', label: '周二' },
+      ]
+    }
+  ];
+
+  document.getElementById('week-panel-container').innerHTML = weeks.map(w => {
+    const daysHtml = w.days.map(wd => {
+      const news = getNewsByDate(wd.date);
+      const dayNum = wd.date.split('-')[2];
+      const isToday = wd.date === getTodayStr();
+      const hasNews = news.length > 0;
+      const y = wd.date.substring(0,4), mo = wd.date.substring(5,7), d = wd.date.substring(8,10);
+      return `<div class="wdc ${isToday?'today-mark':''} ${!hasNews?'empty':'has-data'}"
+                   ${hasNews ? `onclick="location.href='news/${y}/${mo}/${y}${mo}${d}.html'"` : ''}>
+        <div class="wdc-label">${wd.label}</div>
+        <div class="wdc-num">${parseInt(dayNum)}</div>
+        <div class="wdc-count">${hasNews ? news.length+'条' : '无'}</div>
+      </div>`;
+    }).join('');
+    const totalCount = w.days.reduce((s, wd) => s + getNewsByDate(wd.date).length, 0);
+    return `<div class="week-section" id="week-${w.num}">
+      <div class="week-title">
+        ${w.label}
+        <span class="w-badge">${w.range}</span>
+        <span style="font-size:0.8rem;color:var(--text-muted);font-weight:400;">${totalCount} 条新闻</span>
+      </div>
+      <div class="week-days-grid">${daysHtml}</div>
+    </div>`;
+  }).join('');
+
+  // hash 锚点处理
+  if (location.hash) {
+    setTimeout(() => {
+      const el = document.querySelector(location.hash);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+  }
+</script>
+</body>
+</html>
