@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>石墨烯每日资讯 · 2026年3月16-17日</title>
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --card: #111827;
+    --card2: #1a2235;
+    --border: #1e3a5f;
+    --accent: #00d4ff;
+    --accent2: #00ff88;
+    --accent3: #ff6b35;
+    --accent4: #a855f7;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --tag-bg: #0f2040;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'PingFang SC', 'Microsoft YaHei', 'Segoe UI', sans-serif;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* ========== HEADER ========== */
+  .site-header {
+    background: linear-gradient(135deg, #050d1f 0%, #0a1628 50%, #050d1f 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 40px 20px 30px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .site-header::before {
+    content: '';
+    position: absolute;
+    top: -60px; left: 50%; transform: translateX(-50%);
+    width: 600px; height: 300px;
+    background: radial-gradient(ellipse, rgba(0,212,255,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .site-header .badge {
+    display: inline-block;
+    background: rgba(0,212,255,0.15);
+    border: 1px solid rgba(0,212,255,0.4);
+    color: var(--accent);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+  .site-header h1 {
+    font-size: clamp(24px, 4vw, 42px);
+    font-weight: 700;
+    background: linear-gradient(90deg, #00d4ff, #00ff88, #00d4ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 10px;
+    letter-spacing: -0.5px;
+  }
+  .site-header .subtitle {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 30px;
+  }
+
+  /* ========== STATS BAR ========== */
+  .stats-bar {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+  }
+  .stat-chip {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 30px;
+    padding: 8px 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+  }
+  .stat-chip .num {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .stat-chip .label { color: var(--muted); }
+
+  /* ========== NAV ========== */
+  .nav-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10,14,26,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    overflow-x: auto;
+  }
+  .nav-bar a {
+    display: inline-block;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 12px;
+    padding: 12px 14px;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+  }
+  .nav-bar a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* ========== MAIN LAYOUT ========== */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+  }
+
+  /* ========== DATE SECTION ========== */
+  .date-section { margin-bottom: 50px; }
+  .date-heading {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+  .date-heading .date-tag {
+    background: linear-gradient(135deg, rgba(0,212,255,0.2), rgba(0,255,136,0.1));
+    border: 1px solid rgba(0,212,255,0.35);
+    color: var(--accent);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 18px;
+    border-radius: 6px;
+    letter-spacing: 1px;
+  }
+  .date-heading .date-tag.orange {
+    background: linear-gradient(135deg, rgba(255,107,53,0.2), rgba(255,200,100,0.1));
+    border-color: rgba(255,107,53,0.35);
+    color: var(--accent3);
+  }
+  .date-heading .line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--border), transparent);
+  }
+  .date-heading .count {
+    color: var(--muted);
+    font-size: 12px;
+  }
+
+  /* ========== NEWS CARD ========== */
+  .news-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 18px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.5s ease forwards;
+  }
+  .news-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(0,212,255,0.1);
+  }
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .card-header {
+    padding: 20px 24px 16px;
+    cursor: pointer;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .card-num {
+    flex-shrink: 0;
+    width: 36px; height: 36px;
+    background: linear-gradient(135deg, rgba(0,212,255,0.2), rgba(0,255,136,0.1));
+    border: 1px solid rgba(0,212,255,0.3);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700;
+    color: var(--accent);
+  }
+  .card-num.orange {
+    background: linear-gradient(135deg, rgba(255,107,53,0.2), rgba(255,200,100,0.1));
+    border-color: rgba(255,107,53,0.3);
+    color: var(--accent3);
+  }
+  .card-meta { flex: 1; min-width: 0; }
+  .card-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.5;
+    margin-bottom: 8px;
+  }
+  .card-title-en {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 10px;
+    font-style: italic;
+  }
+  .card-tags {
+    display: flex; gap: 6px; flex-wrap: wrap;
+  }
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    padding: 2px 10px;
+    border-radius: 20px;
+    border: 1px solid;
+    letter-spacing: 0.3px;
+    cursor: pointer;
+    transition: all 0.15s;
+    user-select: none;
+  }
+  .tag:hover { opacity: 0.75; transform: scale(1.05); }
+  .tag.active-filter { box-shadow: 0 0 0 2px #fff3; transform: scale(1.08); }
+  .tag.source { background: rgba(0,212,255,0.08); border-color: rgba(0,212,255,0.25); color: #67e8f9; }
+  .tag.source:hover, .tag.source.active-filter { background: rgba(0,212,255,0.22); border-color: #67e8f9; }
+  .tag.domain { background: rgba(168,85,247,0.08); border-color: rgba(168,85,247,0.25); color: #c084fc; }
+  .tag.domain:hover, .tag.domain.active-filter { background: rgba(168,85,247,0.22); border-color: #c084fc; }
+  .tag.date   { background: rgba(0,255,136,0.08); border-color: rgba(0,255,136,0.25); color: #4ade80; }
+  .tag.date:hover, .tag.date.active-filter { background: rgba(0,255,136,0.22); border-color: #4ade80; }
+  .tag.hot    { background: rgba(255,107,53,0.08); border-color: rgba(255,107,53,0.25); color: #fb923c; }
+  .tag.hot:hover, .tag.hot.active-filter { background: rgba(255,107,53,0.22); border-color: #fb923c; }
+
+  /* ========== FILTER BAR ========== */
+  .filter-bar {
+    background: rgba(10,14,26,0.9);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .filter-label {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-right: 4px;
+    white-space: nowrap;
+  }
+  .filter-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .filter-chip:hover { border-color: var(--accent); color: var(--accent); }
+  .filter-chip.active { background: rgba(0,212,255,0.12); border-color: var(--accent); color: var(--accent); }
+  .filter-chip.clear-btn { border-color: rgba(255,107,53,0.3); color: rgba(255,107,53,0.7); }
+  .filter-chip.clear-btn:hover { border-color: var(--accent3); color: var(--accent3); background: rgba(255,107,53,0.1); }
+  .filter-count {
+    font-size: 11px;
+    color: var(--muted);
+    margin-left: auto;
+    white-space: nowrap;
+  }
+  .filter-count span { color: var(--accent); font-weight: 600; }
+
+  /* 被过滤隐藏的卡片 */
+  .news-card.filtered-out {
+    display: none;
+  }
+  /* 日期分区：若所有卡片都被过滤，隐藏整个区块标题 */
+  .date-section.all-hidden .date-heading {
+    display: none;
+  }
+
+  .card-toggle {
+    flex-shrink: 0;
+    color: var(--muted);
+    font-size: 18px;
+    transition: transform 0.3s;
+    margin-top: 4px;
+    user-select: none;
+  }
+  .card-toggle.open { transform: rotate(180deg); }
+
+  /* ========== CARD BODY ========== */
+  .card-body {
+    display: none;
+    padding: 0 24px 24px;
+    border-top: 1px solid var(--border);
+  }
+  .card-body.open { display: block; }
+
+  .body-section { margin-top: 18px; }
+  .body-section h4 {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--muted);
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .body-section p {
+    font-size: 14px;
+    color: #cbd5e1;
+    line-height: 1.8;
+    margin-bottom: 10px;
+  }
+
+  .data-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+    margin-top: 10px;
+  }
+  .data-item {
+    background: var(--tag-bg);
+    border: 1px solid rgba(0,212,255,0.15);
+    border-radius: 8px;
+    padding: 10px 14px;
+  }
+  .data-item .di-label { font-size: 11px; color: var(--muted); margin-bottom: 4px; }
+  .data-item .di-val { font-size: 14px; font-weight: 600; color: var(--accent); }
+
+  .quote-box {
+    background: rgba(0,212,255,0.05);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 12px 16px;
+    margin: 12px 0;
+    font-size: 13px;
+    color: #a5f3fc;
+    font-style: italic;
+    line-height: 1.7;
+  }
+
+  .source-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--accent);
+    font-size: 12px;
+    text-decoration: none;
+    margin-top: 14px;
+    padding: 6px 14px;
+    border: 1px solid rgba(0,212,255,0.25);
+    border-radius: 6px;
+    transition: all 0.2s;
+  }
+  .source-link:hover {
+    background: rgba(0,212,255,0.1);
+    border-color: var(--accent);
+  }
+
+  /* ========== FOOTER ========== */
+  .footer {
+    text-align: center;
+    padding: 30px;
+    color: var(--muted);
+    font-size: 12px;
+    border-top: 1px solid var(--border);
+  }
+  .footer span { color: var(--accent); }
+
+  /* ========== ANIMATION DELAYS ========== */
+  .news-card:nth-child(1)  { animation-delay: 0.05s; }
+  .news-card:nth-child(2)  { animation-delay: 0.10s; }
+  .news-card:nth-child(3)  { animation-delay: 0.15s; }
+  .news-card:nth-child(4)  { animation-delay: 0.20s; }
+  .news-card:nth-child(5)  { animation-delay: 0.25s; }
+  .news-card:nth-child(6)  { animation-delay: 0.30s; }
+  .news-card:nth-child(7)  { animation-delay: 0.35s; }
+  .news-card:nth-child(8)  { animation-delay: 0.40s; }
+  .news-card:nth-child(9)  { animation-delay: 0.45s; }
+  .news-card:nth-child(10) { animation-delay: 0.50s; }
+  .news-card:nth-child(11) { animation-delay: 0.55s; }
+  .news-card:nth-child(12) { animation-delay: 0.60s; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="badge">GRAPHENE DAILY INTELLIGENCE</div>
+  <h1>⬡ 石墨烯每日资讯</h1>
+  <div class="subtitle">2026年3月16日 — 3月17日 · 全球石墨烯领域最新动态</div>
+  <div class="stats-bar">
+    <div class="stat-chip"><span class="num">14</span><span class="label">条新闻</span></div>
+    <div class="stat-chip"><span class="num">2</span><span class="label">天跨度</span></div>
+    <div class="stat-chip"><span class="num">6</span><span class="label">来源渠道</span></div>
+    <div class="stat-chip"><span class="num">7</span><span class="label">应用领域</span></div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav class="nav-bar">
+  <a href="#mar17">📅 3月17日（6条）</a>
+  <a href="#mar16">📅 3月16日（8条）</a>
+  <a href="#defense">🛡️ 国防雷达</a>
+  <a href="#epa">✅ EPA监管</a>
+  <a href="#bio">🔬 生物医学</a>
+  <a href="#energy">⚡ 储能电池</a>
+  <a href="#textile">👘 纺织材料</a>
+  <a href="#standard">📋 国际标准</a>
+</nav>
+
+<!-- FILTER BAR -->
+<div class="filter-bar" id="filter-bar">
+  <span class="filter-label">🔍 筛选</span>
+  <span class="filter-chip active" data-filter="all" onclick="setFilter('all',this)">全部 <b>14</b></span>
+  <span class="filter-chip" data-filter="domain" data-value="🛡️ 国防雷达" onclick="setFilter('domain','🛡️ 国防雷达',this)">🛡️ 国防雷达</span>
+  <span class="filter-chip" data-filter="domain" data-value="✅ EPA监管" onclick="setFilter('domain','✅ EPA监管',this)">✅ EPA监管</span>
+  <span class="filter-chip" data-filter="domain" data-value="🔬 生物医学" onclick="setFilter('domain','🔬 生物医学',this)">🔬 生物医学</span>
+  <span class="filter-chip" data-filter="domain" data-value="⚡ 储能电池" onclick="setFilter('domain','⚡ 储能电池',this)">⚡ 储能电池</span>
+  <span class="filter-chip" data-filter="domain" data-value="👘 纺织材料" onclick="setFilter('domain','👘 纺织材料',this)">👘 纺织材料</span>
+  <span class="filter-chip" data-filter="domain" data-value="📋 国际标准" onclick="setFilter('domain','📋 国际标准',this)">📋 国际标准</span>
+  <span class="filter-chip" data-filter="domain" data-value="🏭 产业化" onclick="setFilter('domain','🏭 产业化',this)">🏭 产业化</span>
+  <span class="filter-chip" data-filter="domain" data-value="♻️ 绿色制备" onclick="setFilter('domain','♻️ 绿色制备',this)">♻️ 绿色制备</span>
+  <span class="filter-chip" data-filter="domain" data-value="🏗️ 建筑材料" onclick="setFilter('domain','🏗️ 建筑材料',this)">🏗️ 建筑材料</span>
+  <span class="filter-chip" data-filter="domain" data-value="⚡ 储能/资源" onclick="setFilter('domain','⚡ 储能/资源',this)">⚡ 储能/资源</span>
+  <span class="filter-chip" data-filter="domain" data-value="🔬 自旋电子学" onclick="setFilter('domain','🔬 自旋电子学',this)">🔬 自旋电子学</span>
+  <span class="filter-chip" data-filter="hot" data-value="🔥 重磅" onclick="setFilter('hot','🔥 重磅',this)">🔥 重磅</span>
+  <span class="filter-chip clear-btn" onclick="setFilter('all',document.querySelector('[data-filter=all]'))">✕ 清除筛选</span>
+  <span class="filter-count" id="filter-count">显示 <span id="visible-count">14</span> / 14 条</span>
+</div>
+
+<div class="container">
+
+  <!-- ===== 3月17日 ===== -->
+  <div class="date-section" id="mar17">
+    <div class="date-heading">
+      <div class="date-tag orange">📅 2026年3月17日（星期二）</div>
+      <div class="line"></div>
+      <div class="count">6 条新闻</div>
+    </div>
+
+    <!-- 17-1 -->
+    <div class="news-card" id="standard">
+      <div class="card-header" onclick="toggle(this)">
+        <div class="card-num orange">01</div>
+        <div class="card-meta">
+          <div class="card-title">浙大高超团队主导：氧化石墨烯国际标准正式发布（IEC 62565-6-3）</div>
+          <div class="card-title-en">IEC publishes international standard for graphene oxide led by Zhejiang University</div>
+          <div class="card-tags">
+            <span class="tag source">腾讯新闻</span>
+            <span class="tag domain">📋 国际标准</span>
+            <span class="tag date">3月17日</span>
+            <span class="tag hot">🔥 重磅</span>
+          </div>
+        </div>
+        <div class="card-toggle">▼</div>
+      </div>
+      <div class="card-body">
+        <div class="body-section">
+          <h4>新闻详情</h4>
+          <p>国际电工委员会（IEC）正式发布石墨烯纳米材料国际标准 <strong>IEC 62565-6-3</strong>，该标准由浙江大学高超教授团队主导制定，是全球首个针对氧化石墨烯（GO）的综合性国际标准，填补了该领域长达十余年的国际标准空白。</p>
+          <p>该标准系统规定了氧化石墨烯的术语定义、表征方法、质量要求及检测规范，为全球氧化石墨烯的生产、贸易和应用提供了统一的技术语言。高超教授团队历经5年国际协商，联合中、美、英、德、日、韩等12个国家专家共同起草完成。</p>
+          <div class="quote-box">
+            "这是中国科学家在纳米材料国际标准领域取得的重要突破，将有力推动全球石墨烯产业的规范化发展，提升中国在全球石墨烯供应链中的话语权。" —— 高超教授团队声明
+          </div>
+        </div>
+        <div class="body-section">
+          <h4>关键数据</h4>
+          <div class="data-grid">
+            <div class="data-item"><div class="di-label">标准编号</div><div class="di-val">IEC 62565-6-3</div></div>
+            <div class="data-item"><div class="di-label">参与国家</div><div class="di-val">12个国家</div></div>
+            <div class="data-item"><div class="di-label">标准制定周期</div><div class="di-val">5年</div></div>
+            <div class="data-item"><div class="di-label">主导机构</div><div class="di-val">浙江大学高超团队</div></div>
+          </div>
+        </div>
+        <a class="source-link" href="https://news.qq.com/rain/a/20260317A03XLQ00" target="_blank">↗ 查看原文</a>
+      </div>
+    </div>
+
+    <!-- 17-2 -->
+    <div class="news-card">
+      <div class="card-header" onclick="toggle(this)">
+        <div class="card-num orange">02</div>
+        <div class="card-meta">
+          <div class="card-title">国家石墨烯创新中心：中试平台撬动全产业链，推动石墨烯量产化落地</div>
+          <div class="card-title-en">National Graphene Innovation Center pilots scale-up to industrialize full supply chain</div>
+          <div class="card-tags">
+            <span class="tag source">新浪财经</span>
+            <span class="tag domain">🏭 产业化</span>
+            <span class="tag date">3月17日</span>
+            <span class="tag hot">🔥 重磅</span>
+          </div>
+        </div>
+        <div class="card-toggle">▼</div>
+      </div>
+      <div class="card-body">
+        <div class="body-section">
+          <h4>新闻详情</h4>
+          <p>国家石墨烯创新中心（常州）发布2026年首季度工作进展报告，中心自主建设的石墨烯中试平台已累计完成<strong>超过32个</strong>企业技术攻关项目，帮助12家中小企业实现石墨烯基材料的规模化生产突破，年产值转化超过<strong>4.7亿元</strong>。</p>
+          <p>中心重点推进三大方向：石墨烯导热膜在消费电子散热领域的规模应用、石墨烯防腐涂料在海洋工程中的示范工程、以及石墨烯改性锂电池隔膜的量产技术。目前已与宁德时代、海洋化工研究院等头部企业签署战略合作协议。</p>
+          <p>中心主任表示，中试平台的核心价值在于打通"实验室—中试—量产"三级跨越的最后一公里，通过共享仪器设备、工艺诊断、可靠性测试等服务，大幅降低中小企业的创新成本。</p>
+          <div class="quote-box">
+            "石墨烯产业从'万能材料'的概念炒作走向真正的规模应用，需要中试平台这个不可或缺的支撑节点。" —— 国家石墨烯创新中心主任
+          </div>
+        </div>
+        <div class="body-section">
+          <h4>关键数据</h4>
+          <div class="data-grid">
+            <div class="data-item"><div class="di-label">累计攻关项目</div><div class="di-val">32+个</div></div>
+            <div class="data-item"><div class="di-label">受益企业</div><div class="di-val">12家</div></div>
+            <div class="data-item"><div class="di-label">年产值转化</div><div class="di-val">4.7亿元</div></div>
+            <div class="data-item"><div class="di-label">合作头部企业</div><div class="di-val">宁德时代等</div></div>
+          </div>
+        </div>
+        <a class="source-link" href="https://finance.sina.com.cn/wm/2026-03-16/doc-inhrevaq9821130.shtml" target="_blank">↗ 查看原文</a>
+      </div>
+    </div>
+
+    <!-- 17-3 -->
+    <div class="news-card">
+      <div class="card-header" onclick="toggle(this)">
+        <div class="card-num orange">03</div>
+        <div class="card-meta">
+          <div class="card-title">GMG 热管理涂层 THERMAL-XR® 再获美国 EPA 新批准，商业化提速</div>
+          <div class="card-title-en">GMG secures additional US EPA approval for THERMAL-XR® graphene coating</div>
+          <div class="card-tags">
+            <span class="tag source">graphene-info</span>
+            <span class="tag domain">✅ EPA监管</span>
+            <span class="tag date">3月17日</span>
+          </div>
+        </div>
+        <div class="card-toggle">▼</div>
+      </div>
+      <div class="card-body">
+        <div class="body-section">
+          <h4>新闻详情</h4>
+          <p>澳大利亚石墨烯制造集团（GMG, Graphene Manufacturing Group）宣布，其旗舰产品<strong>THERMAL-XR® 石墨烯热管理涂层</strong>获得美国环保署（EPA）追加扩展应用批准，允许该产品在更广泛的工业设备、暖通空调（HVAC）系统及数据中心散热场景中商业销售。</p>
+          <p>此次批准是 GMG 在3月16日首次获得 EPA 基础注册许可后的快速延伸，标志着 THERMAL-XR® 的合规销售范围已覆盖美国全境主要商业应用场景。该涂层可在金属或非金属表面形成单原子层厚度的石墨烯薄膜，实测导热效率提升可达<strong>30-45%</strong>，并具备防腐蚀特性。</p>
+          <div class="quote-box">
+            "获得 EPA 的扩展批准意味着我们可以立即向美国大型数据中心和工业客户提供 THERMAL-XR®，这是我们商业化进程中的一个关键里程碑。" —— GMG CEO Craig Nicol
+          </div>
+        </div>
+        <div class="body-section">
+          <h4>关键数据</h4>
+          <div class="data-grid">
+            <div class="data-item"><div class="di-label">产品名称</div><div class="di-val">THERMAL-XR®</div></div>
+            <div class="data-item"><div class="di-label">导热效率提升</div><div class="di-val">30–45%</div></div>
+            <div class="data-item"><div class="di-label">监管机构</div><div class="di-val">美国 EPA</div></div>
+            <div class="data-item"><div class="di-label">目标市场</div><div class="di-val">数据中心/HVAC</div></div>
+          </div>
+        </div>
+        <a class="source-link" href="https://www.graphene-info.com/gmg-secures-us-epa-approval-thermal-xr-coating" target="_blank">↗ 查看原文</a>
+      </div>
+    </div>
+
+    <!-- 17-4 -->
+    <div class="news-card">
+      <div class="card-header" onclick="toggle(this)">
+        <div class="card-num orange">04</div>
+        <div class="card-meta">
+          <div class="card-title">阳光激活石墨烯膜从卤水中高效回收电池级锂，能耗降低60%</div>
+          <div class="card-title-en">Sunlight-activated graphene membrane recovers battery-grade lithium from brines with 60% less energy</div>
+          <div class="card-tags">
+            <span class="tag source">graphene-info</span>
+            <span class="tag domain">⚡ 储能/资源</span>
+            <span class="tag date">3月17日</span>
+            <span class="tag hot">🔥 突破</span>
+          </div>
+        </div>
+        <div class="card-toggle">▼</div>
+      </div>
+      <div class="card-body">
+        <div class="body-section">
+          <h4>新闻详情</h4>
+          <p>发表于《自然·可持续发展》的最新研究揭示了一种利用太阳光激活氧化石墨烯（GO）膜，从盐湖卤水中高选择性提取锂离子的新技术。该技术由澳大利亚蒙纳士大学联合中科院长春应用化学研究所共同开发。</p>
+          <p>核心机制：在太阳光照射下，GO 膜的光热效应在膜表面形成温度梯度，结合表面官能团对 Li⁺ 的选择性配位，实现对 Mg²⁺/Li⁺ 分离系数高达<strong>4500:1</strong>的超高选择性。相比传统蒸发池提锂，能耗降低约<strong>60%</strong>，提锂效率提升<strong>3倍</strong>，且无需外部电力驱动。</p>
+          <p>这对解决全球锂资源紧缺问题具有重要意义——全球已探明的盐湖卤水中储存了约<strong>58%</strong>的可开采锂资源，但传统提取成本极高。该技术若商业化落地，将大幅降低新能源汽车电池供应链成本。</p>
+          <div class="quote-box">
+            "我们的石墨烯膜可以直接利用太阳能进行锂的提取，这是一个真正可持续、可扩展的绿色锂矿方案。"
+          </div>
+        </div>
+        <div class="body-section">
+          <h4>关键数据</h4>
+          <div class="data-grid">
+            <div class="data-item"><div class="di-label">Mg²⁺/Li⁺ 分离系数</div><div class="di-val">4500:1</div></div>
+            <div class="data-item"><div class="di-label">能耗降低</div><div class="di-val">60%</div></div>
+            <div class="data-item"><div class="di-label">提锂效率提升</div><div class="di-val">3倍</div></div>
+            <div class="data-item"><div class="di-label">盐湖储锂比例</div><div class="di-val">全球58%</div></div>
+          </div>
+        </div>
+        <a class="source-link" href="https://www.graphene-info.com/sunlight-activated-graphene-membrane-recovers-battery-grade-lithium-brines" target="_blank">↗ 查看原文</a>
+      </div>
+    </div>
+
+    <!-- 17-5 -->
+    <div class="news-card">
+      <div class="card-header" onclick="toggle(this)">
+        <div class="card-num orange">05</div>
+        <div class="card-meta">
+          <div class="card-title">花生壳制备高质量石墨烯：农业废弃物变身先进功能材料新路径</div>
+          <div class="card-title-en">Peanut shells used as feedstock to produce high-quality graphene in breakthrough green synthesis</div>
+          <div class="card-tags">
+            <span class="tag source">Sustainability Matters</span>
+            <span class="tag domain">♻️ 绿色制备</span>
+            <span class="tag date">3月17日</span>
+          </div>
+        </div>
+        <div class="card-toggle">▼</div>
+      </div>
+      <div class="card-body">
+        <div class="body-section">
+          <h4>新闻详情</h4>
+          <p>澳大利亚科廷大学研究团队在《Carbon》期刊发表研究，成功以花生壳作为碳源，通过优化的化学气相沉积（CVD）工艺，制备出导电性、结晶质量与商业级石墨烯相当的高品质单层/双层石墨烯薄膜。</p>
+          <p>研究关键突破：利用花生壳中天然的碳水化合物（纤维素+木质素）组分，在特定热解条件下产生高纯碳源气体，避免了传统 CVD 工艺对甲烷等化石燃料的依赖。拉曼光谱测试显示，所得石墨烯的 <strong>2D/G 峰强比达到 2.1</strong>（接近理想单层石墨烯的2.0），缺陷峰（D 峰）极低，表明晶体质量优异。</p>
+          <p>此方法每公斤花生壳可产出约 <strong>0.8g</strong> 高质量石墨烯，同时每吨花生壳可减少约 <strong>1.2吨 CO₂</strong> 排放（相比直接焚烧），为农业废弃物的高值化利用提供了全新路径。</p>
+          <div class="quote-box">
+            "这项技术最令人兴奋的地方是完全可以就地取材——全球每年产生数百万吨花生壳废弃物，都是潜在的石墨烯原料。"
+          </div>
+        </div>
+        <div class="body-section">
+          <h4>关键数据</h4>
+          <div class="data-grid">
+            <div class="data-item"><div class="di-label">2D/G 峰强比</div><div class="di-val">2.1</div></div>
+            <div class="data-item"><div class="di-label">产出比</div><div class="di-val">0.8g/kg花生壳</div></div>
+            <div class="data-item"><div class="di-label">减碳效果</div><div class="di-val">1.2吨CO₂/吨</div></div>
+            <div class="data-item"><div class="di-label">发表期刊</div><div class="di-val">Carbon</div></div>
+          </div>
+        </div>
+        <a class="source-link" href="https://www.sustainabilitymatters.net.au/content/waste/case-study/peanut-shells-used-for-high-quality-graphene-484792043" target="_blank">↗ 查看原文</a>
+      </div>
+    </div>
+
+    <!-- 17-6 -->
+    <div class="news-card">
+      <div class="card-header" onclick="toggle(this)">
+        <div class="card-num orange">06</div>
+        <div class="card-meta">
+          <div class="card-title">Holcim UK 与金丝雀码头集团合作，探索石墨烯增强混凝土在超高层建筑中的应用</div>
+          <div class="card-title-en">Holcim UK and Canary Wharf Group explore graphene-enhanced concrete for high-rise construction</div>
+          <div class="card-tags">
+            <span class="tag source">graphene-info</span>
+            <span class="tag domain">🏗️ 建筑材料</span>
+            <span class="tag date">3月17日</span>
+          </div>
+        </div>
+        <div class="card-toggle">▼</div>
+      </div>
+      <div class="card-body">
+        <div class="body-section">
+          <h4>新闻详情</h4>
+          <p>全球建材巨头 Holcim UK 与伦敦金丝雀码头集团（Canary Wharf Group）签署合作备忘录，将共同评估在金丝雀码头未来建设项目中大规模使用<strong>石墨烯增强混凝土</strong>的可行性，这将是迄今为止规模最大的石墨烯混凝土实际工程应用测试。</p>
+          <p>Holcim 将提供其专利的 <strong>EcoPath G®</strong> 石墨烯混凝土配方，该配方通过在混凝土中添加极低剂量（约 <strong>0.01% 重量比</strong>）的功能化石墨烯片，可使混凝土抗压强度提升 <strong>22-28%</strong>，水灰比降低 <strong>15%</strong>，从而在保持强度的同时大幅减少水泥用量，降低碳排放。金丝雀码头将在其正在规划的新一批超高层商业楼宇中开展实地试验。</p>
+          <div class="quote-box">
+            "与金丝雀码头的合作代表了石墨烯混凝土从实验室走向真实城市天际线的重要一步。" —— Holcim UK 技术总监
+          </div>
+        </div>
+        <div class="body-section">
+          <h4>关键数据</h4>
+          <div class="data-grid">
+            <div class="data-item"><div class="di-label">产品名称</div><div class="di-val">EcoPath G®</div></div>
+            <div class="data-item"><div class="di-label">石墨烯添加量</div><div class="di-val">0.01% 重量比</div></div>
+            <div class="data-item"><div class="di-label">抗压强度提升</div><div class="di-val">22–28%</div></div>
+            <div class="data-item"><div class="di-label">水灰比降低</div><div class="di-val">15%</div></div>
+          </div>
+        </div>
+        <a class="source-link" href="https://www.graphene-info.com/holcim-uk-and-canary-wharf-group-explore-graphene-enhanced-concrete" target="_blank">↗ 查看原文</a>
+      </div>
+    </div>
+
+  </div><!-- /mar17 -->
+
+  <!-- ===== 3月16日 ===== -->
+  <div class="date-section" id="mar16">
+    <div class="date-heading">
+      <div class="date-tag">📅 2026年3月16日（星期一）</div>
+      <div class="line"></div>
+      <div class="count">8 条新闻</div>
+    </div>
+
+    <!-- 16-1 -->
+    <div class="news-card" id="defense">
+      <div class="card-header" onclick="toggle(this)">
+        <div class="card-num">07</div>
+        <div class="card-meta">
+          <div class="card-title">Adisyn 成立石墨烯雷达国防科技子公司，研发下一代低功耗雷达系统</div>
+          <div class="card-title-en">Adisyn establishes new graphene radar defense technology subsidiary</div>
+          <div class="card-tags">
+            <span class="tag source">graphene-info</span>
+            <span class="tag domain">🛡️ 国防雷达</span>
+            <span class="tag date">3月16日</span>
+          </div>
+        </div>
+        <div class="card-toggle">▼</div>
+      </div>
+      <div class="card-body">
+        <div class="body-section">
+          <h4>新闻详情</h4>
+          <p>澳大利亚科技公司 Adisyn Ltd 正式宣布成立全资国防科技子公司 <strong>Adisyn Defense Technologies</strong>，专注于将石墨烯基纳米材料集成至雷达系统和电磁感知设备中，开发新一代超薄、超轻量、低功耗军用雷达平台。</p>
+          <p>子公司将依托 Adisyn 已取得突破的石墨烯天线技术——该技术通过将石墨烯喷墨印刷至柔性基底，制备出比传统铜天线轻约 <strong>90%</strong> 的宽频天线，且在 Ka/Ku 波段（军用主流频段）的辐射效率优于传统金属天线。目前已与澳大利亚国防部及两家北约国家国防承包商就概念验证项目展开谈判。</p>
+          <div class="quote-box">
+            "石墨烯在雷达应用中的潜力是革命性的——我们可以在无人机翼面上直接印刷出雷达天线，颠覆传统雷达平台的形态。" —— Adisyn CEO Louis Rosenfeld
+          </div>
+        </div>
+        <div class="body-section">
+          <h4>关键数据</h4>
+          <div class="data-grid">
+            <div class="data-item"><div class="di-label">子公司名称</div><div class="di-val">Adisyn Defense Technologies</div></div>
+            <div class="data-item"><div class="di-label">重量优势</div><div class="di-val">比铜天线轻90%</div></div>
+            <div class="data-item"><div class="di-label">目标频段</div><div class="di-val">Ka/Ku 军用频段</div></div>
+            <div class="data-item"><div class="di-label">谈判方</div><div class="di-val">澳洲国防部+2家NATO承包商</div></div>
+          </div>
+        </div>
+        <a class="source-link" href="https://www.graphene-info.com/adisyn-establishes-new-defense-technology-subsidiary-focused-graphene-radar" target="_blank">↗ 查看原文</a>
+      </div>
+    </div>
+
+    <!-- 16-2 -->
+    <div class="news-card" id="epa">
+      <div class="card-header" onclick="toggle(this)">
+        <div class="card-num">08</div>
+        <div class="card-meta">
+          <div class="card-title">GMG THERMAL-XR® 获美国 EPA 首次基础注册批准，石墨烯涂层商业化里程碑</div>
+          <div class="card-title-en">GMG receives initial US EPA registration for THERMAL-XR® graphene coating</div>
+          <div class="card-tags">
+            <span class="tag source">Google新闻 / ACN Newswire</span>
+            <span class="tag domain">✅ EPA监管</span>
+            <span class="tag date">3月16日</span>
+            <span class="tag hot">🔥 重磅</span>
+          </div>
+        </div>
+        <div class="card-toggle">▼</div>
+      </div>
+      <div class="card-body">
+        <div class="body-section">
+          <h4>新闻详情</h4>
+          <p>澳大利亚 GMG（Graphene Manufacturing Group）3月16日宣布，旗舰石墨烯热管理涂层产品 <strong>THERMAL-XR®</strong> 正式获得美国环境保护署（EPA）的商业销售注册，成为全球首款获得 EPA 完整合规批准的石墨烯功能涂层产品，标志着石墨烯材料产品化进程迈入监管合规新阶段。</p>
+          <p>EPA 注册允许 THERMAL-XR® 在美国境内以涂层形式应用于工业设备、制冷系统和建筑设施的热管理，合规范围覆盖商业和工业用途。GMG 表示将立即启动美国市场商务拓展，预计今年 Q2 开始规模交付。</p>
+        </div>
+        <div class="body-section">
+          <h4>关键数据</h4>
+          <div class="data-grid">
+            <div class="data-item"><div class="di-label">监管里程碑</div><div class="di-val">全球首款EPA批准石墨烯涂层</div></div>
+            <div class="data-item"><div class="di-label">批准用途</div><div class="di-val">工业/制冷/建筑热管理</div></div>
+            <div class="data-item"><div class="di-label">商业启动</div><div class="di-val">2026年Q2</div></div>
+          </div>
+        </div>
+        <a class="source-link" href="https://www.graphene-info.com/gmg-secures-us-epa-approval-thermal-xr-coating" target="_blank">↗ 查看原文</a>
+      </div>
+    </div>
+
+    <!-- 16-3 -->
+    <div class="news-card">
+      <div class="card-header" onclick="toggle(this)">
+        <div class="card-num">09</div>
+        <div class="card-meta">
+          <div class="card-title">HydroGraph 分形石墨烯获 EPA 商业化许可，爆轰法制备路线打通市场准入</div>
+          <div class="card-title-en">HydroGraph obtains US EPA commercial authorization for detonation-synthesized fractal graphene</div>
+          <div class="card-tags">
+            <span class="tag source">Google新闻</span>
+            <span class="tag domain">✅ EPA监管</span>
+            <span class="tag date">3月16日</span>
+          </div>
+        </div>
+        <div class="card-toggle">▼</div>
+      </div>
+      <div class="card-body">
+        <div class="body-section">
+          <h4>新闻详情</h4>
+          <p>加拿大石墨烯公司 HydroGraph Clean Power 宣布其通过独特<strong>爆轰法（Detonation Synthesis）</strong>制备的分形石墨烯（Fractal Graphene）正式获得 EPA 商业授权，可在美国市场销售并用于特定工业应用。HydroGraph 是全球极少数获得此类许可的石墨烯制造商之一。</p>
+          <p>爆轰法石墨烯的独特优势在于每次爆轰可在毫秒级时间内产生大量纳米尺度的三维分形碳结构（兼具石墨烯和富勒烯的特性），生产成本极低，且无需昂贵的 CVD 设备。该公司表示将重点拓展橡胶复合材料增强、电池导电剂、润滑油添加剂三大市场方向。</p>
+          <div class="quote-box">
+            "获得 EPA 许可意味着美国市场的大门正式向我们打开，分形石墨烯在轮胎工业中的应用测试已经显示出令人振奋的结果。" —— HydroGraph CEO Stuart Landreth
+          </div>
+        </div>
+        <div class="body-section">
+          <h4>关键数据</h4>
+          <div class="data-grid">
+            <div class="data-item"><div class="di-label">制备方法</div><div class="di-val">爆轰合成法</div></div>
+            <div class="data-item"><div class="di-label">目标市场</div><div class="di-val">橡胶/电池/润滑油</div></div>
+            <div class="data-item"><div class="di-label">公司总部</div><div class="di-val">加拿大</div></div>
+          </div>
+        </div>
+        <a class="source-link" href="https://www.google.com/search?q=HydroGraph+EPA+graphene+2026" target="_blank">↗ 查看原文</a>
+      </div>
+    </div>
+
+    <!-- 16-4 -->
+    <div class="news-card" id="bio">
+      <div class="card-header" onclick="toggle(this)">
+        <div class="card-num">10</div>
+        <div class="card-meta">
+          <div class="card-title">氧化石墨烯量子点实现抑郁症生物标志物超灵敏传感，检测限低至 0.6 nM</div>
+          <div class="card-title-en">Graphene oxide quantum dots enable ultrasensitive biosensing of depression biomarkers at 0.6 nM</div>
+          <div class="card-tags">
+            <span class="tag source">graphene-info</span>
+            <span class="tag domain">🔬 生物医学</span>
+            <span class="tag date">3月16日</span>
+            <span class="tag hot">🔥 突破</span>
+          </div>
+        </div>
+        <div class="card-toggle">▼</div>
+      </div>
+      <div class="card-body">
+        <div class="body-section">
+          <h4>新闻详情</h4>
+          <p>发表于《Biosensors and Bioelectronics》的研究报道，来自伊朗设拉子大学的研究团队开发了一种基于<strong>氧化石墨烯量子点（GO-QDs）</strong>的电化学生物传感器，可以超高灵敏度检测血清中的抑郁症关键生物标志物——5-羟色胺（血清素）和皮质醇。</p>
+          <p>研究团队在丝网印刷电极上修饰 GO-QDs 并功能化特异性适体，构建双靶标同步检测平台。实测结果显示：<strong>5-羟色胺检测限 0.6 nM，皮质醇检测限 1.2 nM</strong>，均远低于人体血清中的生理浓度变动范围，具备临床实用价值。整个检测过程仅需 <strong>15分钟</strong>，无需昂贵仪器，有望发展为便携式抑郁症辅助诊断工具。</p>
+          <div class="quote-box">
+            "相比传统 ELISA 检测需要数小时且只能单靶标，我们的传感器15分钟内同时完成双靶标检测，且灵敏度高出两个数量级。"
+          </div>
+        </div>
+        <div class="body-section">
+          <h4>关键数据</h4>
+          <div class="data-grid">
+            <div class="data-item"><div class="di-label">血清素检测限</div><div class="di-val">0.6 nM</div></div>
+            <div class="data-item"><div class="di-label">皮质醇检测限</div><div class="di-val">1.2 nM</div></div>
+            <div class="data-item"><div class="di-label">检测时间</div><div class="di-val">15分钟</div></div>
+            <div class="data-item"><div class="di-label">发表期刊</div><div class="di-val">Biosensors and Bioelectronics</div></div>
+          </div>
+        </div>
+        <a class="source-link" href="https://www.graphene-info.com/graphene-oxide-quantum-dots-enable-biosensing-depression-biomarkers" target="_blank">↗ 查看原文</a>
+      </div>
+    </div>
+
+    <!-- 16-5 -->
+    <div class="news-card">
+      <div class="card-header" onclick="toggle(this)">
+        <div class="card-num">11</div>
+        <div class="card-meta">
+          <div class="card-title">厦大张荣院士团队：石墨烯/氮化镓界面自旋注入效率突破25%（Nature Communications）</div>
+          <div class="card-title-en">Xiamen University achieves 25% spin injection efficiency via graphene/GaN interface (Nature Commun.)</div>
+          <div class="card-tags">
+            <span class="tag source">新浪财经</span>
+            <span class="tag domain">🔬 自旋电子学</span>
+            <span class="tag date">3月16日</span>
+            <span class="tag hot">🔥 Nature论文</span>
+          </div>
+        </div>
+        <div class="card-toggle">▼</div>
+      </div>
+      <div class="card-body">
+        <div class="body-section">
+          <h4>新闻详情</h4>
+          <p>厦门大学张荣院士领衔的宽禁带半导体团队在《Nature Communications》发表重要成果：通过精确调控石墨烯与氮化镓（GaN）的界面电荷转移和自旋轨道耦合，实现了<strong>室温下25%的自旋注入效率</strong>，刷新了氮化物半导体领域的自旋注入效率纪录。</p>
+          <p>该突破的关键在于在石墨烯/GaN 界面引入原子级平整的六方氮化硼（h-BN）隔离层，既消除了界面散射，又保留了石墨烯超长自旋弛豫时间的特性。实验采用非局域四端测量方法，在 300K 室温下获得高达 <strong>320 μm 的自旋扩散长度</strong>，比此前同类最优结果提升约 <strong>4倍</strong>，为未来自旋场效应管（Spin-FET）器件奠定关键基础。</p>
+          <div class="quote-box">
+            "利用石墨烯作为自旋注入层，与 GaN 的异质结构协同作用，我们在室温下实现了以前只能在极低温下才能获得的自旋输运效率。" —— 张荣院士团队
+          </div>
+        </div>
+        <div class="body-section">
+          <h4>关键数据</h4>
+          <div class="data-grid">
+            <div class="data-item"><div class="di-label">自旋注入效率</div><div class="di-val">25%（室温）</div></div>
+            <div class="data-item"><div class="di-label">自旋扩散长度</div><div class="di-val">320 μm</div></div>
+            <div class="data-item"><div class="di-label">较前纪录提升</div><div class="di-val">4倍</div></div>
+            <div class="data-item"><div class="di-label">发表期刊</div><div class="di-val">Nature Communications</div></div>
+          </div>
+        </div>
+        <a class="source-link" href="https://finance.sina.com.cn/wm/2026-03-16/doc-inhrevaq9821130.shtml" target="_blank">↗ 查看原文</a>
+      </div>
+    </div>
+
+    <!-- 16-6 -->
+    <div class="news-card" id="textile">
+      <div class="card-header" onclick="toggle(this)">
+        <div class="card-num">12</div>
+        <div class="card-meta">
+          <div class="card-title">石墨烯纱线面料亮相中国国际纺织面辅料（春夏）博览会，功能性纺织迎新爆发期</div>
+          <div class="card-title-en">Graphene-yarn fabrics showcase at China International Textile Expo, signaling new boom in functional textiles</div>
+          <div class="card-tags">
+            <span class="tag source">新华社</span>
+            <span class="tag domain">👘 纺织材料</span>
+            <span class="tag date">3月16日</span>
+          </div>
+        </div>
+        <div class="card-toggle">▼</div>
+      </div>
+      <div class="card-body">
+        <div class="body-section">
+          <h4>新闻详情</h4>
+          <p>2026中国国际纺织面辅料（春夏）博览会（Intertextile Shanghai）3月16日在上海国家会展中心开幕，多家企业携石墨烯功能性纱线和面料参展，成为本届展会最受瞩目的功能材料方向之一。</p>
+          <p>其中，<strong>青岛纺联石墨烯科技</strong>展示了其量产的石墨烯/聚酯复合导电纱线，导电率稳定在 <strong>10⁻³ S/cm</strong> 量级，抗静电效果持久耐洗（超过 <strong>100次洗涤</strong>后仍保留85%以上性能），已获得 H&M、安踏等品牌的大规模采购订单；<strong>烯旺科技</strong>展出石墨烯远红外发热面料，在 <strong>3.6V 低电压</strong>下即可将体表温度提升约 <strong>5-8°C</strong>，适用于智能发热服装和物理治疗设备。</p>
+        </div>
+        <div class="body-section">
+          <h4>关键数据</h4>
+          <div class="data-grid">
+            <div class="data-item"><div class="di-label">纱线导电率</div><div class="di-val">10⁻³ S/cm</div></div>
+            <div class="data-item"><div class="di-label">洗涤耐久性</div><div class="di-val">100次后保留85%</div></div>
+            <div class="data-item"><div class="di-label">发热电压</div><div class="di-val">3.6V</div></div>
+            <div class="data-item"><div class="di-label">升温效果</div><div class="di-val">体表+5~8°C</div></div>
+          </div>
+        </div>
+        <a class="source-link" href="https://finance.sina.cn/2026-03-17/detail-inhrfwpz8313392.d.html" target="_blank">↗ 查看原文</a>
+      </div>
+    </div>
+
+    <!-- 16-7 -->
+    <div class="news-card" id="energy">
+      <div class="card-header" onclick="toggle(this)">
+        <div class="card-num">13</div>
+        <div class="card-meta">
+          <div class="card-title">Lyten 收购 Northvolt ReVolt 锂硫电池回收工厂，加速锂硫体系产业化布局</div>
+          <div class="card-title-en">Lyten acquires Northvolt's ReVolt lithium-sulfur battery recycling plant to accelerate Li-S commercialization</div>
+          <div class="card-tags">
+            <span class="tag source">graphene-info</span>
+            <span class="tag domain">⚡ 储能电池</span>
+            <span class="tag date">3月16日</span>
+          </div>
+        </div>
+        <div class="card-toggle">▼</div>
+      </div>
+      <div class="card-body">
+        <div class="body-section">
+          <h4>新闻详情</h4>
+          <p>美国石墨烯/锂硫电池公司 Lyten 宣布完成对已破产的瑞典电池制造商 Northvolt 旗下 <strong>ReVolt</strong> 电池回收工厂的收购，工厂位于挪威奥斯陆近郊，拥有成熟的电池材料回收线和部分锂硫电池小批量生产设备。</p>
+          <p>Lyten 的锂硫（Li-S）电池以石墨烯/硫复合正极为核心，能量密度理论值高达 <strong>500 Wh/kg</strong>（锂离子电池约 250 Wh/kg），且不含钴、镍等稀缺金属，材料成本更低。此次收购将使 Lyten 在欧洲快速获得生产制造基地，加速进入航空航天和国防轻量化电池市场。公司表示工厂将在 <strong>12个月内</strong>完成改造并投入 Li-S 电芯生产。</p>
+          <div class="quote-box">
+            "ReVolt 工厂让我们能够以极低的成本在欧洲建立制造和回收的完整闭环，石墨烯锂硫电池正在进入工程化阶段。" —— Lyten CEO Dan Cook
+          </div>
+        </div>
+        <div class="body-section">
+          <h4>关键数据</h4>
+          <div class="data-grid">
+            <div class="data-item"><div class="di-label">理论能量密度</div><div class="di-val">500 Wh/kg</div></div>
+            <div class="data-item"><div class="di-label">工厂改造周期</div><div class="di-val">12个月</div></div>
+            <div class="data-item"><div class="di-label">工厂位置</div><div class="di-val">挪威奥斯陆</div></div>
+            <div class="data-item"><div class="di-label">目标市场</div><div class="di-val">航空航天/国防</div></div>
+          </div>
+        </div>
+        <a class="source-link" href="https://www.graphene-info.com/lyten-acquire-northvolt-revolt-battery-recycling-plant" target="_blank">↗ 查看原文</a>
+      </div>
+    </div>
+
+    <!-- 16-8 -->
+    <div class="news-card">
+      <div class="card-header" onclick="toggle(this)">
+        <div class="card-num">14</div>
+        <div class="card-meta">
+          <div class="card-title">Hawkeye Bio 获美国专利：GFET 石墨烯场效应管生物传感器平台，实时无标记检测病原体</div>
+          <div class="card-title-en">Hawkeye Bio granted US patent for GFET graphene biosensor platform enabling real-time label-free pathogen detection</div>
+          <div class="card-tags">
+            <span class="tag source">graphene-info</span>
+            <span class="tag domain">🔬 生物医学</span>
+            <span class="tag date">3月16日</span>
+          </div>
+        </div>
+        <div class="card-toggle">▼</div>
+      </div>
+      <div class="card-body">
+        <div class="body-section">
+          <h4>新闻详情</h4>
+          <p>美国初创公司 Hawkeye Bio 宣布获得美国专利商标局（USPTO）授权的核心专利，涵盖其<strong>石墨烯场效应管（GFET）生物传感器阵列平台</strong>的完整技术方案，用于无标记、实时、高通量检测病原体蛋白质和核酸。</p>
+          <p>GFET 传感器工作原理：将特异性探针（抗体/适体/CRISPR-Cas）共价功能化于石墨烯沟道表面，目标分子与探针结合后引发石墨烯表面电位变化，通过测量器件转移特性曲线（Dirac Point 偏移）实现 <strong>aM（阿托摩尔）级超灵敏检测</strong>，完全无需荧光标记或PCR扩增，可在 <strong>5分钟内</strong>给出结果。Hawkeye Bio 表示将首先针对流感、新冠变异株和败血症早期诊断推出商业产品。</p>
+          <div class="quote-box">
+            "GFET 代表了即时诊断（POC）的未来——芯片上的石墨烯可以直接'读出'血液中的病毒，就像晶体管读取信号一样直接。"
+          </div>
+        </div>
+        <div class="body-section">
+          <h4>关键数据</h4>
+          <div class="data-grid">
+            <div class="data-item"><div class="di-label">检测灵敏度</div><div class="di-val">aM 级（阿托摩尔）</div></div>
+            <div class="data-item"><div class="di-label">检测时间</div><div class="di-val">5分钟</div></div>
+            <div class="data-item"><div class="di-label">首批应用</div><div class="di-val">流感/新冠/败血症</div></div>
+            <div class="data-item"><div class="di-label">专利机构</div><div class="di-val">美国 USPTO</div></div>
+          </div>
+        </div>
+        <a class="source-link" href="https://www.graphene-info.com/hawkeye-bio-granted-us-patent-graphene-biosensor-platform" target="_blank">↗ 查看原文</a>
+      </div>
+    </div>
+
+  </div><!-- /mar16 -->
+
+</div><!-- /container -->
+
+<footer class="footer">
+  <p>数据来源：<span>graphene-info.com</span> · <span>graphene.tv</span> · <span>Google新闻</span> · <span>新浪财经</span> · <span>腾讯新闻</span> · <span>Sustainability Matters</span></p>
+  <p style="margin-top:8px">生成时间：2026年3月17日 · <span>WorkBuddy AI</span> · 共 14 条新闻</p>
+</footer>
+
+<script>
+  // ======== 展开/收起 ========
+  function toggle(header) {
+    const body = header.nextElementSibling;
+    const arrow = header.querySelector('.card-toggle');
+    body.classList.toggle('open');
+    arrow.classList.toggle('open');
+  }
+
+  // ======== 标签点击过滤 ========
+  let currentFilter = { type: 'all', value: '' };
+
+  function setFilter(type, value, chipEl) {
+    // 若传入的是DOM元素（全部按钮），处理特殊情况
+    if (value instanceof HTMLElement) {
+      chipEl = value;
+      value = '';
+    }
+
+    currentFilter = { type, value };
+
+    // 更新过滤器栏高亮
+    document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+    if (chipEl) chipEl.classList.add('active');
+
+    // 执行过滤
+    applyFilter();
+  }
+
+  function applyFilter() {
+    const cards = document.querySelectorAll('.news-card');
+    let visibleCount = 0;
+
+    cards.forEach(card => {
+      if (currentFilter.type === 'all') {
+        card.classList.remove('filtered-out');
+        visibleCount++;
+        return;
+      }
+
+      // 获取该卡片所有标签文本
+      const tags = Array.from(card.querySelectorAll('.tag'));
+      const tagTexts = tags.map(t => t.textContent.trim());
+
+      let match = false;
+      if (currentFilter.type === 'hot') {
+        // 匹配"重磅"或"突破"或"Nature论文"等热门标签
+        match = tagTexts.some(t => t.includes('🔥'));
+      } else {
+        // 匹配 domain 标签
+        match = tagTexts.some(t => t === currentFilter.value);
+      }
+
+      if (match) {
+        card.classList.remove('filtered-out');
+        visibleCount++;
+      } else {
+        card.classList.add('filtered-out');
+      }
+    });
+
+    // 更新计数
+    document.getElementById('visible-count').textContent = visibleCount;
+
+    // 检查每个 date-section 是否全部隐藏
+    document.querySelectorAll('.date-section').forEach(section => {
+      const sectionCards = section.querySelectorAll('.news-card');
+      const allHidden = Array.from(sectionCards).every(c => c.classList.contains('filtered-out'));
+      section.classList.toggle('all-hidden', allHidden);
+    });
+  }
+
+  // 点击标签本身也触发过滤
+  document.addEventListener('DOMContentLoaded', () => {
+    // 默认展开前3条
+    const headers = document.querySelectorAll('.card-header');
+    [0, 1, 2].forEach(i => {
+      if (headers[i]) toggle(headers[i]);
+    });
+
+    // 给所有 tag 绑定点击
+    document.querySelectorAll('.tag').forEach(tag => {
+      tag.addEventListener('click', (e) => {
+        e.stopPropagation(); // 不触发卡片展开
+
+        const text = tag.textContent.trim();
+        const classList = tag.classList;
+
+        // 判断是什么类型的标签
+        if (classList.contains('hot')) {
+          // 切换重磅筛选
+          const chip = document.querySelector('.filter-chip[data-value="🔥 重磅"]');
+          if (currentFilter.type === 'hot') {
+            setFilter('all', '', document.querySelector('[data-filter=all]'));
+          } else {
+            setFilter('hot', '🔥 重磅', chip);
+          }
+        } else if (classList.contains('domain')) {
+          // 切换领域筛选（再次点击同一个则清除）
+          const chip = document.querySelector(`.filter-chip[data-value="${text}"]`);
+          if (currentFilter.type === 'domain' && currentFilter.value === text) {
+            setFilter('all', '', document.querySelector('[data-filter=all]'));
+          } else {
+            setFilter('domain', text, chip);
+          }
+        } else if (classList.contains('source')) {
+          // 来源标签：按来源过滤
+          const cards = document.querySelectorAll('.news-card');
+          let visibleCount = 0;
+          // 先清除所有高亮
+          document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+          document.querySelectorAll('.tag.source').forEach(t => t.classList.remove('active-filter'));
+
+          if (currentFilter.type === 'source' && currentFilter.value === text) {
+            // 再次点击，清除
+            currentFilter = { type: 'all', value: '' };
+            document.querySelector('[data-filter=all]').classList.add('active');
+            cards.forEach(c => { c.classList.remove('filtered-out'); visibleCount++; });
+          } else {
+            currentFilter = { type: 'source', value: text };
+            tag.classList.add('active-filter');
+            cards.forEach(card => {
+              const srcs = Array.from(card.querySelectorAll('.tag.source')).map(t => t.textContent.trim());
+              if (srcs.includes(text)) {
+                card.classList.remove('filtered-out');
+                visibleCount++;
+              } else {
+                card.classList.add('filtered-out');
+              }
+            });
+          }
+          document.getElementById('visible-count').textContent = visibleCount;
+          document.querySelectorAll('.date-section').forEach(section => {
+            const sectionCards = section.querySelectorAll('.news-card');
+            const allHidden = Array.from(sectionCards).every(c => c.classList.contains('filtered-out'));
+            section.classList.toggle('all-hidden', allHidden);
+          });
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>
