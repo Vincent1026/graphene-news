@@ -1,10 +1,29 @@
 
 // Graphene News Data - 2026-03-18
-// 自动生成时间: 2026-03-18 21:13:02
+// 自动生成时间: 2026-03-18 21:18:24
 
 GRAPHENE_NEWS_DB = GRAPHENE_NEWS_DB || {};
 
 GRAPHENE_NEWS_DB['2026-03-18'] = [
+  {
+    "id": "20260318_21",
+    "title": "双栅石墨烯晶体管使液体生物传感灵敏度提高20倍",
+    "title_en": "Dual-gate graphene transistor enables 20x more sensitive biosensing in liquids",
+    "content": "宾夕法尼亚州立大学研究人员设计了一种新型场效应晶体管,即使在富含液体的环境(如人体)中也能实现响应式和多功能的传感。使用该团队晶体管构建的传感器,对各种化学和生物信号(如水中的有害化学物质或大脑中的多巴胺水平)的灵敏度比使用类似晶体管设计的其他传感器高20倍。该团队在 npj 2D Materials and Applications 上发表了他们的工作。该技术基于石墨烯,一种二维(2D)材料,尽管只有几个原子厚,但导电且对环境高度敏感。传感器展示了高达20倍的更高灵敏度和高达15倍的更少信号漂移。传感器的另一个主要亮点是它们可以有效地监测各种化学和生物目标,包括大脑中的神经递质(如多巴胺和血清素)、IL-6(主要负责炎症的蛋白质制剂)以及PFAS(在受污染水和其他环境中持续存在的有害合成化学物质)。该团队计划继续开发传感架构并为商业用途准备该技术,目前正在优化传感器以识别与帕金森病相关的挥发性有机化合物。来源:Nanowerk,发布时间:2026年3月18日",
+    "content_en": "Researchers at Penn State have designed a new type of field-effect transistor that can facilitate responsive and versatile sensing, even in liquid-rich environments like the human body. Sensors built with the team's transistors were up to 20 times more sensitive to various chemical and biological signals, like hazardous chemicals in water or the levels of dopamine in the brain, than other sensors built with comparable transistor designs. The team published their work in npj 2D Materials and Applications. The technology is based on graphene, a two-dimensional (2D) material that is conductive and highly sensitive to its environment despite being only a few atoms thick. The team's sensors demonstrated up to 20 times more sensitivity than other conventional single-gate field-effect transistors and up to 15 times less signal drift. Another major highlight of the sensors is that they can effectively monitor a variety of chemical and biological targets - including neurotransmitters like dopamine and serotonin in the brain; IL-6, a protein agent largely responsible for inflammation; and PFAS, the harmful synthetic chemicals that persist in contaminated water, among other environments. The team plans to continue developing the sensing architecture and prepare the technology for commercial use. Currently, they are optimizing the sensors to identify volatile organic compounds associated with the Parkinson's disease. Source: Nanowerk, Published: March 18, 2026",
+    "url": "https://www.nanowerk.com/news2/newsid=62766.php",
+    "source": "nanowerk.com",
+    "tags": [
+      "graphene",
+      "research",
+      "application",
+      "sensor",
+      "medical",
+      "university",
+      "lab"
+    ],
+    "date": "2026-03-18"
+  },
   {
     "id": "20260318_18",
     "title": "HydroGraph 认证 Broadway 为合格复合合作伙伴，扩展英国和欧洲商业石墨烯母粒产能",
