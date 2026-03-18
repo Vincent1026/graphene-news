@@ -1,10 +1,44 @@
 
 // Graphene News Data - 2026-03-18
-// 自动生成时间: 2026-03-18 19:28:58
+// 自动生成时间: 2026-03-18 21:13:02
 
 GRAPHENE_NEWS_DB = GRAPHENE_NEWS_DB || {};
 
 GRAPHENE_NEWS_DB['2026-03-18'] = [
+  {
+    "id": "20260318_18",
+    "title": "HydroGraph 认证 Broadway 为合格复合合作伙伴，扩展英国和欧洲商业石墨烯母粒产能",
+    "title_en": "HydroGraph Certifies Broadway as Qualified Compounding Partner",
+    "content": "HydroGraph Clean Power Inc. 宣布 Broadway Colours Ltd. 已通过其严格的认证流程，成为合格的 HydroGraph 复合合作伙伴。此次合作加强了 HydroGraph 在英国和欧洲塑料市场的商业布局，并扩大了其支持石墨烯增强聚合物材料大规模商业应用的能力。Broadway 推出了其专有的石墨烯母粒系列 GrapheneXcel。HydroGraph 的 Fractal Graphene 材料旨在以比传统纳米片石墨烯材料低得多的添加量提供性能改进。全球对先进复合材料的需求在汽车、包装、电子和基础设施市场不断增长。来源：Investing News Network，发布时间：2026年3月17日",
+    "content_en": "HydroGraph Clean Power Inc. announced that Broadway Colours Ltd. has completed its rigorous certification process to become a qualified HydroGraph Compounding Partner. This partnership strengthens HydroGraph's commercial footprint in the UK and European plastics markets. Broadway has launched its proprietary graphene masterbatch series GrapheneXcel. HydroGraph's Fractal Graphene materials are designed to provide performance improvements at much lower loadings than traditional graphene materials. Source: Investing News Network, Published: March 17, 2026",
+    "url": "https://investingnews.com/hydrograph-certifies-broadway-as-qualified-compounding-partner-expanding-commercial-graphene-masterbatch-capabilities-in-the-uk-and-europe/",
+    "source": "investingnews.com",
+    "tags": [
+      "graphene",
+      "commercial",
+      "partnership",
+      "UK",
+      "Europe"
+    ],
+    "date": "2026-03-18"
+  },
+  {
+    "id": "20260318_19",
+    "title": "Black Swan Graphene 完成英国工厂产能扩张，年产能增至 140 吨以上",
+    "title_en": "Black Swan Graphene Completes UK Production Capacity Expansion",
+    "content": "Black Swan Graphene Inc. 宣布完成其位于英国康塞特工厂的生产能力扩张。此次升级安装了 GEA 3160 Ariete 系统，使公司的石墨烯纳米片年产能从 40 吨增加到 140 吨以上，工业流速最高可达 22,000 升/小时。这是公司第四次也是最大规模的产能扩张。该设施支持其 GraphCore 和 Graphene Enhanced Masterbatch 产品线。Black Swan 专注于大规模生产高性能、低成本的石墨烯产品。来源：StockTitan，发布时间：2026年3月18日",
+    "content_en": "Black Swan Graphene Inc. announced the completion of production capacity expansion at its Consett, UK facility. The upgrade installed a GEA 3160 Ariete system, increasing the company's GNP annual production capacity from 40 tons to over 140 tons. This is the company's fourth and largest capacity expansion. The facility supports its GraphCore and GEM product lines. Black Swan focuses on large-scale production of high-performance, low-cost graphene products. Source: StockTitan, Published: March 18, 2026",
+    "url": "https://www.stocktitan.net/news/BSWGF/black-swan-graphene-completes-production-capacity-expansion-at-its-8p4igjrrwdq5.html",
+    "source": "stocktitan.net",
+    "tags": [
+      "graphene",
+      "production",
+      "expansion",
+      "UK",
+      "industrial"
+    ],
+    "date": "2026-03-18"
+  },
   {
     "id": "20260318_3",
     "title": "石墨烯 oxide quantum dots enable biosensing of depression biomarkers",
