@@ -234,7 +234,7 @@ const GRAPHENE_NEWS_DB = {
       readTime: "5 min",
       featured: false
     }
-  ]
+  ],
   "2026-03-17": [
     {
       id: "20260317-001",
