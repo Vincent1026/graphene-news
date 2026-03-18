@@ -462,15 +462,15 @@
   document.getElementById('today-display').textContent = formatDate(today);
   document.getElementById('today-count').textContent = todayNews.length;
 
-  // 本周日历（3月11-17）
+  // 本周日历（3月12-18）
   const weekDays = [
-    { date: '2026-03-11', label: '周三' },
     { date: '2026-03-12', label: '周四' },
     { date: '2026-03-13', label: '周五' },
     { date: '2026-03-14', label: '周六' },
     { date: '2026-03-15', label: '周日' },
     { date: '2026-03-16', label: '周一' },
     { date: '2026-03-17', label: '周二' },
+    { date: '2026-03-18', label: '周三' },
   ];
   document.getElementById('week-days-row').innerHTML = weekDays.map(wd => {
     const news = getNewsByDate(wd.date);
