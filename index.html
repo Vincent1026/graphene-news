@@ -46,6 +46,103 @@
       background: var(--hover);
     }
     .archive-btn .btn-icon { font-size: 1rem; }
+
+    /* 标签云区域 */
+    .tag-cloud-section {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      margin-bottom: 32px;
+    }
+    .tag-cloud-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .tag-cloud-title {
+      font-size: 0.88rem;
+      color: var(--text);
+      font-weight: 600;
+    }
+    .tag-cloud-subtitle {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+    .tag-cloud-subtitle span {
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .filter-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    .filter-all-btn,
+    .filter-category-btn,
+    .clear-filter-btn {
+      background: transparent;
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+    .filter-all-btn:hover,
+    .filter-category-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .filter-all-btn.active,
+    .filter-category-btn.active {
+      background: rgba(0,198,255,0.12);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .clear-filter-btn {
+      border-color: rgba(255,107,53,0.3);
+      color: rgba(255,107,53,0.7);
+    }
+    .clear-filter-btn:hover {
+      border-color: #ff6b35;
+      color: #ff6b35;
+      background: rgba(255,107,53,0.08);
+    }
+    .filter-status {
+      margin-left: auto;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+    .filter-status span {
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .tag-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .tag-cloud .tag {
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .tag-cloud .tag:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 0 2px var(--accent);
+    }
+    .tag-cloud .tag.active-tag {
+      box-shadow: 0 0 0 2px var(--accent);
+      transform: scale(1.08);
+    }
+
     .week-preview {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
@@ -155,6 +252,24 @@
     <a href="news/2026/03/20260317.html" class="archive-btn" style="border-color: rgba(0,198,255,0.4); color: var(--accent);"><span class="btn-icon">⚡</span>今日日报</a>
   </div>
 
+  <!-- 标签汇总 & 过滤 -->
+  <div class="tag-cloud-section fade-in fade-in-delay-1" id="tag-section">
+    <div class="tag-cloud-header">
+      <span class="tag-cloud-title">🏷️ 全部标签汇总</span>
+      <span class="tag-cloud-subtitle">共 <span id="all-tags-count">0</span> 个标签 · 点击筛选新闻</span>
+    </div>
+    <div class="filter-row">
+      <button class="filter-all-btn active" onclick="filterHomeNews('all',this)">全部</button>
+      <button class="filter-category-btn" onclick="filterHomeNews('research',this)">🔬 科研</button>
+      <button class="filter-category-btn" onclick="filterHomeNews('industry',this)">🏭 产业</button>
+      <button class="filter-category-btn" onclick="filterHomeNews('funding',this)">💰 融资</button>
+      <button class="filter-category-btn" onclick="filterHomeNews('hot',this)">🔥 热门</button>
+      <button class="clear-filter-btn" onclick="filterHomeNews('all',document.querySelector('.filter-all-btn'))">✕ 清除</button>
+      <span class="filter-status">显示 <span id="home-filter-count">38</span> / 38 条</span>
+    </div>
+    <div class="tag-cloud" id="tag-cloud"></div>
+  </div>
+
   <!-- 统计数字 -->
   <div class="stats-bar fade-in fade-in-delay-1">
     <div class="stat-box"><div class="s-num">8</div><div class="s-label">追踪天数</div></div>
@@ -200,6 +315,10 @@
 <script src="js/data.js"></script>
 <script src="js/ui.js"></script>
 <script>
+  // 主页过滤状态
+  let homeFilter = { type: 'all', value: '' };
+  let allNewsCache = [];
+
   // 注入导航和页脚
   document.getElementById('navbar-root').innerHTML = renderNavbarHome('home');
   document.getElementById('footer-root').innerHTML = renderFooter().replace(/href="index.html"/g, 'href="index.html"');
@@ -207,6 +326,137 @@
   const today = getTodayStr();
   const todayNews = getNewsByDate(today);
   const yesterday = '2026-03-16';
+
+  // ========== 标签汇总与过滤 ==========
+
+  // 收集所有新闻（用于主页过滤）
+  function getAllNews() {
+    if (allNewsCache.length > 0) return allNewsCache;
+    const dates = ['2026-03-10', '2026-03-11', '2026-03-12', '2026-03-13', '2026-03-14', '2026-03-15', '2026-03-16', '2026-03-17'];
+    allNewsCache = dates.flatMap(d => getNewsByDate(d));
+    return allNewsCache;
+  }
+
+  // 渲染标签云
+  function renderTagCloud() {
+    const allNews = getAllNews();
+    const tagCount = new Map();
+
+    // 统计每个标签出现的次数
+    allNews.forEach(n => {
+      n.tags.forEach(t => {
+        tagCount.set(t, (tagCount.get(t) || 0) + 1);
+      });
+    });
+
+    // 按数量排序
+    const sortedTags = Array.from(tagCount.entries())
+      .sort((a, b) => b[1] - a[1]);
+
+    document.getElementById('all-tags-count').textContent = sortedTags.length;
+
+    // 生成标签 HTML
+    document.getElementById('tag-cloud').innerHTML = sortedTags.map(([tag, count]) => {
+      const cls = tag === '热门' ? 'hot' : 'industry';
+      const isHot = tag === '热门';
+      const displayCount = count > 1 ? `<span style="font-size:0.7em;opacity:0.6;margin-left:2px;">${count}</span>` : '';
+      return `<span class="tag ${cls}" onclick="filterByTag('${tag}',this)">${isHot?'🔥':''}${tag}${displayCount}</span>`;
+    }).join('');
+  }
+
+  // 主页分类过滤
+  window.filterHomeNews = function(category, btnEl) {
+    homeFilter = { type: category, value: '' };
+
+    // 更新按钮高亮
+    document.querySelectorAll('.filter-all-btn, .filter-category-btn').forEach(b => b.classList.remove('active'));
+    btnEl.classList.add('active');
+
+    // 清除标签高亮
+    document.querySelectorAll('.tag-cloud .tag').forEach(t => t.classList.remove('active-tag'));
+
+    applyHomeFilter();
+  };
+
+  // 按标签过滤
+  window.filterByTag = function(tag, tagEl) {
+    // 更新状态
+    if (homeFilter.type === 'tag' && homeFilter.value === tag) {
+      // 再次点击同一标签，取消
+      homeFilter = { type: 'all', value: '' };
+      document.querySelectorAll('.filter-all-btn, .filter-category-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector('.filter-all-btn').classList.add('active');
+    } else {
+      homeFilter = { type: 'tag', value: tag };
+      document.querySelectorAll('.filter-all-btn, .filter-category-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tag-cloud .tag').forEach(t => t.classList.remove('active-tag'));
+      tagEl.classList.add('active-tag');
+    }
+
+    applyHomeFilter();
+  };
+
+  // 应用主页过滤
+  function applyHomeFilter() {
+    const allNews = getAllNews();
+    let filteredNews = allNews;
+
+    if (homeFilter.type === 'research') {
+      filteredNews = allNews.filter(n => n.category === 'research');
+    } else if (homeFilter.type === 'industry') {
+      filteredNews = allNews.filter(n => n.category === 'industry');
+    } else if (homeFilter.type === 'funding') {
+      filteredNews = allNews.filter(n => n.category === 'funding');
+    } else if (homeFilter.type === 'hot') {
+      filteredNews = allNews.filter(n => n.tags.some(t => t === '热门' || t === '重磅' || t === '突破'));
+    } else if (homeFilter.type === 'tag') {
+      filteredNews = allNews.filter(n => n.tags.includes(homeFilter.value));
+    }
+
+    // 更新计数
+    document.getElementById('home-filter-count').textContent = filteredNews.length;
+
+    // 过滤显示的卡片
+    filterCardsByDate(filteredNews);
+  }
+
+  // 按日期过滤并更新各区域
+  function filterCardsByDate(filteredNews) {
+    // 今日焦点
+    const todayFiltered = filteredNews.filter(n => n.id.startsWith('20260317'));
+    const featured = todayFiltered.find(n => n.featured);
+    const rest = todayFiltered.filter(n => !n.featured);
+    let featuredHtml = '';
+    if (featured) featuredHtml += renderNewsCard(featured, 'featured');
+    if (rest[0]) featuredHtml += renderNewsCard(rest[0]);
+    document.getElementById('featured-grid').innerHTML = featuredHtml || '<div style="text-align:center;padding:40px;color:var(--text-muted)">暂无新闻</div>';
+
+    // 今日更多列表
+    const moreNews = rest.slice(1);
+    document.getElementById('more-news-list').innerHTML =
+      moreNews.length > 0
+        ? `<div class="news-list">${moreNews.map((n, i) => renderNewsListItem(n, i, today)).join('')}</div>`
+        : '';
+
+    // 昨日回顾
+    const yesterdayFiltered = filteredNews.filter(n => n.id.startsWith('20260316'));
+    document.getElementById('yesterday-grid').innerHTML = yesterdayFiltered.length > 0
+      ? yesterdayFiltered.slice(0, 3).map(n => renderNewsCard(n)).join('')
+      : '';
+
+    // 近期精选
+    const recentDates = ['2026-03-15', '2026-03-14', '2026-03-13'];
+    const recentFiltered = recentDates.flatMap(d => {
+      const dayStr = d.replace(/-/g, '');
+      return filteredNews.filter(n => n.id.startsWith(dayStr));
+    }).slice(0, 6);
+    document.getElementById('recent-list').innerHTML = recentFiltered.length > 0
+      ? recentFiltered.map((n, i) => {
+          const d = n.id.substring(0,4)+'-'+n.id.substring(4,6)+'-'+n.id.substring(6,8);
+          return renderNewsListItem(n, i, d);
+        }).join('')
+      : '';
+  }
 
   // 今日日期显示
   document.getElementById('today-display').textContent = formatDate(today);
@@ -260,11 +510,14 @@
   // 近期精选（3月15日及更早，取前6条）
   const recentDates = ['2026-03-15', '2026-03-14', '2026-03-13'];
   const recentNews = recentDates.flatMap(d => getNewsByDate(d)).slice(0, 6);
-  document.getElementById('recent-list').innerHTML = 
+  document.getElementById('recent-list').innerHTML =
     recentNews.map((n, i) => {
       const d = n.id.substring(0,4)+'-'+n.id.substring(4,6)+'-'+n.id.substring(6,8);
       return renderNewsListItem(n, i, d);
     }).join('');
+
+  // 初始化标签云
+  renderTagCloud();
 </script>
 </body>
 </html>

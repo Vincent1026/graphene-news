@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>石墨烯每日资讯 · 2026年3月17日</title>
+<title>石墨烯每日资讯 · 2026年3月16-17日</title>
 <style>
   :root {
     --bg: #0a0e1a;
@@ -229,11 +229,73 @@
     border-radius: 20px;
     border: 1px solid;
     letter-spacing: 0.3px;
+    cursor: pointer;
+    transition: all 0.15s;
+    user-select: none;
   }
+  .tag:hover { opacity: 0.75; transform: scale(1.05); }
+  .tag.active-filter { box-shadow: 0 0 0 2px #fff3; transform: scale(1.08); }
   .tag.source { background: rgba(0,212,255,0.08); border-color: rgba(0,212,255,0.25); color: #67e8f9; }
+  .tag.source:hover, .tag.source.active-filter { background: rgba(0,212,255,0.22); border-color: #67e8f9; }
   .tag.domain { background: rgba(168,85,247,0.08); border-color: rgba(168,85,247,0.25); color: #c084fc; }
+  .tag.domain:hover, .tag.domain.active-filter { background: rgba(168,85,247,0.22); border-color: #c084fc; }
   .tag.date   { background: rgba(0,255,136,0.08); border-color: rgba(0,255,136,0.25); color: #4ade80; }
+  .tag.date:hover, .tag.date.active-filter { background: rgba(0,255,136,0.22); border-color: #4ade80; }
   .tag.hot    { background: rgba(255,107,53,0.08); border-color: rgba(255,107,53,0.25); color: #fb923c; }
+  .tag.hot:hover, .tag.hot.active-filter { background: rgba(255,107,53,0.22); border-color: #fb923c; }
+
+  /* ========== FILTER BAR ========== */
+  .filter-bar {
+    background: rgba(10,14,26,0.9);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .filter-label {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-right: 4px;
+    white-space: nowrap;
+  }
+  .filter-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .filter-chip:hover { border-color: var(--accent); color: var(--accent); }
+  .filter-chip.active { background: rgba(0,212,255,0.12); border-color: var(--accent); color: var(--accent); }
+  .filter-chip.clear-btn { border-color: rgba(255,107,53,0.3); color: rgba(255,107,53,0.7); }
+  .filter-chip.clear-btn:hover { border-color: var(--accent3); color: var(--accent3); background: rgba(255,107,53,0.1); }
+  .filter-count {
+    font-size: 11px;
+    color: var(--muted);
+    margin-left: auto;
+    white-space: nowrap;
+  }
+  .filter-count span { color: var(--accent); font-weight: 600; }
+
+  /* 被过滤隐藏的卡片 */
+  .news-card.filtered-out {
+    display: none;
+  }
+  /* 日期分区：若所有卡片都被过滤，隐藏整个区块标题 */
+  .date-section.all-hidden .date-heading {
+    display: none;
+  }
 
   .card-toggle {
     flex-shrink: 0;
@@ -366,6 +428,26 @@
   <a href="#textile">👘 纺织材料</a>
   <a href="#standard">📋 国际标准</a>
 </nav>
+
+<!-- FILTER BAR -->
+<div class="filter-bar" id="filter-bar">
+  <span class="filter-label">🔍 筛选</span>
+  <span class="filter-chip active" data-filter="all" onclick="setFilter('all',this)">全部 <b>14</b></span>
+  <span class="filter-chip" data-filter="domain" data-value="🛡️ 国防雷达" onclick="setFilter('domain','🛡️ 国防雷达',this)">🛡️ 国防雷达</span>
+  <span class="filter-chip" data-filter="domain" data-value="✅ EPA监管" onclick="setFilter('domain','✅ EPA监管',this)">✅ EPA监管</span>
+  <span class="filter-chip" data-filter="domain" data-value="🔬 生物医学" onclick="setFilter('domain','🔬 生物医学',this)">🔬 生物医学</span>
+  <span class="filter-chip" data-filter="domain" data-value="⚡ 储能电池" onclick="setFilter('domain','⚡ 储能电池',this)">⚡ 储能电池</span>
+  <span class="filter-chip" data-filter="domain" data-value="👘 纺织材料" onclick="setFilter('domain','👘 纺织材料',this)">👘 纺织材料</span>
+  <span class="filter-chip" data-filter="domain" data-value="📋 国际标准" onclick="setFilter('domain','📋 国际标准',this)">📋 国际标准</span>
+  <span class="filter-chip" data-filter="domain" data-value="🏭 产业化" onclick="setFilter('domain','🏭 产业化',this)">🏭 产业化</span>
+  <span class="filter-chip" data-filter="domain" data-value="♻️ 绿色制备" onclick="setFilter('domain','♻️ 绿色制备',this)">♻️ 绿色制备</span>
+  <span class="filter-chip" data-filter="domain" data-value="🏗️ 建筑材料" onclick="setFilter('domain','🏗️ 建筑材料',this)">🏗️ 建筑材料</span>
+  <span class="filter-chip" data-filter="domain" data-value="⚡ 储能/资源" onclick="setFilter('domain','⚡ 储能/资源',this)">⚡ 储能/资源</span>
+  <span class="filter-chip" data-filter="domain" data-value="🔬 自旋电子学" onclick="setFilter('domain','🔬 自旋电子学',this)">🔬 自旋电子学</span>
+  <span class="filter-chip" data-filter="hot" data-value="🔥 重磅" onclick="setFilter('hot','🔥 重磅',this)">🔥 重磅</span>
+  <span class="filter-chip clear-btn" onclick="setFilter('all',document.querySelector('[data-filter=all]'))">✕ 清除筛选</span>
+  <span class="filter-count" id="filter-count">显示 <span id="visible-count">14</span> / 14 条</span>
+</div>
 
 <div class="container">
 
@@ -916,6 +998,7 @@
 </footer>
 
 <script>
+  // ======== 展开/收起 ========
   function toggle(header) {
     const body = header.nextElementSibling;
     const arrow = header.querySelector('.card-toggle');
@@ -923,11 +1006,136 @@
     arrow.classList.toggle('open');
   }
 
-  // 默认展开前3条
+  // ======== 标签点击过滤 ========
+  let currentFilter = { type: 'all', value: '' };
+
+  function setFilter(type, value, chipEl) {
+    // 若传入的是DOM元素（全部按钮），处理特殊情况
+    if (value instanceof HTMLElement) {
+      chipEl = value;
+      value = '';
+    }
+
+    currentFilter = { type, value };
+
+    // 更新过滤器栏高亮
+    document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+    if (chipEl) chipEl.classList.add('active');
+
+    // 执行过滤
+    applyFilter();
+  }
+
+  function applyFilter() {
+    const cards = document.querySelectorAll('.news-card');
+    let visibleCount = 0;
+
+    cards.forEach(card => {
+      if (currentFilter.type === 'all') {
+        card.classList.remove('filtered-out');
+        visibleCount++;
+        return;
+      }
+
+      // 获取该卡片所有标签文本
+      const tags = Array.from(card.querySelectorAll('.tag'));
+      const tagTexts = tags.map(t => t.textContent.trim());
+
+      let match = false;
+      if (currentFilter.type === 'hot') {
+        // 匹配"重磅"或"突破"或"Nature论文"等热门标签
+        match = tagTexts.some(t => t.includes('🔥'));
+      } else {
+        // 匹配 domain 标签
+        match = tagTexts.some(t => t === currentFilter.value);
+      }
+
+      if (match) {
+        card.classList.remove('filtered-out');
+        visibleCount++;
+      } else {
+        card.classList.add('filtered-out');
+      }
+    });
+
+    // 更新计数
+    document.getElementById('visible-count').textContent = visibleCount;
+
+    // 检查每个 date-section 是否全部隐藏
+    document.querySelectorAll('.date-section').forEach(section => {
+      const sectionCards = section.querySelectorAll('.news-card');
+      const allHidden = Array.from(sectionCards).every(c => c.classList.contains('filtered-out'));
+      section.classList.toggle('all-hidden', allHidden);
+    });
+  }
+
+  // 点击标签本身也触发过滤
   document.addEventListener('DOMContentLoaded', () => {
+    // 默认展开前3条
     const headers = document.querySelectorAll('.card-header');
     [0, 1, 2].forEach(i => {
       if (headers[i]) toggle(headers[i]);
+    });
+
+    // 给所有 tag 绑定点击
+    document.querySelectorAll('.tag').forEach(tag => {
+      tag.addEventListener('click', (e) => {
+        e.stopPropagation(); // 不触发卡片展开
+
+        const text = tag.textContent.trim();
+        const classList = tag.classList;
+
+        // 判断是什么类型的标签
+        if (classList.contains('hot')) {
+          // 切换重磅筛选
+          const chip = document.querySelector('.filter-chip[data-value="🔥 重磅"]');
+          if (currentFilter.type === 'hot') {
+            setFilter('all', '', document.querySelector('[data-filter=all]'));
+          } else {
+            setFilter('hot', '🔥 重磅', chip);
+          }
+        } else if (classList.contains('domain')) {
+          // 切换领域筛选（再次点击同一个则清除）
+          const chip = document.querySelector(`.filter-chip[data-value="${text}"]`);
+          if (currentFilter.type === 'domain' && currentFilter.value === text) {
+            setFilter('all', '', document.querySelector('[data-filter=all]'));
+          } else {
+            setFilter('domain', text, chip);
+          }
+        } else if (classList.contains('source')) {
+          // 来源标签：按来源过滤
+          const cards = document.querySelectorAll('.news-card');
+          let visibleCount = 0;
+          // 先清除所有高亮
+          document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+          document.querySelectorAll('.tag.source').forEach(t => t.classList.remove('active-filter'));
+
+          if (currentFilter.type === 'source' && currentFilter.value === text) {
+            // 再次点击，清除
+            currentFilter = { type: 'all', value: '' };
+            document.querySelector('[data-filter=all]').classList.add('active');
+            cards.forEach(c => { c.classList.remove('filtered-out'); visibleCount++; });
+          } else {
+            currentFilter = { type: 'source', value: text };
+            tag.classList.add('active-filter');
+            cards.forEach(card => {
+              const srcs = Array.from(card.querySelectorAll('.tag.source')).map(t => t.textContent.trim());
+              if (srcs.includes(text)) {
+                card.classList.remove('filtered-out');
+                visibleCount++;
+              } else {
+                card.classList.add('filtered-out');
+              }
+            });
+          }
+          document.getElementById('visible-count').textContent = visibleCount;
+          document.querySelectorAll('.date-section').forEach(section => {
+            const sectionCards = section.querySelectorAll('.news-card');
+            const allHidden = Array.from(sectionCards).every(c => c.classList.contains('filtered-out'));
+            section.classList.toggle('all-hidden', allHidden);
+          });
+        }
+      });
     });
   });
 </script>

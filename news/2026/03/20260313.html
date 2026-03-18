@@ -68,6 +68,9 @@ function renderArticle(n,idx){
   </article>`;
 }
 document.getElementById('articles-root').innerHTML=news.map((n,i)=>renderArticle(n,i)).join('')+`<div class="daily-nav"><a href="20260312.html" class="dnav-btn">← 3月12日</a><a href="../../../archive.html" class="dnav-btn">📋 归档</a><a href="20260314.html" class="dnav-btn">3月14日 →</a></div>`;
+// 初始化标签过滤功能
+initFilterBar(news, '.full-article');
+
 const allTags=[...new Set(news.flatMap(n=>n.tags))];
 const weekDays=['2026-03-17','2026-03-16','2026-03-15','2026-03-14','2026-03-13','2026-03-12','2026-03-11'];
 document.getElementById('sidebar-root').innerHTML=`
