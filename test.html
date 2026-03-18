@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+</head>
+<body>
+    <script src="js/data.js"></script>
+    <script>
+        console.log('Today:', getTodayStr());
+        const todayNews = getNewsByDate(getTodayStr());
+        console.log('Today news count:', todayNews.length);
+        console.log('Today news:', todayNews);
+        document.body.innerHTML = 'Today news count: ' + todayNews.length;
+    </script>
+</body>
+</html>
