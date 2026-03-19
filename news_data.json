@@ -1,78 +1,5 @@
 [
   {
-    "title": "RIG Gaming携手Ora Graphene Audio推出搭载GrapheneQ驱动器的新款游戏耳机",
-    "description": "NACON旗下RIG音频品牌推出R5 SPEAR MAX HD游戏耳机，采用Ora专利GrapheneQ石墨烯驱动单元，为PC游戏玩家带来录音室级音效体验。",
-    "source": "Graphene-Info",
-    "url": "https://www.graphene-info.com/rig-gaming-partners-ora-graphene-audio-launch-new-gaming-headset-grapheneq",
-    "date": "2026-03-18",
-    "tags": [
-      "音频设备",
-      "游戏",
-      "电子产品"
-    ]
-  },
-  {
-    "title": "Black Swan Graphene完成英国工厂生产能力扩建",
-    "description": "Black Swan Graphene宣布完成位于英国Consett工厂的产能扩建，生产能力增加两倍以上。新的大型生产线采用GEA集团制造的3160 Ariete系统。",
-    "source": "Graphene-Info",
-    "url": "https://www.graphene-info.com/black-swan-graphene-completes-production-capacity-expansion-its-united-kingdom",
-    "date": "2026-03-18",
-    "tags": [
-      "产能扩张",
-      "制造业",
-      "英国"
-    ]
-  },
-  {
-    "title": "石墨烯氧化物超级电容器实现1683 C/g超高容量",
-    "description": "上海技术学院、海军工程大学和辽沈工业集团的研究人员开发出高性能NiCo₂V₂O₈@GO空心球电极材料，显著提升超级电容器性能。",
-    "source": "Graphene-Info",
-    "url": "https://www.graphene-info.com/graphene-oxide-enables-improved-supercapacitors-1683-cg-capacitance",
-    "date": "2026-03-18",
-    "tags": [
-      "科研进展",
-      "超级电容",
-      "电池技术"
-    ]
-  },
-  {
-    "title": "GMG获得美国EPA批准销售THERMAL-XR石墨烯涂层",
-    "description": "Graphene Manufacturing Group宣布美国环保署批准其THERMAL-XR石墨烯涂层系统在美销售。该产品用于暖通空调、数据中心、汽车和电子领域。",
-    "source": "Graphene-Info",
-    "url": "https://www.graphene-info.com/gmg-secures-us-epa-approval-thermal-xr-coating",
-    "date": "2026-03-17",
-    "tags": [
-      "认证",
-      "涂层技术",
-      "美国",
-      "工业应用"
-    ]
-  },
-  {
-    "title": "Graphene-Info发布新版CVD石墨ene市场报告",
-    "description": "CVD石墨烯市场正在逐步兴起，应用和项目不断增加。新版报告涵盖最新研究和行业动态。",
-    "source": "Graphene-Info",
-    "url": "https://www.graphene-info.com/cvd-graphene-market-report",
-    "date": "2026-03-16",
-    "tags": [
-      "市场报告",
-      "CVD",
-      "行业资讯"
-    ]
-  },
-  {
-    "title": "石墨烯氧化物量子点用于抑郁症生物标志物检测",
-    "description": "德里大学研究人员开发出环保方法合成石墨烯氧化物量子点，可用于超灵敏检测神经生物标志物。",
-    "source": "Graphene-Info",
-    "url": "https://www.graphene-info.com/graphene-oxide-quantum-dots-enable-biosensing-depression-biomarkers",
-    "date": "2026-03-16",
-    "tags": [
-      "科研进展",
-      "生物医学",
-      "传感器"
-    ]
-  },
-  {
     "title": "Solidion Technology推出AI数据中心UPS电池系统",
     "description": "Solidion Technology发布适用于人工智能数据中心的UPS电池系统，采用先进石墨烯技术。",
     "source": "Graphene-Info",
@@ -121,6 +48,42 @@
     ]
   },
   {
+    "title": "RIG Gaming携手Ora Graphene Audio推出搭载GrapheneQ驱动器的新款游戏耳机",
+    "description": "NACON旗下RIG音频品牌推出R5 SPEAR MAX HD游戏耳机，采用Ora专利GrapheneQ石墨烯驱动单元，为PC游戏玩家带来录音室级音效体验。",
+    "source": "Graphene-Info",
+    "url": "https://www.graphene-info.com/rig-gaming-partners-ora-graphene-audio-launch-new-gaming-headset-grapheneq",
+    "date": "2026-03-18",
+    "tags": [
+      "音频设备",
+      "游戏",
+      "电子产品"
+    ]
+  },
+  {
+    "title": "Black Swan Graphene完成英国工厂生产能力扩建",
+    "description": "Black Swan Graphene宣布完成位于英国Consett工厂的产能扩建，生产能力增加两倍以上。新的大型生产线采用GEA集团制造的3160 Ariete系统。",
+    "source": "Graphene-Info",
+    "url": "https://www.graphene-info.com/black-swan-graphene-completes-production-capacity-expansion-its-united-kingdom",
+    "date": "2026-03-18",
+    "tags": [
+      "产能扩张",
+      "制造业",
+      "英国"
+    ]
+  },
+  {
+    "title": "石墨烯氧化物超级电容器实现1683 C/g超高容量",
+    "description": "上海技术学院、海军工程大学和辽沈工业集团的研究人员开发出高性能NiCo₂V₂O₈@GO空心球电极材料，显著提升超级电容器性能。",
+    "source": "Graphene-Info",
+    "url": "https://www.graphene-info.com/graphene-oxide-enables-improved-supercapacitors-1683-cg-capacitance",
+    "date": "2026-03-18",
+    "tags": [
+      "科研进展",
+      "超级电容",
+      "电池技术"
+    ]
+  },
+  {
     "title": "河南省科学院公开石墨烯铜复合线材发明专利",
     "description": "河南省科学院突破界面瓶颈，发明石墨烯铜复合线材及制备方法。",
     "source": "Graphene.tv",
@@ -130,6 +93,43 @@
       "科研进展",
       "专利",
       "中国"
+    ]
+  },
+  {
+    "title": "GMG获得美国EPA批准销售THERMAL-XR石墨烯涂层",
+    "description": "Graphene Manufacturing Group宣布美国环保署批准其THERMAL-XR石墨烯涂层系统在美销售。该产品用于暖通空调、数据中心、汽车和电子领域。",
+    "source": "Graphene-Info",
+    "url": "https://www.graphene-info.com/gmg-secures-us-epa-approval-thermal-xr-coating",
+    "date": "2026-03-17",
+    "tags": [
+      "认证",
+      "涂层技术",
+      "美国",
+      "工业应用"
+    ]
+  },
+  {
+    "title": "Graphene-Info发布新版CVD石墨烯市场报告",
+    "description": "CVD石墨烯市场正在逐步兴起，应用和项目不断增加。新版报告涵盖最新研究和行业动态。",
+    "source": "Graphene-Info",
+    "url": "https://www.graphene-info.com/cvd-graphene-market-report",
+    "date": "2026-03-16",
+    "tags": [
+      "市场报告",
+      "CVD",
+      "行业资讯"
+    ]
+  },
+  {
+    "title": "石墨烯氧化物量子点用于抑郁症生物标志物检测",
+    "description": "德里大学研究人员开发出环保方法合成石墨烯氧化物量子点，可用于超灵敏检测神经生物标志物。",
+    "source": "Graphene-Info",
+    "url": "https://www.graphene-info.com/graphene-oxide-quantum-dots-enable-biosensing-depression-biomarkers",
+    "date": "2026-03-16",
+    "tags": [
+      "科研进展",
+      "生物医学",
+      "传感器"
     ]
   },
   {
