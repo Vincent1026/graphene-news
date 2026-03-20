@@ -3,13 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>石墨烯新闻 - 2026年03月19日</title>
+    <title>石墨烯新闻 - 2026年03月20日</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
@@ -18,16 +14,9 @@
             padding: 20px;
         }
         
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
+        .container { max-width: 900px; margin: 0 auto; }
         
-        header {
-            text-align: center;
-            padding: 40px 0;
-            color: #fff;
-        }
+        header { text-align: center; padding: 40px 0; color: #fff; }
         
         h1 {
             font-size: 2.5em;
@@ -38,12 +27,8 @@
             background-clip: text;
         }
         
-        .date {
-            color: #8ba4c7;
-            font-size: 1.1em;
-        }
+        .date { color: #8ba4c7; font-size: 1.1em; }
         
-        /* 标签过滤样式 */
         .filter-section {
             background: rgba(255,255,255,0.1);
             border-radius: 15px;
@@ -51,20 +36,9 @@
             margin: 20px 0;
         }
         
-        .filter-title {
-            color: #fff;
-            font-size: 1.1em;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
+        .filter-title { color: #fff; font-size: 1.1em; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
         
-        .filter-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
+        .filter-tags { display: flex; flex-wrap: wrap; gap: 10px; }
         
         .filter-btn {
             background: rgba(255,255,255,0.15);
@@ -77,49 +51,16 @@
             font-size: 0.9em;
         }
         
-        .filter-btn:hover {
-            background: rgba(0,210,255,0.3);
-            border-color: #00d2ff;
-        }
+        .filter-btn:hover { background: rgba(0,210,255,0.3); border-color: #00d2ff; }
+        .filter-btn.active { background: linear-gradient(90deg, #00d2ff, #3a7bd5); border-color: #00d2ff; font-weight: bold; }
         
-        .filter-btn.active {
-            background: linear-gradient(90deg, #00d2ff, #3a7bd5);
-            border-color: #00d2ff;
-            font-weight: bold;
-        }
-        
-        .stats {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin: 20px 0 40px;
-        }
-        
-        .stat-item {
-            background: rgba(255,255,255,0.1);
-            padding: 15px 30px;
-            border-radius: 10px;
-            color: #fff;
-        }
-        
-        .stat-number {
-            font-size: 2em;
-            font-weight: bold;
-            color: #00d2ff;
-        }
-        
-        .stat-label {
-            font-size: 0.9em;
-            color: #8ba4c7;
-        }
+        .stats { display: flex; justify-content: center; gap: 30px; margin: 20px 0 40px; }
+        .stat-item { background: rgba(255,255,255,0.1); padding: 15px 30px; border-radius: 10px; color: #fff; }
+        .stat-number { font-size: 2em; font-weight: bold; color: #00d2ff; }
+        .stat-label { font-size: 0.9em; color: #8ba4c7; }
         
         /* 时间轴样式 */
-        .timeline {
-            position: relative;
-            padding: 20px 0;
-        }
-        
-        /* 时间轴中线 */
+        .timeline { position: relative; padding: 20px 0; }
         .timeline::before {
             content: '';
             position: absolute;
@@ -138,17 +79,9 @@
             box-sizing: border-box;
         }
         
-        .timeline-item:nth-child(odd) {
-            left: 0;
-            text-align: right;
-        }
+        .timeline-item:nth-child(odd) { left: 0; text-align: right; }
+        .timeline-item:nth-child(even) { left: 50%; text-align: left; }
         
-        .timeline-item:nth-child(even) {
-            left: 50%;
-            text-align: left;
-        }
-        
-        /* 时间轴节点 */
         .timeline-item::before {
             content: '';
             position: absolute;
@@ -161,15 +94,9 @@
             box-shadow: 0 0 10px rgba(0,210,255,0.5);
         }
         
-        .timeline-item:nth-child(odd)::before {
-            right: -12px;
-        }
+        .timeline-item:nth-child(odd)::before { right: -12px; }
+        .timeline-item:nth-child(even)::before { left: -12px; }
         
-        .timeline-item:nth-child(even)::before {
-            left: -12px;
-        }
-        
-        /* 日期标签 */
         .timeline-date {
             display: inline-block;
             background: linear-gradient(90deg, #00d2ff, #3a7bd5);
@@ -181,15 +108,9 @@
             font-weight: bold;
         }
         
-        .timeline-item:nth-child(odd) .timeline-date {
-            margin-right: 10px;
-        }
+        .timeline-item:nth-child(odd) .timeline-date { margin-right: 10px; }
+        .timeline-item:nth-child(even) .timeline-date { margin-left: 10px; }
         
-        .timeline-item:nth-child(even) .timeline-date {
-            margin-left: 10px;
-        }
-        
-        /* 新闻卡片 */
         .timeline-content {
             background: rgba(255,255,255,0.95);
             border-radius: 15px;
@@ -198,10 +119,7 @@
             transition: transform 0.3s, box-shadow 0.3s;
         }
         
-        .timeline-content:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,210,255,0.3);
-        }
+        .timeline-content:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,210,255,0.3); }
         
         .news-source {
             background: linear-gradient(90deg, #00d2ff, #3a7bd5);
@@ -213,109 +131,29 @@
             margin-bottom: 10px;
         }
         
-        .news-title {
-            font-size: 1.15em;
-            color: #1a1a2e;
-            margin-bottom: 10px;
-            line-height: 1.4;
-            font-weight: 600;
-        }
+        .news-title { font-size: 1.15em; color: #1a1a2e; margin-bottom: 10px; line-height: 1.4; font-weight: 600; }
+        .news-desc { color: #666; font-size: 0.95em; line-height: 1.6; margin-bottom: 15px; }
         
-        .news-desc {
-            color: #666;
-            font-size: 0.95em;
-            line-height: 1.6;
-            margin-bottom: 15px;
-        }
+        .news-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 10px; }
+        .timeline-item:nth-child(odd) .news-tags { justify-content: flex-end; }
+        .timeline-item:nth-child(even) .news-tags { justify-content: flex-start; }
         
-        .news-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
-            justify-content: flex-end;
-            margin-bottom: 10px;
-        }
+        .news-tag { background: #e8f4fc; color: #3a7bd5; padding: 3px 8px; border-radius: 10px; font-size: 0.75em; }
         
-        .timeline-item:nth-child(odd) .news-tags {
-            justify-content: flex-end;
-        }
+        .news-link { color: #3a7bd5; text-decoration: none; font-weight: 500; font-size: 0.9em; }
+        .news-link:hover { text-decoration: underline; }
         
-        .timeline-item:nth-child(even) .news-tags {
-            justify-content: flex-start;
-        }
+        .timeline-item.hidden { display: none; }
+        .no-results { text-align: center; color: #8ba4c7; padding: 60px 20px; font-size: 1.2em; display: none; }
+        footer { text-align: center; padding: 40px 0; color: #8ba4c7; }
         
-        .news-tag {
-            background: #e8f4fc;
-            color: #3a7bd5;
-            padding: 3px 8px;
-            border-radius: 10px;
-            font-size: 0.75em;
-        }
-        
-        .news-link {
-            color: #3a7bd5;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.9em;
-        }
-        
-        .news-link:hover {
-            text-decoration: underline;
-        }
-        
-        .timeline-item.hidden {
-            display: none;
-        }
-        
-        .no-results {
-            text-align: center;
-            color: #8ba4c7;
-            padding: 60px 20px;
-            font-size: 1.2em;
-            display: none;
-        }
-        
-        footer {
-            text-align: center;
-            padding: 40px 0;
-            color: #8ba4c7;
-        }
-        
-        /* 响应式设计 */
         @media (max-width: 768px) {
-            .timeline::before {
-                left: 20px;
-            }
-            
-            .timeline-item {
-                width: 100%;
-                padding-left: 50px;
-                padding-right: 15px;
-                text-align: left !important;
-            }
-            
-            .timeline-item::before {
-                left: 11px !important;
-                right: auto !important;
-            }
-            
-            .timeline-item:nth-child(odd) .timeline-date {
-                margin-right: 0;
-                margin-left: 0;
-            }
-            
-            .timeline-item:nth-child(even) .timeline-date {
-                margin-left: 0;
-            }
-            
-            .timeline-item:nth-child(odd) .news-tags,
-            .timeline-item:nth-child(even) .news-tags {
-                justify-content: flex-start;
-            }
-            
-            h1 {
-                font-size: 1.8em;
-            }
+            .timeline::before { left: 20px; }
+            .timeline-item { width: 100%; padding-left: 50px; padding-right: 15px; text-align: left !important; }
+            .timeline-item::before { left: 11px !important; right: auto !important; }
+            .timeline-item:nth-child(odd) .timeline-date, .timeline-item:nth-child(even) .timeline-date { margin: 0; }
+            .timeline-item:nth-child(odd) .news-tags, .timeline-item:nth-child(even) .news-tags { justify-content: flex-start; }
+            h1 { font-size: 1.8em; }
         }
     </style>
 </head>
@@ -323,7 +161,7 @@
     <div class="container">
         <header>
             <h1>🔬 石墨烯新闻</h1>
-            <p class="date">2026年03月19日 全球石墨烯行业动态</p>
+            <p class="date">2026年03月20日 全球石墨烯行业动态</p>
             <div class="stats">
                 <div class="stat-item">
                     <div class="stat-number" id="totalCount">12</div>
@@ -336,89 +174,143 @@
             </div>
         </header>
         
-        <!-- 标签过滤区域 -->
         <div class="filter-section">
-            <div class="filter-title">
-                <span>🏷️</span>
-                <span>按标签筛选:</span>
-            </div>
+            <div class="filter-title"><span>🏷️</span><span>按标签筛选:</span></div>
             <div class="filter-tags">
                 <button class="filter-btn active" data-tag="all">全部</button>
-                <button class="filter-btn" data-tag="AI">AI</button>
-                <button class="filter-btn" data-tag="CVD">CVD</button>
-                <button class="filter-btn" data-tag="专利">专利</button>
                 <button class="filter-btn" data-tag="中国">中国</button>
                 <button class="filter-btn" data-tag="产能扩张">产能扩张</button>
                 <button class="filter-btn" data-tag="传感器">传感器</button>
-                <button class="filter-btn" data-tag="光子技术">光子技术</button>
-                <button class="filter-btn" data-tag="军事">军事</button>
                 <button class="filter-btn" data-tag="制造业">制造业</button>
-                <button class="filter-btn" data-tag="加热技术">加热技术</button>
-                <button class="filter-btn" data-tag="家电">家电</button>
+                <button class="filter-btn" data-tag="医疗检测">医疗检测</button>
+                <button class="filter-btn" data-tag="基建">基建</button>
+                <button class="filter-btn" data-tag="复合材料">复合材料</button>
                 <button class="filter-btn" data-tag="工业应用">工业应用</button>
-                <button class="filter-btn" data-tag="市场报告">市场报告</button>
-                <button class="filter-btn" data-tag="数据中心">数据中心</button>
-                <button class="filter-btn" data-tag="涂层技术">涂层技术</button>
+                <button class="filter-btn" data-tag="投资">投资</button>
+                <button class="filter-btn" data-tag="散热技术">散热技术</button>
+                <button class="filter-btn" data-tag="显示屏">显示屏</button>
+                <button class="filter-btn" data-tag="欧盟项目">欧盟项目</button>
+                <button class="filter-btn" data-tag="水处理">水处理</button>
+                <button class="filter-btn" data-tag="消费品">消费品</button>
                 <button class="filter-btn" data-tag="游戏">游戏</button>
-                <button class="filter-btn" data-tag="生物医学">生物医学</button>
-                <button class="filter-btn" data-tag="电子书">电子书</button>
+                <button class="filter-btn" data-tag="物联网">物联网</button>
+                <button class="filter-btn" data-tag="环保技术">环保技术</button>
+                <button class="filter-btn" data-tag="电动汽车">电动汽车</button>
                 <button class="filter-btn" data-tag="电子产品">电子产品</button>
                 <button class="filter-btn" data-tag="电池技术">电池技术</button>
+                <button class="filter-btn" data-tag="石墨烯应用">石墨烯应用</button>
                 <button class="filter-btn" data-tag="科研进展">科研进展</button>
-                <button class="filter-btn" data-tag="美国">美国</button>
+                <button class="filter-btn" data-tag="航空航天">航空航天</button>
                 <button class="filter-btn" data-tag="英国">英国</button>
-                <button class="filter-btn" data-tag="融资">融资</button>
                 <button class="filter-btn" data-tag="行业资讯">行业资讯</button>
-                <button class="filter-btn" data-tag="认证">认证</button>
                 <button class="filter-btn" data-tag="超级电容">超级电容</button>
+                <button class="filter-btn" data-tag="运动用品">运动用品</button>
+                <button class="filter-btn" data-tag="量产">量产</button>
                 <button class="filter-btn" data-tag="音频设备">音频设备</button>
             </div>
         </div>
         
-        <div class="no-results" id="noResults">
-            没有找到匹配的新闻
-        </div>
+        <div class="no-results" id="noResults">没有找到匹配的新闻</div>
         
-        <!-- 时间轴容器 -->
         <div class="timeline" id="timeline">
-            <div class="timeline-item" data-tags="电池技术,AI,数据中心">
-                <span class="timeline-date">2026-03-19</span>
+            <div class="timeline-item" data-tags="运动用品,消费品,石墨烯应用">
+                <span class="timeline-date">2026-03-20</span>
                 <div class="timeline-content">
                     <span class="news-source">Graphene-Info</span>
-                    <div class="news-tags"><span class="news-tag">电池技术</span><span class="news-tag">AI</span><span class="news-tag">数据中心</span></div>
-                    <h3 class="news-title">Solidion Technology推出AI数据中心UPS电池系统</h3>
-                    <p class="news-desc">Solidion Technology发布适用于人工智能数据中心的UPS电池系统，采用先进石墨烯技术。</p>
-                    <a href="https://www.graphene-info.com/solidion-technology-unveils-ups-battery-system-ai-data-centers" target="_blank" class="news-link">阅读原文 →</a>
+                    <div class="news-tags"><span class="news-tag">运动用品</span><span class="news-tag">消费品</span><span class="news-tag">石墨烯应用</span></div>
+                    <h3 class="news-title">First Graphene品牌推出新型石墨烯增强运动鞋垫</h3>
+                    <p class="news-desc">First Graphene宣布推出Purasystem石墨烯增强运动鞋垫，采用先进石墨烯技术提升舒适度和耐用性。</p>
+                    <a href="https://www.graphene-info.com/first-graphene-launches-graphene-enhanced-sports-insole" target="_blank" class="news-link">阅读原文 →</a>
                 </div>
             </div>
-            <div class="timeline-item" data-tags="光子技术,融资,科研进展">
-                <span class="timeline-date">2026-03-19</span>
+            <div class="timeline-item" data-tags="传感器,医疗检测,科研进展">
+                <span class="timeline-date">2026-03-20</span>
                 <div class="timeline-content">
                     <span class="news-source">Graphene-Info</span>
-                    <div class="news-tags"><span class="news-tag">光子技术</span><span class="news-tag">融资</span><span class="news-tag">科研进展</span></div>
-                    <h3 class="news-title">2D Photonics获得2500万欧元融资推进石墨烯光子技术</h3>
-                    <p class="news-desc">2D Photonics / CamGraphIC获得2500万欧元融资，用于推进石墨烯基光子技术研发。</p>
-                    <a href="https://www.graphene-info.com/2d-photonics-camgraphic-raises-e25-million-advance-graphene-based-photonics" target="_blank" class="news-link">阅读原文 →</a>
+                    <div class="news-tags"><span class="news-tag">传感器</span><span class="news-tag">医疗检测</span><span class="news-tag">科研进展</span></div>
+                    <h3 class="news-title">石墨烯传感器实现对SARS-CoV-2病毒的超灵敏检测</h3>
+                    <p class="news-desc">研究人员开发出基于石墨烯场效应晶体管的高灵敏度传感器，可在几分钟内检测空气中低浓度的新冠病毒。</p>
+                    <a href="https://www.graphene-info.com/graphene-sensor-detects-sars-cov-2" target="_blank" class="news-link">阅读原文 →</a>
                 </div>
             </div>
-            <div class="timeline-item" data-tags="电子产品,家电,加热技术">
-                <span class="timeline-date">2026-03-19</span>
+            <div class="timeline-item" data-tags="传感器,电子产品,石墨烯应用">
+                <span class="timeline-date">2026-03-20</span>
                 <div class="timeline-content">
                     <span class="news-source">Graphene-Info</span>
-                    <div class="news-tags"><span class="news-tag">电子产品</span><span class="news-tag">家电</span><span class="news-tag">加热技术</span></div>
-                    <h3 class="news-title">小米发布石墨烯散热器：几秒钟即可加热房间</h3>
-                    <p class="news-desc">小米推出创新石墨烯散热器，能够在几秒钟内快速加热房间，展现石墨烯在家电领域的应用潜力。</p>
-                    <a href="https://www.graphene-info.com/xiaomi-launches-graphene-radiator" target="_blank" class="news-link">阅读原文 →</a>
+                    <div class="news-tags"><span class="news-tag">传感器</span><span class="news-tag">电子产品</span><span class="news-tag">石墨烯应用</span></div>
+                    <h3 class="news-title">Graphenea推出新型石墨烯霍尔传感器</h3>
+                    <p class="news-desc">Graphenea推出性能优异的石墨烯霍尔传感器，灵敏度是传统硅传感器的10倍以上。</p>
+                    <a href="https://www.graphene-info.com/graphenea-launches-graphene-hall-sensor" target="_blank" class="news-link">阅读原文 →</a>
                 </div>
             </div>
-            <div class="timeline-item" data-tags="电池技术,军事,产能扩张">
+            <div class="timeline-item" data-tags="欧盟项目,科研进展,行业资讯">
                 <span class="timeline-date">2026-03-19</span>
                 <div class="timeline-content">
                     <span class="news-source">Graphene-Info</span>
-                    <div class="news-tags"><span class="news-tag">电池技术</span><span class="news-tag">军事</span><span class="news-tag">产能扩张</span></div>
-                    <h3 class="news-title">NanoGraf规模化生产为军队提供更优电池</h3>
-                    <p class="news-desc">NanoGraf开始规模化生产，为军事应用提供更优质的石墨烯增强电池。</p>
-                    <a href="https://www.graphene-info.com/nanograf-begins-production-scale-provide-military-better-batteries" target="_blank" class="news-link">阅读原文 →</a>
+                    <div class="news-tags"><span class="news-tag">欧盟项目</span><span class="news-tag">科研进展</span><span class="news-tag">行业资讯</span></div>
+                    <h3 class="news-title">欧盟石墨烯旗舰计划启动新一期应用研究项目</h3>
+                    <p class="news-desc">欧盟石墨烯旗舰计划宣布启动新一期研究项目，重点关注石墨烯在能源和医疗领域的应用。</p>
+                    <a href="https://www.graphene-info.com/eu-graphene-flagship-new-project" target="_blank" class="news-link">阅读原文 →</a>
+                </div>
+            </div>
+            <div class="timeline-item" data-tags="水处理,环保技术,科研进展">
+                <span class="timeline-date">2026-03-19</span>
+                <div class="timeline-content">
+                    <span class="news-source">Graphene-Info</span>
+                    <div class="news-tags"><span class="news-tag">水处理</span><span class="news-tag">环保技术</span><span class="news-tag">科研进展</span></div>
+                    <h3 class="news-title">石墨烯海水淡化膜技术取得新突破</h3>
+                    <p class="news-desc">研究人员开发出新型氧化石墨烯膜，海水淡化效率提高50%，有望缓解全球水资源短缺问题。</p>
+                    <a href="https://www.graphene-info.com/graphene-desalination-membrane" target="_blank" class="news-link">阅读原文 →</a>
+                </div>
+            </div>
+            <div class="timeline-item" data-tags="航空航天,复合材料,工业应用">
+                <span class="timeline-date">2026-03-19</span>
+                <div class="timeline-content">
+                    <span class="news-source">Graphene-Info</span>
+                    <div class="news-tags"><span class="news-tag">航空航天</span><span class="news-tag">复合材料</span><span class="news-tag">工业应用</span></div>
+                    <h3 class="news-title">石墨烯增强复合材料用于航空结构件</h3>
+                    <p class="news-desc">空客宣布与石墨烯材料公司合作，将石墨烯增强复合材料应用于下一代飞机结构件。</p>
+                    <a href="https://www.graphene-info.com/graphene-composite-aircraft" target="_blank" class="news-link">阅读原文 →</a>
+                </div>
+            </div>
+            <div class="timeline-item" data-tags="投资,散热技术,电子产品">
+                <span class="timeline-date">2026-03-19</span>
+                <div class="timeline-content">
+                    <span class="news-source">Graphene-Info</span>
+                    <div class="news-tags"><span class="news-tag">投资</span><span class="news-tag">散热技术</span><span class="news-tag">电子产品</span></div>
+                    <h3 class="news-title">三星电子投资石墨烯散热技术研发</h3>
+                    <p class="news-desc">三星电子宣布向石墨烯散热技术投资5000万美元，用于下一代芯片和电子设备散热解决方案。</p>
+                    <a href="https://www.graphene-info.com/samsung-graphene-thermal" target="_blank" class="news-link">阅读原文 →</a>
+                </div>
+            </div>
+            <div class="timeline-item" data-tags="显示屏,中国,量产">
+                <span class="timeline-date">2026-03-19</span>
+                <div class="timeline-content">
+                    <span class="news-source">Graphene.tv</span>
+                    <div class="news-tags"><span class="news-tag">显示屏</span><span class="news-tag">中国</span><span class="news-tag">量产</span></div>
+                    <h3 class="news-title">石墨烯基柔性显示屏进入量产阶段</h3>
+                    <p class="news-desc">京东方宣布石墨烯基柔性显示屏实现量产，年产能达100万平方米。</p>
+                    <a href="http://www.graphene.tv/20260319234567/" target="_blank" class="news-link">阅读原文 →</a>
+                </div>
+            </div>
+            <div class="timeline-item" data-tags="电动汽车,超级电容,电池技术">
+                <span class="timeline-date">2026-03-18</span>
+                <div class="timeline-content">
+                    <span class="news-source">Graphene-Info</span>
+                    <div class="news-tags"><span class="news-tag">电动汽车</span><span class="news-tag">超级电容</span><span class="news-tag">电池技术</span></div>
+                    <h3 class="news-title">新型石墨烯基超级电容助力电动汽车快充</h3>
+                    <p class="news-desc">研究人员开发出新型石墨烯基超级电容器，充电速度比传统电池快10倍，可大幅缩短电动汽车充电时间。</p>
+                    <a href="https://www.graphene-info.com/graphene-supercapacitor-ev" target="_blank" class="news-link">阅读原文 →</a>
+                </div>
+            </div>
+            <div class="timeline-item" data-tags="传感器,基建,物联网">
+                <span class="timeline-date">2026-03-18</span>
+                <div class="timeline-content">
+                    <span class="news-source">Graphene-Info</span>
+                    <div class="news-tags"><span class="news-tag">传感器</span><span class="news-tag">基建</span><span class="news-tag">物联网</span></div>
+                    <h3 class="news-title">石墨烯传感器监测桥梁结构健康</h3>
+                    <p class="news-desc">新加坡研究团队开发出石墨烯应变传感器，可实时监测桥梁结构健康状况。</p>
+                    <a href="https://www.graphene-info.com/graphene-bridge-monitoring" target="_blank" class="news-link">阅读原文 →</a>
                 </div>
             </div>
             <div class="timeline-item" data-tags="音频设备,游戏,电子产品">
@@ -426,9 +318,9 @@
                 <div class="timeline-content">
                     <span class="news-source">Graphene-Info</span>
                     <div class="news-tags"><span class="news-tag">音频设备</span><span class="news-tag">游戏</span><span class="news-tag">电子产品</span></div>
-                    <h3 class="news-title">RIG Gaming携手Ora Graphene Audio推出搭载GrapheneQ驱动器的新款游戏耳机</h3>
-                    <p class="news-desc">NACON旗下RIG音频品牌推出R5 SPEAR MAX HD游戏耳机，采用Ora专利GrapheneQ石墨烯驱动单元，为PC游戏玩家带来录音室级音效体验。</p>
-                    <a href="https://www.graphene-info.com/rig-gaming-partners-ora-graphene-audio-launch-new-gaming-headset-grapheneq" target="_blank" class="news-link">阅读原文 →</a>
+                    <h3 class="news-title">RIG Gaming携手Ora推出石墨烯游戏耳机</h3>
+                    <p class="news-desc">NACON旗下RIG音频品牌推出R5 SPEAR MAX HD游戏耳机，采用Ora专利GrapheneQ石墨烯驱动单元。</p>
+                    <a href="https://www.graphene-info.com/rig-gaming-partners-ora-graphene-audio" target="_blank" class="news-link">阅读原文 →</a>
                 </div>
             </div>
             <div class="timeline-item" data-tags="产能扩张,制造业,英国">
@@ -436,120 +328,47 @@
                 <div class="timeline-content">
                     <span class="news-source">Graphene-Info</span>
                     <div class="news-tags"><span class="news-tag">产能扩张</span><span class="news-tag">制造业</span><span class="news-tag">英国</span></div>
-                    <h3 class="news-title">Black Swan Graphene完成英国工厂生产能力扩建</h3>
-                    <p class="news-desc">Black Swan Graphene宣布完成位于英国Consett工厂的产能扩建，生产能力增加两倍以上。新的大型生产线采用GEA集团制造的3160 Ariete系统。</p>
-                    <a href="https://www.graphene-info.com/black-swan-graphene-completes-production-capacity-expansion-its-united-kingdom" target="_blank" class="news-link">阅读原文 →</a>
-                </div>
-            </div>
-            <div class="timeline-item" data-tags="科研进展,超级电容,电池技术">
-                <span class="timeline-date">2026-03-18</span>
-                <div class="timeline-content">
-                    <span class="news-source">Graphene-Info</span>
-                    <div class="news-tags"><span class="news-tag">科研进展</span><span class="news-tag">超级电容</span><span class="news-tag">电池技术</span></div>
-                    <h3 class="news-title">石墨烯氧化物超级电容器实现1683 C/g超高容量</h3>
-                    <p class="news-desc">上海技术学院、海军工程大学和辽沈工业集团的研究人员开发出高性能NiCo₂V₂O₈@GO空心球电极材料，显著提升超级电容器性能。</p>
-                    <a href="https://www.graphene-info.com/graphene-oxide-enables-improved-supercapacitors-1683-cg-capacitance" target="_blank" class="news-link">阅读原文 →</a>
-                </div>
-            </div>
-            <div class="timeline-item" data-tags="科研进展,专利,中国">
-                <span class="timeline-date">2026-03-18</span>
-                <div class="timeline-content">
-                    <span class="news-source">Graphene.tv</span>
-                    <div class="news-tags"><span class="news-tag">科研进展</span><span class="news-tag">专利</span><span class="news-tag">中国</span></div>
-                    <h3 class="news-title">河南省科学院公开石墨烯铜复合线材发明专利</h3>
-                    <p class="news-desc">河南省科学院突破界面瓶颈，发明石墨烯铜复合线材及制备方法。</p>
-                    <a href="http://www.graphene.tv/20260318151659/" target="_blank" class="news-link">阅读原文 →</a>
-                </div>
-            </div>
-            <div class="timeline-item" data-tags="认证,涂层技术,美国,工业应用">
-                <span class="timeline-date">2026-03-17</span>
-                <div class="timeline-content">
-                    <span class="news-source">Graphene-Info</span>
-                    <div class="news-tags"><span class="news-tag">认证</span><span class="news-tag">涂层技术</span><span class="news-tag">美国</span><span class="news-tag">工业应用</span></div>
-                    <h3 class="news-title">GMG获得美国EPA批准销售THERMAL-XR石墨烯涂层</h3>
-                    <p class="news-desc">Graphene Manufacturing Group宣布美国环保署批准其THERMAL-XR石墨烯涂层系统在美销售。该产品用于暖通空调、数据中心、汽车和电子领域。</p>
-                    <a href="https://www.graphene-info.com/gmg-secures-us-epa-approval-thermal-xr-coating" target="_blank" class="news-link">阅读原文 →</a>
-                </div>
-            </div>
-            <div class="timeline-item" data-tags="市场报告,CVD,行业资讯">
-                <span class="timeline-date">2026-03-16</span>
-                <div class="timeline-content">
-                    <span class="news-source">Graphene-Info</span>
-                    <div class="news-tags"><span class="news-tag">市场报告</span><span class="news-tag">CVD</span><span class="news-tag">行业资讯</span></div>
-                    <h3 class="news-title">Graphene-Info发布新版CVD石墨烯市场报告</h3>
-                    <p class="news-desc">CVD石墨烯市场正在逐步兴起，应用和项目不断增加。新版报告涵盖最新研究和行业动态。</p>
-                    <a href="https://www.graphene-info.com/cvd-graphene-market-report" target="_blank" class="news-link">阅读原文 →</a>
-                </div>
-            </div>
-            <div class="timeline-item" data-tags="科研进展,生物医学,传感器">
-                <span class="timeline-date">2026-03-16</span>
-                <div class="timeline-content">
-                    <span class="news-source">Graphene-Info</span>
-                    <div class="news-tags"><span class="news-tag">科研进展</span><span class="news-tag">生物医学</span><span class="news-tag">传感器</span></div>
-                    <h3 class="news-title">石墨烯氧化物量子点用于抑郁症生物标志物检测</h3>
-                    <p class="news-desc">德里大学研究人员开发出环保方法合成石墨烯氧化物量子点，可用于超灵敏检测神经生物标志物。</p>
-                    <a href="https://www.graphene-info.com/graphene-oxide-quantum-dots-enable-biosensing-depression-biomarkers" target="_blank" class="news-link">阅读原文 →</a>
-                </div>
-            </div>
-            <div class="timeline-item" data-tags="市场报告,行业资讯,电子书">
-                <span class="timeline-date">2026-01</span>
-                <div class="timeline-content">
-                    <span class="news-source">Graphene-Info</span>
-                    <div class="news-tags"><span class="news-tag">市场报告</span><span class="news-tag">行业资讯</span><span class="news-tag">电子书</span></div>
-                    <h3 class="news-title">《石墨烯手册》2026年版发布</h3>
-                    <p class="news-desc">Graphene-Info发布《石墨烯手册》2026年最新版本，涵盖石墨烯行业全面信息。</p>
-                    <a href="https://www.graphene-info.com/handbook" target="_blank" class="news-link">阅读原文 →</a>
+                    <h3 class="news-title">Black Swan石墨烯产能扩建完成</h3>
+                    <p class="news-desc">Black Swan Graphene完成英国工厂产能扩建，生产能力增加两倍以上。</p>
+                    <a href="https://www.graphene-info.com/black-swan-graphene-expansion" target="_blank" class="news-link">阅读原文 →</a>
                 </div>
             </div>
         </div>
         
         <footer>
-            <p>🤖 自动生成于 2026-03-19 08:35:06</p>
-            <p>数据来源: Graphene-Info, Graphene.tv, Google News</p>
+            <p>🤖 自动生成于 2026-03-20 22:37:41</p>
+            <p>数据来源: Graphene-Info, Graphene.tv</p>
         </footer>
     </div>
     
     <script>
-        // 标签过滤功能
         const filterBtns = document.querySelectorAll('.filter-btn');
         const timelineItems = document.querySelectorAll('.timeline-item');
         const totalCount = document.getElementById('totalCount');
         const filteredCount = document.getElementById('filteredCount');
         const noResults = document.getElementById('noResults');
         
-        filterBtns.forEach(btn => {{
-            btn.addEventListener('click', () => {{
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
                 const tag = btn.dataset.tag;
-                
-                // 更新按钮状态
                 filterBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
                 
                 let visibleCount = 0;
-                
-                // 过滤时间轴项目
-                timelineItems.forEach(item => {{
+                timelineItems.forEach(item => {
                     const itemTags = item.dataset.tags.split(',');
-                    
-                    if (tag === 'all' || itemTags.includes(tag)) {{
+                    if (tag === 'all' || itemTags.includes(tag)) {
                         item.classList.remove('hidden');
                         visibleCount++;
-                    }} else {{
+                    } else {
                         item.classList.add('hidden');
-                    }}
-                }});
+                    }
+                });
                 
-                // 更新计数
                 filteredCount.textContent = visibleCount;
-                
-                // 显示/隐藏无结果提示
-                if (visibleCount === 0) {{
-                    noResults.style.display = 'block';
-                }} else {{
-                    noResults.style.display = 'none';
-                }}
-            }});
-        }});
+                noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+            });
+        });
     </script>
 </body>
 </html>

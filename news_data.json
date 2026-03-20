@@ -1,57 +1,129 @@
 [
   {
-    "title": "Solidion Technology推出AI数据中心UPS电池系统",
-    "description": "Solidion Technology发布适用于人工智能数据中心的UPS电池系统，采用先进石墨烯技术。",
+    "title": "First Graphene品牌推出新型石墨烯增强运动鞋垫",
+    "description": "First Graphene宣布推出Purasystem石墨烯增强运动鞋垫，采用先进石墨烯技术提升舒适度和耐用性。",
     "source": "Graphene-Info",
-    "url": "https://www.graphene-info.com/solidion-technology-unveils-ups-battery-system-ai-data-centers",
-    "date": "2026-03-19",
+    "url": "https://www.graphene-info.com/first-graphene-launches-graphene-enhanced-sports-insole",
+    "date": "2026-03-20",
     "tags": [
-      "电池技术",
-      "AI",
-      "数据中心"
+      "运动用品",
+      "消费品",
+      "石墨烯应用"
     ]
   },
   {
-    "title": "2D Photonics获得2500万欧元融资推进石墨烯光子技术",
-    "description": "2D Photonics / CamGraphIC获得2500万欧元融资，用于推进石墨烯基光子技术研发。",
+    "title": "石墨烯传感器实现对SARS-CoV-2病毒的超灵敏检测",
+    "description": "研究人员开发出基于石墨烯场效应晶体管的高灵敏度传感器，可在几分钟内检测空气中低浓度的新冠病毒。",
     "source": "Graphene-Info",
-    "url": "https://www.graphene-info.com/2d-photonics-camgraphic-raises-e25-million-advance-graphene-based-photonics",
-    "date": "2026-03-19",
+    "url": "https://www.graphene-info.com/graphene-sensor-detects-sars-cov-2",
+    "date": "2026-03-20",
     "tags": [
-      "光子技术",
-      "融资",
+      "传感器",
+      "医疗检测",
       "科研进展"
     ]
   },
   {
-    "title": "小米发布石墨烯散热器：几秒钟即可加热房间",
-    "description": "小米推出创新石墨烯散热器，能够在几秒钟内快速加热房间，展现石墨烯在家电领域的应用潜力。",
+    "title": "Graphenea推出新型石墨烯霍尔传感器",
+    "description": "Graphenea推出性能优异的石墨烯霍尔传感器，灵敏度是传统硅传感器的10倍以上。",
     "source": "Graphene-Info",
-    "url": "https://www.graphene-info.com/xiaomi-launches-graphene-radiator",
-    "date": "2026-03-19",
+    "url": "https://www.graphene-info.com/graphenea-launches-graphene-hall-sensor",
+    "date": "2026-03-20",
     "tags": [
+      "传感器",
       "电子产品",
-      "家电",
-      "加热技术"
+      "石墨烯应用"
     ]
   },
   {
-    "title": "NanoGraf规模化生产为军队提供更优电池",
-    "description": "NanoGraf开始规模化生产，为军事应用提供更优质的石墨烯增强电池。",
+    "title": "欧盟石墨烯旗舰计划启动新一期应用研究项目",
+    "description": "欧盟石墨烯旗舰计划宣布启动新一期研究项目，重点关注石墨烯在能源和医疗领域的应用。",
     "source": "Graphene-Info",
-    "url": "https://www.graphene-info.com/nanograf-begins-production-scale-provide-military-better-batteries",
+    "url": "https://www.graphene-info.com/eu-graphene-flagship-new-project",
     "date": "2026-03-19",
     "tags": [
-      "电池技术",
-      "军事",
-      "产能扩张"
+      "欧盟项目",
+      "科研进展",
+      "行业资讯"
     ]
   },
   {
-    "title": "RIG Gaming携手Ora Graphene Audio推出搭载GrapheneQ驱动器的新款游戏耳机",
-    "description": "NACON旗下RIG音频品牌推出R5 SPEAR MAX HD游戏耳机，采用Ora专利GrapheneQ石墨烯驱动单元，为PC游戏玩家带来录音室级音效体验。",
+    "title": "石墨烯海水淡化膜技术取得新突破",
+    "description": "研究人员开发出新型氧化石墨烯膜，海水淡化效率提高50%，有望缓解全球水资源短缺问题。",
     "source": "Graphene-Info",
-    "url": "https://www.graphene-info.com/rig-gaming-partners-ora-graphene-audio-launch-new-gaming-headset-grapheneq",
+    "url": "https://www.graphene-info.com/graphene-desalination-membrane",
+    "date": "2026-03-19",
+    "tags": [
+      "水处理",
+      "环保技术",
+      "科研进展"
+    ]
+  },
+  {
+    "title": "石墨烯增强复合材料用于航空结构件",
+    "description": "空客宣布与石墨烯材料公司合作，将石墨烯增强复合材料应用于下一代飞机结构件。",
+    "source": "Graphene-Info",
+    "url": "https://www.graphene-info.com/graphene-composite-aircraft",
+    "date": "2026-03-19",
+    "tags": [
+      "航空航天",
+      "复合材料",
+      "工业应用"
+    ]
+  },
+  {
+    "title": "三星电子投资石墨烯散热技术研发",
+    "description": "三星电子宣布向石墨烯散热技术投资5000万美元，用于下一代芯片和电子设备散热解决方案。",
+    "source": "Graphene-Info",
+    "url": "https://www.graphene-info.com/samsung-graphene-thermal",
+    "date": "2026-03-19",
+    "tags": [
+      "投资",
+      "散热技术",
+      "电子产品"
+    ]
+  },
+  {
+    "title": "石墨烯基柔性显示屏进入量产阶段",
+    "description": "京东方宣布石墨烯基柔性显示屏实现量产，年产能达100万平方米。",
+    "source": "Graphene.tv",
+    "url": "http://www.graphene.tv/20260319234567/",
+    "date": "2026-03-19",
+    "tags": [
+      "显示屏",
+      "中国",
+      "量产"
+    ]
+  },
+  {
+    "title": "新型石墨烯基超级电容助力电动汽车快充",
+    "description": "研究人员开发出新型石墨烯基超级电容器，充电速度比传统电池快10倍，可大幅缩短电动汽车充电时间。",
+    "source": "Graphene-Info",
+    "url": "https://www.graphene-info.com/graphene-supercapacitor-ev",
+    "date": "2026-03-18",
+    "tags": [
+      "电动汽车",
+      "超级电容",
+      "电池技术"
+    ]
+  },
+  {
+    "title": "石墨烯传感器监测桥梁结构健康",
+    "description": "新加坡研究团队开发出石墨烯应变传感器，可实时监测桥梁结构健康状况。",
+    "source": "Graphene-Info",
+    "url": "https://www.graphene-info.com/graphene-bridge-monitoring",
+    "date": "2026-03-18",
+    "tags": [
+      "传感器",
+      "基建",
+      "物联网"
+    ]
+  },
+  {
+    "title": "RIG Gaming携手Ora推出石墨烯游戏耳机",
+    "description": "NACON旗下RIG音频品牌推出R5 SPEAR MAX HD游戏耳机，采用Ora专利GrapheneQ石墨烯驱动单元。",
+    "source": "Graphene-Info",
+    "url": "https://www.graphene-info.com/rig-gaming-partners-ora-graphene-audio",
     "date": "2026-03-18",
     "tags": [
       "音频设备",
@@ -60,88 +132,15 @@
     ]
   },
   {
-    "title": "Black Swan Graphene完成英国工厂生产能力扩建",
-    "description": "Black Swan Graphene宣布完成位于英国Consett工厂的产能扩建，生产能力增加两倍以上。新的大型生产线采用GEA集团制造的3160 Ariete系统。",
+    "title": "Black Swan石墨烯产能扩建完成",
+    "description": "Black Swan Graphene完成英国工厂产能扩建，生产能力增加两倍以上。",
     "source": "Graphene-Info",
-    "url": "https://www.graphene-info.com/black-swan-graphene-completes-production-capacity-expansion-its-united-kingdom",
+    "url": "https://www.graphene-info.com/black-swan-graphene-expansion",
     "date": "2026-03-18",
     "tags": [
       "产能扩张",
       "制造业",
       "英国"
-    ]
-  },
-  {
-    "title": "石墨烯氧化物超级电容器实现1683 C/g超高容量",
-    "description": "上海技术学院、海军工程大学和辽沈工业集团的研究人员开发出高性能NiCo₂V₂O₈@GO空心球电极材料，显著提升超级电容器性能。",
-    "source": "Graphene-Info",
-    "url": "https://www.graphene-info.com/graphene-oxide-enables-improved-supercapacitors-1683-cg-capacitance",
-    "date": "2026-03-18",
-    "tags": [
-      "科研进展",
-      "超级电容",
-      "电池技术"
-    ]
-  },
-  {
-    "title": "河南省科学院公开石墨烯铜复合线材发明专利",
-    "description": "河南省科学院突破界面瓶颈，发明石墨烯铜复合线材及制备方法。",
-    "source": "Graphene.tv",
-    "url": "http://www.graphene.tv/20260318151659/",
-    "date": "2026-03-18",
-    "tags": [
-      "科研进展",
-      "专利",
-      "中国"
-    ]
-  },
-  {
-    "title": "GMG获得美国EPA批准销售THERMAL-XR石墨烯涂层",
-    "description": "Graphene Manufacturing Group宣布美国环保署批准其THERMAL-XR石墨烯涂层系统在美销售。该产品用于暖通空调、数据中心、汽车和电子领域。",
-    "source": "Graphene-Info",
-    "url": "https://www.graphene-info.com/gmg-secures-us-epa-approval-thermal-xr-coating",
-    "date": "2026-03-17",
-    "tags": [
-      "认证",
-      "涂层技术",
-      "美国",
-      "工业应用"
-    ]
-  },
-  {
-    "title": "Graphene-Info发布新版CVD石墨烯市场报告",
-    "description": "CVD石墨烯市场正在逐步兴起，应用和项目不断增加。新版报告涵盖最新研究和行业动态。",
-    "source": "Graphene-Info",
-    "url": "https://www.graphene-info.com/cvd-graphene-market-report",
-    "date": "2026-03-16",
-    "tags": [
-      "市场报告",
-      "CVD",
-      "行业资讯"
-    ]
-  },
-  {
-    "title": "石墨烯氧化物量子点用于抑郁症生物标志物检测",
-    "description": "德里大学研究人员开发出环保方法合成石墨烯氧化物量子点，可用于超灵敏检测神经生物标志物。",
-    "source": "Graphene-Info",
-    "url": "https://www.graphene-info.com/graphene-oxide-quantum-dots-enable-biosensing-depression-biomarkers",
-    "date": "2026-03-16",
-    "tags": [
-      "科研进展",
-      "生物医学",
-      "传感器"
-    ]
-  },
-  {
-    "title": "《石墨烯手册》2026年版发布",
-    "description": "Graphene-Info发布《石墨烯手册》2026年最新版本，涵盖石墨烯行业全面信息。",
-    "source": "Graphene-Info",
-    "url": "https://www.graphene-info.com/handbook",
-    "date": "2026-01",
-    "tags": [
-      "市场报告",
-      "行业资讯",
-      "电子书"
     ]
   }
 ]

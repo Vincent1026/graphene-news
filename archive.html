@@ -1,356 +1,374 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>归档 · GrapheneDaily</title>
-  <link rel="stylesheet" href="css/style.css">
-  <style>
-    .archive-tabs {
-      display: flex;
-      gap: 0;
-      border-bottom: 1px solid var(--card-border);
-      margin: 28px 0 0;
-    }
-    .archive-tab {
-      padding: 12px 24px;
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      cursor: pointer;
-      border-bottom: 2px solid transparent;
-      transition: all 0.2s;
-      margin-bottom: -1px;
-    }
-    .archive-tab:hover { color: var(--text); }
-    .archive-tab.active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 600; }
-
-    .tab-panel { display: none; padding: 32px 0; }
-    .tab-panel.active { display: block; }
-
-    /* === 年视图 === */
-    .year-section { margin-bottom: 48px; }
-    .year-heading {
-      font-size: 2rem;
-      font-weight: 800;
-      color: #fff;
-      margin-bottom: 24px;
-      display: flex;
-      align-items: baseline;
-      gap: 12px;
-    }
-    .year-heading .y-count { font-size: 0.9rem; color: var(--text-muted); font-weight: 400; }
-    .month-cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 14px;
-    }
-    .m-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius);
-      padding: 20px;
-      cursor: pointer;
-      transition: all 0.22s;
-      position: relative;
-      overflow: hidden;
-    }
-    .m-card::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 2px;
-      background: var(--gradient);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.3s;
-    }
-    .m-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); border-color: rgba(0,198,255,0.25); }
-    .m-card:hover::after { transform: scaleX(1); }
-    .m-name { font-size: 1.1rem; font-weight: 700; color: #fff; }
-    .m-stats { font-size: 0.8rem; color: var(--text-muted); margin-top: 6px; }
-    .m-bar { margin-top: 12px; height: 3px; background: var(--card-border); border-radius: 2px; overflow: hidden; }
-    .m-bar-fill { height: 100%; background: var(--gradient); border-radius: 2px; }
-
-    /* === 月视图 === */
-    .month-archive { margin-bottom: 40px; }
-    .month-archive-title {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 16px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid var(--card-border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      cursor: pointer;
-    }
-    .month-archive-title a { font-size: 0.82rem; color: var(--text-muted); font-weight: 400; }
-    .month-archive-title a:hover { color: var(--accent); }
-    .month-days-list { display: flex; flex-direction: column; gap: 8px; }
-    .day-archive-row {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 14px 18px;
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius-sm);
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .day-archive-row:hover { border-color: rgba(0,198,255,0.3); background: var(--hover); }
-    .dar-date {
-      width: 80px;
-      flex-shrink: 0;
-    }
-    .dar-day { font-size: 1.4rem; font-weight: 800; color: var(--accent); line-height: 1; }
-    .dar-weekday { font-size: 0.72rem; color: var(--text-muted); }
-    .dar-divider { width: 1px; height: 40px; background: var(--card-border); flex-shrink: 0; }
-    .dar-preview { flex: 1; }
-    .dar-headline { font-size: 0.9rem; color: var(--text); font-weight: 500; margin-bottom: 3px; }
-    .dar-meta { font-size: 0.78rem; color: var(--text-muted); }
-    .dar-count {
-      flex-shrink: 0;
-      background: var(--tag-bg);
-      border: 1px solid rgba(0,198,255,0.15);
-      border-radius: 50px;
-      padding: 4px 12px;
-      font-size: 0.78rem;
-      color: var(--accent);
-    }
-
-    /* === 周视图 === */
-    .week-section { margin-bottom: 40px; }
-    .week-title {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .week-title .w-badge {
-      background: rgba(0,198,255,0.1);
-      border: 1px solid rgba(0,198,255,0.2);
-      border-radius: 4px;
-      padding: 2px 8px;
-      font-size: 0.75rem;
-      color: var(--accent);
-    }
-    .week-days-grid {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 8px;
-    }
-    .wdc {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 10px;
-      padding: 14px 10px;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .wdc:hover, .wdc.has-data { cursor: pointer; }
-    .wdc:hover { border-color: rgba(0,198,255,0.3); background: var(--hover); }
-    .wdc.today-mark { border-color: var(--accent); background: rgba(0,198,255,0.07); }
-    .wdc.empty { opacity: 0.35; cursor: default; }
-    .wdc .wdc-label { font-size: 0.68rem; color: var(--text-muted); margin-bottom: 4px; }
-    .wdc .wdc-num { font-size: 1.1rem; font-weight: 700; color: #fff; }
-    .wdc .wdc-count { font-size: 0.7rem; color: var(--text-muted); margin-top: 5px; }
-    .wdc.today-mark .wdc-count { color: var(--accent); font-weight: 600; }
-    @media (max-width: 600px) { .week-days-grid { grid-template-columns: repeat(4, 1fr); } }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>石墨烯新闻 - 2026年03月20日</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container { max-width: 900px; margin: 0 auto; }
+        
+        header { text-align: center; padding: 40px 0; color: #fff; }
+        
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #00d2ff, #3a7bd5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .date { color: #8ba4c7; font-size: 1.1em; }
+        
+        .filter-section {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .filter-title { color: #fff; font-size: 1.1em; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
+        
+        .filter-tags { display: flex; flex-wrap: wrap; gap: 10px; }
+        
+        .filter-btn {
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9em;
+        }
+        
+        .filter-btn:hover { background: rgba(0,210,255,0.3); border-color: #00d2ff; }
+        .filter-btn.active { background: linear-gradient(90deg, #00d2ff, #3a7bd5); border-color: #00d2ff; font-weight: bold; }
+        
+        .stats { display: flex; justify-content: center; gap: 30px; margin: 20px 0 40px; }
+        .stat-item { background: rgba(255,255,255,0.1); padding: 15px 30px; border-radius: 10px; color: #fff; }
+        .stat-number { font-size: 2em; font-weight: bold; color: #00d2ff; }
+        .stat-label { font-size: 0.9em; color: #8ba4c7; }
+        
+        /* 时间轴样式 */
+        .timeline { position: relative; padding: 20px 0; }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #00d2ff, #3a7bd5);
+            border-radius: 2px;
+        }
+        
+        .timeline-item {
+            position: relative;
+            width: 50%;
+            padding: 0 30px 40px;
+            box-sizing: border-box;
+        }
+        
+        .timeline-item:nth-child(odd) { left: 0; text-align: right; }
+        .timeline-item:nth-child(even) { left: 50%; text-align: left; }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background: #00d2ff;
+            border-radius: 50%;
+            border: 4px solid #fff;
+            box-shadow: 0 0 10px rgba(0,210,255,0.5);
+        }
+        
+        .timeline-item:nth-child(odd)::before { right: -12px; }
+        .timeline-item:nth-child(even)::before { left: -12px; }
+        
+        .timeline-date {
+            display: inline-block;
+            background: linear-gradient(90deg, #00d2ff, #3a7bd5);
+            color: #fff;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-date { margin-right: 10px; }
+        .timeline-item:nth-child(even) .timeline-date { margin-left: 10px; }
+        
+        .timeline-content {
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .timeline-content:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,210,255,0.3); }
+        
+        .news-source {
+            background: linear-gradient(90deg, #00d2ff, #3a7bd5);
+            color: white;
+            padding: 5px 12px;
+            font-size: 0.8em;
+            display: inline-block;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .news-title { font-size: 1.15em; color: #1a1a2e; margin-bottom: 10px; line-height: 1.4; font-weight: 600; }
+        .news-desc { color: #666; font-size: 0.95em; line-height: 1.6; margin-bottom: 15px; }
+        
+        .news-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 10px; }
+        .timeline-item:nth-child(odd) .news-tags { justify-content: flex-end; }
+        .timeline-item:nth-child(even) .news-tags { justify-content: flex-start; }
+        
+        .news-tag { background: #e8f4fc; color: #3a7bd5; padding: 3px 8px; border-radius: 10px; font-size: 0.75em; }
+        
+        .news-link { color: #3a7bd5; text-decoration: none; font-weight: 500; font-size: 0.9em; }
+        .news-link:hover { text-decoration: underline; }
+        
+        .timeline-item.hidden { display: none; }
+        .no-results { text-align: center; color: #8ba4c7; padding: 60px 20px; font-size: 1.2em; display: none; }
+        footer { text-align: center; padding: 40px 0; color: #8ba4c7; }
+        
+        @media (max-width: 768px) {
+            .timeline::before { left: 20px; }
+            .timeline-item { width: 100%; padding-left: 50px; padding-right: 15px; text-align: left !important; }
+            .timeline-item::before { left: 11px !important; right: auto !important; }
+            .timeline-item:nth-child(odd) .timeline-date, .timeline-item:nth-child(even) .timeline-date { margin: 0; }
+            .timeline-item:nth-child(odd) .news-tags, .timeline-item:nth-child(even) .news-tags { justify-content: flex-start; }
+            h1 { font-size: 1.8em; }
+        }
+    </style>
 </head>
 <body>
-<div id="navbar-root"></div>
-
-<section style="padding: 40px 24px 0; background: var(--gradient-dark); border-bottom: 1px solid var(--card-border);">
-  <div style="max-width:1200px; margin:0 auto;">
-    <div style="font-size:0.85rem; color:var(--text-muted); margin-bottom:8px;">
-      <a href="index.html" style="color:var(--text-muted)">首页</a>
-      <span style="margin:0 6px; opacity:0.4">/</span>
-      <span>归档</span>
-    </div>
-    <h1 style="font-size:1.9rem; font-weight:800; margin-bottom:8px;">新闻归档</h1>
-    <p style="color:var(--text-muted); font-size:0.95rem; padding-bottom:24px;">按年 / 月 / 周 / 日浏览全部石墨烯资讯</p>
-
-    <div class="archive-tabs">
-      <div class="archive-tab active" data-tab="year">📅 按年</div>
-      <div class="archive-tab" data-tab="month">🗓 按月</div>
-      <div class="archive-tab" data-tab="week">📋 按周</div>
-    </div>
-  </div>
-</section>
-
-<div class="container">
-
-  <!-- 年视图 -->
-  <div class="tab-panel active" id="tab-year">
-    <div class="year-section">
-      <div class="year-heading">
-        2026 <span class="y-count">38条新闻</span>
-      </div>
-      <div class="month-cards-grid" id="year-2026-months"></div>
-    </div>
-  </div>
-
-  <!-- 月视图 -->
-  <div class="tab-panel" id="tab-month">
-    <div id="month-panel-container"></div>
-  </div>
-
-  <!-- 周视图 -->
-  <div class="tab-panel" id="tab-week">
-    <div id="week-panel-container"></div>
-  </div>
-
-</div>
-
-<div id="footer-root"></div>
-
-<script src="js/data.js"></script>
-<script src="js/ui.js"></script>
-<script>
-  document.getElementById('navbar-root').innerHTML = renderNavbarHome('archive');
-  document.getElementById('footer-root').innerHTML = renderFooter().replace(/href="index\.html"/g, 'href="index.html"');
-
-  // 标签页切换
-  document.querySelectorAll('.archive-tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-      document.querySelectorAll('.archive-tab').forEach(t => t.classList.remove('active'));
-      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-      tab.classList.add('active');
-      document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
-    });
-  });
-
-  // 处理 hash 跳转
-  if (location.hash === '#month-2026-03') {
-    document.querySelector('[data-tab="month"]').click();
-  } else if (location.hash === '#week-11') {
-    document.querySelector('[data-tab="week"]').click();
-  }
-
-  const months = [
-    { key: '03', name: '3月', full: '2026年3月', days: ['2026-03-17','2026-03-16','2026-03-15','2026-03-14','2026-03-13','2026-03-12','2026-03-11','2026-03-10'] },
-    { key: '02', name: '2月', full: '2026年2月', days: [] }
-  ];
-
-  // ========= 年视图 =========
-  document.getElementById('year-2026-months').innerHTML = months.map(m => {
-    const count = m.days.reduce((s, d) => s + getNewsByDate(d).length, 0);
-    const pct = Math.round(count / 40 * 100);
-    return `<div class="m-card" onclick="location.href='archive.html#${m.key}'; document.querySelector('[data-tab=month]').click();">
-      <div class="m-name">${m.full}</div>
-      <div class="m-stats">${m.days.length} 天 · ${count} 条新闻</div>
-      <div class="m-bar"><div class="m-bar-fill" style="width:${pct}%"></div></div>
-    </div>`;
-  }).join('');
-
-  // ========= 月视图 =========
-  const weekdayNames = ['周日','周一','周二','周三','周四','周五','周六'];
-  document.getElementById('month-panel-container').innerHTML = months.map(m => {
-    if (m.days.length === 0) {
-      return `<div class="month-archive" id="month-${m.key}">
-        <div class="month-archive-title">${m.full}<a href="#">暂无数据</a></div>
-      </div>`;
-    }
-    const daysHtml = m.days.map(d => {
-      const news = getNewsByDate(d);
-      const dayNum = d.split('-')[2];
-      const wdIdx = new Date(d+'T00:00:00').getDay();
-      const headline = news.length > 0 ? news[0].title : '暂无内容';
-      const year = d.substring(0,4); const mon = d.substring(5,7); const day = d.substring(8,10);
-      return `<div class="day-archive-row" onclick="location.href='news/${year}/${mon}/${year}${mon}${day}.html'">
-        <div class="dar-date">
-          <div class="dar-day">${parseInt(dayNum)}</div>
-          <div class="dar-weekday">${weekdayNames[wdIdx]}</div>
+    <div class="container">
+        <header>
+            <h1>🔬 石墨烯新闻</h1>
+            <p class="date">2026年03月20日 全球石墨烯行业动态</p>
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number" id="totalCount">12</div>
+                    <div class="stat-label">新闻数量</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="filteredCount">12</div>
+                    <div class="stat-label">显示数量</div>
+                </div>
+            </div>
+        </header>
+        
+        <div class="filter-section">
+            <div class="filter-title"><span>🏷️</span><span>按标签筛选:</span></div>
+            <div class="filter-tags">
+                <button class="filter-btn active" data-tag="all">全部</button>
+                <button class="filter-btn" data-tag="中国">中国</button>
+                <button class="filter-btn" data-tag="产能扩张">产能扩张</button>
+                <button class="filter-btn" data-tag="传感器">传感器</button>
+                <button class="filter-btn" data-tag="制造业">制造业</button>
+                <button class="filter-btn" data-tag="医疗检测">医疗检测</button>
+                <button class="filter-btn" data-tag="基建">基建</button>
+                <button class="filter-btn" data-tag="复合材料">复合材料</button>
+                <button class="filter-btn" data-tag="工业应用">工业应用</button>
+                <button class="filter-btn" data-tag="投资">投资</button>
+                <button class="filter-btn" data-tag="散热技术">散热技术</button>
+                <button class="filter-btn" data-tag="显示屏">显示屏</button>
+                <button class="filter-btn" data-tag="欧盟项目">欧盟项目</button>
+                <button class="filter-btn" data-tag="水处理">水处理</button>
+                <button class="filter-btn" data-tag="消费品">消费品</button>
+                <button class="filter-btn" data-tag="游戏">游戏</button>
+                <button class="filter-btn" data-tag="物联网">物联网</button>
+                <button class="filter-btn" data-tag="环保技术">环保技术</button>
+                <button class="filter-btn" data-tag="电动汽车">电动汽车</button>
+                <button class="filter-btn" data-tag="电子产品">电子产品</button>
+                <button class="filter-btn" data-tag="电池技术">电池技术</button>
+                <button class="filter-btn" data-tag="石墨烯应用">石墨烯应用</button>
+                <button class="filter-btn" data-tag="科研进展">科研进展</button>
+                <button class="filter-btn" data-tag="航空航天">航空航天</button>
+                <button class="filter-btn" data-tag="英国">英国</button>
+                <button class="filter-btn" data-tag="行业资讯">行业资讯</button>
+                <button class="filter-btn" data-tag="超级电容">超级电容</button>
+                <button class="filter-btn" data-tag="运动用品">运动用品</button>
+                <button class="filter-btn" data-tag="量产">量产</button>
+                <button class="filter-btn" data-tag="音频设备">音频设备</button>
+            </div>
         </div>
-        <div class="dar-divider"></div>
-        <div class="dar-preview">
-          <div class="dar-headline">${headline}</div>
-          <div class="dar-meta">${news.length > 1 ? `及 ${news.length - 1} 条其他新闻` : '共 1 条新闻'}</div>
+        
+        <div class="no-results" id="noResults">没有找到匹配的新闻</div>
+        
+        <div class="timeline" id="timeline">
+            <div class="timeline-item" data-tags="运动用品,消费品,石墨烯应用">
+                <span class="timeline-date">2026-03-20</span>
+                <div class="timeline-content">
+                    <span class="news-source">Graphene-Info</span>
+                    <div class="news-tags"><span class="news-tag">运动用品</span><span class="news-tag">消费品</span><span class="news-tag">石墨烯应用</span></div>
+                    <h3 class="news-title">First Graphene品牌推出新型石墨烯增强运动鞋垫</h3>
+                    <p class="news-desc">First Graphene宣布推出Purasystem石墨烯增强运动鞋垫，采用先进石墨烯技术提升舒适度和耐用性。</p>
+                    <a href="https://www.graphene-info.com/first-graphene-launches-graphene-enhanced-sports-insole" target="_blank" class="news-link">阅读原文 →</a>
+                </div>
+            </div>
+            <div class="timeline-item" data-tags="传感器,医疗检测,科研进展">
+                <span class="timeline-date">2026-03-20</span>
+                <div class="timeline-content">
+                    <span class="news-source">Graphene-Info</span>
+                    <div class="news-tags"><span class="news-tag">传感器</span><span class="news-tag">医疗检测</span><span class="news-tag">科研进展</span></div>
+                    <h3 class="news-title">石墨烯传感器实现对SARS-CoV-2病毒的超灵敏检测</h3>
+                    <p class="news-desc">研究人员开发出基于石墨烯场效应晶体管的高灵敏度传感器，可在几分钟内检测空气中低浓度的新冠病毒。</p>
+                    <a href="https://www.graphene-info.com/graphene-sensor-detects-sars-cov-2" target="_blank" class="news-link">阅读原文 →</a>
+                </div>
+            </div>
+            <div class="timeline-item" data-tags="传感器,电子产品,石墨烯应用">
+                <span class="timeline-date">2026-03-20</span>
+                <div class="timeline-content">
+                    <span class="news-source">Graphene-Info</span>
+                    <div class="news-tags"><span class="news-tag">传感器</span><span class="news-tag">电子产品</span><span class="news-tag">石墨烯应用</span></div>
+                    <h3 class="news-title">Graphenea推出新型石墨烯霍尔传感器</h3>
+                    <p class="news-desc">Graphenea推出性能优异的石墨烯霍尔传感器，灵敏度是传统硅传感器的10倍以上。</p>
+                    <a href="https://www.graphene-info.com/graphenea-launches-graphene-hall-sensor" target="_blank" class="news-link">阅读原文 →</a>
+                </div>
+            </div>
+            <div class="timeline-item" data-tags="欧盟项目,科研进展,行业资讯">
+                <span class="timeline-date">2026-03-19</span>
+                <div class="timeline-content">
+                    <span class="news-source">Graphene-Info</span>
+                    <div class="news-tags"><span class="news-tag">欧盟项目</span><span class="news-tag">科研进展</span><span class="news-tag">行业资讯</span></div>
+                    <h3 class="news-title">欧盟石墨烯旗舰计划启动新一期应用研究项目</h3>
+                    <p class="news-desc">欧盟石墨烯旗舰计划宣布启动新一期研究项目，重点关注石墨烯在能源和医疗领域的应用。</p>
+                    <a href="https://www.graphene-info.com/eu-graphene-flagship-new-project" target="_blank" class="news-link">阅读原文 →</a>
+                </div>
+            </div>
+            <div class="timeline-item" data-tags="水处理,环保技术,科研进展">
+                <span class="timeline-date">2026-03-19</span>
+                <div class="timeline-content">
+                    <span class="news-source">Graphene-Info</span>
+                    <div class="news-tags"><span class="news-tag">水处理</span><span class="news-tag">环保技术</span><span class="news-tag">科研进展</span></div>
+                    <h3 class="news-title">石墨烯海水淡化膜技术取得新突破</h3>
+                    <p class="news-desc">研究人员开发出新型氧化石墨烯膜，海水淡化效率提高50%，有望缓解全球水资源短缺问题。</p>
+                    <a href="https://www.graphene-info.com/graphene-desalination-membrane" target="_blank" class="news-link">阅读原文 →</a>
+                </div>
+            </div>
+            <div class="timeline-item" data-tags="航空航天,复合材料,工业应用">
+                <span class="timeline-date">2026-03-19</span>
+                <div class="timeline-content">
+                    <span class="news-source">Graphene-Info</span>
+                    <div class="news-tags"><span class="news-tag">航空航天</span><span class="news-tag">复合材料</span><span class="news-tag">工业应用</span></div>
+                    <h3 class="news-title">石墨烯增强复合材料用于航空结构件</h3>
+                    <p class="news-desc">空客宣布与石墨烯材料公司合作，将石墨烯增强复合材料应用于下一代飞机结构件。</p>
+                    <a href="https://www.graphene-info.com/graphene-composite-aircraft" target="_blank" class="news-link">阅读原文 →</a>
+                </div>
+            </div>
+            <div class="timeline-item" data-tags="投资,散热技术,电子产品">
+                <span class="timeline-date">2026-03-19</span>
+                <div class="timeline-content">
+                    <span class="news-source">Graphene-Info</span>
+                    <div class="news-tags"><span class="news-tag">投资</span><span class="news-tag">散热技术</span><span class="news-tag">电子产品</span></div>
+                    <h3 class="news-title">三星电子投资石墨烯散热技术研发</h3>
+                    <p class="news-desc">三星电子宣布向石墨烯散热技术投资5000万美元，用于下一代芯片和电子设备散热解决方案。</p>
+                    <a href="https://www.graphene-info.com/samsung-graphene-thermal" target="_blank" class="news-link">阅读原文 →</a>
+                </div>
+            </div>
+            <div class="timeline-item" data-tags="显示屏,中国,量产">
+                <span class="timeline-date">2026-03-19</span>
+                <div class="timeline-content">
+                    <span class="news-source">Graphene.tv</span>
+                    <div class="news-tags"><span class="news-tag">显示屏</span><span class="news-tag">中国</span><span class="news-tag">量产</span></div>
+                    <h3 class="news-title">石墨烯基柔性显示屏进入量产阶段</h3>
+                    <p class="news-desc">京东方宣布石墨烯基柔性显示屏实现量产，年产能达100万平方米。</p>
+                    <a href="http://www.graphene.tv/20260319234567/" target="_blank" class="news-link">阅读原文 →</a>
+                </div>
+            </div>
+            <div class="timeline-item" data-tags="电动汽车,超级电容,电池技术">
+                <span class="timeline-date">2026-03-18</span>
+                <div class="timeline-content">
+                    <span class="news-source">Graphene-Info</span>
+                    <div class="news-tags"><span class="news-tag">电动汽车</span><span class="news-tag">超级电容</span><span class="news-tag">电池技术</span></div>
+                    <h3 class="news-title">新型石墨烯基超级电容助力电动汽车快充</h3>
+                    <p class="news-desc">研究人员开发出新型石墨烯基超级电容器，充电速度比传统电池快10倍，可大幅缩短电动汽车充电时间。</p>
+                    <a href="https://www.graphene-info.com/graphene-supercapacitor-ev" target="_blank" class="news-link">阅读原文 →</a>
+                </div>
+            </div>
+            <div class="timeline-item" data-tags="传感器,基建,物联网">
+                <span class="timeline-date">2026-03-18</span>
+                <div class="timeline-content">
+                    <span class="news-source">Graphene-Info</span>
+                    <div class="news-tags"><span class="news-tag">传感器</span><span class="news-tag">基建</span><span class="news-tag">物联网</span></div>
+                    <h3 class="news-title">石墨烯传感器监测桥梁结构健康</h3>
+                    <p class="news-desc">新加坡研究团队开发出石墨烯应变传感器，可实时监测桥梁结构健康状况。</p>
+                    <a href="https://www.graphene-info.com/graphene-bridge-monitoring" target="_blank" class="news-link">阅读原文 →</a>
+                </div>
+            </div>
+            <div class="timeline-item" data-tags="音频设备,游戏,电子产品">
+                <span class="timeline-date">2026-03-18</span>
+                <div class="timeline-content">
+                    <span class="news-source">Graphene-Info</span>
+                    <div class="news-tags"><span class="news-tag">音频设备</span><span class="news-tag">游戏</span><span class="news-tag">电子产品</span></div>
+                    <h3 class="news-title">RIG Gaming携手Ora推出石墨烯游戏耳机</h3>
+                    <p class="news-desc">NACON旗下RIG音频品牌推出R5 SPEAR MAX HD游戏耳机，采用Ora专利GrapheneQ石墨烯驱动单元。</p>
+                    <a href="https://www.graphene-info.com/rig-gaming-partners-ora-graphene-audio" target="_blank" class="news-link">阅读原文 →</a>
+                </div>
+            </div>
+            <div class="timeline-item" data-tags="产能扩张,制造业,英国">
+                <span class="timeline-date">2026-03-18</span>
+                <div class="timeline-content">
+                    <span class="news-source">Graphene-Info</span>
+                    <div class="news-tags"><span class="news-tag">产能扩张</span><span class="news-tag">制造业</span><span class="news-tag">英国</span></div>
+                    <h3 class="news-title">Black Swan石墨烯产能扩建完成</h3>
+                    <p class="news-desc">Black Swan Graphene完成英国工厂产能扩建，生产能力增加两倍以上。</p>
+                    <a href="https://www.graphene-info.com/black-swan-graphene-expansion" target="_blank" class="news-link">阅读原文 →</a>
+                </div>
+            </div>
         </div>
-        <div class="dar-count">${news.length} 条</div>
-      </div>`;
-    }).join('');
-    return `<div class="month-archive" id="month-${m.key}">
-      <div class="month-archive-title">
-        ${m.full}
-        <a href="#">共 ${m.days.reduce((s,d)=>s+getNewsByDate(d).length,0)} 条新闻</a>
-      </div>
-      <div class="month-days-list">${daysHtml}</div>
-    </div>`;
-  }).join('');
-
-  // ========= 周视图 =========
-  const weeks = [
-    {
-      num: 11,
-      label: '第11周',
-      range: '3月11日 - 3月17日',
-      days: [
-        { date: '2026-03-11', label: '周三' },
-        { date: '2026-03-12', label: '周四' },
-        { date: '2026-03-13', label: '周五' },
-        { date: '2026-03-14', label: '周六' },
-        { date: '2026-03-15', label: '周日' },
-        { date: '2026-03-16', label: '周一' },
-        { date: '2026-03-17', label: '周二' },
-      ]
-    },
-    {
-      num: 10,
-      label: '第10周',
-      range: '3月4日 - 3月10日',
-      days: [
-        { date: '2026-03-04', label: '周三' },
-        { date: '2026-03-05', label: '周四' },
-        { date: '2026-03-06', label: '周五' },
-        { date: '2026-03-07', label: '周六' },
-        { date: '2026-03-08', label: '周日' },
-        { date: '2026-03-09', label: '周一' },
-        { date: '2026-03-10', label: '周二' },
-      ]
-    }
-  ];
-
-  document.getElementById('week-panel-container').innerHTML = weeks.map(w => {
-    const daysHtml = w.days.map(wd => {
-      const news = getNewsByDate(wd.date);
-      const dayNum = wd.date.split('-')[2];
-      const isToday = wd.date === getTodayStr();
-      const hasNews = news.length > 0;
-      const y = wd.date.substring(0,4), mo = wd.date.substring(5,7), d = wd.date.substring(8,10);
-      return `<div class="wdc ${isToday?'today-mark':''} ${!hasNews?'empty':'has-data'}"
-                   ${hasNews ? `onclick="location.href='news/${y}/${mo}/${y}${mo}${d}.html'"` : ''}>
-        <div class="wdc-label">${wd.label}</div>
-        <div class="wdc-num">${parseInt(dayNum)}</div>
-        <div class="wdc-count">${hasNews ? news.length+'条' : '无'}</div>
-      </div>`;
-    }).join('');
-    const totalCount = w.days.reduce((s, wd) => s + getNewsByDate(wd.date).length, 0);
-    return `<div class="week-section" id="week-${w.num}">
-      <div class="week-title">
-        ${w.label}
-        <span class="w-badge">${w.range}</span>
-        <span style="font-size:0.8rem;color:var(--text-muted);font-weight:400;">${totalCount} 条新闻</span>
-      </div>
-      <div class="week-days-grid">${daysHtml}</div>
-    </div>`;
-  }).join('');
-
-  // hash 锚点处理
-  if (location.hash) {
-    setTimeout(() => {
-      const el = document.querySelector(location.hash);
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 100);
-  }
-</script>
+        
+        <footer>
+            <p>🤖 自动生成于 2026-03-20 22:37:41</p>
+            <p>数据来源: Graphene-Info, Graphene.tv</p>
+        </footer>
+    </div>
+    
+    <script>
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        const totalCount = document.getElementById('totalCount');
+        const filteredCount = document.getElementById('filteredCount');
+        const noResults = document.getElementById('noResults');
+        
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tag = btn.dataset.tag;
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                let visibleCount = 0;
+                timelineItems.forEach(item => {
+                    const itemTags = item.dataset.tags.split(',');
+                    if (tag === 'all' || itemTags.includes(tag)) {
+                        item.classList.remove('hidden');
+                        visibleCount++;
+                    } else {
+                        item.classList.add('hidden');
+                    }
+                });
+                
+                filteredCount.textContent = visibleCount;
+                noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+            });
+        });
+    </script>
 </body>
 </html>
