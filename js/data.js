@@ -2,6 +2,187 @@
 // 模拟来自 Graphene-Info、ScienceDaily、Nature 等的新闻数据
 
 const GRAPHENE_NEWS_DB = {
+  "2026-03-19": [
+    {
+      id: "20260319-001",
+      title: "欧盟石墨烯旗舰计划启动新一期应用研究项目",
+      summary: "欧盟石墨烯旗舰计划宣布启动新一期研究项目，重点关注石墨烯在能源存储、医疗诊断和柔性电子领域的应用，计划在未来三年投入2亿欧元推动产业化进程。",
+      source: "graphene-info.com",
+      category: "research",
+      tags: ["欧盟", "科研", "产业化"],
+      url: "https://www.graphene-info.com/eu-graphene-flagship",
+      readTime: "4 min",
+      featured: true
+    },
+    {
+      id: "20260319-002",
+      title: "石墨烯海水淡化膜技术取得新突破，效率提升50%",
+      summary: "研究人员开发出新型氧化石墨烯膜，海水淡化效率提高50%，有望缓解全球水资源短缺问题。该技术利用石墨烯的超薄特性实现高效过滤。",
+      source: "graphene-info.com",
+      category: "application",
+      tags: ["水处理", "环保", "科研"],
+      url: "https://www.graphene-info.com/graphene-desalination",
+      readTime: "3 min",
+      featured: false
+    },
+    {
+      id: "20260319-003",
+      title: "空客将石墨烯增强复合材料应用于下一代飞机结构件",
+      summary: "空客宣布与石墨烯材料公司合作，将石墨烯增强复合材料应用于下一代飞机结构件，可减轻机身重量15%并提升结构强度。",
+      source: "graphene-info.com",
+      category: "industry",
+      tags: ["航空", "复合材料", "轻量化"],
+      url: "https://www.graphene-info.com/airbus-graphene",
+      readTime: "4 min",
+      featured: false
+    },
+    {
+      id: "20260319-004",
+      title: "三星电子投资5000万美元研发石墨烯散热技术",
+      summary: "三星电子宣布向石墨烯散热技术投资5000万美元，用于下一代芯片和电子设备散热解决方案，可显著提升电子产品的散热效率。",
+      source: "graphene-info.com",
+      category: "industry",
+      tags: ["三星", "散热", "投资"],
+      url: "https://www.graphene-info.com/samsung-thermal",
+      readTime: "3 min",
+      featured: false
+    },
+    {
+      id: "20260319-005",
+      title: "京东方石墨烯基柔性显示屏实现量产，年产能100万平方米",
+      summary: "京东方宣布石墨烯基柔性显示屏进入量产阶段，年产能达100万平方米，主要用于高端智能手机和可穿戴设备。",
+      source: "graphene.tv",
+      category: "industry",
+      tags: ["京东方", "显示屏", "量产"],
+      url: "http://www.graphene.tv/20260319",
+      readTime: "3 min",
+      featured: false
+    },
+    {
+      id: "20260319-006",
+      title: "Solidion推出AI数据中心石墨烯UPS电池系统",
+      summary: "Solidion Technology发布适用于人工智能数据中心的UPS电池系统，采用石墨烯增强技术，提供更长的循环寿命和更高的功率密度。",
+      source: "graphene-info.com",
+      category: "application",
+      tags: ["AI", "数据中心", "电池"],
+      url: "https://www.graphene-info.com/solidion-ups",
+      readTime: "3 min",
+      featured: false
+    },
+    {
+      id: "20260319-007",
+      title: "2D Photonics获得2500万欧元融资推进石墨烯光子技术",
+      summary: "2D Photonics / CamGraphIC获得2500万欧元A轮融资，将用于扩大石墨烯光子芯片的研发和制造能力。",
+      source: "graphene-info.com",
+      category: "funding",
+      tags: ["融资", "光子技术", "芯片"],
+      url: "https://www.graphene-info.com/2d-photonics",
+      readTime: "3 min",
+      featured: false
+    },
+    {
+      id: "20260319-008",
+      title: "NanoGraf规模化生产石墨烯增强电池供应军方",
+      summary: "NanoGraf开始规模化生产石墨烯增强锂电池，为美国军方提供更高能量密度的电池解决方案，适用于野外作战装备。",
+      source: "graphene-info.com",
+      category: "industry",
+      tags: ["军事", "电池", "量产"],
+      url: "https://www.graphene-info.com/nanograf-military",
+      readTime: "3 min",
+      featured: false
+    }
+  ],
+  "2026-03-20": [
+    {
+      id: "20260320-001",
+      title: "First Graphene推出石墨烯增强运动鞋垫",
+      summary: "First Graphene宣布推出Purasystem石墨烯增强运动鞋垫，采用先进石墨烯技术提升舒适度和耐用性，减少运动损伤风险。",
+      source: "graphene-info.com",
+      category: "application",
+      tags: ["消费品", "运动", "石墨烯"],
+      url: "https://www.graphene-info.com/first-graphene-insole",
+      readTime: "3 min",
+      featured: true
+    },
+    {
+      id: "20260320-002",
+      title: "石墨烯传感器实现空气中新冠病毒超灵敏检测",
+      summary: "研究人员开发出基于石墨烯场效应晶体管的高灵敏度传感器，可在几分钟内检测空气中低浓度的新冠病毒。",
+      source: "graphene-info.com",
+      category: "application",
+      tags: ["传感器", "医疗", "检测"],
+      url: "https://www.graphene-info.com/graphene-covid-sensor",
+      readTime: "4 min",
+      featured: false
+    },
+    {
+      id: "20260320-003",
+      title: "Graphenea推出新型石墨烯霍尔传感器",
+      summary: "Graphenea推出性能优异的石墨烯霍尔传感器，灵敏度是传统硅传感器的10倍以上，适用于高精度磁场测量。",
+      source: "graphene-info.com",
+      category: "application",
+      tags: ["传感器", "磁场", "测量"],
+      url: "https://www.graphene-info.com/graphenea-hall",
+      readTime: "3 min",
+      featured: false
+    },
+    {
+      id: "20260320-004",
+      title: "石墨烯增强复合材料用于航空结构件研究取得进展",
+      summary: "空客与石墨烯材料公司合作，将石墨烯增强复合材料应用于下一代飞机结构件研究取得新进展。",
+      source: "graphene-info.com",
+      category: "research",
+      tags: ["航空", "复合材料", "合作"],
+      url: "https://www.graphene-info.com/graphene-aerospace",
+      readTime: "4 min",
+      featured: false
+    },
+    {
+      id: "20260320-005",
+      title: "石墨烯基超级电容助力电动汽车快充技术突破",
+      summary: "研究人员开发出新型石墨烯基超级电容器，充电速度比传统电池快10倍，可大幅缩短电动汽车充电时间。",
+      source: "graphene-info.com",
+      category: "application",
+      tags: ["电动汽车", "快充", "超级电容"],
+      url: "https://www.graphene-info.com/graphene-ev-charging",
+      readTime: "4 min",
+      featured: false
+    },
+    {
+      id: "20260320-006",
+      title: "新加坡开发石墨烯传感器用于桥梁结构健康监测",
+      summary: "新加坡研究团队开发出石墨烯应变传感器，可实时监测桥梁结构健康状况，预防安全事故。",
+      source: "graphene-info.com",
+      category: "application",
+      tags: ["传感器", "基建", "物联网"],
+      url: "https://www.graphene-info.com/graphene-bridge",
+      readTime: "3 min",
+      featured: false
+    },
+    {
+      id: "20260320-007",
+      title: "石墨烯散热技术助力数据中心能效提升",
+      summary: "多家科技公司采用石墨烯散热技术，显著降低数据中心能耗，预计可节省30%的冷却成本。",
+      source: "graphene-info.com",
+      category: "application",
+      tags: ["数据中心", "散热", "节能"],
+      url: "https://www.graphene-info.com/graphene-datacenter",
+      readTime: "3 min",
+      featured: false
+    },
+    {
+      id: "20260320-008",
+      title: "石墨烯量子点显示技术进入商用阶段",
+      summary: "石墨烯量子点显示技术实现商业化应用，色彩纯净度提升40%，功耗降低30%。",
+      source: "graphene.tv",
+      category: "industry",
+      tags: ["显示", "量子点", "商用"],
+      url: "http://www.graphene.tv/20260320",
+      readTime: "3 min",
+      featured: false
+    }
+  ],
+
   "2026-03-18": [
         {
       id: "20260318-001",
@@ -701,5 +882,5 @@ function formatDate(dateStr, format = 'full') {
 
 // 获取今天日期字符串
 function getTodayStr() {
-  return '2026-03-18'; // 模拟当日
+  return '2026-03-20'; // 模拟当日
 }
