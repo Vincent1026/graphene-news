@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Data Test</title>
+</head>
+<body>
+    <h1>Data Test</h1>
+    <div id="result"></div>
+    <script>
+        window.onerror = function(msg, url, line, col, error) {
+            document.getElementById('result').innerHTML += '<p style="color:red">Error: ' + msg + ' at line ' + line + '</p>';
+            return false;
+        };
+        
+        document.getElementById('result').innerHTML = '<p>Loading data.js...</p>';
+    </script>
+    <script src="js/data.js"></script>
+    <script>
+        try {
+            document.getElementById('result').innerHTML += '<p>data.js loaded successfully</p>';
+            document.getElementById('result').innerHTML += '<p>getTodayStr: ' + getTodayStr() + '</p>';
+            
+            const todayNews = getNewsByDate(getTodayStr());
+            document.getElementById('result').innerHTML += '<p>Today news count: ' + todayNews.length + '</p>';
+            
+            if (todayNews.length > 0) {
+                document.getElementById('result').innerHTML += '<p>First news: ' + todayNews[0].title + '</p>';
+            } else {
+                document.getElementById('result').innerHTML += '<p style="color:red">No news found!</p>';
+                
+                // 检查GRAPHENE_NEWS_DB
+                if (typeof GRAPHENE_NEWS_DB !== 'undefined') {
+                    const dates = Object.keys(GRAPHENE_NEWS_DB);
+                    document.getElementById('result').innerHTML += '<p>Available dates: ' + dates.join(', ') + '</p>';
+                }
+            }
+        } catch(e) {
+            document.getElementById('result').innerHTML += '<p style="color:red">Exception: ' + e.message + '</p>';
+        }
+    </script>
+</body>
+</html>
