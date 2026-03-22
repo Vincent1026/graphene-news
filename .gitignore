@@ -1,0 +1,12 @@
+# Legacy files (old repo structure, kept in git history)
+about.html
+archive.html
+test.html
+test2.html
+css/
+js/
+news/
+graphene-news/
+fetch.log
+auto_update.py
+__pycache__/
