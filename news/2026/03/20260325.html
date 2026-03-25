@@ -33,7 +33,7 @@
         .timeline-date { display: inline-block; background: linear-gradient(90deg, #00d2ff, #3a7bd5); color: #fff; padding: 5px 15px; border-radius: 15px; font-size: 0.85em; margin-bottom: 10px; font-weight: bold; }
         .timeline-item:nth-child(odd) .timeline-date { margin-right: 10px; }
         .timeline-item:nth-child(even) .timeline-date { margin-left: 10px; }
-        .timeline-content { background: rgba(255,255,255,0.95); border-radius: 15px; padding: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.2); }
+        .timeline-content { background: rgba(255,255,255,0.95); border-radius: 15px; padding: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.2); transition: transform 0.3s, box-shadow 0.3s; }
         .timeline-content:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,210,255,0.3); }
         .news-source { background: linear-gradient(90deg, #00d2ff, #3a7bd5); color: white; padding: 5px 12px; font-size: 0.8em; display: inline-block; border-radius: 10px; margin-bottom: 10px; }
         .news-title { font-size: 1.15em; color: #1a1a2e; margin-bottom: 10px; line-height: 1.4; font-weight: 600; }
@@ -43,12 +43,13 @@
         .timeline-item:nth-child(even) .news-tags { justify-content: flex-start; }
         .news-tag { background: #e8f4fc; color: #3a7bd5; padding: 3px 8px; border-radius: 10px; font-size: 0.75em; }
         .news-link { color: #3a7bd5; text-decoration: none; font-weight: 500; font-size: 0.9em; }
+        .news-link:hover { text-decoration: underline; }
         .expand-btn { background: #f0f4f8; border: none; color: #3a7bd5; padding: 4px 12px; border-radius: 8px; cursor: pointer; font-size: 0.8em; margin-top: 8px; }
-        .news-full-content { margin-top: 12px; padding: 12px; background: #f8fafc; border-radius: 8px; color: #333; font-size: 0.9em; line-height: 1.7; border-left: 3px solid #00d2ff; max-height: 300px; overflow-y: auto; }
+        .news-full-content { margin-top: 12px; padding: 12px; background: #f8fafc; border-radius: 8px; color: #333; font-size: 0.9em; line-height: 1.7; text-align: left; border-left: 3px solid #00d2ff; max-height: 300px; overflow-y: auto; }
         .timeline-item.hidden { display: none; }
         footer { text-align: center; padding: 40px 0; color: #8ba4c7; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 40px; }
         footer a { color: #00d2ff; text-decoration: none; }
-        @media (max-width: 768px) { .timeline::before { left: 20px; } .timeline-item { width: 100%; padding-left: 50px; text-align: left; } .timeline-item::before { left: 11px; } }
+        @media (max-width: 768px) { .timeline::before { left: 20px; } .timeline-item { width: 100%; padding-left: 50px; text-align: left !important; } .timeline-item::before { left: 11px !important; right: auto !important; } }
     </style>
 </head>
 <body>
@@ -57,9 +58,9 @@
             <h1>🔬 石墨烯新闻</h1>
             <p class="subtitle">2026年03月25日 全球石墨烯行业动态</p>
             <div class="stats">
-                <div class="stat-item"><div class="stat-number">1</div><div class="stat-label">新闻数量</div></div>
-                <div class="stat-item"><div class="stat-number" id="filteredCount">1</div><div class="stat-label">显示数量</div></div>
-                <div class="stat-item"><div class="stat-number">1</div><div class="stat-label">新闻来源</div></div>
+                <div class="stat-item"><div class="stat-number">2</div><div class="stat-label">新闻数量</div></div>
+                <div class="stat-item"><div class="stat-number" id="filteredCount">2</div><div class="stat-label">显示数量</div></div>
+                <div class="stat-item"><div class="stat-number">2</div><div class="stat-label">新闻来源</div></div>
             </div>
         </header>
         <div class="filter-section">
@@ -68,19 +69,30 @@
         </div>
         <div class="no-results" id="noResults">没有找到匹配的新闻</div>
         <div class="timeline">
-        <div class="timeline-item" data-tags="芯片,科研进展,石墨烯材料,电子产品">
-            <span class="timeline-date">2026-03-25</span>
-            <div class="timeline-content">
-                <span class="news-source">EurekAlert</span>
-                <div class="news-tags"><span class="news-tag">芯片</span><span class="news-tag">科研进展</span><span class="news-tag">石墨烯材料</span><span class="news-tag">电子产品</span></div>
-                <h3 class="news-title">石墨烯接收器让节能 6G 硬件更接近现实</h3>
-                <p class="news-desc">ICFO 研究人员在 Nature Communications 发表研究，首次展示 sub-THz 石墨烯接收器，实现零能耗、超紧凑设计，为 6G 无线技术铺平道路。</p>
-                <a href="https://www.eurekalert.org/news-releases/1121001" target="_blank" class="news-link">阅读原文 →</a>
-                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">ICFO 研究团队在 Nature Communications 发表突破性研究，首次展示了 sub-THz（亚太赫兹）石墨烯接收器。该技术解决了从 5G 过渡到 6G 的关键挑战：在 sub-THz 频段实现高效信号检测。该石墨烯接收器具有以下优势：多千兆比特每秒数据速率、低复杂度、超紧凑（仅 0.018 mm²）、CMOS 兼容、运行时近零能耗。研究由 ICREA Prof. Frank Koppens 领导，与 ETH Zurich、Ioannina 大学、加泰罗尼亚纳米科学与纳米技术研究所（ICN2）等机构合作完成。这一进展将石墨烯设备从实验室探测器转变为 6G 无线技术的实用化微型构件。</div>
-            </div>
-        </div></div>
+    <div class="timeline-item" data-tags="科研进展,芯片,石墨烯材料,电子产品">
+        <span class="timeline-date">2026-03-25</span>
+        <div class="timeline-content">
+            <span class="news-source">AzerTag</span>
+            <div class="news-tags"><span class="news-tag">科研进展</span><span class="news-tag">芯片</span><span class="news-tag">石墨烯材料</span><span class="news-tag">电子产品</span></div>
+            <h3 class="news-title">纳米技术突破：石墨烯有望实现仿脑超高效电子器件</h3>
+            <p class="news-desc">研究人员在石墨烯神经形态计算领域取得重大突破，展示了利用石墨烯实现类脑超高效电子器件的可能性，为下一代节能计算技术铺平道路。</p>
+            <a href="https://azertag.az/en/xeber/nanotech_breakthrough_could_enable_brain_like_ultra_efficient_electronics-4092899" target="_blank" class="news-link">阅读原文 →</a>
+            <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">纳米技术领域的最新突破显示，石墨烯材料有望用于构建仿脑式超高效电子器件。研究人员利用石墨烯独特的电子特性，开发了能够模拟生物神经元行为的新型器件架构。这项技术突破对于开发下一代低功耗神经形态计算系统具有重要意义。传统电子器件在处理复杂计算任务时能耗较高，而石墨烯基神经形态器件通过模拟人脑的信息处理方式，有望实现数量级的能效提升。该研究成果为人工智能硬件、边缘计算和物联网设备的能效优化提供了新的技术路径。</div>
+        </div>
+    </div>
+    <div class="timeline-item" data-tags="芯片,科研进展,石墨烯材料,电子产品">
+        <span class="timeline-date">2026-03-25</span>
+        <div class="timeline-content">
+            <span class="news-source">EurekAlert</span>
+            <div class="news-tags"><span class="news-tag">芯片</span><span class="news-tag">科研进展</span><span class="news-tag">石墨烯材料</span><span class="news-tag">电子产品</span></div>
+            <h3 class="news-title">石墨烯接收器让节能 6G 硬件更接近现实</h3>
+            <p class="news-desc">ICFO 研究人员在 Nature Communications 发表研究，首次展示 sub-THz 石墨烯接收器，实现零能耗、超紧凑设计，为 6G 无线技术铺平道路。</p>
+            <a href="https://www.eurekalert.org/news-releases/1121001" target="_blank" class="news-link">阅读原文 →</a>
+            <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">ICFO 研究团队在 Nature Communications 发表突破性研究，首次展示了 sub-THz（亚太赫兹）石墨烯接收器。该技术解决了从 5G 过渡到 6G 的关键挑战：在 sub-THz 频段实现高效信号检测。该石墨烯接收器具有以下优势：多千兆比特每秒数据速率、低复杂度、超紧凑（仅 0.018 mm²）、CMOS 兼容、运行时近零能耗。研究由 ICREA Prof. Frank Koppens 领导，与 ETH Zurich、Ioannina 大学、加泰罗尼亚纳米科学与纳米技术研究所（ICN2）等机构合作完成。这一进展将石墨烯设备从实验室探测器转变为 6G 无线技术的实用化微型构件。</div>
+        </div>
+    </div></div>
         <footer>
-            <p>📡 数据来源: Graphene-Info | Graphene.tv | EurekAlert | InvestingNews | SustainableBiz Canada | Hackaday</p>
+            <p>📡 数据来源: Graphene-Info | Graphene.tv | EurekAlert | AzerTag | InvestingNews</p>
             <p>🔗 GitHub: <a href="https://github.com/Vincent1026/graphene-news" target="_blank">Vincent1026/graphene-news</a></p>
         </footer>
     </div>
