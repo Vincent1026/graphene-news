@@ -1,5 +1,20 @@
 [
   {
+    "title": "石墨烯接收器让节能 6G 硬件更接近现实",
+    "description": "ICFO 研究人员在 Nature Communications 发表研究，首次展示 sub-THz 石墨烯接收器，实现零能耗、超紧凑设计，为 6G 无线技术铺平道路。",
+    "content": "ICFO 研究团队在 Nature Communications 发表突破性研究，首次展示了 sub-THz（亚太赫兹）石墨烯接收器。该技术解决了从 5G 过渡到 6G 的关键挑战：在 sub-THz 频段实现高效信号检测。该石墨烯接收器具有以下优势：多千兆比特每秒数据速率、低复杂度、超紧凑（仅 0.018 mm²）、CMOS 兼容、运行时近零能耗。研究由 ICREA Prof. Frank Koppens 领导，与 ETH Zurich、Ioannina 大学、加泰罗尼亚纳米科学与纳米技术研究所（ICN2）等机构合作完成。这一进展将石墨烯设备从实验室探测器转变为 6G 无线技术的实用化微型构件。",
+    "url": "https://www.eurekalert.org/news-releases/1121001",
+    "source": "EurekAlert",
+    "lang": "zh",
+    "date": "2026-03-25",
+    "tags": [
+      "芯片",
+      "科研进展",
+      "石墨烯材料",
+      "电子产品"
+    ]
+  },
+  {
     "title": "Black Swan 以 1260 万美元收购注塑公司 Falpaco",
     "description": "Black Swan Graphene Inc. 计划以 $1260 万收购魁北克注塑成型公司 Falpaco，实现石墨烯增强橡胶和塑料零件的垂直整合生产，交易预计 Q2 完成。",
     "content": "Black Swan Graphene Inc. (SWAN-X) 宣布以 1260 万美元收购魁北克注塑成型公司 Falpaco Rubber and Plastics Inc.，以实现石墨烯增强橡胶和塑料零件的垂直整合生产。该收购是 Black Swan 加速石墨烯产品商业化战略的关键一步，将结合其石墨烯材料专业知识与 Falpaco 的注塑成型能力和市场基础。Falpaco 位于蒙特利尔东南的格兰比工业园区，拥有约 45 名全职员工，为多个行业提供注塑成型服务。该交易预计在 Q2 完成，需满足常规条件并获得 TSX Venture Exchange 批准。完成后 Falpaco 将成为 Black Swan 的全资子公司。",
