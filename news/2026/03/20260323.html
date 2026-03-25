@@ -33,7 +33,7 @@
         .timeline-date { display: inline-block; background: linear-gradient(90deg, #00d2ff, #3a7bd5); color: #fff; padding: 5px 15px; border-radius: 15px; font-size: 0.85em; margin-bottom: 10px; font-weight: bold; }
         .timeline-item:nth-child(odd) .timeline-date { margin-right: 10px; }
         .timeline-item:nth-child(even) .timeline-date { margin-left: 10px; }
-        .timeline-content { background: rgba(255,255,255,0.95); border-radius: 15px; padding: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.2); transition: transform 0.3s; }
+        .timeline-content { background: rgba(255,255,255,0.95); border-radius: 15px; padding: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.2); }
         .timeline-content:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,210,255,0.3); }
         .news-source { background: linear-gradient(90deg, #00d2ff, #3a7bd5); color: white; padding: 5px 12px; font-size: 0.8em; display: inline-block; border-radius: 10px; margin-bottom: 10px; }
         .news-title { font-size: 1.15em; color: #1a1a2e; margin-bottom: 10px; line-height: 1.4; font-weight: 600; }
@@ -44,11 +44,11 @@
         .news-tag { background: #e8f4fc; color: #3a7bd5; padding: 3px 8px; border-radius: 10px; font-size: 0.75em; }
         .news-link { color: #3a7bd5; text-decoration: none; font-weight: 500; font-size: 0.9em; }
         .expand-btn { background: #f0f4f8; border: none; color: #3a7bd5; padding: 4px 12px; border-radius: 8px; cursor: pointer; font-size: 0.8em; margin-top: 8px; }
-        .news-full-content { margin-top: 12px; padding: 12px; background: #f8fafc; border-radius: 8px; color: #333; font-size: 0.9em; line-height: 1.7; text-align: left; border-left: 3px solid #00d2ff; max-height: 300px; overflow-y: auto; }
+        .news-full-content { margin-top: 12px; padding: 12px; background: #f8fafc; border-radius: 8px; color: #333; font-size: 0.9em; line-height: 1.7; border-left: 3px solid #00d2ff; max-height: 300px; overflow-y: auto; }
         .timeline-item.hidden { display: none; }
         footer { text-align: center; padding: 40px 0; color: #8ba4c7; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 40px; }
         footer a { color: #00d2ff; text-decoration: none; }
-        @media (max-width: 768px) { .timeline::before { left: 20px; } .timeline-item { width: 100%; padding-left: 50px; padding-right: 15px; text-align: left !important; } .timeline-item::before { left: 11px !important; right: auto !important; } h1 { font-size: 1.8em; } }
+        @media (max-width: 768px) { .timeline::before { left: 20px; } .timeline-item { width: 100%; padding-left: 50px; text-align: left; } .timeline-item::before { left: 11px; } }
     </style>
 </head>
 <body>
