@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>石墨烯新闻 - 2026年03月24日</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); min-height: 100vh; padding: 20px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        header { text-align: center; padding: 40px 0; color: #fff; }
+        h1 { font-size: 2.5em; margin-bottom: 10px; background: linear-gradient(90deg, #00d2ff, #3a7bd5); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .subtitle { font-size: 1.1em; color: #8ba4c7; margin-bottom: 5px; }
+        .stats { display: flex; justify-content: center; gap: 30px; margin: 20px 0 40px; }
+        .stat-item { background: rgba(255,255,255,0.1); padding: 15px 30px; border-radius: 10px; color: #fff; }
+        .stat-number { font-size: 2em; font-weight: bold; color: #00d2ff; }
+        .stat-label { font-size: 0.9em; color: #8ba4c7; }
+        .filter-section { background: rgba(255,255,255,0.1); border-radius: 15px; padding: 20px; margin: 20px 0; }
+        .filter-title { color: #fff; font-size: 1.1em; margin-bottom: 15px; }
+        .filter-tags { display: flex; flex-wrap: wrap; gap: 10px; }
+        .filter-btn { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 8px 16px; border-radius: 20px; cursor: pointer; font-size: 0.9em; }
+        .filter-btn:hover { background: rgba(0,210,255,0.3); }
+        .filter-btn.active { background: linear-gradient(90deg, #00d2ff, #3a7bd5); border-color: #00d2ff; font-weight: bold; }
+        .no-results { text-align: center; color: #8ba4c7; padding: 60px 20px; display: none; }
+        .timeline { position: relative; padding: 20px 0; }
+        .timeline::before { content: ''; position: absolute; left: 50%; transform: translateX(-50%); width: 4px; height: 100%; background: linear-gradient(180deg, #00d2ff, #3a7bd5); border-radius: 2px; }
+        .timeline-item { position: relative; width: 50%; padding: 0 30px 40px; box-sizing: border-box; }
+        .timeline-item:nth-child(odd) { left: 0; text-align: right; }
+        .timeline-item:nth-child(even) { left: 50%; text-align: left; }
+        .timeline-item::before { content: ''; position: absolute; top: 0; width: 20px; height: 20px; background: #00d2ff; border-radius: 50%; border: 4px solid #fff; box-shadow: 0 0 10px rgba(0,210,255,0.5); }
+        .timeline-item:nth-child(odd)::before { right: -12px; }
+        .timeline-item:nth-child(even)::before { left: -12px; }
+        .timeline-date { display: inline-block; background: linear-gradient(90deg, #00d2ff, #3a7bd5); color: #fff; padding: 5px 15px; border-radius: 15px; font-size: 0.85em; margin-bottom: 10px; font-weight: bold; }
+        .timeline-item:nth-child(odd) .timeline-date { margin-right: 10px; }
+        .timeline-item:nth-child(even) .timeline-date { margin-left: 10px; }
+        .timeline-content { background: rgba(255,255,255,0.95); border-radius: 15px; padding: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.2); transition: transform 0.3s; }
+        .timeline-content:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,210,255,0.3); }
+        .news-source { background: linear-gradient(90deg, #00d2ff, #3a7bd5); color: white; padding: 5px 12px; font-size: 0.8em; display: inline-block; border-radius: 10px; margin-bottom: 10px; }
+        .news-title { font-size: 1.15em; color: #1a1a2e; margin-bottom: 10px; line-height: 1.4; font-weight: 600; }
+        .news-desc { color: #666; font-size: 0.95em; line-height: 1.6; margin-bottom: 15px; }
+        .news-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 10px; }
+        .timeline-item:nth-child(odd) .news-tags { justify-content: flex-end; }
+        .timeline-item:nth-child(even) .news-tags { justify-content: flex-start; }
+        .news-tag { background: #e8f4fc; color: #3a7bd5; padding: 3px 8px; border-radius: 10px; font-size: 0.75em; }
+        .news-link { color: #3a7bd5; text-decoration: none; font-weight: 500; font-size: 0.9em; }
+        .expand-btn { background: #f0f4f8; border: none; color: #3a7bd5; padding: 4px 12px; border-radius: 8px; cursor: pointer; font-size: 0.8em; margin-top: 8px; }
+        .news-full-content { margin-top: 12px; padding: 12px; background: #f8fafc; border-radius: 8px; color: #333; font-size: 0.9em; line-height: 1.7; text-align: left; border-left: 3px solid #00d2ff; max-height: 300px; overflow-y: auto; }
+        .timeline-item.hidden { display: none; }
+        footer { text-align: center; padding: 40px 0; color: #8ba4c7; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 40px; }
+        footer a { color: #00d2ff; text-decoration: none; }
+        @media (max-width: 768px) { .timeline::before { left: 20px; } .timeline-item { width: 100%; padding-left: 50px; padding-right: 15px; text-align: left !important; } .timeline-item::before { left: 11px !important; right: auto !important; } h1 { font-size: 1.8em; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔬 石墨烯新闻</h1>
+            <p class="subtitle">2026年03月24日 全球石墨烯行业动态</p>
+            <div class="stats">
+                <div class="stat-item"><div class="stat-number">2</div><div class="stat-label">新闻数量</div></div>
+                <div class="stat-item"><div class="stat-number" id="filteredCount">2</div><div class="stat-label">显示数量</div></div>
+                <div class="stat-item"><div class="stat-number">2</div><div class="stat-label">新闻来源</div></div>
+            </div>
+        </header>
+        <div class="filter-section">
+            <div class="filter-title">🏷️ 按标签筛选:</div>
+            <div class="filter-tags"><button class="filter-btn active" data-tag="all">全部</button><button class="filter-btn" data-tag="3D打印">3D打印</button><button class="filter-btn" data-tag="产能扩张">产能扩张</button><button class="filter-btn" data-tag="复合材料">复合材料</button><button class="filter-btn" data-tag="投资">投资</button><button class="filter-btn" data-tag="石墨烯材料">石墨烯材料</button><button class="filter-btn" data-tag="行业资讯">行业资讯</button></div>
+        </div>
+        <div class="no-results" id="noResults">没有找到匹配的新闻</div>
+        <div class="timeline">
+        <div class="timeline-item" data-tags="投资,产能扩张,行业资讯,石墨烯材料">
+            <span class="timeline-date">2026-03-24</span>
+            <div class="timeline-content">
+                <span class="news-source">SustainableBiz Canada</span>
+                <div class="news-tags"><span class="news-tag">投资</span><span class="news-tag">产能扩张</span><span class="news-tag">行业资讯</span><span class="news-tag">石墨烯材料</span></div>
+                <h3 class="news-title">Black Swan 以 1260 万美元收购注塑公司 Falpaco</h3>
+                <p class="news-desc">Black Swan Graphene Inc. 计划以 $1260 万收购魁北克注塑成型公司 Falpaco，实现石墨烯增强橡胶和塑料零件的垂直整合生产，交易预计 Q2 完成。</p>
+                <a href="https://sustainablebiz.ca/black-swan-to-acquire-moulding-company-falpaco-in-126m-deal" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">Black Swan Graphene Inc. (SWAN-X) 宣布以 1260 万美元收购魁北克注塑成型公司 Falpaco Rubber and Plastics Inc.，以实现石墨烯增强橡胶和塑料零件的垂直整合生产。该收购是 Black Swan 加速石墨烯产品商业化战略的关键一步，将结合其石墨烯材料专业知识与 Falpaco 的注塑成型能力和市场基础。Falpaco 位于蒙特利尔东南的格兰比工业园区，拥有约 45 名全职员工，为多个行业提供注塑成型服务。该交易预计在 Q2 完成，需满足常规条件并获得 TSX Venture Exchange 批准。完成后 Falpaco 将成为 Black Swan 的全资子公司。</div>
+            </div>
+        </div>
+        <div class="timeline-item" data-tags="石墨烯材料,复合材料,3D打印">
+            <span class="timeline-date">2026-03-24</span>
+            <div class="timeline-content">
+                <span class="news-source">Hackaday</span>
+                <div class="news-tags"><span class="news-tag">石墨烯材料</span><span class="news-tag">复合材料</span><span class="news-tag">3D打印</span></div>
+                <h3 class="news-title">测试昂贵的石墨烯增强尼龙丝材</h3>
+                <p class="news-desc">Lyten 3D 推出 PA1205 石墨烯增强尼龙丝，价格 $150/kg。测试表明相比普通尼龙强度更高，与 PA-CF 相比脆性更低，总体是不错的材料但价格较高。</p>
+                <a href="https://hackaday.com/2026/03/24/testing-expensive-graphene-reinforced-nylon-filament/" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">Lyten 3D 推出的 PA1205 石墨烯增强尼龙丝材价格高达 $150/kg。Dr. Igor Gaspar 对该材料进行了测试，使用 Bambu Lab 切片器的标准 PA-CF 预设打印测试件。测试结果显示：与普通 PA 尼龙相比，PA1205 强度表现良好；与 PA-CF 相比，PA1205 脆性更低；但与大多数纤维增强丝材一样，比纯材料更脆。总体而言是一款不错的丝材，但考虑到价格，性价比需要权衡。该丝材使用 PA12 基材，比 PA6 对湿度更不敏感，建议使用 0.6mm 喷嘴打印。</div>
+            </div>
+        </div></div>
+        <footer>
+            <p>📡 数据来源: Graphene-Info | Graphene.tv | EurekAlert | InvestingNews | SustainableBiz Canada | Hackaday</p>
+            <p>🔗 GitHub: <a href="https://github.com/Vincent1026/graphene-news" target="_blank">Vincent1026/graphene-news</a></p>
+        </footer>
+    </div>
+    <script>
+        function toggleContent(btn) { const c = btn.nextElementSibling; c.style.display = c.style.display === 'none' ? 'block' : 'none'; btn.textContent = c.style.display === 'none' ? '展开详情 ▼' : '收起详情 ▲'; }
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        const filteredCount = document.getElementById('filteredCount');
+        const noResults = document.getElementById('noResults');
+        filterBtns.forEach(btn => { btn.addEventListener('click', () => { const tag = btn.dataset.tag; filterBtns.forEach(b => b.classList.remove('active')); btn.classList.add('active'); let visibleCount = 0; timelineItems.forEach(item => { const itemTags = item.dataset.tags.split(','); if (tag === 'all' || itemTags.includes(tag)) { item.classList.remove('hidden'); visibleCount++; } else { item.classList.add('hidden'); } }); filteredCount.textContent = visibleCount; noResults.style.display = visibleCount === 0 ? 'block' : 'none'; }); });
+    </script>
+</body>
+</html>
