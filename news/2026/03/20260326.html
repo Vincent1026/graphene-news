@@ -11,18 +11,17 @@
         header { text-align: center; padding: 40px 0; color: #fff; }
         h1 { font-size: 2.5em; margin-bottom: 10px; background: linear-gradient(90deg, #00d2ff, #3a7bd5); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
         .subtitle { font-size: 1.1em; color: #8ba4c7; margin-bottom: 5px; }
-        .update-info { font-size: 0.85em; color: #5a7a9a; margin-top: 5px; }
         .stats { display: flex; justify-content: center; gap: 30px; margin: 20px 0 40px; }
         .stat-item { background: rgba(255,255,255,0.1); padding: 15px 30px; border-radius: 10px; color: #fff; }
         .stat-number { font-size: 2em; font-weight: bold; color: #00d2ff; }
         .stat-label { font-size: 0.9em; color: #8ba4c7; }
         .filter-section { background: rgba(255,255,255,0.1); border-radius: 15px; padding: 20px; margin: 20px 0; }
-        .filter-title { color: #fff; font-size: 1.1em; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
+        .filter-title { color: #fff; font-size: 1.1em; margin-bottom: 15px; }
         .filter-tags { display: flex; flex-wrap: wrap; gap: 10px; }
-        .filter-btn { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 8px 16px; border-radius: 20px; cursor: pointer; transition: all 0.3s; font-size: 0.9em; }
-        .filter-btn:hover { background: rgba(0,210,255,0.3); border-color: #00d2ff; }
+        .filter-btn { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 8px 16px; border-radius: 20px; cursor: pointer; font-size: 0.9em; }
+        .filter-btn:hover { background: rgba(0,210,255,0.3); }
         .filter-btn.active { background: linear-gradient(90deg, #00d2ff, #3a7bd5); border-color: #00d2ff; font-weight: bold; }
-        .no-results { text-align: center; color: #8ba4c7; padding: 60px 20px; font-size: 1.2em; display: none; }
+        .no-results { text-align: center; color: #8ba4c7; padding: 60px 20px; display: none; }
         .timeline { position: relative; padding: 20px 0; }
         .timeline::before { content: ''; position: absolute; left: 50%; transform: translateX(-50%); width: 4px; height: 100%; background: linear-gradient(180deg, #00d2ff, #3a7bd5); border-radius: 2px; }
         .timeline-item { position: relative; width: 50%; padding: 0 30px 40px; box-sizing: border-box; }
@@ -34,7 +33,7 @@
         .timeline-date { display: inline-block; background: linear-gradient(90deg, #00d2ff, #3a7bd5); color: #fff; padding: 5px 15px; border-radius: 15px; font-size: 0.85em; margin-bottom: 10px; font-weight: bold; }
         .timeline-item:nth-child(odd) .timeline-date { margin-right: 10px; }
         .timeline-item:nth-child(even) .timeline-date { margin-left: 10px; }
-        .timeline-content { background: rgba(255,255,255,0.95); border-radius: 15px; padding: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.2); transition: transform 0.3s, box-shadow 0.3s; }
+        .timeline-content { background: rgba(255,255,255,0.95); border-radius: 15px; padding: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.2); }
         .timeline-content:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,210,255,0.3); }
         .news-source { background: linear-gradient(90deg, #00d2ff, #3a7bd5); color: white; padding: 5px 12px; font-size: 0.8em; display: inline-block; border-radius: 10px; margin-bottom: 10px; }
         .news-title { font-size: 1.15em; color: #1a1a2e; margin-bottom: 10px; line-height: 1.4; font-weight: 600; }
@@ -45,11 +44,11 @@
         .news-tag { background: #e8f4fc; color: #3a7bd5; padding: 3px 8px; border-radius: 10px; font-size: 0.75em; }
         .news-link { color: #3a7bd5; text-decoration: none; font-weight: 500; font-size: 0.9em; }
         .expand-btn { background: #f0f4f8; border: none; color: #3a7bd5; padding: 4px 12px; border-radius: 8px; cursor: pointer; font-size: 0.8em; margin-top: 8px; }
-        .news-full-content { margin-top: 12px; padding: 12px; background: #f8fafc; border-radius: 8px; color: #333; font-size: 0.9em; line-height: 1.7; text-align: left; border-left: 3px solid #00d2ff; max-height: 300px; overflow-y: auto; }
+        .news-full-content { margin-top: 12px; padding: 12px; background: #f8fafc; border-radius: 8px; color: #333; font-size: 0.9em; line-height: 1.7; border-left: 3px solid #00d2ff; max-height: 300px; overflow-y: auto; }
         .timeline-item.hidden { display: none; }
         footer { text-align: center; padding: 40px 0; color: #8ba4c7; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 40px; }
         footer a { color: #00d2ff; text-decoration: none; }
-        @media (max-width: 768px) { .timeline::before { left: 20px; } .timeline-item { width: 100%; padding-left: 50px; padding-right: 15px; text-align: left !important; } .timeline-item::before { left: 11px !important; right: auto !important; } h1 { font-size: 1.8em; } }
+        @media (max-width: 768px) { .timeline::before { left: 20px; } .timeline-item { width: 100%; padding-left: 50px; text-align: left; } .timeline-item::before { left: 11px; } }
     </style>
 </head>
 <body>
@@ -57,19 +56,18 @@
         <header>
             <h1>石墨烯新闻</h1>
             <p class="subtitle">2026年03月26日 全球石墨烯行业动态</p>
-            <p class="update-info">自动采集于 2026-03-26 17:55:37</p>
             <div class="stats">
-                <div class="stat-item"><div class="stat-number" id="totalCount">75</div><div class="stat-label">新闻数量</div></div>
-                <div class="stat-item"><div class="stat-number" id="filteredCount">30</div><div class="stat-label">显示数量</div></div>
-                <div class="stat-item"><div class="stat-number" id="sourceCount">7</div><div class="stat-label">新闻来源</div></div>
+                <div class="stat-item"><div class="stat-number">25</div><div class="stat-label">新闻数量</div></div>
+                <div class="stat-item"><div class="stat-number" id="filteredCount">25</div><div class="stat-label">显示数量</div></div>
+                <div class="stat-item"><div class="stat-number">2</div><div class="stat-label">新闻来源</div></div>
             </div>
         </header>
         <div class="filter-section">
-            <div class="filter-title"><span></span><span>按标签筛选:</span></div>
-            <div class="filter-tags"><button class="filter-btn active" data-tag="all">全部</button><button class="filter-btn" data-tag="3D打印">3D打印</button><button class="filter-btn" data-tag="专利">专利</button><button class="filter-btn" data-tag="中国">中国</button><button class="filter-btn" data-tag="产能扩张">产能扩张</button><button class="filter-btn" data-tag="传感器">传感器</button><button class="filter-btn" data-tag="净水">净水</button><button class="filter-btn" data-tag="制造业">制造业</button><button class="filter-btn" data-tag="医疗检测">医疗检测</button><button class="filter-btn" data-tag="可穿戴设备">可穿戴设备</button><button class="filter-btn" data-tag="基建">基建</button><button class="filter-btn" data-tag="复合材料">复合材料</button><button class="filter-btn" data-tag="工业应用">工业应用</button><button class="filter-btn" data-tag="投资">投资</button><button class="filter-btn" data-tag="散热技术">散热技术</button><button class="filter-btn" data-tag="显示屏">显示屏</button><button class="filter-btn" data-tag="欧盟项目">欧盟项目</button><button class="filter-btn" data-tag="水处理">水处理</button><button class="filter-btn" data-tag="消费品">消费品</button><button class="filter-btn" data-tag="游戏">游戏</button><button class="filter-btn" data-tag="物联网">物联网</button><button class="filter-btn" data-tag="环保技术">环保技术</button><button class="filter-btn" data-tag="电动汽车">电动汽车</button><button class="filter-btn" data-tag="电子产品">电子产品</button><button class="filter-btn" data-tag="电池技术">电池技术</button><button class="filter-btn" data-tag="石墨烯应用">石墨烯应用</button><button class="filter-btn" data-tag="石墨烯材料">石墨烯材料</button><button class="filter-btn" data-tag="石墨烯采暖">石墨烯采暖</button><button class="filter-btn" data-tag="科研进展">科研进展</button><button class="filter-btn" data-tag="航空航天">航空航天</button><button class="filter-btn" data-tag="芯片">芯片</button><button class="filter-btn" data-tag="英国">英国</button><button class="filter-btn" data-tag="行业资讯">行业资讯</button><button class="filter-btn" data-tag="超级电容">超级电容</button><button class="filter-btn" data-tag="运动用品">运动用品</button><button class="filter-btn" data-tag="量产">量产</button><button class="filter-btn" data-tag="音频设备">音频设备</button></div>
+            <div class="filter-title">按标签筛选:</div>
+            <div class="filter-tags"><button class="filter-btn active" data-tag="all">全部</button><button class="filter-btn" data-tag="中国">中国</button><button class="filter-btn" data-tag="产能扩张">产能扩张</button><button class="filter-btn" data-tag="可穿戴设备">可穿戴设备</button><button class="filter-btn" data-tag="复合材料">复合材料</button><button class="filter-btn" data-tag="投资">投资</button><button class="filter-btn" data-tag="环保技术">环保技术</button><button class="filter-btn" data-tag="电池技术">电池技术</button><button class="filter-btn" data-tag="石墨烯材料">石墨烯材料</button><button class="filter-btn" data-tag="科研进展">科研进展</button><button class="filter-btn" data-tag="英国">英国</button><button class="filter-btn" data-tag="行业资讯">行业资讯</button><button class="filter-btn" data-tag="运动用品">运动用品</button></div>
         </div>
         <div class="no-results" id="noResults">没有找到匹配的新闻</div>
-        <div class="timeline" id="timeline">
+        <div class="timeline">
     <div class="timeline-item" data-tags="科研进展,可穿戴设备,中国">
         <span class="timeline-date">2026-03-26</span>
         <div class="timeline-content">
@@ -344,73 +342,16 @@
             <a href="http://www.graphene.tv/20260325151921/" target="_blank" class="news-link">阅读原文</a>
             <button class="expand-btn" onclick="toggleContent(this)">展开详情</button><div class="news-full-content" style="display:none">宇航派蒙石墨烯发热技术上车小牛电动 | 定义两轮车舒适新标准<br>宇航派蒙<br>•<br>2026年3月25日 17:42<br>•<br>产业新闻<br>•<br>阅读 21<br>2026年3月17日，小牛电动“真科技，就要小牛”新品发布会落下帷幕。其最新发布的两轮电动车正式搭载了由宇航派蒙提供的石墨烯发热坐垫，成为行业首款应用汽车级坐垫加热技术的两轮电动车。这一创新不仅将高端汽车的舒适体验引入两轮出行领域，更以精准的女性用户定位和人性化功能设计，为冬季骑行带来了前所未有的温暖体验。<br>2026年3月17日，小牛电动“真科技，就要小牛”新品发布会落下帷幕。其最新发布的两轮电动车正式搭载了由宇航派蒙提供的石墨烯发热坐垫，成为行业首款应用汽车级坐垫加热技术的两轮电动车。这一创新不仅将高端汽车的舒适体验引入两轮出行领域，更以精准的女性用户定位和人性化功能设计，为冬季骑行带来了前所未有的温暖体验。<br>汽车级技术延伸<br>石墨烯黑科技赋能两轮出行<br>作为国家级“专精特新”小巨人企业，宇航派蒙是国内石墨烯行业首家通过IATF 16949车规级质量管理体系认证的企业。企业自研的PMAlux石墨烯热管理技术除了具备电热转化率高、加热速度快、温度分布均匀、无异物感等优势，更针对车用复杂使用环境进行了专项优化。无论在装配的适配性便捷性，还是应对道路颠簸、人体进出时的膝跪压力，以及长期使用的耐久性考验，均展现出优异的稳定性和安全性。<br>此次为小牛电动提供的石墨烯发热坐垫，正是其车规级技术向两轮车领域的成功延伸。针对两轮车场景时，产品可从容应对户外雨淋、暴晒、高低温差等严苛环境，确保座椅加热系统可靠运行，让用户彻底告别冬季骑行“冷板凳”的困扰。<br>精准洞察客户需求<br>赋能多元场景<br>在AI技术赋能下，小牛电动新品精准洞察女性用户需求，宇航派蒙石墨烯发热座椅成为两轮电动车市场中唯一面向女性客户定制的加热方案。<br>不止于此，基于车规级技术平台，宇航派蒙针对多元化车用场景进行了深度拓展——可针对客户需求实现分区发热、按摩辅助发热等功能，满足商用车司机长途驾驶的舒缓需求，也可应用于房车取暖等场景。目前，这些定制化解决方案正与多家客户同步推进研发与落地中，将温暖与健康带给更多用户。<br>技术领先奠定合作基石<br>持续引领行业升级<br>宇航派蒙在石墨烯热管理领域深耕多年，投资5亿元的泰安生产基地建有全球首条石墨烯发热膜智能化生产线，通过全流程智能化管控，大幅提升了产品技术精度与品质稳定性。此次与小牛电动的合作，标志着石墨烯热管理技术正在从汽车向更广泛的出行场景渗透，也为两轮电动车行业树立了舒适化升级的新标杆。<br>随着消费者对出行品质要求的不断提升，以及AI技术加速向终端渗透，宇航派蒙将继续发挥在石墨烯热管理领域的技术优势，携手更多合作伙伴，将温暖与健康带入更多出行场景。<br>本文来自<br>宇航派蒙<br>，本文观点不代表石墨烯网立场，转载请联系原作者。<br>供暖取暖<br>赞<br>(0)<br>宇航派蒙<br>0<br>生成海报<br>国家石墨烯创新中心亮相“科创镇海·情系桑梓”投资推介会 助力沪镇产业科创融合<br>上一篇<br>2026年3月25日 17:38<br>包头市农牧领域4个项目进入自治区重点研发和成果转化计划拟立项名单<br>下一篇<br>2026年3月25日 18:47<br>相关推荐<br>徐州汇墨申请一种石墨烯制备装置专利，能够提高工作效率<br>2024年10月25日<br>562<br>0<br>0<br>0<br>产业新闻<br>年产300吨散热膜用石墨烯材料及年产10万平方米石墨烯散热膜项目(水电安装、消防预埋)劳务<br>2024年10月29日<br>324<br>0<br>0<br>0<br>产业新闻<br>重庆诺奖二维材料研究院孵化项目-降碳节能石墨烯润滑油<br>2024年9月13日<br>626<br>0<br>0<br>0<br>产业新闻<br>只需添加石墨烯即可实现更环保的锂离子电池<br>2022年7月11日<br>1.2K<br>0<br>0<br>0<br>产业新闻<br>思泉新材料IPO备战中，荣获“2021年创新东莞科学技术奖”又成一助力<br>2022年4月6日<br>1.5K<br>0<br>0<br>0<br>产业新闻<br>两个新突破！内蒙古在第七届全国职工优秀技术创新成果交流活动中喜获佳绩<br>2023年7月30日<br>1.4K<br>0<br>0<br>0<br>产业新闻<br>石墨烯深融轨道交通及汽车产业研讨会暨中小企业服务月“一起益企”活动成功举办<br>2024年6月27日<br>753<br>0<br>0<br>0<br>产业新闻<br>年产300吨散热膜用石墨烯材料及年产10万平方米石墨烯散热膜项目砌体、抹灰、屋面工程劳务分包<br>2024年11月19日<br>306<br>0<br>0<br>0<br>产业新闻<br>Graphenea推出特种化学品分拆公司KIVORO<br>2022年12月14日<br>1.2K<br>0<br>0<br>0<br>产业新闻<br>发表回复<br>请登录后评论...<br>登录<br>后才能评论<br>提交</div>
         </div>
-    </div>
-    <div class="timeline-item" data-tags="科研进展,芯片,石墨烯材料,电子产品">
-        <span class="timeline-date">2026-03-25</span>
-        <div class="timeline-content">
-            <span class="news-source">AzerTag</span>
-            <div class="news-tags"><span class="news-tag">科研进展</span><span class="news-tag">芯片</span><span class="news-tag">石墨烯材料</span><span class="news-tag">电子产品</span></div>
-            <h3 class="news-title">纳米技术突破：石墨烯有望实现仿脑超高效电子器件</h3>
-            <p class="news-desc">研究人员在石墨烯神经形态计算领域取得重大突破，展示了利用石墨烯实现类脑超高效电子器件的可能性，为下一代节能计算技术铺平道路。</p>
-            <a href="https://azertag.az/en/xeber/nanotech_breakthrough_could_enable_brain_like_ultra_efficient_electronics-4092899" target="_blank" class="news-link">阅读原文</a>
-            <button class="expand-btn" onclick="toggleContent(this)">展开详情</button><div class="news-full-content" style="display:none">纳米技术领域的最新突破显示，石墨烯材料有望用于构建仿脑式超高效电子器件。研究人员利用石墨烯独特的电子特性，开发了能够模拟生物神经元行为的新型器件架构。这项技术突破对于开发下一代低功耗神经形态计算系统具有重要意义。传统电子器件在处理复杂计算任务时能耗较高，而石墨烯基神经形态器件通过模拟人脑的信息处理方式，有望实现数量级的能效提升。该研究成果为人工智能硬件、边缘计算和物联网设备的能效优化提供了新的技术路径。</div>
-        </div>
-    </div>
-    <div class="timeline-item" data-tags="芯片,科研进展,石墨烯材料,电子产品">
-        <span class="timeline-date">2026-03-25</span>
-        <div class="timeline-content">
-            <span class="news-source">EurekAlert</span>
-            <div class="news-tags"><span class="news-tag">芯片</span><span class="news-tag">科研进展</span><span class="news-tag">石墨烯材料</span><span class="news-tag">电子产品</span></div>
-            <h3 class="news-title">石墨烯接收器让节能 6G 硬件更接近现实</h3>
-            <p class="news-desc">ICFO 研究人员在 Nature Communications 发表研究，首次展示 sub-THz 石墨烯接收器，实现零能耗、超紧凑设计，为 6G 无线技术铺平道路。</p>
-            <a href="https://www.eurekalert.org/news-releases/1121001" target="_blank" class="news-link">阅读原文</a>
-            <button class="expand-btn" onclick="toggleContent(this)">展开详情</button><div class="news-full-content" style="display:none">ICFO 研究团队在 Nature Communications 发表突破性研究，首次展示了 sub-THz（亚太赫兹）石墨烯接收器。该技术解决了从 5G 过渡到 6G 的关键挑战：在 sub-THz 频段实现高效信号检测。该石墨烯接收器具有以下优势：多千兆比特每秒数据速率、低复杂度、超紧凑（仅 0.018 mm²）、CMOS 兼容、运行时近零能耗。研究由 ICREA Prof. Frank Koppens 领导，与 ETH Zurich、Ioannina 大学、加泰罗尼亚纳米科学与纳米技术研究所（ICN2）等机构合作完成。这一进展将石墨烯设备从实验室探测器转变为 6G 无线技术的实用化微型构件。</div>
-        </div>
-    </div>
-    <div class="timeline-item" data-tags="投资,产能扩张,行业资讯,石墨烯材料">
-        <span class="timeline-date">2026-03-24</span>
-        <div class="timeline-content">
-            <span class="news-source">SustainableBiz Canada</span>
-            <div class="news-tags"><span class="news-tag">投资</span><span class="news-tag">产能扩张</span><span class="news-tag">行业资讯</span><span class="news-tag">石墨烯材料</span></div>
-            <h3 class="news-title">Black Swan 以 1260 万美元收购注塑公司 Falpaco</h3>
-            <p class="news-desc">Black Swan Graphene Inc. 计划以 $1260 万收购魁北克注塑成型公司 Falpaco，实现石墨烯增强橡胶和塑料零件的垂直整合生产，交易预计 Q2 完成。</p>
-            <a href="https://sustainablebiz.ca/black-swan-to-acquire-moulding-company-falpaco-in-126m-deal" target="_blank" class="news-link">阅读原文</a>
-            <button class="expand-btn" onclick="toggleContent(this)">展开详情</button><div class="news-full-content" style="display:none">Black Swan Graphene Inc. (SWAN-X) 宣布以 1260 万美元收购魁北克注塑成型公司 Falpaco Rubber and Plastics Inc.，以实现石墨烯增强橡胶和塑料零件的垂直整合生产。该收购是 Black Swan 加速石墨烯产品商业化战略的关键一步，将结合其石墨烯材料专业知识与 Falpaco 的注塑成型能力和市场基础。Falpaco 位于蒙特利尔东南的格兰比工业园区，拥有约 45 名全职员工，为多个行业提供注塑成型服务。该交易预计在 Q2 完成，需满足常规条件并获得 TSX Venture Exchange 批准。完成后 Falpaco 将成为 Black Swan 的全资子公司。</div>
-        </div>
-    </div>
-    <div class="timeline-item" data-tags="投资,行业资讯,石墨烯材料,基建">
-        <span class="timeline-date">2026-03-23</span>
-        <div class="timeline-content">
-            <span class="news-source">InvestingNews</span>
-            <div class="news-tags"><span class="news-tag">投资</span><span class="news-tag">行业资讯</span><span class="news-tag">石墨烯材料</span><span class="news-tag">基建</span></div>
-            <h3 class="news-title">HydroGraph 与 Sparc Technologies 合作商业化石墨烯增强涂层</h3>
-            <p class="news-desc">HydroGraph Clean Power Inc. 与 Sparc Technologies Limited 签署意向书，合作将 HydroGraph 的 Fractal Graphene™ 纳入 Sparc 的 ecosparc® 添加剂用于保护涂层，目标市场规模 US$33 亿。</p>
-            <a href="https://investingnews.com/correction-hydrograph-and-sparc-technologies-team-up-to-commercialize-graphene-enhanced-coatings-for-global-infrastructure-protection/" target="_blank" class="news-link">阅读原文</a>
-            <button class="expand-btn" onclick="toggleContent(this)">展开详情</button><div class="news-full-content" style="display:none">HydroGraph Clean Power Inc. (CSE: HG, OTC: HGRAF) 与 Sparc Technologies Limited (ASX: SPN) 签署意向书（LOI），合作将 HydroGraph 的 Fractal Graphene™ 纳入 Sparc 的 ecosparc® 添加剂用于保护涂层。该合作旨在延长钢铁资产在恶劣环境中的使用寿命，目标市场规模达 US$33 亿。双方计划进行联合测试和产品开发，如性能测试成功，将在约 12 个月内协商最终商业协议。此次合作结合了 HydroGraph 的石墨烯材料专业知识和 Sparc 的涂层技术，将加速从产品验证到商业采用的进程。</div>
-        </div>
-    </div>
-    <div class="timeline-item" data-tags="石墨烯材料,复合材料,3D打印">
-        <span class="timeline-date">2026-03-24</span>
-        <div class="timeline-content">
-            <span class="news-source">Hackaday</span>
-            <div class="news-tags"><span class="news-tag">石墨烯材料</span><span class="news-tag">复合材料</span><span class="news-tag">3D打印</span></div>
-            <h3 class="news-title">测试昂贵的石墨烯增强尼龙丝材</h3>
-            <p class="news-desc">Lyten 3D 推出 PA1205 石墨烯增强尼龙丝，价格 $150/kg。测试表明相比普通尼龙强度更高，与 PA-CF 相比脆性更低，总体是不错的材料但价格较高。</p>
-            <a href="https://hackaday.com/2026/03/24/testing-expensive-graphene-reinforced-nylon-filament/" target="_blank" class="news-link">阅读原文</a>
-            <button class="expand-btn" onclick="toggleContent(this)">展开详情</button><div class="news-full-content" style="display:none">Lyten 3D 推出的 PA1205 石墨烯增强尼龙丝材价格高达 $150/kg。Dr. Igor Gaspar 对该材料进行了测试，使用 Bambu Lab 切片器的标准 PA-CF 预设打印测试件。测试结果显示：与普通 PA 尼龙相比，PA1205 强度表现良好；与 PA-CF 相比，PA1205 脆性更低；但与大多数纤维增强丝材一样，比纯材料更脆。总体而言是一款不错的丝材，但考虑到价格，性价比需要权衡。该丝材使用 PA12 基材，比 PA6 对湿度更不敏感，建议使用 0.6mm 喷嘴打印。</div>
-        </div>
     </div></div>
         <footer>
-            <p>数据来源: Graphene-Info | Graphene.tv | EurekAlert | InvestingNews | SustainableBiz Canada | Hackaday</p>
+            <p>数据来源: Graphene-Info | Graphene.tv | EurekAlert | InvestingNews | Hackaday</p>
             <p>GitHub: <a href="https://github.com/Vincent1026/graphene-news" target="_blank">Vincent1026/graphene-news</a></p>
-            <p>自动更新于 2026-03-26 17:55:37</p>
         </footer>
     </div>
     <script>
         function toggleContent(btn) { const c = btn.nextElementSibling; c.style.display = c.style.display === 'none' ? 'block' : 'none'; btn.textContent = c.style.display === 'none' ? '展开详情' : '收起详情'; }
         const filterBtns = document.querySelectorAll('.filter-btn');
         const timelineItems = document.querySelectorAll('.timeline-item');
-        const totalCount = document.getElementById('totalCount');
         const filteredCount = document.getElementById('filteredCount');
         const noResults = document.getElementById('noResults');
         filterBtns.forEach(btn => { btn.addEventListener('click', () => { const tag = btn.dataset.tag; filterBtns.forEach(b => b.classList.remove('active')); btn.classList.add('active'); let visibleCount = 0; timelineItems.forEach(item => { const itemTags = item.dataset.tags.split(','); if (tag === 'all' || itemTags.includes(tag)) { item.classList.remove('hidden'); visibleCount++; } else { item.classList.add('hidden'); } }); filteredCount.textContent = visibleCount; noResults.style.display = visibleCount === 0 ? 'block' : 'none'; }); });
