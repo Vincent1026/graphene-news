@@ -1,5 +1,48 @@
 [
   {
+    "title": "Nanowerk 报道石墨烯纳米技术最新进展",
+    "description": "Nanowerk 报道了石墨烯纳米技术在多个领域的最新研究进展, 包括电子器件、传感器和能源存储。",
+    "content": "Nanowerk 发布关于石墨烯纳米技术最新进展的报道, 涵盖了从基础研究到商业应用的多个方面。石墨烯在电子器件方面展现出优异性能, 其高迁移率和高导电性使其成为下一代电子产品的关键材料。在传感器应用中, 石墨烯的高比表面积带来了极高的检测灵敏度。能源存储领域也在积极探索石墨烯基超级电容器和电池技术。",
+    "url": "https://www.nanowerk.com/nanotechnology-news3/newsid=68998.php",
+    "source": "Nanowerk",
+    "lang": "zh",
+    "date": "2026-03-27",
+    "tags": [
+      "科研进展",
+      "石墨烯材料",
+      "电子产品"
+    ]
+  },
+  {
+    "title": "Argo Graphene Solutions 成功完成材料试验后扩大规模",
+    "description": "Argo Graphene Solutions 在成功完成材料试验后宣布扩大生产规模, 加速石墨烯材料的商业化进程。",
+    "content": "Argo Graphene Solutions 宣布在成功完成关键材料试验后, 将扩大其石墨烯生产规模。该公司专注于开发高质量石墨烯材料, 用于电子、能源和复合材料等多个应用领域。此次扩大规模标志着公司从研发阶段向商业化生产的重要转变, 预计将为市场提供更稳定的石墨烯供应。",
+    "url": "https://www.ad-hoc-news.de/boerse/news/ueberblick/argo-graphene-solutions-scaling-up-after-successful-material-trials/68990637",
+    "source": "AD-HOC-News",
+    "lang": "zh",
+    "date": "2026-03-27",
+    "tags": [
+      "产能扩张",
+      "行业资讯",
+      "石墨烯材料"
+    ]
+  },
+  {
+    "title": "石墨烯焦点：纳米技术如何变革电子行业",
+    "description": "石墨烯凭借其优异的导电性、柔韧性和稳定性, 正在推动电子行业从柔性显示器到高频芯片的全面变革。",
+    "content": "石墨烯作为革命性材料, 正在改变电子行业的格局。其优异的导电性能使其成为下一代高频芯片的理想材料, 而柔韧性则推动了可穿戴设备和柔性显示器的发展。石墨烯在热管理方面也展现出巨大潜力, 其高导热性可用于高效散热解决方案。在传感器领域, 石墨烯的高灵敏度使其成为生物传感器和气体传感器的理想材料。随着生产成本降低, 石墨烯正在从实验室走向大规模商业化应用。",
+    "url": "https://www.eletimes.ai/graphene-in-focus-how-nanotechnology-is-transforming-electronics",
+    "source": "ELE Times",
+    "lang": "zh",
+    "date": "2026-03-27",
+    "tags": [
+      "芯片",
+      "电子产品",
+      "石墨烯材料",
+      "柔性显示屏"
+    ]
+  },
+  {
     "title": "西北工业大学开发MXene/石墨烯/PI复合薄膜",
     "description": "研究通过激光直接写入技术制备多孔激光诱导石墨烯微阵列层, 用于可穿戴柔性声学报警设备。",
     "content": "研究通过激光直接写入技术, 在聚酰亚胺薄膜上制备了多孔激光诱导石墨烯微阵列层。制备出具有优异电导率及高热导率的MXene/LIG@PI薄膜, 可用于可穿戴柔性声学报警设备。",
