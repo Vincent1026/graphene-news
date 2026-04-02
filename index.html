@@ -3,25 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>石墨烯新闻 - 2026年03月27日</title>
+    <title>石墨烯新闻 - 2026年04月02日</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); min-height: 100vh; padding: 20px; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh; padding: 20px;
+        }
         .container { max-width: 900px; margin: 0 auto; }
         header { text-align: center; padding: 40px 0; color: #fff; }
-        h1 { font-size: 2.5em; margin-bottom: 10px; background: linear-gradient(90deg, #00d2ff, #3a7bd5); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        h1 { font-size: 2.5em; margin-bottom: 10px;
+            background: linear-gradient(90deg, #00d2ff, #3a7bd5);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
         .subtitle { font-size: 1.1em; color: #8ba4c7; margin-bottom: 5px; }
+        .update-info { font-size: 0.85em; color: #5a7a9a; margin-top: 5px; }
         .stats { display: flex; justify-content: center; gap: 30px; margin: 20px 0 40px; }
         .stat-item { background: rgba(255,255,255,0.1); padding: 15px 30px; border-radius: 10px; color: #fff; }
         .stat-number { font-size: 2em; font-weight: bold; color: #00d2ff; }
         .stat-label { font-size: 0.9em; color: #8ba4c7; }
         .filter-section { background: rgba(255,255,255,0.1); border-radius: 15px; padding: 20px; margin: 20px 0; }
-        .filter-title { color: #fff; font-size: 1.1em; margin-bottom: 15px; }
+        .filter-title { color: #fff; font-size: 1.1em; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
         .filter-tags { display: flex; flex-wrap: wrap; gap: 10px; }
-        .filter-btn { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 8px 16px; border-radius: 20px; cursor: pointer; font-size: 0.9em; }
-        .filter-btn:hover { background: rgba(0,210,255,0.3); }
+        .filter-btn {
+            background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.2);
+            color: #fff; padding: 8px 16px; border-radius: 20px; cursor: pointer;
+            transition: all 0.3s; font-size: 0.9em;
+        }
+        .filter-btn:hover { background: rgba(0,210,255,0.3); border-color: #00d2ff; }
         .filter-btn.active { background: linear-gradient(90deg, #00d2ff, #3a7bd5); border-color: #00d2ff; font-weight: bold; }
-        .no-results { text-align: center; color: #8ba4c7; padding: 60px 20px; display: none; }
+        .no-results { text-align: center; color: #8ba4c7; padding: 60px 20px; font-size: 1.2em; display: none; }
         .timeline { position: relative; padding: 20px 0; }
         .timeline::before { content: ''; position: absolute; left: 50%; transform: translateX(-50%); width: 4px; height: 100%; background: linear-gradient(180deg, #00d2ff, #3a7bd5); border-radius: 2px; }
         .timeline-item { position: relative; width: 50%; padding: 0 30px 40px; box-sizing: border-box; }
@@ -33,7 +44,7 @@
         .timeline-date { display: inline-block; background: linear-gradient(90deg, #00d2ff, #3a7bd5); color: #fff; padding: 5px 15px; border-radius: 15px; font-size: 0.85em; margin-bottom: 10px; font-weight: bold; }
         .timeline-item:nth-child(odd) .timeline-date { margin-right: 10px; }
         .timeline-item:nth-child(even) .timeline-date { margin-left: 10px; }
-        .timeline-content { background: rgba(255,255,255,0.95); border-radius: 15px; padding: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.2); }
+        .timeline-content { background: rgba(255,255,255,0.95); border-radius: 15px; padding: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.2); transition: transform 0.3s, box-shadow 0.3s; }
         .timeline-content:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,210,255,0.3); }
         .news-source { background: linear-gradient(90deg, #00d2ff, #3a7bd5); color: white; padding: 5px 12px; font-size: 0.8em; display: inline-block; border-radius: 10px; margin-bottom: 10px; }
         .news-title { font-size: 1.15em; color: #1a1a2e; margin-bottom: 10px; line-height: 1.4; font-weight: 600; }
@@ -43,131 +54,298 @@
         .timeline-item:nth-child(even) .news-tags { justify-content: flex-start; }
         .news-tag { background: #e8f4fc; color: #3a7bd5; padding: 3px 8px; border-radius: 10px; font-size: 0.75em; }
         .news-link { color: #3a7bd5; text-decoration: none; font-weight: 500; font-size: 0.9em; }
+        .news-link:hover { text-decoration: underline; }
         .expand-btn { background: #f0f4f8; border: none; color: #3a7bd5; padding: 4px 12px; border-radius: 8px; cursor: pointer; font-size: 0.8em; margin-top: 8px; }
-        .news-full-content { margin-top: 12px; padding: 12px; background: #f8fafc; border-radius: 8px; color: #333; font-size: 0.9em; line-height: 1.7; border-left: 3px solid #00d2ff; max-height: 300px; overflow-y: auto; }
+        .expand-btn:hover { background: #e0e8f0; }
+        .news-full-content { margin-top: 12px; padding: 12px; background: #f8fafc; border-radius: 8px; color: #333; font-size: 0.9em; line-height: 1.7; text-align: left; border-left: 3px solid #00d2ff; max-height: 300px; overflow-y: auto; }
         .timeline-item.hidden { display: none; }
         footer { text-align: center; padding: 40px 0; color: #8ba4c7; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 40px; }
         footer a { color: #00d2ff; text-decoration: none; }
-        @media (max-width: 768px) { .timeline::before { left: 20px; } .timeline-item { width: 100%; padding-left: 50px; text-align: left; } .timeline-item::before { left: 11px; } }
+        footer a:hover { text-decoration: underline; }
+        @media (max-width: 768px) {
+            .timeline::before { left: 20px; }
+            .timeline-item { width: 100%; padding-left: 50px; padding-right: 15px; text-align: left !important; }
+            .timeline-item::before { left: 11px !important; right: auto !important; }
+            .timeline-item:nth-child(odd) .timeline-date, .timeline-item:nth-child(even) .timeline-date { margin: 0; }
+            .timeline-item:nth-child(odd) .news-tags, .timeline-item:nth-child(even) .news-tags { justify-content: flex-start; }
+            h1 { font-size: 1.8em; }
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>石墨烯新闻</h1>
-            <p class="subtitle">2026年03月27日 全球石墨烯行业动态</p>
+            <h1>🔬 石墨烯新闻</h1>
+            <p class="subtitle">2026年04月02日 全球石墨烯行业动态</p>
+            <p class="update-info">🤖 自动采集于 2026-04-02 21:33:59</p>
             <div class="stats">
-                <div class="stat-item"><div class="stat-number">8</div><div class="stat-label">新闻数量</div></div>
-                <div class="stat-item"><div class="stat-number" id="filteredCount">8</div><div class="stat-label">显示数量</div></div>
-                <div class="stat-item"><div class="stat-number">4</div><div class="stat-label">新闻来源</div></div>
+                <div class="stat-item"><div class="stat-number" id="totalCount">20</div><div class="stat-label">新闻数量</div></div>
+                <div class="stat-item"><div class="stat-number" id="filteredCount">20</div><div class="stat-label">显示数量</div></div>
+                <div class="stat-item"><div class="stat-number" id="sourceCount">2</div><div class="stat-label">新闻来源</div></div>
             </div>
         </header>
         <div class="filter-section">
-            <div class="filter-title">按标签筛选:</div>
-            <div class="filter-tags"><button class="filter-btn active" data-tag="all">全部</button><button class="filter-btn" data-tag="产能扩张">产能扩张</button><button class="filter-btn" data-tag="汽车应用">汽车应用</button><button class="filter-btn" data-tag="环保技术">环保技术</button><button class="filter-btn" data-tag="电子产品">电子产品</button><button class="filter-btn" data-tag="石墨烯材料">石墨烯材料</button><button class="filter-btn" data-tag="科研进展">科研进展</button><button class="filter-btn" data-tag="芯片">芯片</button><button class="filter-btn" data-tag="行业资讯">行业资讯</button></div>
+            <div class="filter-title"><span>🏷️</span><span>按标签筛选:</span></div>
+            <div class="filter-tags"><button class="filter-btn active" data-tag="all">全部</button><button class="filter-btn" data-tag="传感器">传感器</button><button class="filter-btn" data-tag="复合材料">复合材料</button><button class="filter-btn" data-tag="投资">投资</button><button class="filter-btn" data-tag="散热技术">散热技术</button><button class="filter-btn" data-tag="柔性显示屏">柔性显示屏</button><button class="filter-btn" data-tag="环保技术">环保技术</button><button class="filter-btn" data-tag="电动汽车">电动汽车</button><button class="filter-btn" data-tag="电池技术">电池技术</button><button class="filter-btn" data-tag="石墨烯材料">石墨烯材料</button><button class="filter-btn" data-tag="石墨烯采暖">石墨烯采暖</button><button class="filter-btn" data-tag="行业资讯">行业资讯</button><button class="filter-btn" data-tag="运动用品">运动用品</button></div>
         </div>
         <div class="no-results" id="noResults">没有找到匹配的新闻</div>
-        <div class="timeline">
-    <div class="timeline-item" data-tags="行业资讯">
-        <span class="timeline-date">2026-03-27</span>
-        <div class="timeline-content">
-            <span class="news-source">Graphene.tv</span>
-            <div class="news-tags"><span class="news-tag">行业资讯</span></div>
-            <h3 class="news-title">Science：基于石墨烯/氧化铪/钨结构的新型双极性忆阻器</h3>
-            <p class="news-desc">Science：基于石墨烯/氧化铪/钨结构的新型双极性忆阻器</p>
-            <a href="http://www.graphene.tv/20260327152012/" target="_blank" class="news-link">阅读原文</a>
-            <button class="expand-btn" onclick="toggleContent(this)">展开详情</button><div class="news-full-content" style="display:none">Science：基于石墨烯/氧化铪/钨结构的新型双极性忆阻器<br>石墨烯网<br>•<br>2026年3月27日 09:20<br>•<br>科研进展<br>•<br>阅读 9<br>研究团队将传统Pt/HfOₓ/W器件中的惰性Pt底电极替换为二维Gra层，利用W电极的高熔点以及HfOₓ作为忆阻器的开关层。通过 wafer-scale 合成技术制备Gra层，并采用电子束光刻（EBL）和射频磁控溅射技术依次沉积HfOₓ薄膜和W电极。器件制备完成后，进行快速热退火处理以改善接触质量。<br>传统基于CMOS的硅基器件在温度超过200°C时表现出显著的可靠性问题，而基于宽禁带（WBG）半导体的逻辑晶体管虽然能在高达800°C的温度下工作，但开发出能在300°C以上可靠编程和保持数据的非易失性存储器（NVM）仍是一大挑战。然而，空间探索、深井钻探、核能和自动驾驶汽车等领域的应用要求电子元件在500°C以上保持稳定。因此，探索新材料以克服传统技术的热限制成为迫切需求。本研究旨在开发一种能在极端高温环境下稳定工作的新型非易失性存储器。<br>本研究提出了一种基于石墨烯（Gra）/氧化铪（HfOₓ）/钨（W）结构的新型双极性忆阻器，以解决高温环境下的非易失性存储问题。研究团队将传统Pt/HfOₓ/W器件中的惰性Pt底电极替换为二维Gra层，利用W电极的高熔点以及HfOₓ作为忆阻器的开关层。通过 wafer-scale 合成技术制备Gra层，并采用电子束光刻（EBL）和射频磁控溅射技术依次沉积HfOₓ薄膜和W电极。器件制备完成后，进行快速热退火处理以改善接触质量。研究团队通过原位高温测试、高分辨率透射电子显微镜（HRTEM）、能量色散X射线光谱（EDS）和电子能量损失光谱（EELS）等手段，系统评估了Gra/HfOₓ/W器件的高温性能及其机制。<br>图1A展示了Gra/HfOₓ/W忆阻器的结构示意图，其中多层石墨烯片通过机械剥离转移到Si/SiO₂基板上，随后通过EBL图案化电阻开关层，并利用射频磁控溅射沉积7.5 nm厚的HfOₓ薄膜，最后通过直流磁控溅射沉积40 nm厚的W电极。图1B显示了Gra/HfOₓ/W器件在不同温度下的直流电流-电压（I-V）特性曲线，表明器件在室温至700°C范围内均能保持稳定的开关行为，且ON/OFF电流比保持在三个数量级以上。图1C进一步展示了器件在700°C下的数据保持性能，经过50小时的持续测试，ON和OFF状态均未出现明显的电阻漂移，显示出优异的高温稳定性。图1D则呈现了器件在700°C下的写入耐久性，通过脉冲开关测试，器件能够承受超过10⁹次的开关循环，同时保持稳定的ON/OFF电流比。此外，图1E和1F分别展示了器件在不同温度下的电压波形和电流响应，证明器件能在30 ns的脉冲宽度下实现可靠的开关操作。最后，图1G展示了一个32×32（1K）的交叉阵列光学图像，验证了Gra/HfOₓ/W器件在大规模集成中的潜力。<br>文献：DOI: 10.1126/science.aeb9934<br>High-temperature memristors enabled by interfacial engineering<br>本文来自<br>FE 图南工作室<br>，本文观点不代表石墨烯网立场，转载请联系原作者。<br>赞<br>(0)<br>石墨烯网<br>0<br>生成海报<br>爱尚家科技亮相2026中关村论坛 艾弗石墨烯新材料助力智能网联汽车高质量发展<br>上一篇<br>2026年3月27日 08:00<br>能照明，还能当充电宝！灾区迎来一批宁波原创石墨烯铝燃料应急电源<br>下一篇<br>2021年7月28日 17:20<br>相关推荐<br>通过亚甲基蓝修饰实现铂上石墨烯的无损显示<br>2022年7月23日<br>1.2K<br>0<br>0<br>0<br>科研进展<br>北京大学刘忠范院士团队Adv. Sci.：自支撑石墨烯织物薄膜，柔性红外伪装！<br>2021年12月19日<br>1.8K<br>0<br>0<br>0<br>科研进展<br>郑大刘春太教授/冯跃战副教授团队 CEJ ：基于循环刮涂铸造工艺制备兼具柔性、热稳定性和阻燃性能的环氧树脂基导热复合膜<br>2022年3月4日<br>1.7K<br>0<br>0<br>0<br>科研进展<br>蒋仲庆教授，JMCA观点：NiFe NPs负载缠绕自生长碳纳米管的N掺杂石墨烯中空小球在可充电液态/柔性全固态锌空气电池<br>2022年5月21日<br>1.4K<br>0<br>0<br>0<br>科研进展<br>四川大学王玉忠院士、张帆研究员JEC综述：废塑料的化学循环和升级回收制备燃料、高值化学品和功能材料<br>2022年2月1日<br>2.9K<br>0<br>0<br>2<br>科研进展<br>高灵敏的超薄石墨烯薄膜应变传感器<br>2016年3月11日<br>2.6K<br>0<br>0<br>0<br>科研进展<br>工程师如何修复一个原子厚度的石墨烯过滤膜<br>2015年5月20日<br>2.2K<br>0<br>0<br>0<br>科研进展<br>“织纹”结构金属氧化物纳米薄膜问世<br>2016年11月10日<br>1.8K<br>0<br>0<br>0<br>科研进展<br>仿生膜催化流动合成β-受体阻滞剂研究获进展<br>2025年7月3日<br>465<br>0<br>0<br>0<br>科研进展<br>发表回复<br>请登录后评论...<br>登录<br>后才能评论<br>提交</div>
+        <div class="timeline" id="timeline">
+        <div class="timeline-item" data-tags="行业资讯">
+            <span class="timeline-date">2026-04-02</span>
+            <div class="timeline-content">
+                <span class="news-source">Graphene-Info</span>
+                <div class="news-tags"><span class="news-tag">行业资讯</span></div>
+                <h3 class="news-title">Get your message across to the 石墨烯 行业</h3>
+                <p class="news-desc">Last updated on Wed 05/11/2025 - 20:42</p>
+                <a href="https://www.graphene-info.com/advertise-here" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">Last updated on Wed 05/11/2025 - 20:42 石墨烯-Info is the world&#x27;s leading 石墨烯 行业 and 市场 portal, offering news and resources to the 石墨烯 行业 and 市场 since 2009. 石墨烯-Info is a trusted brand that is read by 行业 professionals, 研究人员, decision makers, C-level management, analysts and more. Our extremely effective and 行业 validated advertising and marketing services include banner ads, logo placements,sponsored articles, email blasts, social media promotion, and more. We offer packages that start from $3,000 per year and one-time promotion items starting at $800. Click here to download our brochure with full details and prices . 石墨烯-Info offers a highly effective way to reach the 石墨烯 行业, perfect to promote your 石墨烯 materials</div>
+            </div>
         </div>
-    </div>
-    <div class="timeline-item" data-tags="汽车应用">
-        <span class="timeline-date">2026-03-27</span>
-        <div class="timeline-content">
-            <span class="news-source">Graphene.tv</span>
-            <div class="news-tags"><span class="news-tag">汽车应用</span></div>
-            <h3 class="news-title">爱尚家科技亮相2026中关村论坛 艾弗石墨烯新材料助力智能网联汽车高质量发展</h3>
-            <p class="news-desc">爱尚家科技亮相2026中关村论坛 艾弗石墨烯新材料助力智能网联汽车高质量发展</p>
-            <a href="http://www.graphene.tv/20260327152005/" target="_blank" class="news-link">阅读原文</a>
-            <button class="expand-btn" onclick="toggleContent(this)">展开详情</button><div class="news-full-content" style="display:none">爱尚家科技亮相2026中关村论坛 艾弗石墨烯新材料助力智能网联汽车高质量发展<br>石墨烯网<br>•<br>2026年3月27日 08:00<br>•<br>产业新闻<br>•<br>阅读 6<br>在未来出行区智能网联汽车领域，爱尚家科技的最新“石墨烯加热新能源汽车座椅”展项采用新一代AIHF®艾弗石墨烯复合材料，实现智能座椅快速、精准、低功耗舒适加热；在-7℃环境测试中，助力汽车采暖系统能耗降低30％，AIHF®艾弗石墨烯复合材料已搭载北汽、吉利、问界、红旗等多款车型，并在吉利银河M9车型全车大六座率先实现布置和量产。以座椅为核心，AIHF®艾弗石墨烯热舒适系统正拓展至全车内饰，打造360°环抱式未来座舱。<br>3月25日，2026中关村论坛年会在京开幕。本届论坛年会由科技部、国家发改委、工信部、国务院国资委、中国科学院、中国工程院、中国科协、北京市政府共同主办，主题为“科技创新与产业创新深度融合”，设置论坛会议、成果发布、技术交易、前沿大赛、配套活动五大板块，共百余场活动，持续强化“科技办会”特色理念，将行业最新科技成果全面融入论坛年会全流程、全场景中，全方位赋能论坛服务与管理，让每一位参与者切实感受到人工智能的发展如何赋能千行百业。北京创新爱尚家科技股份有限公司（以下简称“爱尚家科技”）作为新材料新科技代表受邀参加，在未来出行区智能网联汽车展区展示了新一代AIHF®艾弗石墨烯复合材料在新能源汽车座舱座椅中的领先应用。<br>本届年会不仅“机器人浓度”再创新高，更充满了充满科技互动体验，科技的温度触手可及。在未来出行区智能网联汽车领域，爱尚家科技的最新“石墨烯加热新能源汽车座椅”展项采用新一代AIHF®艾弗石墨烯复合材料，实现智能座椅快速、精准、低功耗舒适加热；在-7℃环境测试中，助力汽车采暖系统能耗降低30％，AIHF®艾弗石墨烯复合材料已搭载北汽、吉利、问界、红旗等多款车型，并在吉利银河M9车型全车大六座率先实现布置和量产。以座椅为核心，AIHF®艾弗石墨烯热舒适系统正拓展至全车内饰，打造360°环抱式未来座舱。<br>作为国家级专精特新“小巨人”企业、北京市专精特新中小企业、国家级高新技术企业，爱尚家科技在新能源汽车应用领域、新材料领域的布局成效显著，源于主动破解行业发展痛点，突破车规级验证难题及行业标准缺失困境。公司通过IATF 16949汽车行业质量管理体系认证，作为汽车供应链的重要一环，严谨把控产品质量与优化生产流程，为石墨烯材料在汽车领域的规模化量产打下夯实基础。同时，针对新能源汽车行业内缺少石墨烯热管理技术应用标准参考，由中国汽车工程学会提出并归口，爱尚家科技牵头起草、清华大学高校科研支持，联合北京石墨烯技术研究院、北京石墨烯研究院、北汽研究总院、吉利汽车研究院、深蓝汽车、天成自控、舒茨曼座椅、瑞泰汽车零配件等十余家行业头部企业共同起草，制定《汽车座椅用石墨烯加热片技术要求及试验方法》团体标准，填补行业技术应用标准的空白，为新材料石墨烯在新能源汽车领域的规划化应用提供参考标准。<br>依托核心材料的技术优势与规模化量产保障，爱尚家科技把握行业发展机遇，在中关村论坛平台充分展示，积极推动石墨烯科技成果向产业落地转化。为加速技术从实验室走向产业端，爱尚家科技牵头、联合北京信息科技大学共建“新能源汽车石墨烯技术概念验证平台”，获北京市科学技术委员会、中关村科技园区管理委员会支持，打通从实验室样品、中试落地到量产应用的全流程，为技术加速转化筑牢根基。此次展项的成功落地依托概念验证平台加速转化，在吉利银河M9、北汽极狐全新阿尔法S5等车型上的量产搭载则通过转化进一步加强产学研协同，推动AIHF®艾弗石墨烯复合材料从产品验证到量产的全链条支撑。值得一提的是，该概念验证平台已被纳入北京市支持2025年国民经济和社会发展计划执行情况报告，标志着其在推动新材料产业化方面的重要价值获得认可。成果转化进一步加速项目发展于行业资源对接，3月25日下午，中关村论坛“投资北京大会”举办，500亿元规模的“京津冀创业投资引导基金”完成首批重点项目签约，爱尚家科技不仅以最新展品亮相常驻展、成果展，更精准对接行业资源、链接资本力量，为长远发展蓄势赋能。<br>作为科技创新与产业创新的“试验田”和“展示窗”，2026中关村论坛年会为新技术验证与推广提供了真实的应用场景，让新科技成为有温度、可感知、能互动的新参会体验，用创新拓展边界，促进技术、场景与产业的良性互动，让今年的论坛年会成为未来工作与生活方式的一次预演。从“前沿新材料”到“智能网联汽车”量产搭载、从温暖舒适到智能健康新未来，爱尚家科技将加速布局，持续深化与主机厂的联合研发、推动新能源汽车热舒适性解决方案应用量产落地，推动乘员舱热舒适系统向更节能、舒适健康、更智能的方向演进，以石墨烯新材料赋能新能源汽车产业高质量发展。<br>本文来自<br>Aika 爱尚家科技<br>，本文观点不代表石墨烯网立场，转载请联系原作者。<br>供暖取暖<br>赞<br>(0)<br>石墨烯网<br>0<br>生成海报<br>宁波聚力培育一流创新生态<br>上一篇<br>2026年3月27日<br>Science：基于石墨烯/氧化铪/钨结构的新型双极性忆阻器<br>下一篇<br>2026年3月27日<br>相关推荐<br>“产品不能做唯一，就做市场第一” 泉企朝行业“隐形冠军”迈进<br>2020年11月13日<br>1.6K<br>0<br>0<br>0<br>产业新闻<br>重磅！3个院士工作室落户中山<br>2024年3月28日<br>620<br>0<br>0<br>0<br>产业新闻<br>“苹果”将成碳元合作伙伴 今年产值冲刺8亿元<br>2014年3月6日<br>2.1K<br>0<br>0<br>0<br>产业新闻<br>东旭光电：石墨烯布局正当时<br>2016年5月18日<br>2.3K<br>0<br>0<br>0<br>产业新闻<br>使用增强型石墨烯粘合剂降低能耗<br>2025年1月28日<br>498<br>0<br>0<br>0<br>产业新闻<br>“神奇材料”制成内暖服饰，2016年获意大利最高科技奖 圣泉石墨烯：苦寻7年玉米芯里“淘宝”<br>2016年12月23日<br>1.8K<br>0<br>0<br>0<br>产业新闻<br>正泰电器1800万欧元投资西班牙石墨烯公司<br>2016年1月28日<br>2.0K<br>0<br>0<br>0<br>产业新闻<br>德尔未来石墨烯应用快速发展 联手诺奖得主深耕研发<br>2019年4月22日<br>2.0K<br>0<br>0<br>0<br>产业新闻<br>2025“华威电子”杯篮球友谊赛，热血赛场展风采<br>2025年6月17日<br>369<br>0<br>0<br>0<br>产业新闻<br>发表回复<br>请登录后评论...<br>登录<br>后才能评论<br>提交</div>
+        <div class="timeline-item" data-tags="传感器,电动汽车">
+            <span class="timeline-date">2026-04-02</span>
+            <div class="timeline-content">
+                <span class="news-source">Graphene-Info</span>
+                <div class="news-tags"><span class="news-tag">传感器</span><span class="news-tag">电动汽车</span></div>
+                <h3 class="news-title">研究人员 develop 石墨烯基 leaf tattoo 传感器 for real-time hydration 监测</h3>
+                <p class="news-desc">研究人员 develop 石墨烯基 leaf tattoo 传感器 for real-time hydration 监测</p>
+                <a href="https://www.graphene-info.com/researchers-develop-graphene-based-leaf-tattoo-sensor-real-time-hydration" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">Share on LinkedIn 研究人员 at The University of Texas at Austin and University of Massachusetts Amherst have developed a 石墨烯基 电子 “leaf tattoo” that can continuously monitor plant hydration while simultaneously performing brain-like, in-传感器 computation directly on living leaves. The core of the 技术 is a 石墨烯 channel configured as a leaf‑gated electrochemical 晶体管 that conforms to the surface of a live leafwithout damaging tissue. The 晶体管’s gate is formed by the leaf itself: ions in the hydrated leaf move in response to applied electrical stimuli, modulating the channel conductance in real time. A small voltage pulse applied through the tattoo drives ions toward or away from the 石墨烯, changing its conductance in a way that directly reflect</div>
+            </div>
         </div>
-    </div>
-    <div class="timeline-item" data-tags="行业资讯">
-        <span class="timeline-date">2026-03-27</span>
-        <div class="timeline-content">
-            <span class="news-source">Graphene.tv</span>
-            <div class="news-tags"><span class="news-tag">行业资讯</span></div>
-            <h3 class="news-title">国家石墨烯创新中心泰安协同创新基地揭牌 | 宇航派蒙热管理技术获专家认可</h3>
-            <p class="news-desc">国家石墨烯创新中心泰安协同创新基地揭牌 | 宇航派蒙热管理技术获专家认可</p>
-            <a href="http://www.graphene.tv/20260326151953/" target="_blank" class="news-link">阅读原文</a>
-            <button class="expand-btn" onclick="toggleContent(this)">展开详情</button><div class="news-full-content" style="display:none">国家石墨烯创新中心泰安协同创新基地揭牌 | 宇航派蒙热管理技术获专家认可<br>宇航派蒙<br>•<br>2026年3月26日 17:40<br>•<br>产业新闻<br>•<br>阅读 15<br>会后，中国石墨烯产业技术创新战略联盟理事长李义春，国家石墨烯创新中心主任刘兆平，北京石墨烯研究院党总支书记、中关村石墨烯产业联盟秘书长孟艳芳等行业专家一行专程前往山东宇航派蒙新材料有限公司进行实地参观考察，与企业负责人深入交流，共话技术合作前景。<br>3月20日，国家石墨烯创新中心泰安协同创新基地揭牌启动仪式暨石墨烯产业发展洽谈会在泰安市高新区举行。活动以“烯聚泰安 共创未来”为主题，汇聚国内石墨烯领域顶尖专家、高校院所及重点企业代表，共商产业发展大计、共促技术成果转化，为石墨烯产业高质量发展注入新活力。<br>协同创新基地揭牌<br>高端人才赋能产业升级<br>仪式现场，与会领导共同为国家石墨烯创新中心泰安协同创新基地揭牌，并向多位石墨烯领域专家颁发聘书与泰山人才金卡，以高端人才引领产业创新升级。同时，一批涵盖校地合作、技术研发、成果转化等关键环节的重点项目现场签约，推动形成从原料提纯到终端应用的完整石墨烯产业链，为区域产业发展奠定坚实基础。<br>专家团点赞宇航派蒙<br>石墨烯热管理技术“落地生花”<br>会后，中国石墨烯产业技术创新战略联盟理事长李义春，国家石墨烯创新中心主任刘兆平，北京石墨烯研究院党总支书记、中关村石墨烯产业联盟秘书长孟艳芳等行业专家一行专程前往山东宇航派蒙新材料有限公司进行实地参观考察，与企业负责人深入交流，共话技术合作前景。<br>专家们深入企业研发中心与生产车间，详细了解从材料制备到终端产品的全链条技术体系，对企业多年来深耕石墨烯热管理领域所取得的突破性进展给予充分肯定；并对其石墨烯热管理技术在芯片散热、车用领域、医疗健康等领域的创新应用表示赞赏，认为企业在技术产业化、产品市场化方面走在了行业前列，为石墨烯材料的规模化应用提供了可借鉴的实践样本。同时，专家们结合行业发展趋势，就石墨烯热管理技术的前沿应用、升级方向提出宝贵建议，并与企业负责人围绕技术研发合作、成果联合转化等方面展开探讨，为后续产学研协同创新奠定了良好基础。<br>此次专家团队的到访与交流，不仅彰显了宇航派蒙在石墨烯热管理领域的技术实力与行业地位，也为企业进一步深化政企合作、拓展创新应用注入了新的信心与动能。未来，宇航派蒙将依托此次交流契机，吸纳专家智慧，深化技术创新，持续推动石墨烯热管理技术的突破与规模化应用，与行业伙伴携手共绘石墨烯产业发展新蓝图。<br>本文来自<br>宇航派蒙<br>，本文观点不代表石墨烯网立场，转载请联系原作者。<br>赞<br>(0)<br>宇航派蒙<br>0<br>生成海报<br>重磅新闻｜国家石墨烯创新中心泰安协同创新基地揭牌启动，利特纳米引领石墨烯产业新征程<br>上一篇<br>2026年3月26日 17:34<br>向6G迈进一步？石墨烯引领无线通信的未来<br>下一篇<br>2026年3月26日 18:33<br>相关推荐<br>重庆石墨烯研究院有限公司与黔江区人民政府签署战略合作协议<br>2021年6月25日<br>1.6K<br>0<br>0<br>0<br>产业新闻<br>开启趣味科普之旅！2025年广州地区科普讲解大赛圆满举办<br>2025年7月31日<br>348<br>0<br>0<br>0<br>产业新闻<br>2023中国石墨产业高质量发展论坛（兴凯湖石墨论坛）开幕 国家和省有关部门领导出席 鲁长友致辞 孙成坤出席<br>2023年6月13日<br>873<br>0<br>0<br>0<br>产业新闻<br>成为曼大GEIC首家中国一级企业会员 东旭光电石墨烯产业化再提速<br>2019年1月25日<br>1.8K<br>0<br>0<br>0<br>产业新闻<br>中航光电获得实用新型专利授权：“石墨烯高导热模块及使用该模块的电子设备”<br>2024年11月26日<br>633<br>0<br>0<br>0<br>产业新闻<br>2019第五期西安石墨烯产业项目对接沙龙活动成功举办<br>2019年8月9日<br>1.8K<br>0<br>0<br>0<br>产业新闻<br>龙蟠科技发布国内首家车用IV型储氢瓶企业标准 意图填补中国氢能产业关键空白<br>2020年5月1日<br>2.1K<br>0<br>0<br>0<br>产业新闻<br>广东举办“加快发展新质生产力”东莞专场宣讲 展现高质量发展的动人图景<br>2024年5月10日<br>790<br>0<br>0<br>0<br>产业新闻<br>Volexion任命电池行业资深人士 Joseph X. Adiletta 为首席执行官，以推动电池性能提升的石墨烯涂层技术商业化<br>2025年6月13日<br>351<br>0<br>0<br>0<br>产业新闻<br>发表回复<br>请登录后评论...<br>登录<br>后才能评论<br>提交</div>
+        <div class="timeline-item" data-tags="行业资讯">
+            <span class="timeline-date">2026-04-02</span>
+            <div class="timeline-content">
+                <span class="news-source">Graphene-Info</span>
+                <div class="news-tags"><span class="news-tag">行业资讯</span></div>
+                <h3 class="news-title">新型 石墨烯基 sub-terahertz receivers could enable 超-compact, zero-power 6G links</h3>
+                <p class="news-desc">新型 石墨烯基 sub-terahertz receivers could enable 超-compact, zero-power 6G links</p>
+                <a href="https://www.graphene-info.com/novel-graphene-based-sub-terahertz-receivers-could-enable-ultra-compact-zero" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">Share on LinkedIn 研究人员 from ICFO, ETH Zurich, University of Ioannina, Catalan Institute of Nanoscience and 纳米技术 (ICN2), Arizona State University and Japan&#x27;s National Institute for Materials Science have demonstrated the first 石墨烯‑based sub‑terahertz (sub‑THz) direct receivers that simultaneously deliver multi‑gigabit‑per‑second data rates, 超‑compact footprint, CMOS compatibility, and near‑zero operating power - making石墨烯 a valid hardware candidate for 6G wireless communications. They operate at sub‑THz carrier frequencies to meet the demanding requirements of future links, achieving multi‑gigabit‑per‑second wireless data transmission over distances of around 3 m at room temperature, with a fully 电子, zero‑bias 检测 scheme and a device area of onl</div>
+            </div>
         </div>
-    </div>
-    <div class="timeline-item" data-tags="行业资讯">
-        <span class="timeline-date">2026-03-27</span>
-        <div class="timeline-content">
-            <span class="news-source">Graphene.tv</span>
-            <div class="news-tags"><span class="news-tag">行业资讯</span></div>
-            <h3 class="news-title">重磅新闻｜国家石墨烯创新中心泰安协同创新基地揭牌启动，利特纳米引领石墨烯产业新征程</h3>
-            <p class="news-desc">重磅新闻｜国家石墨烯创新中心泰安协同创新基地揭牌启动，利特纳米引领石墨烯产业新征程</p>
-            <a href="http://www.graphene.tv/20260326151962/" target="_blank" class="news-link">阅读原文</a>
-            <button class="expand-btn" onclick="toggleContent(this)">展开详情</button><div class="news-full-content" style="display:none">重磅新闻｜国家石墨烯创新中心泰安协同创新基地揭牌启动，利特纳米引领石墨烯产业新征程<br>利特纳米<br>•<br>2026年3月26日 17:34<br>•<br>产业新闻<br>•<br>阅读 16<br>作为深耕石墨烯产业化领域的权威专家与企业家，侯士峰教授携核心团队与技术资源深度参与协同创新基地建设。基地为项目量身配置1200平方米实验场地及3个重点实验室，以技术创新与产业协同为抓手，加快推动石墨烯技术成果转化与规模化应用，为泰安新型工业化强市建设、全国石墨烯产业提质升级树立标杆、贡献力量。<br>3月20日，国家石墨烯创新中心泰安协同创新基地揭牌启动仪式暨石墨烯产业发展洽谈会在泰安高新区隆重举行。本次活动以 “烯聚泰安 共创未来” 为主题，汇聚国内石墨烯领域知名专家、高校院所及重点企业代表，共商产业发展大计，共促重点项目落地。<br>会上，国家石墨烯创新中心泰安协同创新基地揭牌成立，与会领导为石墨烯领域专家颁发聘书及泰山人才金卡，山东利特纳米技术有限公司董事长侯士峰教授受聘为创新基地首席科学家。<br>本次活动现场签约校地合作、产业落地、技术转化等重点项目 15 个。其中，侯士峰教授、周铭教授与泰安高新区签约泰安石墨烯研究院项目；利特纳米及其子公司集中签约石墨烯高导热散热材料产业化、石墨烯智能装备研发制造、石墨烯功能性纺织面料成衣 3 个重大产业化项目。签约项目投资规模大、科技含量高、产业带动性强，将有力推动石墨烯技术在新能源、现代农业、纺织服装、高端装备、绿色建材等领域规模化应用。<br>项目签约后，泰安高新区发布石墨烯产业发展优势与扶持政策；国家石墨烯创新中心及多位专家先后作主题报告，侯士峰教授作题为《石墨烯基纳米材料–化学角度的应用》的专题分享。与会专家围绕行业前沿技术、研发成果与产业化路径深入交流，为泰安石墨烯产业高质量发展建言献策。<br>作为深耕石墨烯产业化领域的权威专家与企业家，侯士峰教授携核心团队与技术资源深度参与协同创新基地建设。基地为项目量身配置1200平方米实验场地及3个重点实验室，以技术创新与产业协同为抓手，加快推动石墨烯技术成果转化与规模化应用，为泰安新型工业化强市建设、全国石墨烯产业提质升级树立标杆、贡献力量。<br>国家石墨烯创新中心泰安协同创新基地的揭牌启用，标志着泰安石墨烯产业创新生态迈入全新阶段。依托山东利特纳米扎实的产业基础与侯士峰教授团队领先的科研优势，泰安将以协同创新基地为核心平台，聚力突破关键技术、加速项目落地、完善产业生态，为我国新材料产业自主可控与石墨烯产业高质量发展注入强劲动能，共赴充满“烯”望的新材料未来。<br>本文来自<br>利特纳米<br>，本文观点不代表石墨烯网立场，转载请联系原作者。<br>赞<br>(0)<br>利特纳米<br>0<br>生成海报<br>中科悦达申请石墨烯片材清洗设备专利，提高生产效率<br>上一篇<br>2026年3月26日<br>国家石墨烯创新中心泰安协同创新基地揭牌 | 宇航派蒙热管理技术获专家认可<br>下一篇<br>2026年3月26日<br>相关推荐<br>大国重器，引领革新 | 正泰入选电力行业重大技术装备及工程名录<br>2024年7月27日<br>795<br>0<br>0<br>0<br>产业新闻<br>中一北工申请一种石墨烯制备方法专利，成本较低且效率较高<br>2024年12月20日<br>475<br>0<br>0<br>0<br>产业新闻<br>宝泰隆：携手宁波石墨烯创新中心,开启石墨烯产业化新篇章<br>2024年7月26日<br>802<br>0<br>0<br>0<br>产业新闻<br>中超电缆获石墨烯应用发明专利授权<br>2014年8月14日<br>1.4K<br>0<br>0<br>0<br>产业新闻<br>喜讯 | 高烯科技两位优秀员工获评良渚街道优秀产业工人<br>2023年5月8日<br>1.0K<br>0<br>0<br>0<br>产业新闻<br>关于《重点新材料首批次应用示范指导目录（2018年版）》的公示<br>2018年9月28日<br>2.7K<br>0<br>0<br>0<br>产业新闻<br>新华锦石墨概念存疑：旗下石墨矿尚无采矿权 （1）<br>2013年9月9日<br>2.3K<br>0<br>0<br>0<br>产业新闻<br>泛亚国际(06128)年度东应占亏损同比增加60.6%至9169.6万港元<br>2021年3月31日<br>1.7K<br>0<br>0<br>0<br>产业新闻<br>盛蕾专题调研科技创新工作<br>2025年2月10日<br>490<br>0<br>0<br>0<br>产业新闻<br>发表回复<br>请登录后评论...<br>登录<br>后才能评论<br>提交</div>
+        <div class="timeline-item" data-tags="行业资讯">
+            <span class="timeline-date">2026-04-02</span>
+            <div class="timeline-content">
+                <span class="news-source">Graphene-Info</span>
+                <div class="news-tags"><span class="news-tag">行业资讯</span></div>
+                <h3 class="news-title">研究人员 unveil tailored LIG electrodes for industrial applications</h3>
+                <p class="news-desc">研究人员 unveil tailored LIG electrodes for industrial applications</p>
+                <a href="https://www.graphene-info.com/researchers-unveil-tailored-lig-electrodes-industrial-applications" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">Share on LinkedIn A 研究 team from the Materials and Processes for Micro and Nano Technologies (MP4MNT) group at the Department of Applied Science and 技术 (DISAT) has developed 新 laser-induced 石墨烯 (LIG) electrodes that are adaptable to users’ requirements and “easy” to manufacture. Their patented invention is now available to manufacturers and innovation partners. Team leader Prof. Marzia Quaglio and researcher Giulia Massagliaexplain that, relying on previous experience in 柔性 sensors and 能源 and gas transport, they arrived at a way to produce tridimensional LIG electrodes that are conductive in all three dimensions and selectively porous to allow fluid transportation. The 生产 process yields Laser-Induced 石墨烯 (LIG), a three-dimensional, porous and co</div>
+            </div>
         </div>
-    </div>
-    <div class="timeline-item" data-tags="行业资讯">
-        <span class="timeline-date">2026-03-27</span>
-        <div class="timeline-content">
-            <span class="news-source">Graphene.tv</span>
-            <div class="news-tags"><span class="news-tag">行业资讯</span></div>
-            <h3 class="news-title">烯聚泰安 共探烯势！高芯热能受邀参加石墨烯产业发展盛会</h3>
-            <p class="news-desc">烯聚泰安 共探烯势！高芯热能受邀参加石墨烯产业发展盛会</p>
-            <a href="http://www.graphene.tv/20260326151949/" target="_blank" class="news-link">阅读原文</a>
-            <button class="expand-btn" onclick="toggleContent(this)">展开详情</button><div class="news-full-content" style="display:none">烯聚泰安 共探烯势！高芯热能受邀参加石墨烯产业发展盛会<br>石墨烯网<br>•<br>2026年3月26日 16:46<br>•<br>产业新闻<br>•<br>阅读 14<br>参会期间，高芯热能总经理施元耀全程参与主会场活动，认真学习石墨烯产业前沿技术、最新政策与行业发展经验；在分组洽谈中，与各方围绕石墨烯产业链配套、技术研发、市场应用等议题深入交流，分享公司在石墨烯热能应用领域的实践成果，挖掘潜在合作契机，同时实地考察泰安高新区协同创新基地及重点企业，深化对产业应用场景的认知。<br>3 月 19 日 – 21 日，国家石墨烯创新中心泰安协同创新基地授牌启动仪式暨石墨烯产业发展洽谈会在泰安盛大举办，宁波高芯热能科技有限公司受邀出席，与政企学研各界嘉宾同台交流、实地学习，共探石墨烯产业发展新机遇。<br>本次盛会以“烯聚泰安 共创未来” 为主题，重磅开展基地授牌启动、产业政策发布、专家企业分享等核心环节，还设置校地合作、项目对接两大分组洽谈专场，为石墨烯产业协同创新、资源对接搭建高端平台。<br>参会期间，高芯热能总经理施元耀全程参与主会场活动，认真学习石墨烯产业前沿技术、最新政策与行业发展经验；在分组洽谈中，与各方围绕石墨烯产业链配套、技术研发、市场应用等议题深入交流，分享公司在石墨烯热能应用领域的实践成果，挖掘潜在合作契机，同时实地考察泰安高新区协同创新基地及重点企业，深化对产业应用场景的认知。<br>此次受邀参会，是行业对高芯热能在石墨烯热能领域发展的认可。未来，公司将以此次交流为契机，持续深耕石墨烯热能应用赛道，加强技术研发与产学研协同合作，汲取行业先进经验，与同仁携手推动石墨烯产业高质量发展！<br>本文来自<br>高芯热能科技<br>，本文观点不代表石墨烯网立场，转载请联系原作者。<br>赞<br>(0)<br>石墨烯网<br>0<br>生成海报<br>厦门大学马来西亚分校《Small Methods》：综述！利用无电极微波等离子体实现的独立石墨烯合成最新进展<br>上一篇<br>2026年3月26日 16:32<br>中科悦达申请石墨烯片材清洗设备专利，提高生产效率<br>下一篇<br>2026年3月26日<br>相关推荐<br>石墨烯光催化技术： 一张“网”或成治水新利器<br>2016年12月26日<br>2.3K<br>0<br>0<br>0<br>产业新闻<br>石墨烯电池1.1秒充满手机电量？网友：这条新闻还能再用十年<br>2018年4月23日<br>2.5K<br>0<br>0<br>0<br>产业新闻<br>北京石墨烯技术研究院申请石墨烯晶圆及其原位制备方法专利，可实现石墨烯晶圆原位制备及薄膜受控生长<br>2025年5月13日<br>435<br>0<br>0<br>0<br>产业新闻<br>赛伍技术上半年营收13.52 亿元，显示和声学重点产品有望持续放量<br>2025年8月31日<br>323<br>0<br>0<br>0<br>产业新闻<br>湖南省博士后“揭榜领题”榜单首发<br>2022年11月10日<br>964<br>0<br>0<br>0<br>产业新闻<br>全球首条单层石墨烯吨级生产线建成<br>2015年11月3日<br>1.7K<br>0<br>0<br>0<br>产业新闻<br>微晶科技携手复合柔性透明导电膜亮相展会<br>2019年6月14日<br>1.1K<br>0<br>0<br>0<br>产业新闻<br>新春走基层丨安徽泗县：数智赋能 传统纺织企业“换羽新生”<br>2024年1月24日<br>616<br>0<br>0<br>0<br>产业新闻<br>第21届投洽会厦门同安区落地及达成合作意向总额968亿元<br>2021年9月9日<br>1.3K<br>0<br>0<br>0<br>产业新闻<br>发表回复<br>请登录后评论...<br>登录<br>后才能评论<br>提交</div>
+        <div class="timeline-item" data-tags="行业资讯">
+            <span class="timeline-date">2026-04-02</span>
+            <div class="timeline-content">
+                <span class="news-source">Graphene-Info</span>
+                <div class="news-tags"><span class="news-tag">行业资讯</span></div>
+                <h3 class="news-title">研究人员 &#x27;write&#x27; europium‑based light emitters on 石墨烯 with laser precision</h3>
+                <p class="news-desc">研究人员 &#x27;write&#x27; europium‑based light emitters on 石墨烯 with laser precision</p>
+                <a href="https://www.graphene-info.com/researchers-write-europium-based-light-emitters-graphene-laser-precision" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">Share on LinkedIn 研究人员 from the University of Jyväskylä and Aalto University have developed a laser‑assisted area‑selective atomic/molecular layer deposition (AS‑ALD/MLD) method that grows europium‑organic thin films on 石墨烯 and other 2D materials with submicron precision, one molecular layer at a time. This resist‑free process turns chemically inert 2D surfaces into spatially defined growth templates, enabling patternedphotoluminescent heterostructures and controllable 电子 doping on a single 芯片. The approach combines femtosecond laser two‑photon oxidation (TPO) with ALD/MLD to locally activate single‑layer 石墨烯 on a silicon 芯片. In selected regions, tightly focused fs‑laser pulses create hydroxyl and other oxygen‑containing functional groups, which act as nucleat</div>
+            </div>
         </div>
-    </div>
-    <div class="timeline-item" data-tags="科研进展,石墨烯材料,环保技术">
-        <span class="timeline-date">2026-03-27</span>
-        <div class="timeline-content">
-            <span class="news-source">Nanowerk</span>
-            <div class="news-tags"><span class="news-tag">科研进展</span><span class="news-tag">石墨烯材料</span><span class="news-tag">环保技术</span></div>
-            <h3 class="news-title">纳米技术研究人员利用农业废料生产石墨烯</h3>
-            <p class="news-desc">研究人员开发了一种利用农业废料（稻壳）生产石墨烯的创新方法，将原本被丢弃或焚烧的废物转化为高价值纳米材料。</p>
-            <a href="https://www.nanowerk.com/nanotechnology-news3/newsid=68998.php" target="_blank" class="news-link">阅读原文</a>
-            <button class="expand-btn" onclick="toggleContent(this)">展开详情</button><div class="news-full-content" style="display:none">来自德克萨斯大学埃尔帕索分校和斯坦福大学的研究人员开发了一种利用稻壳生产石墨烯的创新方法。稻壳是稻米加工过程中大量产生的副产品，通常被丢弃或焚烧，对环境造成负担。<br><br>研究团队发现了一种将这些农业废料转化为高价值石墨烯纳米材料的可持续方法。该技术涉及将稻壳在高温下处理，生成高质量、多孔、比表面积大的石墨烯。研究人员还利用回收的锂离子电池阴极作为催化剂，进一步提高了生产效率。<br><br>这项研究不仅解决了农业废料处理问题，还为石墨烯的大规模生产提供了更可持续、更经济的途径。研究成果发表在知名学术期刊上，引起了材料科学界的广泛关注。</div>
+        <div class="timeline-item" data-tags="行业资讯">
+            <span class="timeline-date">2026-04-02</span>
+            <div class="timeline-content">
+                <span class="news-source">Graphene-Info</span>
+                <div class="news-tags"><span class="news-tag">行业资讯</span></div>
+                <h3 class="news-title">Jiangmen Xinhui Industrial Park 推出 trial 生产 of 石墨烯-coated aluminum foil project</h3>
+                <p class="news-desc">Jiangmen Xinhui Industrial Park 推出 trial 生产 of 石墨烯-coated aluminum foil project</p>
+                <a href="https://www.graphene-info.com/jiangmen-xinhui-industrial-park-launches-trial-production-graphene-coated" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">Share on LinkedIn China&#x27;s Jiangmen Xinhui Industrial Park (Fengshanhu 新 能源 Industrial Park) has 宣布 the launch of trial 生产 for its 石墨烯-coated 碳 aluminum foil project. Developed and built by Jiangmen Yingang 新 能源 Industrial Park Construction Co., Ltd., part of the Jiangfa Group, the project represents an 投资 of about 200 百万美元 yuan (almost US$29 百万美元). The large facility is designed to produce up to48,000 tons of 石墨烯-coated 碳 aluminum foil per year once fully operational. The project’s turnkey delivery and trial 生产 ceremony marked a step toward 商业化-scale 生产 in the region’s rapidly growing 石墨烯 and 新 能源 industries. Source: news.metal.com Posted: Mar 30,2026 by Roni Peleg</div>
+            </div>
         </div>
-    </div>
-    <div class="timeline-item" data-tags="产能扩张,行业资讯,石墨烯材料">
-        <span class="timeline-date">2026-03-27</span>
-        <div class="timeline-content">
-            <span class="news-source">AD-HOC-News</span>
-            <div class="news-tags"><span class="news-tag">产能扩张</span><span class="news-tag">行业资讯</span><span class="news-tag">石墨烯材料</span></div>
-            <h3 class="news-title">Argo Graphene Solutions 在成功完成材料试验后扩大规模</h3>
-            <p class="news-desc">Argo Graphene Solutions Inc. 宣布其专有的石墨烯粉末和氧化石墨烯粉末已成功通过第三方的材料试验和表征分析。</p>
-            <a href="https://www.ad-hoc-news.de/boerse/news/ueberblick/argo-graphene-solutions-scaling-up-after-successful-material-trials/68990637" target="_blank" class="news-link">阅读原文</a>
-            <button class="expand-btn" onclick="toggleContent(this)">展开详情</button><div class="news-full-content" style="display:none">Argo Graphene Solutions Inc. 宣布其专有的石墨烯粉末和氧化石墨烯粉末已成功通过独立第三方的材料试验和表征分析。<br><br>试验结果显示材料质量优异，纯度高，层状结构完整，电导率和热导率均达到行业领先水平。公司目前正在扩大生产规模，以满足日益增长的市场需求。<br><br>这次成功的材料试验验证了 Argo 专有生产技术的可靠性，为后续的商业化合作奠定了基础。公司计划在未来几个月内与多家潜在合作伙伴展开深入谈判，涉及能源存储、复合材料和涂层等多个应用领域。<br><br>Argo Graphene Solutions 首席执行官表示，这标志着公司从研发阶段正式进入商业化阶段，预计2026年将实现量产目标。</div>
+        <div class="timeline-item" data-tags="投资">
+            <span class="timeline-date">2026-04-02</span>
+            <div class="timeline-content">
+                <span class="news-source">Graphene-Info</span>
+                <div class="news-tags"><span class="news-tag">投资</span></div>
+                <h3 class="news-title">石墨烯-Info releases a 新 edition of its 石墨烯 投资 Guide</h3>
+                <p class="news-desc">石墨烯-Info releases a 新 edition of its 石墨烯 投资 Guide</p>
+                <a href="https://www.graphene-info.com/graphene-info-releases-new-edition-its-graphene-investment-guide-3" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">Share on LinkedIn Today we published a 新 edition of our 石墨烯 投资 Guide , with all the latest information and financial updates from public 石墨烯 公司. This is still a challenging time for many 石墨烯 公司 - but we are seeing signs of increased activities and 改进 conditions for quite some time, with several 公司 that seem to be moving forward and exciting investors with large valuations. While many 石墨烯公司 still struggle to generate meaningful revenues, and we still expect consolidation and liquidation to continue in the next few years, we are also seeing increased investor optimism, and almost all the 公司 we cover have seen their shares rise in the past year, a very good sign that the 行业 is recovering. The 石墨烯 投资 Gui</div>
+            </div>
         </div>
-    </div>
-    <div class="timeline-item" data-tags="电子产品,芯片,行业资讯,石墨烯材料">
-        <span class="timeline-date">2026-03-27</span>
-        <div class="timeline-content">
-            <span class="news-source">ELE Times</span>
-            <div class="news-tags"><span class="news-tag">电子产品</span><span class="news-tag">芯片</span><span class="news-tag">行业资讯</span><span class="news-tag">石墨烯材料</span></div>
-            <h3 class="news-title">石墨烯聚焦：纳米技术如何改变电子产品</h3>
-            <p class="news-desc">石墨烯正在彻底改变电子行业，从柔性显示器到高速晶体管，研究人员和公司正在探索这种神奇材料的各种应用。</p>
-            <a href="https://www.eletimes.ai/graphene-in-focus-how-nanotechnology-is-transforming-electronics" target="_blank" class="news-link">阅读原文</a>
-            <button class="expand-btn" onclick="toggleContent(this)">展开详情</button><div class="news-full-content" style="display:none">石墨烯因其独特的电子特性而被称为&quot;神奇材料&quot;。单层石墨烯只有一个碳原子厚度，电子迁移率比硅高出100倍，热导率是铜的10倍。这些特性使其成为下一代电子产品的理想材料。<br><br>当前的主要应用方向包括：<br>• 柔性显示器和可折叠设备 - 石墨烯薄膜可实现真正的柔性屏幕<br>• 高速晶体管和芯片 - 突破硅基芯片的性能极限<br>• 超级电容器和电池 - 大幅提升储能密度和充电速度<br>• 传感器和医疗设备 - 高灵敏度生物传感器<br><br>多家公司正在进行商业化尝试。三星已成功研发石墨烯基柔性屏幕原型，IBM正在开发石墨烯晶体管，华为也在布局石墨烯散热技术。随着生产成本的降低，石墨烯有望在未来5-10年内大规模进入消费电子市场。<br><br>行业分析师预测，到2030年全球石墨烯电子市场规模将超过100亿美元。</div>
+        <div class="timeline-item" data-tags="传感器,柔性显示屏,散热技术,运动用品">
+            <span class="timeline-date">2026-04-02</span>
+            <div class="timeline-content">
+                <span class="news-source">Graphene-Info</span>
+                <div class="news-tags"><span class="news-tag">传感器</span><span class="news-tag">柔性显示屏</span><span class="news-tag">散热技术</span><span class="news-tag">运动用品</span></div>
+                <h3 class="news-title">Philips’ 新 QD-OLED gaming monitor uses 石墨烯 heat dissipation 技术</h3>
+                <p class="news-desc">Philips’ 新 QD-OLED gaming monitor uses 石墨烯 heat dissipation 技术</p>
+                <a href="https://www.graphene-info.com/philips-new-qd-oled-gaming-monitor-uses-graphene-heat-dissipation-technology" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">Share on LinkedIn Philips has introduced a 新 QD‑ OLED gaming monitor, the Evnia 32M2N8900X, which incorporates a 石墨烯 layer within its display panel to enhance 导热 性能. The use of 石墨烯 allows for more efficient heat dissipation, helping the panel maintain stable operation and extend its service life - an important factor in 高‑brightness OLED designs. The 32‑inch 4K (3840×2160) display combines a QD‑OLED panel with a 240Hz refresh rate and Philips’ Ambiglow lighting system. While most specifications focus on gaming 性能 and visual quality, the integration of 石墨烯 is a noteworthy 开发, reflecting a broader 行业 trend toward 石墨烯‑based materials for 导热 management in 先进 electronics. The Evnia 32M2N8900X is currently available in th</div>
+            </div>
         </div>
-    </div></div>
+        <div class="timeline-item" data-tags="行业资讯">
+            <span class="timeline-date">2026-04-02</span>
+            <div class="timeline-content">
+                <span class="news-source">Graphene-Info</span>
+                <div class="news-tags"><span class="news-tag">行业资讯</span></div>
+                <h3 class="news-title">The 石墨烯 Handbook, 2026 edition</h3>
+                <p class="news-desc">The 石墨烯 Handbook, 2026 edition</p>
+                <a href="https://www.graphene-info.com/graphene-handbook-2026-edition" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">Share on LinkedIn We&#x27;re happy to announce the 13 th edition of 石墨烯-Info&#x27;s very own 石墨烯 Handbook , the most comprehensive resource on 石墨烯 技术, 行业 and 市场 - now updated for 2026. After many years, the 石墨烯 行业 and 市场 are at an inflection point, showing highly positive signs. Get your copy now to stay current on 石墨烯 研究, 开发 and 市场! Reading this book, you&#x27;ll learn all about: Theproperties of 石墨烯 Different 生产 methods Possible 石墨烯 applications The latest 石墨烯 研究 The current 市场 for 石墨烯 materials and products The main 石墨烯 challenges Other promising 2D materials The book also provides: A history of 石墨烯 developments A 石墨烯 投资 guide An introduction to 石墨烯 metrology and s</div>
+            </div>
+        </div>
+        <div class="timeline-item" data-tags="电池技术">
+            <span class="timeline-date">2026-04-02</span>
+            <div class="timeline-content">
+                <span class="news-source">Graphene-Info</span>
+                <div class="news-tags"><span class="news-tag">电池技术</span></div>
+                <h3 class="news-title">Solidion 技术 unveils UPS 电池 system for AI data centers</h3>
+                <p class="news-desc">Solidion 技术 unveils UPS 电池 system for AI data centers</p>
+                <a href="https://www.graphene-info.com/solidion-technology-unveils-ups-battery-system-ai-data-centers" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">Share on LinkedIn Solidion 技术 , an 先进 电池 技术 solutions provider, has 宣布 the 开发 of a next-generation Uninterruptible Power Supply (UPS) system designed specifically for the rapidly expanding artificial intelligence (AI) data center 市场. The 新 PEAK Series - short for Power, 能源, 阳极, Knowledge - incorporates Solidion’s award-winning 5500 电池 cell, which leverages the company’s proprietarysilicon-碳 阳极 技术 to deliver superior 能源 density, reliability, and cost 效率. The 技术 seems to use 石墨烯 in its silicon-碳 阳极 技术. Solidion expects 商业化 availability of the PEAK Series in the first quarter of 2026 and is currently engaging with select data center partners for early integration and t</div>
+            </div>
+        </div>
+        <div class="timeline-item" data-tags="投资">
+            <span class="timeline-date">2026-04-02</span>
+            <div class="timeline-content">
+                <span class="news-source">Graphene-Info</span>
+                <div class="news-tags"><span class="news-tag">投资</span></div>
+                <h3 class="news-title">2D Photonics / CamGraphIC 获得融资 €25 百万美元 to advance 石墨烯基 photonics</h3>
+                <p class="news-desc">2D Photonics / CamGraphIC 获得融资 €25 百万美元 to advance 石墨烯基 photonics</p>
+                <a href="https://www.graphene-info.com/2d-photonics-raises-25-million-advance-graphene-based-photonics" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">Share on LinkedIn Frontier IP Group has 宣布 that its portfolio company, 2D Photonics , has raised €25 百万美元 in a Series A 融资 round to advance the 开发 of 石墨烯 photonics transceivers. 2D Photonics is closely related to CamGraPhIC - 2D Photonics is the parent company, with CamGraPhIC&#x27;s operations in both the UK and Italy operating under its umbrella. This 融资 will enable the company to scale up 生产 and establish a试点 manufacturing plant, positioning it at the forefront of next-generation optical 技术. The 投资, backed by major 行业 and financial institutions, underscores the potential of 2D Photonics’ 技术 to transform artificial intelligence and mobile communications by significantly reducing costs, improving 能源 效率, and</div>
+            </div>
+        </div>
+        <div class="timeline-item" data-tags="散热技术,环保技术,石墨烯采暖">
+            <span class="timeline-date">2026-04-02</span>
+            <div class="timeline-content">
+                <span class="news-source">Graphene-Info</span>
+                <div class="news-tags"><span class="news-tag">散热技术</span><span class="news-tag">环保技术</span><span class="news-tag">石墨烯采暖</span></div>
+                <h3 class="news-title">Xiaomi 推出 a 石墨烯 radiator capable of heating a room in a few seconds</h3>
+                <p class="news-desc">Xiaomi 推出 a 石墨烯 radiator capable of heating a room in a few seconds</p>
+                <a href="https://www.graphene-info.com/xiaomi-launches-graphene-radiator-capable-heating-room-few-seconds" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">Share on LinkedIn Xiaomi has released its 新 Xiaomi Mijia 石墨烯 Skirting Board Heater 2, a 石墨烯 radiator that boasts a powerful heating system 2.200W and a foldable format. The Xiaomi Mijia 石墨烯 Skirting Board Heater 2 features a 石墨烯 heating 技术 heater capable of providing heat in just 3 seconds and heating an entire room to the desired temperature in just 15 minutes. In 2022, Xiaomi 推出 the Mijia 石墨烯 BaseboardHeater (Fire Edition) . The device uses two 石墨烯基 heating elements, and has a simulated flame function that uses an integrated humidifier and LEDs to generate the flame appearance. This 新 launch seems to be the next generation in the same product line. In addition, the 新 Xiaomi Mijia 石墨烯 Skirting Board Heater 2 has various cooling</div>
+            </div>
+        </div>
+        <div class="timeline-item" data-tags="行业资讯">
+            <span class="timeline-date">2026-04-02</span>
+            <div class="timeline-content">
+                <span class="news-source">Graphene-Info</span>
+                <div class="news-tags"><span class="news-tag">行业资讯</span></div>
+                <h3 class="news-title">NanoGraf begins 生产 at scale to provide Military with better batteries</h3>
+                <p class="news-desc">NanoGraf begins 生产 at scale to provide Military with better batteries</p>
+                <a href="https://www.graphene-info.com/nanograf-begins-production-scale-provide-military-better-batteries" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">Share on LinkedIn NanoGraf , an 先进 电池 材料 company, 宣布 earlier this month the successful completion of the first large volume 生产 run of its M38 18650 cell for the U.S. military. Nanograf, formerly called SiNode Systems, pursues advances in Lithium-ion 电池 anodes for a wide range of industries from consumer electronics to electric vehicles. NanoGraf explaines that it uses a proprietary silicon alloy-石墨烯材料 architecture to overcome the silicon 阳极 technical hurdles. The combination of silicon-based alloys and a 柔性 3D 石墨烯 network helps stabilize the active 材料 during charge and discharge. The company’s manufacturing process is different from others that rely on expensive and complex vapor deposition-based systems. Instead, a wet c</div>
+            </div>
+        </div>
+        <div class="timeline-item" data-tags="电池技术,复合材料">
+            <span class="timeline-date">2026-04-02</span>
+            <div class="timeline-content">
+                <span class="news-source">Graphene.tv</span>
+                <div class="news-tags"><span class="news-tag">电池技术</span><span class="news-tag">复合材料</span></div>
+                <h3 class="news-title">南京工业大学黄康团队Adv. Membr.：荷电增强氧化石墨烯复合膜用于水系有机液流电池兼具高传导与高容量</h3>
+                <p class="news-desc">南京工业大学黄康团队Adv. Membr.：荷电增强氧化石墨烯复合膜用于水系有机液流电池兼具高传导与高容量</p>
+                <a href="http://www.graphene.tv/20260402152304/" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">南京工业大学黄康团队Adv. Membr.：荷电增强氧化石墨烯复合膜用于水系有机液流电池兼具高传导与高容量<br>石墨烯网<br>•<br>2026年4月2日 18:05<br>•<br>科研进展<br>•<br>阅读 11<br>本文通过超声辅助酸刻蚀制备荷电增强多孔氧化石墨烯(CPGO)纳米片，并将其嵌入聚合物基体中，利用多离子通道构建与静电排斥协同策略实现高效选择性离子传输。酸刻蚀使多孔表面暴露出更多含氧基团，不仅有利于CPGO的均匀分散，还能提升孔辅助离子通道与界面水桥离子通道的连通性，同时在碱性电解液中CPGO上的羧基可为K⁺传输提供位点，更强的界面作用还能有效减小离子簇尺寸，使离子选择性提升2.1倍。<br>水系有机液流电池(AOFB)作为极具应用前景的储能技术，具有自放电速率低、成本低廉且不依赖金属资源等优势，但目前仍亟需具备高离子选择性传输能力的隔膜以缓解其容量衰减问题。本文通过超声辅助酸刻蚀制备荷电增强多孔氧化石墨烯(CPGO)纳米片，并将其嵌入聚合物基体中，利用多离子通道构建与静电排斥协同策略实现高效选择性离子传输。酸刻蚀使多孔表面暴露出更多含氧基团，不仅有利于CPGO的均匀分散，还能提升孔辅助离子通道与界面水桥离子通道的连通性，同时在碱性电解液中CPGO上的羧基可为K⁺传输提供位点，更强的界面作用还能有效减小离子簇尺寸，使离子选择性提升2.1倍。所制备的优化隔膜使水系有机液流电池在20~100 mA·cm⁻²电流密度下实现98.9%~99.9%的高库仑效率与94.8%~77.9%的高电压效率，且在1000次循环后容量保持率仍高于99%(每循环容量衰减0.0002%)，显著优于纯聚合物隔膜(每循环衰减0.02%)。<br>如图1所示，本文通过超声辅助硫酸刻蚀制备了负电性增强的CPGO纳米片，并利用其表面电荷特性与孔道结构，为水系有机液流电池隔膜构建了高效选择性离子传输通道。本文采用改进Hummers法合成氧化石墨烯(GO)，其二维片层结构清晰呈现于图2a。经刻蚀处理后得到的CPGO横向尺寸减小(图2b)，表面出现更多缺陷并形成孔道结构(图2b插图)。图2c-d显示，原始GO与CPGO纳米片存在明显差异，GO整体呈明亮均匀形貌，而CPGO表面出现多处暗区，进一步证实其表面存在贯穿孔结构。图2e表明，两种材料均出现典型的D峰(无序sp³杂化结构)与G峰(sp²杂化碳的C-C振动)。此外，CPGO的ID/IG强度比由GO的0.903提升至0.998，同时D峰发生拉曼位移，表明其表面缺陷密度显著提高。图2f显示，在C 1s高分辨谱中，原始GO呈现五个特征峰，分别对应sp²杂化C=C(283.8 eV)、sp³杂化C-C(284.8 eV)、环氧/羟基(286.9 eV)、羰基(288.7 eV)及羧基(290.0 eV)，CPGO虽具有相似峰位但峰强不同，由于缺陷增多使表面含氧基团暴露量提升，其C=O与O-C=O键含量上升且峰位略有右移。图2g表明，CPGO的层间距发生明显变化，相较于GO，CPGO的主衍射峰移至2θ=8.54°，说明层间距增大，这可归因于表面暴露的含氧基团占据层间空间所致。如图2h所示，GO在膜中易发生团聚，几乎掩盖了聚合物本身的褶皱结构。与之相比，同等添加量下CPGO在膜内分散性显著更优，均匀插层于聚合物网络中(图2i)，这主要归因于CPGO表面与聚合物侧链间相互作用增强，提升了界面相容性。<br>图1. CPGO基杂化膜中离子传输行为示意图。<br>图2.(a，a插图，c)GO与(b，b插图，d)CPGO的SEM、TEM及AFM图像；(e)拉曼光谱；(f)GO与CPGO的XPS的C 1s谱图及(g)XRD图谱；(h)SP/GO-2%与(i)SP/CPGO-2%膜的断面SEM。<br>如图3a所示，与GO基杂化膜相比，CPGO基杂化膜的吸水率提升更为显著，这归因于CPGO纳米片表面具有更高密度的亲水官能团。同时，得益于CPGO纳米片的均匀分布以及官能团间更强的相互作用，膜在水中的溶胀行为得到抑制(图3b)。如图3c所示，所有CPGO基杂化膜的面电阻均显著降低，在碱性溶液中随着CPGO含量从0%提升至2%，膜面电阻由0.37 Ω cm⁻²大幅降至0.17 Ω cm⁻²，证明了孔道强化对离子传输的关键作用。图3c表明，仅添加0.5%的GO就会对聚合物膜的离子传输产生不利影响，主要原因是高长径比的石墨片层产生了阻塞效应，且GO负载量越高，膜面电阻呈逐步上升趋势。图3d显示，所有膜中OH⁻迁移数均为最高，其中SP/CPGO-2%膜可达0.82，而未改性GO的引入则使迁移数低于纯膜，这与面电阻测试结果一致。图3e显示，CPGO的加入同时提升了膜的总离子电导率与K⁺电导率，这源于多孔结构与界面水通道的协同作用，共同促进了OH⁻传输。引入CPGO不仅提升了离子电导率，还能更有效地抑制活性物种扩散，使Fe(CN)₆⁴⁻渗透率更低(图3f)，这是因为更多暴露的含氧基团增强了CPGO的负电性，通过静电排斥作用阻碍活性离子扩散，CPGO含量增加会使排斥作用增强，同时过度团聚形成的物理屏障进一步抑制Fe(CN)₆⁴⁻渗透。<br>图3.(a)吸水率、(b)溶胀率以及(c)SPEEK、SP/GO-X与SP/CPGO-X(X=0.5、1、2、3、4)隔膜在1 M KOH溶液中的面电阻。紫色虚线及数值代表SPEEK纯膜的性能；(d)由电压-电流曲线计算得到的OH⁻迁移数；(e)SPEEK、SP/GO-2%与SP/CPGO-2%隔膜在1 M KOH中的离子电导率及在去离子水中测得的本征K⁺电导率；(f)所有隔膜的Fe(CN)₆⁴⁻渗透率。<br>图4a表明，SPEEK纯膜的亲水(暗区)-疏水(亮区)微相分离程度极低，导致离子传输通道连续性较差。在基体中引入2%GO纳米片后，微相分离略有增强，可观察到部分亲水区域，但通道连续性依然不佳(图4b)。与之相比，SP/CPGO-2%膜的微相分离显著增强，亲水区域更为连续，进而形成高度连通的离子传输通道(图4c)。图4d-e中较大的相角偏移表明聚合物链在膜内呈无序堆积状态，主链的杂乱堆积使相图整体以亮区为主，而SP/CPGO-2%膜呈现明显的暗区且相角偏移最小(图4f)，说明CPGO表面的含氧基团与聚合物侧链上的磺酸基团存在强相互作用，诱导聚合物链向CPGO聚集并发生重排，最终形成有序且连续的离子传输通道。如图4g所示，杂化膜的散射矢量(q)大于纯膜，纳米片的引入使离子簇间距(d)减小，其中SP/CPGO-2%膜的离子簇间距最小，低于SP/GO-2%膜与SPEEK纯膜，离子簇间距的缩小表明SPEEK侧链上的磺酸基团被CPGO表面的含氧基团吸引，使磺酸基团周围的离子簇排布更为紧密，进而使SP/CPGO-2%膜内离子通道尺寸更窄，活性物种的扩散阻力增大。图4h表明，石墨烯表面的含氧官能团可调控其电子结构并促进电子聚集，其中-COOH及其去质子化产物-COO⁻的作用最为显著，这种增强的电子密度使CPGO纳米片带有更强的负电荷，通过静电排斥进一步提高离子通道内活性物种的扩散阻力。<br>图4. SPEEK膜(a)、SP/GO-2%膜(b)和SP/CPGO-2%膜(c)的AFM相图；SPEEK膜(d)、SP/GO-2%膜(e)和SP/CPGO-2%膜(</div>
+            </div>
+        </div>
+        <div class="timeline-item" data-tags="行业资讯">
+            <span class="timeline-date">2026-04-02</span>
+            <div class="timeline-content">
+                <span class="news-source">Graphene.tv</span>
+                <div class="news-tags"><span class="news-tag">行业资讯</span></div>
+                <h3 class="news-title">图文速览|国家石墨烯创新中心工作回顾（3月16日-3月31日）</h3>
+                <p class="news-desc">图文速览|国家石墨烯创新中心工作回顾（3月16日-3月31日）</p>
+                <a href="http://www.graphene.tv/20260402152269/" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">图文速览|国家石墨烯创新中心工作回顾（3月16日-3月31日）<br>国家石墨烯创新中心<br>•<br>2026年4月2日 13:58<br>•<br>产业新闻<br>•<br>阅读 11<br>3月16日星期一<br>科元控股集团有限公司一行来访交流<br>宁夏墨工科技有限公司一行来访交流<br>3月17日星期二<br>浙江浙能科技环保集团股份有限公司一行来访交流<br>3月18日星期三<br>赴慈溪滨海经济开发区管委会座谈交流<br>国家石墨烯创新中心协同基地墨西园区举行现场工作办公会<br>省人大教科文卫委张国强副主任委员来访调研<br>宁波市委党校金山区第40期处级干部进修班一行来访参观<br>3月19日星期四<br>赴山东金利特新材料有限责任公司参观交流<br>国家石墨烯创新中心锂电池中试服务平台亮相宁波大圆柱论坛<br>3月20日星期五<br>国家石墨烯创新中心泰安协同创新基地举行揭牌仪式暨石墨烯产业发展洽谈会<br>举行综合管理办公室工作例会<br>3月21日星期六<br>组织8位员工聘期汇报，1位试用期员工考核汇报<br>3月23日星期一<br>剥离烯事业部某客户审厂<br>宁波宏烯新材料科技有限公司总经理邹迪波一行来访参观<br>3月24日星期二<br>“科创镇海·情系桑梓”投资推介会暨上海镇海商会年会在上海举行<br>云南安宁市领导一行来访<br>3月25日星期三<br>宁波石墨烯创新中心联合党支部举行3月主题党日活动<br>3月26日星期四<br>高质量发展中国行网络潮评周活动走进国家石墨烯创新中心<br>杭州科技职业技术学院赴国家石墨烯创新中心调研考察暨校企合作洽谈<br>3月27日星期五<br>宁波石墨烯创新中心有限公司工会委员会组织开展“烯创家园”2026年第一季度职工生日会<br>3月28日星期六<br>全球南方金融家宁波参访团走进国家石墨烯创新中心<br>举行事业部运行机制落地暨管理制度宣贯专项会议<br>3月30日星期一<br>徐丹副总经理，兼镇海区妇联副主席，参加镇海区妇联十七届四次（执委）扩大会议<br>召开综合办、项目办、人力办代表工作交流会<br>3月31日星期二<br>抚州市政府驻闽浙办事处主任吴国安一行来访交流<br>江北区发改局副局长吴春益一行来访交流<br>市总工会党组书记、副主席陈强一行来访调研<br>江西省兴国县副县长张茶根一行来访调研<br>本文来自<br>国家石墨烯创新中心<br>，本文观点不代表石墨烯网立场，转载请联系原作者。<br>赞<br>(0)<br>国家石墨烯创新中心<br>0<br>生成海报<br>“烯创未来 赋能发展”石墨烯科普知识及应用主题讲座走进宁波大学材料科学与化学工程学院<br>上一篇<br>2026年4月2日 13:58<br>南京工业大学黄康团队Adv. Membr.：荷电增强氧化石墨烯复合膜用于水系有机液流电池兼具高传导与高容量<br>下一篇<br>2026年4月2日 18:05<br>相关推荐<br>国网北京市电力公司申请石墨烯发电发热布料专利，能够有效地解决石墨烯发热布料需外接电源的问题<br>2024年11月22日<br>579<br>0<br>0<br>0<br>产业新闻<br>Haydale获得Innovate UK资助，用于开发智能复合材料模具<br>2022年4月11日<br>1.5K<br>0<br>0<br>0<br>产业新闻<br>四川石墨烯瞄准“新兴高端成长型产业”发展<br>2016年8月24日<br>1.7K<br>0<br>0<br>0<br>产业新闻<br>世名科技：暂无外延石墨烯相关的技术、生产及销售<br>2024年2月23日<br>825<br>0<br>0<br>0<br>产业新闻<br>中国成为石墨烯装甲投入使用的首个国家<br>2018年11月26日<br>2.3K<br>0<br>0<br>0<br>产业新闻<br>【武进】常州富烯科技股份有限公司金属基复合导热材料的研发与产业化项目建设工程设计方案批后公布<br>2024年1月4日<br>760<br>0<br>0<br>0<br>产业新闻<br>龙游·云墨碳谷项目建设按下“快进键”<br>2021年7月10日<br>2.1K<br>0<br>0<br>0<br>产业新闻<br>创新引领奖+1！上海大学在第25届工博会精彩亮相！<br>2025年9月28日<br>280<br>0<br>0<br>0<br>产业新闻<br>年产300吨散热膜用石墨烯材料及年产10万平米石墨烯散热膜项目混凝土、砂浆材料采购竞争性磋商公告<br>2024年9月11日<br>405<br>0<br>0<br>0<br>产业新闻<br>发表回复<br>请登录后评论...<br>登录<br>后才能评论<br>提交</div>
+            </div>
+        </div>
+        <div class="timeline-item" data-tags="石墨烯材料">
+            <span class="timeline-date">2026-04-02</span>
+            <div class="timeline-content">
+                <span class="news-source">Graphene.tv</span>
+                <div class="news-tags"><span class="news-tag">石墨烯材料</span></div>
+                <h3 class="news-title">“烯创未来 赋能发展”石墨烯科普知识及应用主题讲座走进宁波大学材料科学与化学工程学院</h3>
+                <p class="news-desc">“烯创未来 赋能发展”石墨烯科普知识及应用主题讲座走进宁波大学材料科学与化学工程学院</p>
+                <a href="http://www.graphene.tv/20260402152266/" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">“烯创未来 赋能发展”石墨烯科普知识及应用主题讲座走进宁波大学材料科学与化学工程学院<br>国家石墨烯创新中心<br>•<br>2026年4月2日 13:58<br>•<br>科普研学<br>•<br>阅读 8<br>讲座在宁波大学忻元甫报告厅举行，现场座无虚席。徐丹副总经理结合其在科研及管理方面的经历经验，从石墨烯的独特结构与卓越性能切入，深入浅出地阐述了其在电子器件、新能源、复合材料、生物医疗等前沿领域的广阔应用前景。她表示，石墨烯凭借其超薄、超高强度、超高导电导热性等优异特性，正成为推动材料领域新质生产力发展的重要力量。<br>4月1日下午，国家石墨烯创新中心副总经理徐丹应邀赴宁波大学材料科学与化学工程学院，作题为“烯创未来 赋能发展 石墨烯科普知识及应用报告”的主题演讲。此次活动，是由宁波大学党委研工部主办、材料科学与化学工程学院承办的“宁波大学研究生名企进校”第二十二期专题讲座，院党委副书记尹慧主持，吸引了学院400余名学生参与。<br>讲座在宁波大学忻元甫报告厅举行，现场座无虚席。徐丹副总经理结合其在科研及管理方面的经历经验，从石墨烯的独特结构与卓越性能切入，深入浅出地阐述了其在电子器件、新能源、复合材料、生物医疗等前沿领域的广阔应用前景。她表示，石墨烯凭借其超薄、超高强度、超高导电导热性等优异特性，正成为推动材料领域新质生产力发展的重要力量。<br>在梳理石墨烯从实验室走向产业化的历程时，徐丹介绍了国家石墨烯创新中心在技术攻关、成果转化及产业链协同创新方面取得的进展。她表示，当前石墨烯产业正处于从技术积累向规模化应用跨越的关键时期，需要更多青年人才投身其中，共同破解从“实验室样品”到“产业化商品”的最后一公里。<br>互动交流环节，现场研究生围绕石墨烯的应用场景、职业发展路径等问题踊跃提问。徐丹结合发展现状和实际案例等，逐一进行细致解答，并勉励同学们夯实基础研究，关注产业需求，在交叉融合中找准个人发展方向，激发未来成长潜能。<br>此次演讲不仅拓宽了高校学子对石墨烯前沿科技与产业生态的认知视野，也进一步深化了国家石墨烯创新中心与宁波大学材化学院之间的交流与合作。未来，国家石墨烯创新中心将持续推动产学研深度融合，为培养新材料领域高水平创新人才，助力我国石墨烯产业高质量发展贡献力量。<br>本文来自<br>国家石墨烯创新中心<br>，本文观点不代表石墨烯网立场，转载请联系原作者。<br>赞<br>(0)<br>国家石墨烯创新中心<br>0<br>生成海报<br>国内外大牌都合作！秀洲这家企业冲刺4.5亿元产值<br>上一篇<br>2026年4月2日 10:11<br>图文速览|国家石墨烯创新中心工作回顾（3月16日-3月31日）<br>下一篇<br>2026年4月2日 13:58<br>相关推荐<br>一起来“浙”citywalk！十条科普研学精品路线发布<br>2025年8月27日<br>354<br>0<br>0<br>0<br>科普研学<br>BGF2025系列活动 | 探索材料前沿，普及科学新知 ！“烯园科普行”分论坛圆满举行<br>2025年10月24日<br>238<br>0<br>0<br>0<br>科普研学<br>探秘“烯”世界 点亮科学梦想<br>2025年9月28日<br>254<br>0<br>0<br>0<br>科普研学<br>九三学社中央院士专家科普行活动在新乡举办<br>2025年9月11日<br>285<br>0<br>0<br>0<br>科普研学<br>四位“桂姐姐”进高校送“成长教科书”<br>2025年10月19日<br>242<br>0<br>0<br>0<br>科普研学<br>从“即物穷理”读懂世界 2025科普中国说河南篇“即物穷理”主题科普活动举办<br>2025年9月26日<br>268<br>0<br>0<br>0<br>科普研学<br>促进国际交流 拓宽学术视野——钱学森力学科技英才班赴英开展访学活动<br>2025年8月23日<br>331<br>0<br>0<br>0<br>科普研学<br>神奇材料探秘之行|武理学子到访湖北省石墨烯产业技术创新中心<br>2026年1月7日<br>171<br>0<br>0<br>0<br>科普研学<br>中国科学院院士刘忠范教授做客《霞光讲坛》<br>2025年11月28日<br>178<br>0<br>0<br>0<br>科普研学<br>发表回复<br>请登录后评论...<br>登录<br>后才能评论<br>提交</div>
+            </div>
+        </div>
+        <div class="timeline-item" data-tags="行业资讯">
+            <span class="timeline-date">2026-04-02</span>
+            <div class="timeline-content">
+                <span class="news-source">Graphene.tv</span>
+                <div class="news-tags"><span class="news-tag">行业资讯</span></div>
+                <h3 class="news-title">园区引进一家企业“链”出一个生态 入驻企业变身“招商合伙人”</h3>
+                <p class="news-desc">园区引进一家企业“链”出一个生态 入驻企业变身“招商合伙人”</p>
+                <a href="http://www.graphene.tv/20260402152257/" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">园区引进一家企业“链”出一个生态 入驻企业变身“招商合伙人”<br>温州新闻网<br>•<br>2026年4月2日 09:55<br>•<br>产业新闻<br>•<br>阅读 17<br>如今，一条以“基础材料—核心部件—终端应用”为核心的产业链协同体系正在瓯海成型：万鑫烯碳提供导电浆料；天越星专注于电气连接用的灰银合金材料，提升设备连接可靠性；宁嘉迪则布局钠离子电池及其应用场景。三家企业各展所长、紧密衔接，形成了一个高效的产业闭环。<br>温州网讯 近日，位于瓯海的温州新能源与装备智造创新园迎来了一批新项目集中落地：浙江天越星科技有限公司的灰银合金项目正式启动，宁嘉迪公司的电池PACK制造、民用换电及钠离子电池产业战略合作项目也同步签约。这些项目都围绕新能源汽车、储能设备产业，形成了从基础材料到终端应用的完整产业生态闭环。<br>这些项目的落地，与园区内的浙江万鑫烯碳有限公司密不可分。作为园区首家入驻企业，万鑫烯碳正主动从“被服务者”转变为“招商合伙人”，积极推动瓯海区的新材料产业从“单点开花”走向“集群成链”。<br>瓯海区依托本地高校资源优势，早在2021年就与温州大学合作共建温州大学碳中和技术创新研究院，落下了布局新能源新材料产业的“先手棋”。次年，依托温州大学的科研力量，瓯海成功引进浙江万鑫烯碳有限公司。<br>万鑫烯碳是国内石墨烯、碳纳米管导电材料领域龙头企业——黑龙江省石墨谷产业集团股份有限公司的全资子公司，其核心产品石墨烯、碳纳米管导电浆料产品是提升电池性能的一种关键材料，广泛应用于电动汽车、储能等新能源领域。通俗来说，它们堪称电池的“性能加速器”：能大幅提升电池导电效率，实现快充功能，同时稳定电池结构、延长循环使用寿命，也是目前提升电动车、储能电池性能主流且高效的解决方案之一。背靠母公司技术与资源优势，万鑫烯碳成为宁德新能源、瑞浦兰钧等头部电池企业的合作伙伴。<br>“我还记得，当时选址半个小时就敲定了，现成厂房条件基本就能用，之后从企业注册到产线投产，也仅6个月。”谈及落户瓯海的经历，万鑫烯碳总经理王海霞直言，当地的高效服务让企业发展少走了很多弯路。落户之初，当地政府在土地、资金、人才等方面为企业提供精准支持，为万鑫烯碳的快速起步筑牢了基础。短短3年时间，万鑫烯碳在瓯海的累计产值已超3亿元。<br>“一花独放不是春。我们不仅是瓯海产业发展的受益者，更希望成为产业生态的建设者。”王海霞表示，正是瓯海优质的营商环境和政府对产业链协同发展的高度重视，给了企业充分的信心与能力，去带动更多优质伙伴共同落户。万鑫烯碳在技术与市场积累上的优势，也为后续吸引产业链上下游项目奠定了扎实的基础。<br>在孵化天越星公司、吸引宁嘉迪公司落户的过程中，万鑫烯碳通过技术共享、产能对接、联合研发等方式，助力天越星快速完成产品验证与市场导入，同时推动宁嘉迪项目顺利融入本地产业生态，形成了“引进一个、带来一串、壮大一片”的良性循环。<br>如今，一条以“基础材料—核心部件—终端应用”为核心的产业链协同体系正在瓯海成型：万鑫烯碳提供导电浆料；天越星专注于电气连接用的灰银合金材料，提升设备连接可靠性；宁嘉迪则布局钠离子电池及其应用场景。三家企业各展所长、紧密衔接，形成了一个高效的产业闭环。<br>从一家企业的快速崛起，到一条产业链的逐步成型，这一切的背后，离不开校地企的协同发力，其中温州大学碳中和技术创新研究院更是重要的“科研智囊团”。项目启动当天，由校企共建的碳材料联合实验室正式揭牌，这意味着，高校的科研成果将直接在工厂里变成产品。<br>本文来自<br>温州日报<br>，本文观点不代表石墨烯网立场，转载请联系原作者。<br>导电添加剂<br>赞<br>(0)<br>温州新闻网<br>0<br>生成海报<br>南开大学ACB:基于石墨烯气凝胶载体的单原子Co-N5位点可诱导臭氧活化，从而增强电解过氧水去污效果<br>上一篇<br>2026年4月2日 09:03<br>国内外大牌都合作！秀洲这家企业冲刺4.5亿元产值<br>下一篇<br>2026年4月2日 10:11<br>相关推荐<br>重庆师范大学化学学院师生来我司参加 2021年第二期“走进石墨烯”科普活动<br>2021年6月24日<br>1.6K<br>0<br>0<br>0<br>产业新闻<br>性价比中的”怪兽”，我选择中唱T6<br>2021年7月17日<br>1.9K<br>0<br>0<br>0<br>产业新闻<br>“刷视频2小时，还有94%电量” 糖果电霸是什么神仙手机？<br>2019年1月8日<br>2.7K<br>0<br>0<br>0<br>产业新闻<br>金阳烯碳“先进能源应用的石墨烯新材料研发与产业化项目”开工大吉<br>2022年7月15日<br>1.5K<br>0<br>0<br>0<br>产业新闻<br>广汽集团：广汽旗下公司巨湾技研具有独立自主知识产权的三维结构石墨烯制备技术<br>2021年8月10日<br>2.4K<br>0<br>0<br>0<br>产业新闻<br>宝泰隆：七台河市东润矿业投资有限公司密林石墨二矿项目的前期筹备工作正在稳步推进中<br>2026年3月3日<br>132<br>0<br>0<br>0<br>产业新闻<br>预计投产4年后年产值可达8亿元 昆山周市镇总投资5亿元的新材料项目开业<br>2023年9月21日<br>853<br>0<br>0<br>0<br>产业新闻<br>“非遗临沂 时尚国人”中国（临沂）纺织服装行业高端论坛盛大举行<br>2023年4月17日<br>954<br>0<br>0<br>0<br>产业新闻<br>山西省委常委卢东亮调研山西煤化所<br>2022年4月26日<br>1.4K<br>0<br>0<br>0<br>产业新闻<br>发表回复<br>请登录后评论...<br>登录<br>后才能评论<br>提交</div>
+            </div>
+        </div>
+        <div class="timeline-item" data-tags="行业资讯">
+            <span class="timeline-date">2026-04-02</span>
+            <div class="timeline-content">
+                <span class="news-source">Graphene.tv</span>
+                <div class="news-tags"><span class="news-tag">行业资讯</span></div>
+                <h3 class="news-title">南开大学ACB:基于石墨烯气凝胶载体的单原子Co-N5位点可诱导臭氧活化，从而增强电解过氧水去污效果</h3>
+                <p class="news-desc">南开大学ACB:基于石墨烯气凝胶载体的单原子Co-N5位点可诱导臭氧活化，从而增强电解过氧水去污效果</p>
+                <a href="http://www.graphene.tv/20260402152250/" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">南开大学ACB:基于石墨烯气凝胶载体的单原子Co-N5位点可诱导臭氧活化，从而增强电解过氧水去污效果<br>石墨烯网<br>•<br>2026年4月2日 09:03<br>•<br>产业新闻<br>•<br>阅读 14<br>在本研究中，我们成功设计并制备了一种由单个钴原子与氮原子配位、嵌入rGA载体上的催化剂（CoNC@rGA）。得益于Co-MOF与GO界面处的交联作用，构建出了具有四个平面氮配体和一个轴向氮配体的五配位单原子钴位点。<br>全文速览<br>电过氧酮（EP）作为一种极具前景的基于臭氧的水净化高级氧化工艺，由于其在酸性溶液中的催化性能不尽如人意，目前仍面临挑战。在此，我们成功开发出锰单原子催化剂（SACs），其锚定于具有五氮原子配位的三维石墨烯气凝胶基底上（CoNC@rGA）。在电过氧酮（EP）体系中，CoNC@rGA实现了对O₃的高效活化，其对草酸的降解速率（k = 0.226 min⁻¹）比不含石墨烯的CoNC高出6.3倍。此外，其归一化动力学速率优于此前报道的大多数研究。实验与理论结果证实，在此过程中，CoNC@rGA上的Co-N5位点作为催化位点，与电产生的H₂O₂协同作用以活化臭氧，从而导致以*O为主导的草酸去除，随后是1O₂和•OH。石墨烯气凝胶上独特的Co-N5配位结构增强了O3的吸附能力，并降低了*O和1O2生成的能垒，从而加速了臭氧分解动力学。该催化剂在处理实际煤化工废水时也展现出优异的TOC去除性能。总体而言，本研究阐明了由石墨烯气凝胶基底诱导的高配位M-Nx位点所具有的SACs在O3活化和污染物降解中的机理。这些发现为设计用于催化臭氧法水处理的碳载SACs提供了理论指导。<br>图文摘要<br>引言<br>在本研究中，我们成功设计并制备了一种由单个钴原子与氮原子配位、嵌入rGA载体上的催化剂（CoNC@rGA）。得益于Co-MOF与GO界面处的交联作用，构建出了具有四个平面氮配体和一个轴向氮配体的五配位单原子钴位点。以草酸（OA）作为模型污染物，对其催化臭氧的能力进行了评估，草酸是一种典型的难降解有机污染物（kO3 &lt; 0.04 M⁻¹ s⁻¹）[29]。所开发的 CoNC@rGA/EP 体系表现出了卓越且稳定的性能，其去除草酸（OA）的降解速率常数高达 0.226 min⁻¹，优于相关研究中的结果。值得注意的是，该过程通过原位电产生的 H₂O₂ 和 CoNC@rGA，实现了均相-异相双路径的协同 O₃ 活化。表征分析、实验结果及密度泛函理论（DFT）计算证实，独特的Co-N5构型和三维rGA骨架显著促进了O3的吸附、电子转移及催化反应动力学。得益于其增强的活性氧（ROS）生成能力，CoNC@rGA/EP在含氯溶液及实际煤化工废水中的OA处理中表现出了优异性能。<br>图文导读<br>Fig. 1. (a) Synthesis procedures of CoNC@rGA; SEM images of (b) GA and (c) CoNC@rGA catalysts; (d) high magnification TEM images of CoNC@rGA; (e) aberration-corrected HAADF-STEM image of CoNC@rGA and (f-i) the corresponding elemental mapping images of CoNC@rGA.<br>研究意义<br>总而言之，本研究开发了一种新型的rGA载体的钴SACs（CoNC@rGA），用于电氧化（EP）工艺以提升废水净化效果。通过钴金属有机框架（Co-MOF）与氧化石墨烯（GO）的交联，成功构建了具有四个平面氮配体和一个轴向氮配体的独特Co-N5构型。得益于催化臭氧化和电解产生的H₂O₂与O₃之间过氧酮反应的协同效应，所制备的CoNC@rGA在CoNC@rGA/EP体系中展现出更强的O₃分解和OA降解动力学性能。CoNC@rGA对OA的降解速率常数是具有CoN₄配位的传统CoNC的6.3倍。密度泛函理论（DFT）计算表明，CoNC@rGA中的Co-N5构型导致了电子耗尽的Co中心的形成，促进了O3的吸附，进而降低了*O和1O2生成的能垒。CoNC@rGA/EP体系被应用于煤化工反渗透浓液处理，进一步验证了其在实际场景中的优异性能和适用性。本研究为精细调节SACs的配位环境提供了新思路，并为基于臭氧的AOPs有效处理废水提供了有前景的催化剂。<br>文献信息<br>Shasha Li, Shuaishuai Li, Chaohui Zhang, Jiana Jing, Ge Song, Jingyang Liu, Hanyue Zhang, Jie Miao, Minghua Zhou, Graphene aerogel supported single atom Co-N5 sites induce ozone activation for enhanced electro-peroxone water decontamination, Applied Catalysis B: Environment and Energy, 2026, https://doi.org/10.1016/j.apcatb.2025.126049<br>本文来自<br>水处理文献速递<br>，本文观点不代表石墨烯网立场，转载请联系原作者。<br>中南大学<br>银恺<br>催化剂<br>赞<br>(0)<br>石墨烯网<br>0<br>生成海报<br>新型催化剂助力乙烯工业高效净化<br>上一篇<br>2026年4月2日<br>园区引进一家企业“链”出一个生态 入驻企业变身“招商合伙人”<br>下一篇<br>2026年4月2日<br>相关推荐<br>材料学院创新创业主题教育活动顺利举行<br>2018年11月9日<br>238<br>0<br>0<br>0<br>科普研学<br>江苏尊道科技产教融合推动石墨烯超级电容器产业化升级<br>2018年1月31日<br>1.8K<br>0<br>0<br>0<br>产业新闻<br>同济大学团队实现声子极化激元晶体的实时电学重构，成果发表于《光：科学与应用》<br>2026年1月9日<br>192<br>0<br>0<br>0<br>科研进展<br>中南大学AFM：飞秒激光驱动原子尺度缺陷修复实现高性能激光诱导石墨烯<br>2025年5月12日<br>474<br>0<br>0<br>0<br>科研进展<br>方大炭素与中南大学等高校开展技术交流<br>2022年9月22日<br>1.1K<br>0<br>0<br>0<br>产业新闻<br>中南大学帅词俊团队 | 还原氧化石墨烯促进二氧化钛光电子–空穴对分离以强化骨支架的光催化抗菌活性<br>2025年2月20日<br>561<br>0<br>0<br>0<br>科研进展<br>中南大学张翼、UCSC陈少伟、湘大何庭 CEJ：模板法构筑超薄石墨烯气凝胶高效双功能氧催化剂<br>2023年2月25日<br>1.2K<br>0<br>0<br>0<br>科研进展<br>浏阳高新区：长沙入浏“第一站”风劲扬帆正当时<br>2018年12月18日<br>2.4K<br>0<br>0<br>0<br>产业新闻<br>中南大学《ACS ANM》：石墨烯复合薄膜上的垂直石墨烯散热和电磁屏蔽<br>2024年2月21日<br>812<br>0<br>0<br>0<br>科研进展<br>发表回复<br>请登录后评论...<br>登录<br>后才能评论<br>提交</div>
+            </div>
+        </div>
+        <div class="timeline-item" data-tags="行业资讯">
+            <span class="timeline-date">2026-04-02</span>
+            <div class="timeline-content">
+                <span class="news-source">Graphene.tv</span>
+                <div class="news-tags"><span class="news-tag">行业资讯</span></div>
+                <h3 class="news-title">创美永磁科技申请电机驱动系统及液体泵专利，能极大的提高对电机和变频器两者的冷却效果</h3>
+                <p class="news-desc">创美永磁科技申请电机驱动系统及液体泵专利，能极大的提高对电机和变频器两者的冷却效果</p>
+                <a href="http://www.graphene.tv/20260402152261/" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">创美永磁科技申请电机驱动系统及液体泵专利，能极大的提高对电机和变频器两者的冷却效果<br>金融界<br>•<br>2026年4月2日 08:50<br>•<br>产业新闻<br>•<br>阅读 14<br>通过对冷却系统重新设计，采用双冷却机构来分别对电机和变频器进行冷却，同时变频冷却机构部分还采用高导热的石墨烯材料制作，这样设计能极大的提高对电机和变频器两者的冷却效果，同时还简化了冷却装置的整体结构。<br>国家知识产权局信息显示，创美永磁科技（浙江）有限公司申请一项名为“一种电机驱动系统以及液体泵”的专利，公开号CN121770234A，申请日期为2026年1月。<br>专利摘要显示，本技术方案涉及电机技术领域，特指一种电机驱动系统以及液体泵，包括：电机，其具有电机外壳；变频器，用于控制电机工作；以及冷却装置，用于对电机和变频器进行冷却；其中，所述冷却装置具有：电机冷却机构，其含有设置在所述电机外壳内的电机冷却通道；变频冷却机构，其含有用于对变频器进行冷却的变频冷却通道；以及进液管路和回液管路；所述变频冷却机构至少部分采用石墨烯或石墨烯复合材料制成。通过对冷却系统重新设计，采用双冷却机构来分别对电机和变频器进行冷却，同时变频冷却机构部分还采用高导热的石墨烯材料制作，这样设计能极大的提高对电机和变频器两者的冷却效果，同时还简化了冷却装置的整体结构。<br>天眼查资料显示，创美永磁科技（浙江）有限公司，成立于2025年，位于台州市，是一家以从事电气机械和器材制造业为主的企业。企业注册资本1000万人民币。通过天眼查大数据分析，创美永磁科技（浙江）有限公司专利信息1条。<br>本文来自<br>金融界<br>，本文观点不代表石墨烯网立场，转载请联系原作者。<br>赞<br>(0)<br>金融界<br>0<br>生成海报<br>GMG 通过先进碳材料委员会认证并成功通过 ISO9001 审核<br>上一篇<br>2026年4月1日 20:03<br>新型催化剂助力乙烯工业高效净化<br>下一篇<br>2026年4月2日<br>相关推荐<br>GE航空的网红试飞员：我们如何测试世界上最大的喷气发动机？<br>2020年5月3日<br>2.0K<br>0<br>0<br>0<br>产业新闻<br>西安市科技局主要领导与中国石墨烯产业技术创新战略联盟秘书长李义春一行进行座谈<br>2019年4月1日<br>1.9K<br>0<br>0<br>0<br>产业新闻<br>青岛双星：公司石墨烯轮胎尚在研发过程中<br>2018年9月11日<br>2.8K<br>0<br>0<br>0<br>产业新闻<br>探索新材料领域的科技之光｜河师大材料学院师生参观煜和石墨及石墨烯科技馆<br>2023年11月23日<br>839<br>0<br>0<br>0<br>产业新闻<br>聚焦雪博会｜粉雪故事汇：这家吉林本土企业的高科技 让寒冷不再可怕<br>2023年12月15日<br>713<br>0<br>0<br>0<br>产业新闻<br>高区新材料及制品产业发展蹄疾步稳<br>2023年12月1日<br>777<br>0<br>0<br>0<br>产业新闻<br>863计划新材料技术领域“二维/三维石墨烯材料与光电器件的可控制备及示范应用”课题技术验收<br>2018年5月15日<br>2.0K<br>0<br>0<br>0<br>产业新闻<br>中环装备：唐山装备与烯彤科技是技术合作，共同开发，产生的技术成果共享。唐山装备也有石墨烯地暖管产品<br>2022年12月14日<br>920<br>0<br>0<br>0<br>产业新闻<br>ENERGIZE：韩国和欧盟共同合作开发高能效神经形态硬件<br>2025年1月31日<br>572<br>0<br>0<br>0<br>产业新闻<br>发表回复<br>请登录后评论...<br>登录<br>后才能评论<br>提交</div>
+            </div>
+        </div>
+        <div class="timeline-item" data-tags="石墨烯材料">
+            <span class="timeline-date">2026-04-02</span>
+            <div class="timeline-content">
+                <span class="news-source">Graphene.tv</span>
+                <div class="news-tags"><span class="news-tag">石墨烯材料</span></div>
+                <h3 class="news-title">GMG 通过先进碳材料委员会认证并成功通过 ISO9001 审核</h3>
+                <p class="news-desc">GMG 通过先进碳材料委员会认证并成功通过 ISO9001 审核</p>
+                <a href="http://www.graphene.tv/20260401152236/" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">GMG 通过先进碳材料委员会认证并成功通过 ISO9001 审核<br>Graphene Manufacturing Group Ltd.<br>•<br>2026年4月1日 20:03<br>•<br>产业新闻<br>•<br>阅读 17<br>公司首席执行官兼董事总经理克雷格·尼科尔（Craig Nicol）表示：“被先进碳材料委员会（Advanced Carbon Council）认证为目前全球五家通过验证的石墨烯生产商之一，再次证明了我们石墨烯的高品质，也印证了我们的石墨烯产品为何能达到世界领先的标准；而质量管理体系审核的成功结果，则彰显了我们将这一优势转化为实际产品制造业务的能力。”<br>澳大利亚昆士兰州布里斯班讯——Graphene Manufacturing Group Ltd（TSX V: GMG）（OTCQX: GMGMF）（“GMG”或“公司”）欣然宣布，先进碳材料委员会（“ACC”）已认证GMG为“经认证的石墨烯生产商”。<br>“认证石墨烯生产商”计划是由ACC实施的独立第三方认证，不仅针对材料本身，还包括对生产设施的实地考察。该计划的独特之处在于，ACC不仅验证材料来源直接来自生产流程，还利用世界一流的表征实验室对材料进行测试。<br>“经认证的石墨烯生产商”计划遵循石墨烯分类框架（GCF）及当前已发布的国际标准，包括：ISO/TS 9651:2025《纳米技术——石墨烯相关二维材料的分类框架》、ISO/TR 19733:2019(E)， 纳米技术——石墨烯及相关二维（2D）材料的性能与测量技术矩阵，ISO/TS 80004-13:2017(E) 纳米技术——术语——第13部分： 石墨烯及相关二维（2D）材料，以及 ISO/TS 21356-1:2021(E) 纳米技术 — 石墨烯的结构表征 — 第 1 部分：来自粉末和分散液的石墨烯。<br>本公司还欣然宣布，已成功通过针对本公司石墨烯涂层及润滑剂添加剂产品的制造、分销及技术支持服务的ISO9001:2015质量审核。图1展示了该证书。ISO 9001是国际公认的质量管理体系（QMS）标准。该标准为组织提供了一个框架，旨在确保产品和服务始终符合客户和法规要求，同时注重持续改进。该标准适用于任何行业或规模的企业，重点关注质量控制、效率和风险管理。<br>先进碳材料委员会执行董事Terrance Barkan表示：“我们很自豪地宣布，Graphene Manufacturing Group（GMG）已成为这一精英石墨烯企业集团的最新成员。该集团已通过对其设施的严格现场检查以及对其石墨烯材料的全面检测。通过‘认证石墨烯生产商’计划进行的独立第三方验证，对于客户、投资者及其他利益相关方在选择石墨烯生产商/供应商时而言，是一项极其有价值的工具。”<br>图1：GMG获得ISO9001质量管理体系认证<br>公司首席执行官兼董事总经理克雷格·尼科尔（Craig Nicol）表示：“被先进碳材料委员会（Advanced Carbon Council）认证为目前全球五家通过验证的石墨烯生产商之一，再次证明了我们石墨烯的高品质，也印证了我们的石墨烯产品为何能达到世界领先的标准；而质量管理体系审核的成功结果，则彰显了我们将这一优势转化为实际产品制造业务的能力。”<br>公司董事长兼非执行董事杰克·佩尔科夫斯基（Jack Perkowski）表示：“祝贺团队成功获得石墨烯及质量管理体系的第三方认证——这对于生产碳纳米材料产品而言，是不可或缺的基础条件。”<br>本文来自<br>Graphene Manufacturing Group<br>，本文观点不代表石墨烯网立场，转载请联系原作者。<br>赞<br>(0)<br>Graphene Manufacturing Group Ltd.<br>0<br>生成海报<br>成都先进金属材料产业技术研究院申请磷化包覆介孔V2O5颗粒/石墨烯复合电极材料专利，提高锂离子电池的循环稳定性<br>上一篇<br>2026年4月1日<br>创美永磁科技申请电机驱动系统及液体泵专利，能极大的提高对电机和变频器两者的冷却效果<br>下一篇<br>2026年4月2日<br>相关推荐<br>重庆石墨烯研究院有限公司召开一届四次董事会<br>2019年11月26日<br>1.5K<br>0<br>0<br>0<br>产业新闻<br>凯纳股份新三板募资2990万元 自然人赵立平参与认购<br>2018年10月24日<br>2.8K<br>0<br>0<br>0<br>产业新闻<br>深圳市科协自主创新大讲堂之“柔性电池：未来能源的新希望”讲座举办<br>2024年9月23日<br>561<br>0<br>0<br>0<br>产业新闻<br>“火车头”带领“动车组”跑起来 三达膜产品开发部总监姚萌深耕科研一线获市道德模范提名奖<br>2022年2月28日<br>1.6K<br>0<br>0<br>0<br>产业新闻<br>Vittoria推出添加了石墨烯材料的自行车轮胎 整体性能更优异<br>2016年3月9日<br>1.9K<br>0<br>0<br>0<br>产业新闻<br>爱玛电动车技术专家登陆CCTV2《消费主张》，为用车安全保驾护航<br>2021年7月19日<br>2.0K<br>0<br>0<br>0<br>产业新闻<br>顺鑫煤炭深加工产业入选“十三五”示范规划项目<br>2017年6月3日<br>1.3K<br>0<br>0<br>0<br>产业新闻<br>市场监管总局：哄抬熔喷布价格违法行为，严查！<br>2020年3月11日<br>2.0K<br>0<br>0<br>0<br>产业新闻<br>安利股份董秘回复：公司积极开发石墨烯聚氨酯复合材料，目前正在运动休闲材料领域推广应用<br>2022年12月3日<br>1.1K<br>0<br>0<br>0<br>产业新闻<br>发表回复<br>请登录后评论...<br>登录<br>后才能评论<br>提交</div>
+            </div>
+        </div></div>
         <footer>
-            <p>数据来源: Graphene-Info | Graphene.tv | Google News | Nanowerk | ELE Times | AD HOC News</p>
-            <p>GitHub: <a href="https://github.com/Vincent1026/graphene-news" target="_blank">Vincent1026/graphene-news</a></p>
+            <p>📡 数据来源: Graphene-Info | Graphene.tv | Google News</p>
+            <p>🔗 GitHub: <a href="https://github.com/Vincent1026/graphene-news" target="_blank">Vincent1026/graphene-news</a></p>
+            <p>🤖 自动更新于 2026-04-02 21:33:59</p>
         </footer>
     </div>
     <script>
-        function toggleContent(btn) { const c = btn.nextElementSibling; c.style.display = c.style.display === 'none' ? 'block' : 'none'; btn.textContent = c.style.display === 'none' ? '展开详情' : '收起详情'; }
+        function toggleContent(btn) {
+            const c = btn.nextElementSibling;
+            c.style.display = c.style.display === 'none' ? 'block' : 'none';
+            btn.textContent = c.style.display === 'none' ? '展开详情 ▼' : '收起详情 ▲';
+        }
         const filterBtns = document.querySelectorAll('.filter-btn');
         const timelineItems = document.querySelectorAll('.timeline-item');
+        const totalCount = document.getElementById('totalCount');
         const filteredCount = document.getElementById('filteredCount');
         const noResults = document.getElementById('noResults');
-        filterBtns.forEach(btn => { btn.addEventListener('click', () => { const tag = btn.dataset.tag; filterBtns.forEach(b => b.classList.remove('active')); btn.classList.add('active'); let visibleCount = 0; timelineItems.forEach(item => { const itemTags = item.dataset.tags.split(','); if (tag === 'all' || itemTags.includes(tag)) { item.classList.remove('hidden'); visibleCount++; } else { item.classList.add('hidden'); } }); filteredCount.textContent = visibleCount; noResults.style.display = visibleCount === 0 ? 'block' : 'none'; }); });
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tag = btn.dataset.tag;
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                let visibleCount = 0;
+                timelineItems.forEach(item => {
+                    const itemTags = item.dataset.tags.split(',');
+                    if (tag === 'all' || itemTags.includes(tag)) {
+                        item.classList.remove('hidden');
+                        visibleCount++;
+                    } else {
+                        item.classList.add('hidden');
+                    }
+                });
+                filteredCount.textContent = visibleCount;
+                noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+            });
+        });
     </script>
 </body>
 </html>
