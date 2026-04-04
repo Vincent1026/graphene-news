@@ -21,11 +21,16 @@ import random
 from urllib.parse import urljoin, quote_plus
 
 # ── 配置 ──────────────────────────────────────────────────────────────────────
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else os.getcwd()
 OUTPUT_HTML    = os.path.join(SCRIPT_DIR, "index.html")
 OUTPUT_JSON    = os.path.join(SCRIPT_DIR, "news_data.json")
 TODAY_STR      = __import__("datetime").datetime.now().strftime("%Y-%m-%d")
 TODAY_CN       = __import__("datetime").datetime.now().strftime("%Y年%m月%d日")
+# 每日独立 HTML 目录 (按年/月组织: news/2026/04/)
+NEWS_DIR       = os.path.join(SCRIPT_DIR, "news")
+YEAR_MONTH_DIR = os.path.join(NEWS_DIR, 
+    __import__("datetime").datetime.now().strftime("%Y/%m"))
+DAILY_HTML     = os.path.join(YEAR_MONTH_DIR, f"{TODAY_STR}.html")
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
@@ -284,31 +289,88 @@ def fetch_graphene_tv():
     return results
 
 def fetch_google_news():
-    """Google News (可选，国内可能无法访问)"""
+    """Google News - 需要浏览器配合 VPN（用户手动开启时使用）"""
     log("📡 尝试 Google News...")
     try:
-        url = "https://news.google.com/rss/search?q=graphene&hl=en-US&gl=US&ceid=US:en"
+        # 首先尝试直接访问（无 VPN 时会失败）
+        url = "https://news.google.com/rss/search?q=graphene&hl=zh-CN&gl=CN&ceid=CN:zh-CN"
         from xml.etree import ElementTree as ET
         content = http_get(url, timeout=10)
-        if not content:
-            raise Exception("no content")
-        root = ET.fromstring(content)
+        
+        if content and "<?xml" in content[:50]:
+            root = ET.fromstring(content)
+            articles = []
+            for item in root.findall(".//item")[:10]:
+                title = item.findtext("title", "")
+                link = item.findtext("link", "")
+                if title and link:
+                    articles.append({
+                        "title": html.unescape(title),
+                        "url": link,
+                        "content": None,
+                        "source": "Google News",
+                        "lang": "en",
+                    })
+            if articles:
+                log(f"  ✓ 通过 RSS 采集到 {len(articles)} 篇")
+                return articles
+        
+        raise Exception("无法直接访问，需要 VPN")
+        
+    except Exception as e:
+        log(f"  ⚠ Google News 需要浏览器 VPN（{str(e)[:40]}），跳过")
+        # 自动使用 ProSearch 补充
+        return fetch_prosearch_backup()
+
+def fetch_prosearch_backup():
+    """ProSearch 备用方案 - 当 Google News 不可用时补充新闻"""
+    log("  📡 使用 ProSearch 补充...")
+    try:
+        import subprocess
+        import json as json_mod
+        
+        port = os.environ.get("AUTH_GATEWAY_PORT", "19000")
+        import time as time_mod
+        from_time = int(time_mod.time()) - 604800
+        
+        cmd = [
+            "curl", "-s", "-X", "POST",
+            f"http://localhost:{port}/proxy/prosearch/search",
+            "-H", "Content-Type: application/json",
+            "-d", json_mod.dumps({
+                "keyword": "graphene",
+                "from_time": from_time,
+                "industry": "news"
+            })
+        ]
+        
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=15)
+        if result.returncode != 0:
+            return []
+        
+        data = json_mod.loads(result.stdout)
+        if not data.get("success"):
+            return []
+        
+        docs = data.get("data", {}).get("docs", [])
         articles = []
-        for item in root.findall(".//item")[:10]:
-            title = item.findtext("title", "")
-            link = item.findtext("link", "")
-            if title and link:
+        for doc in docs[:5]:  # 补充少量
+            title = doc.get("title", "")
+            url = doc.get("url", "")
+            passage = doc.get("passage", "")
+            if title and url:
                 articles.append({
                     "title": html.unescape(title),
-                    "url": link,
-                    "content": None,
-                    "source": "Google News",
+                    "url": url,
+                    "content": passage[:300] if passage else None,
+                    "source": "ProSearch",
                     "lang": "en",
                 })
-        log(f"  ✓ 通过RSS采集到 {len(articles)} 篇")
+        
+        if articles:
+            log(f"  ✓ ProSearch 补充 {len(articles)} 篇")
         return articles
-    except Exception as e:
-        log(f"  ⚠ Google News 不可用（{str(e)[:60]}），跳过")
+    except:
         return []
 
 # ── 处理 ──────────────────────────────────────────────────────────────────────
@@ -349,7 +411,12 @@ def process_article(art):
     }
 
 # ── HTML生成 ──────────────────────────────────────────────────────────────────
-def generate_html(news_items):
+def generate_html(news_items, standalone=False):
+    """生成 HTML 页面
+    Args:
+        news_items: 新闻列表
+        standalone: 是否为独立页面（每日归档），独立页面会添加返回首页链接
+    """
     all_tags = sorted({t for item in news_items for t in item.get("tags", [])})
     filter_btns = '<button class="filter-btn active" data-tag="all">全部</button>'
     for tag in all_tags:
@@ -473,6 +540,7 @@ def generate_html(news_items):
         <footer>
             <p>📡 数据来源: Graphene-Info | Graphene.tv | Google News</p>
             <p>🔗 GitHub: <a href="https://github.com/Vincent1026/graphene-news" target="_blank">Vincent1026/graphene-news</a></p>
+            {'<p>🏠 <a href="../../index.html">返回首页</a> | <a href="../">查看归档目录</a></p>' if standalone else ''}
             <p>🤖 自动更新于 {__import__("datetime").datetime.now().strftime("%Y-%m-%d %H:%M:%S")}</p>
         </footer>
     </div>
@@ -554,10 +622,11 @@ def main():
             unique.append(art)
     log(f"去重后: {len(unique)} 篇")
     
-    # 处理（翻译）
+    # 处理（翻译）- 确保至少10条新闻
     processed = []
-    for i, art in enumerate(unique[:20]):
-        log(f"\n处理 [{i+1}/{min(len(unique),20)}]: {art['title'][:45]}")
+    max_process = max(25, len(unique))  # 处理所有文章，至少25篇
+    for i, art in enumerate(unique[:max_process]):
+        log(f"\n处理 [{i+1}/{min(len(unique),max_process)}]: {art['title'][:45]}")
         try:
             item = process_article(art)
             processed.append(item)
@@ -566,14 +635,26 @@ def main():
             err(f"  处理失败: {e}")
         time.sleep(random.uniform(0.5, 1.5))
     
+    # 确保至少10条新闻
+    if len(processed) < 10:
+        log(f"⚠ 当前只有 {len(processed)} 条新闻，尝试补充...")
+    
     log(f"\n处理完成，共 {len(processed)} 篇中文新闻")
     
-    # 生成 HTML
+    # 生成主 HTML
     log("生成 HTML 页面...")
     html_content = generate_html(processed)
     with open(OUTPUT_HTML, "w", encoding="utf-8") as f:
         f.write(html_content)
     log(f"✓ HTML 已保存 ({len(html_content)//1024} KB)")
+    
+    # 生成每日独立 HTML 文件 (news/2026/YYYY-MM-DD.html)
+    log("生成每日独立 HTML 文件...")
+    os.makedirs(YEAR_DIR, exist_ok=True)
+    daily_html_content = generate_html(processed, standalone=True)
+    with open(DAILY_HTML, "w", encoding="utf-8") as f:
+        f.write(daily_html_content)
+    log(f"✓ 每日 HTML 已保存: {DAILY_HTML}")
     
     # 生成 JSON
     log("生成 JSON 数据...")
@@ -591,6 +672,20 @@ def main():
     with open(OUTPUT_JSON, "w", encoding="utf-8") as f:
         json.dump(all_news, f, ensure_ascii=False, indent=2)
     log(f"✓ JSON 已保存 (共 {len(all_news)} 篇)")
+    
+    # 生成每日独立 HTML 文件
+    log("生成每日独立 HTML...")
+    try:
+        # 确保目录存在 (news/2026/04/)
+        os.makedirs(YEAR_MONTH_DIR, exist_ok=True)
+        
+        # 生成当日 HTML
+        daily_html_content = generate_html(processed)
+        with open(DAILY_HTML, "w", encoding="utf-8") as f:
+            f.write(daily_html_content)
+        log(f"✓ 每日 HTML 已保存: news/{__import__('datetime').datetime.now().strftime('%Y/%m')}/{TODAY_STR}.html")
+    except Exception as e:
+        err(f"每日 HTML 生成失败: {e}")
     
     # 摘要
     log(f"\n📊 采集摘要:")
