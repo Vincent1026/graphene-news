@@ -21,8 +21,8 @@ else
     exit 1
 fi
 
-# Commit and push
-git add index.html news_data.json 2>/dev/null
+# Commit and push (包括 news 目录)
+git add index.html news_data.json news/ 2>/dev/null
 if git diff --cached --quiet; then
     echo "[$(date '+%Y-%m-%d %H:%M:%S')] 没有新内容" | tee -a "$LOG"
 else

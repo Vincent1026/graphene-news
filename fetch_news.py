@@ -648,13 +648,13 @@ def main():
         f.write(html_content)
     log(f"✓ HTML 已保存 ({len(html_content)//1024} KB)")
     
-    # 生成每日独立 HTML 文件 (news/2026/YYYY-MM-DD.html)
+    # 生成每日独立 HTML 文件 (news/2026/04/YYYY-MM-DD.html)
     log("生成每日独立 HTML 文件...")
-    os.makedirs(YEAR_DIR, exist_ok=True)
-    daily_html_content = generate_html(processed, standalone=True)
+    os.makedirs(YEAR_MONTH_DIR, exist_ok=True)
+    daily_html_content = generate_html(processed)
     with open(DAILY_HTML, "w", encoding="utf-8") as f:
         f.write(daily_html_content)
-    log(f"✓ 每日 HTML 已保存: {DAILY_HTML}")
+    log(f"✓ 每日 HTML 已保存: news/{__import__('datetime').datetime.now().strftime('%Y/%m')}/{TODAY_STR}.html")
     
     # 生成 JSON
     log("生成 JSON 数据...")
