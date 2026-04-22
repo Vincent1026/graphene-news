@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>石墨烯新闻 - 2026年04月17日</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh; padding: 20px;
+        }
+        .container { max-width: 900px; margin: 0 auto; }
+        header { text-align: center; padding: 40px 0; color: #fff; }
+        h1 { font-size: 2.5em; margin-bottom: 10px;
+            background: linear-gradient(90deg, #00d2ff, #3a7bd5);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .subtitle { font-size: 1.1em; color: #8ba4c7; margin-bottom: 5px; }
+        .update-info { font-size: 0.85em; color: #5a7a9a; margin-top: 5px; }
+        .stats { display: flex; justify-content: center; gap: 30px; margin: 20px 0 40px; }
+        .stat-item { background: rgba(255,255,255,0.1); padding: 15px 30px; border-radius: 10px; color: #fff; }
+        .stat-number { font-size: 2em; font-weight: bold; color: #00d2ff; }
+        .stat-label { font-size: 0.9em; color: #8ba4c7; }
+        .filter-section { background: rgba(255,255,255,0.1); border-radius: 15px; padding: 20px; margin: 20px 0; }
+        .filter-title { color: #fff; font-size: 1.1em; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
+        .filter-tags { display: flex; flex-wrap: wrap; gap: 10px; }
+        .filter-btn {
+            background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.2);
+            color: #fff; padding: 8px 16px; border-radius: 20px; cursor: pointer;
+            transition: all 0.3s; font-size: 0.9em;
+        }
+        .filter-btn:hover { background: rgba(0,210,255,0.3); border-color: #00d2ff; }
+        .filter-btn.active { background: linear-gradient(90deg, #00d2ff, #3a7bd5); border-color: #00d2ff; font-weight: bold; }
+        .no-results { text-align: center; color: #8ba4c7; padding: 60px 20px; font-size: 1.2em; display: none; }
+        .timeline { position: relative; padding: 20px 0; }
+        .timeline::before { content: ''; position: absolute; left: 50%; transform: translateX(-50%); width: 4px; height: 100%; background: linear-gradient(180deg, #00d2ff, #3a7bd5); border-radius: 2px; }
+        .timeline-item { position: relative; width: 50%; padding: 0 30px 40px; box-sizing: border-box; }
+        .timeline-item:nth-child(odd) { left: 0; text-align: right; }
+        .timeline-item:nth-child(even) { left: 50%; text-align: left; }
+        .timeline-item::before { content: ''; position: absolute; top: 0; width: 20px; height: 20px; background: #00d2ff; border-radius: 50%; border: 4px solid #fff; box-shadow: 0 0 10px rgba(0,210,255,0.5); }
+        .timeline-item:nth-child(odd)::before { right: -12px; }
+        .timeline-item:nth-child(even)::before { left: -12px; }
+        .timeline-date { display: inline-block; background: linear-gradient(90deg, #00d2ff, #3a7bd5); color: #fff; padding: 5px 15px; border-radius: 15px; font-size: 0.85em; margin-bottom: 10px; font-weight: bold; }
+        .timeline-item:nth-child(odd) .timeline-date { margin-right: 10px; }
+        .timeline-item:nth-child(even) .timeline-date { margin-left: 10px; }
+        .timeline-content { background: rgba(255,255,255,0.95); border-radius: 15px; padding: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.2); transition: transform 0.3s, box-shadow 0.3s; }
+        .timeline-content:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,210,255,0.3); }
+        .news-source { background: linear-gradient(90deg, #00d2ff, #3a7bd5); color: white; padding: 5px 12px; font-size: 0.8em; display: inline-block; border-radius: 10px; margin-bottom: 10px; }
+        .news-title { font-size: 1.15em; color: #1a1a2e; margin-bottom: 10px; line-height: 1.4; font-weight: 600; }
+        .news-desc { color: #666; font-size: 0.95em; line-height: 1.6; margin-bottom: 15px; }
+        .news-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 10px; }
+        .timeline-item:nth-child(odd) .news-tags { justify-content: flex-end; }
+        .timeline-item:nth-child(even) .news-tags { justify-content: flex-start; }
+        .news-tag { background: #e8f4fc; color: #3a7bd5; padding: 3px 8px; border-radius: 10px; font-size: 0.75em; }
+        .news-link { color: #3a7bd5; text-decoration: none; font-weight: 500; font-size: 0.9em; }
+        .news-link:hover { text-decoration: underline; }
+        .expand-btn { background: #f0f4f8; border: none; color: #3a7bd5; padding: 4px 12px; border-radius: 8px; cursor: pointer; font-size: 0.8em; margin-top: 8px; }
+        .expand-btn:hover { background: #e0e8f0; }
+        .news-full-content { margin-top: 12px; padding: 12px; background: #f8fafc; border-radius: 8px; color: #333; font-size: 0.9em; line-height: 1.7; text-align: left; border-left: 3px solid #00d2ff; max-height: 300px; overflow-y: auto; }
+        .timeline-item.hidden { display: none; }
+        footer { text-align: center; padding: 40px 0; color: #8ba4c7; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 40px; }
+        footer a { color: #00d2ff; text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
+        @media (max-width: 768px) {
+            .timeline::before { left: 20px; }
+            .timeline-item { width: 100%; padding-left: 50px; padding-right: 15px; text-align: left !important; }
+            .timeline-item::before { left: 11px !important; right: auto !important; }
+            .timeline-item:nth-child(odd) .timeline-date, .timeline-item:nth-child(even) .timeline-date { margin: 0; }
+            .timeline-item:nth-child(odd) .news-tags, .timeline-item:nth-child(even) .news-tags { justify-content: flex-start; }
+            h1 { font-size: 1.8em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔬 石墨烯新闻</h1>
+            <p class="subtitle">2026年04月17日 全球石墨烯行业动态</p>
+            <p class="update-info">🤖 自动采集于 2026-04-17 15:10:26</p>
+            <div class="stats">
+                <div class="stat-item"><div class="stat-number" id="totalCount">34</div><div class="stat-label">新闻数量</div></div>
+                <div class="stat-item"><div class="stat-number" id="filteredCount">34</div><div class="stat-label">显示数量</div></div>
+                <div class="stat-item"><div class="stat-number" id="sourceCount">3</div><div class="stat-label">新闻来源</div></div>
+            </div>
+        </header>
+        <div class="filter-section">
+            <div class="filter-title"><span>🏷️</span><span>按标签筛选:</span></div>
+            <div class="filter-tags"><button class="filter-btn active" data-tag="all">全部</button><button class="filter-btn" data-tag="传感器">传感器</button><button class="filter-btn" data-tag="医疗检测">医疗检测</button><button class="filter-btn" data-tag="复合材料">复合材料</button><button class="filter-btn" data-tag="投资">投资</button><button class="filter-btn" data-tag="散热技术">散热技术</button><button class="filter-btn" data-tag="柔性显示屏">柔性显示屏</button><button class="filter-btn" data-tag="环保技术">环保技术</button><button class="filter-btn" data-tag="电动汽车">电动汽车</button><button class="filter-btn" data-tag="电池技术">电池技术</button><button class="filter-btn" data-tag="石墨烯材料">石墨烯材料</button><button class="filter-btn" data-tag="石墨烯采暖">石墨烯采暖</button><button class="filter-btn" data-tag="科研进展">科研进展</button><button class="filter-btn" data-tag="航空航天">航空航天</button><button class="filter-btn" data-tag="英国">英国</button><button class="filter-btn" data-tag="行业资讯">行业资讯</button></div>
+        </div>
+        <div class="no-results" id="noResults">没有找到匹配的新闻</div>
+        <div class="timeline" id="timeline">
+        <div class="timeline-item" data-tags="行业资讯">
+            <span class="timeline-date">2026-04-17</span>
+            <div class="timeline-content">
+                <span class="news-source">Graphene-Info</span>
+                <div class="news-tags"><span class="news-tag">行业资讯</span></div>
+                <h3 class="news-title">将您的信息传达给石墨烯行业</h3>
+                <p class="news-desc">最后更新日期： 2025年5月11日星期三- 20:42</p>
+                <a href="https://www.graphene-info.com/advertise-here" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">最后更新日期： 2025年5月11日星期三- 20:42 Graphene-Info是世界领先的石墨烯行业和市场门户网站，自2009年以来为石墨烯行业和市场提供新闻和资源。Graphene-Info是一个值得信赖的品牌，受到行业专业人士、研究人员、决策者、C级管理人员、分析师等的青睐。我们极其有效且经过行业验证的广告和营销服务包括横幅广告、徽标展示位置、赞助文章、电子邮件爆炸、社交媒体促销等。我们提供的套餐起价为每年$ 3,000 ，一次性促销商品起价为$ 800。单击此处下载我们的手册，其中包含完整的详细信息和价格。Graphene-Info为石墨烯行业提供了一种非常有效的方式，非常适合推广您的石墨烯材料</div>
+            </div>
+        </div>
+        <div class="timeline-item" data-tags="电池技术">
+            <span class="timeline-date">2026-04-17</span>
+            <div class="timeline-content">
+                <span class="news-source">Graphene-Info</span>
+                <div class="news-tags"><span class="news-tag">电池技术</span></div>
+                <h3 class="news-title">GMG报告6分钟充电石墨烯铝离子电池的能量密度增加一倍</h3>
+                <p class="news-desc">GMG报告6分钟充电石墨烯铝离子电池的能量密度增加一倍</p>
+                <a href="https://www.graphene-info.com/gmg-reports-doubling-energy-density-6-minute-charging-graphene-aluminium-ion" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">LinkedIn石墨烯制造集团（ GMG ）的股份提供了其石墨烯铝离子电池技术（ “G + A电池” ）的最新进展，该技术由GMG和昆士兰大学（ “UQ” ）根据与全球最大的金属和采矿集团之一力拓（ Rio Tinto ）的联合开发协议开发，并得到了美国印第安纳州电池创新中心（ “BIC” ）的支持。能量密度增加据报道， GMG G + A电池与具有代表性的市场领先的超快充电电池--钛酸锂（ “LTO” ）电池相比，表现出了卓越的性能特性，该电池的售价高达1200 $/kWh。GMG现在开发了一个全新的hyb</div>
+            </div>
+        </div>
+        <div class="timeline-item" data-tags="行业资讯">
+            <span class="timeline-date">2026-04-17</span>
+            <div class="timeline-content">
+                <span class="news-source">Graphene-Info</span>
+                <div class="news-tags"><span class="news-tag">行业资讯</span></div>
+                <h3 class="news-title">石墨烯制造集团（ GMG ）</h3>
+                <p class="news-desc">石墨烯制造集团（ GMG ）</p>
+                <a href="https://www.graphene-info.com/graphene-manufacturing-group-gmg" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">Company Type: 石墨烯 producers Australia-based 石墨烯 Manufacturing Group (GMG) was founded in 2016 to create a business to manufacture bulk 石墨烯 materials. GMG uses a proprietary 生产 process and the company focuses on solutions for the 能源 storage and 能源 saving markets. GMG went public in April 2021 and trades at the TSX Venture Exchange in Canada (ticker: GMG). Contact information for 石墨烯 Manufacturing Group (GMG)Company Address PO Box 3093 Darra QLD 4076 Australia</div>
+            </div>
+        </div>
+        <div class="timeline-item" data-tags="电池技术,电动汽车">
+            <span class="timeline-date">2026-04-17</span>
+            <div class="timeline-content">
+                <span class="news-source">Graphene-Info</span>
+                <div class="news-tags"><span class="news-tag">电池技术</span><span class="news-tag">电动汽车</span></div>
+                <h3 class="news-title">being developed by GMG and the University of Queensland (“UQ”) under a Joint 开发 Agreement with Rio Tinto, one of the world’s largest metals and mining groups, and with the support of the 电池 Innovation Center of Indiana (“BIC”) in the United States of America</h3>
+                <p class="news-desc">being developed by GMG and the University of Queensland (“UQ”) under a Joint 开发 Agreement with Rio Tinto, one of the world’s largest metals and mining groups, and with the support of the 电池 Innovation...</p>
+                <a href="https://www.graphene-info.com/gmg-advances-development-its-graphene-aluminium-ion-battery-enters-agreement" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">Share on LinkedIn 石墨烯 Manufacturing Group (GMG) has provided a progress update on the 石墨烯 Aluminium-Ion 电池 技术 (“G+AI 电池”) being developed by GMG and the University of Queensland (“UQ”) under a Joint 开发 Agreement with Rio Tinto, one of the world’s largest metals and mining groups. GMG has 宣布 that it has signed a service contract with the 电池 Innovation Center of Indiana (“BIC”) in the United Statesof America to support the next phase of 开发 of the 石墨烯 Aluminium-Ion 电池. BIC is a collaborative initiative designed to incorporate leadership from renowned universities, government agencies, and 商业化 enterprises. BIC is a public-private 合作 and a not-for-profit organization focusing on the rapid 开发, testing a</div>
+            </div>
+        </div>
+        <div class="timeline-item" data-tags="行业资讯">
+            <span class="timeline-date">2026-04-17</span>
+            <div class="timeline-content">
+                <span class="news-source">Graphene-Info</span>
+                <div class="news-tags"><span class="news-tag">行业资讯</span></div>
+                <h3 class="news-title">研究人员 examine 石墨烯 wetting transparency from macroscopic window to nanoscale mirror</h3>
+                <p class="news-desc">研究人员 examine 石墨烯 wetting transparency from macroscopic window to nanoscale mirror</p>
+                <a href="https://www.graphene-info.com/researchers-examine-graphene-wetting-transparency-macroscopic-window-nanoscale" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">Share on LinkedIn 研究人员 at the Max Planck Institute for 聚合物 研究, University of Cambridge, Institute for Basic Science (IBS), Korea University and Durham University have uncovered how 石墨烯 can appear “wetting transparent” at large scales while still reshaping water structure at the nanoscale. 石墨烯 on a substrate and in contact with water underpins technologies from 海水淡化 and 能源 storage to sensing,electrocatalysis, and neuromorphic devices, yet its wettability has remained controversial. Suspended 石墨烯 on water is intrinsically hydrophobic, but when 石墨烯 is supported on oxides or ionic crystals, macroscopic contact‑angle measurements show that the apparent wettability is largely dictated by the underlying substrate - an effect known as wetting trans</div>
+            </div>
+        </div>
+        <div class="timeline-item" data-tags="行业资讯">
+            <span class="timeline-date">2026-04-17</span>
+            <div class="timeline-content">
+                <span class="news-source">Graphene-Info</span>
+                <div class="news-tags"><span class="news-tag">行业资讯</span></div>
+                <h3 class="news-title">HydroGraph opens 新 Austin, Texas HQ for 规模化扩大</h3>
+                <p class="news-desc">HydroGraph opens 新 Austin, Texas HQ for 规模化扩大</p>
+                <a href="https://www.graphene-info.com/hydrograph-opens-new-austin-texas-hq-scale" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">Share on LinkedIn HydroGraph Clean Power has 宣布 the opening of its 新 Austin headquarters, having received its certificate of occupancy in March 2026. The 新 facility centralizes key executive and operating functions, as well as 扩建 the Company’s 研究 and 生产 capabilities in support of continued growth activities. “We are excited to officially open our 新 U.S. headquarters, a key milestone underpinning a substantialincrease in our 研究, 开发 and manufacturing capabilities,” said Kjirstin Breure, President and Chief Executive Officer of HydroGraph. “In addition to centralizing key administrative functions into Texas, our 新 office will facilitate a notable 扩建 of our R&amp;D capabilities, the operation of two active Hyperion Reactors on site, and serv</div>
+            </div>
+        </div>
+        <div class="timeline-item" data-tags="传感器">
+            <span class="timeline-date">2026-04-17</span>
+            <div class="timeline-content">
+                <span class="news-source">Graphene-Info</span>
+                <div class="news-tags"><span class="news-tag">传感器</span></div>
+                <h3 class="news-title">石墨烯-碳 black-SrO 传感器 enables sensitive theobromine 检测 at neutral pH</h3>
+                <p class="news-desc">石墨烯-碳 black-SrO 传感器 enables sensitive theobromine 检测 at neutral pH</p>
+                <a href="https://www.graphene-info.com/graphene-carbon-black-sro-sensor-enables-sensitive-theobromine-detection" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">Share on LinkedIn 研究人员 at Oregon State University (OSU), National Taipei University of 技术 and Ming Chi University of 技术 have developed a nanoscale electrochemical 传感器 that can measure theobromine in beverages with 高 sensitivity and accuracy. The central concept is engineered interfacial chemistry: the 材料 creates localized alkaline microdomains directly at the electrode surface, enabling efficient electrochemicaloxidation of theobromine while the bulk solution remains at neutral pH. The sensing layer is a ternary nanocomposite combining strontium oxide (SrO), functionalized 碳 black (f‑CB) and reduced 石墨烯 oxide (r‑GO). SrO forms nanoscale alkaline domains that facilitate interfacial proton abstraction from theobromine, effectively activating this</div>
+            </div>
+        </div>
+        <div class="timeline-item" data-tags="行业资讯">
+            <span class="timeline-date">2026-04-17</span>
+            <div class="timeline-content">
+                <span class="news-source">Graphene-Info</span>
+                <div class="news-tags"><span class="news-tag">行业资讯</span></div>
+                <h3 class="news-title">Directa Plus provides update on trading halt and restructuring</h3>
+                <p class="news-desc">Directa Plus provides update on trading halt and restructuring</p>
+                <a href="https://www.graphene-info.com/directa-plus-provides-update-trading-halt-and-restructuring" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">Share on LinkedIn Italy-based Directa Plus has 宣布 a significant organizational update as it enters a period of financial and operational uncertainty. Trading of the company’s shares on AIM has been suspended while it works to clarify its 融资 position and assess next steps. The company has been seeking 新 融资 arrangements to extend its limited cash runway, and has warned that, without securing additional backing, it may ultimatelyhave to move towards administration. In parallel, Directa Plus will work with corporate restructuring advisers to protect stakeholders’ interests and support an orderly process. Directa Plus, known for its 石墨烯 technologies and applications across textiles, 环保 remediation, and composites, has also reported that the board of its main</div>
+            </div>
+        </div>
+        <div class="timeline-item" data-tags="行业资讯">
+            <span class="timeline-date">2026-04-17</span>
+            <div class="timeline-content">
+                <span class="news-source">Graphene-Info</span>
+                <div class="news-tags"><span class="news-tag">行业资讯</span></div>
+                <h3 class="news-title">研究人员 report interfacial Ising superconductivity in a 石墨烯-capped gallium trilayer</h3>
+                <p class="news-desc">研究人员 report interfacial Ising superconductivity in a 石墨烯-capped gallium trilayer</p>
+                <a href="https://www.graphene-info.com/researchers-report-interfacial-ising-superconductivity-graphene-capped-gallium" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">Share on LinkedIn 研究人员 from Penn State, University of Oxford, Zhejiang University, Diamond Light Source and the University of North Texas have demonstrated a 新 route to Ising‑type superconductivity in a 轻量化, low‑dimensional 材料 by combining quantum confinement with strong interfacial hybridization. Using plasma‑free confinement epitaxy aided by a 碳 buffer layer, they synthesized a gallium trilayer sandwiched between石墨烯 and a 6H‑SiC(0001) substrate, creating a two‑dimensional superconducting channel where Cooper pairs are stabilized against in‑plane magnetic fields well beyond the Pauli paramagnetic limit. In this structure, three atomic layers of gallium are confined between a silicon carbide (6H‑SiC) substrate below and a 石墨烯 capping layer above. The</div>
+            </div>
+        </div>
+        <div class="timeline-item" data-tags="行业资讯">
+            <span class="timeline-date">2026-04-17</span>
+            <div class="timeline-content">
+                <span class="news-source">Graphene-Info</span>
+                <div class="news-tags"><span class="news-tag">行业资讯</span></div>
+                <h3 class="news-title">Pohang City 推出 governance body to drive 石墨烯 innovation</h3>
+                <p class="news-desc">Pohang City 推出 governance body to drive 石墨烯 innovation</p>
+                <a href="https://www.graphene-info.com/pohang-city-launches-governance-body-drive-graphene-innovation" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">Share on LinkedIn South Korea’s Pohang City is concentrating its administrative efforts on securing a global leadership position in the 先进 materials 行业 by establishing an expert governance body dedicated to developing the 石墨烯 sector. As part of this initiative, Pohang City has formed a committee under a specialized ordinance that unites leading figures from 行业, academia, and 研究 institutions. The committee is chairedby Acting Mayor Jang Sang-kil and includes prominent members such as Hong Byung-hee, CEO of 石墨烯 Square, and Lee Tae-woo, President of the Korea 石墨烯 Society. The committee will focus on strategies to foster the growth of the 石墨烯 行业 and refine related policy frameworks. In the medium to long term, the city plans to create the “Poh</div>
+            </div>
+        </div>
+        <div class="timeline-item" data-tags="行业资讯">
+            <span class="timeline-date">2026-04-17</span>
+            <div class="timeline-content">
+                <span class="news-source">Graphene-Info</span>
+                <div class="news-tags"><span class="news-tag">行业资讯</span></div>
+                <h3 class="news-title">The 石墨烯 Handbook, 2026 edition</h3>
+                <p class="news-desc">The 石墨烯 Handbook, 2026 edition</p>
+                <a href="https://www.graphene-info.com/graphene-handbook-2026-edition" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">Share on LinkedIn We&#x27;re happy to announce the 13 th edition of 石墨烯-Info&#x27;s very own 石墨烯 Handbook , the most comprehensive resource on 石墨烯 技术, 行业 and 市场 - now updated for 2026. After many years, the 石墨烯 行业 and 市场 are at an inflection point, showing highly positive signs. Get your copy now to stay current on 石墨烯 研究, 开发 and 市场! Reading this book, you&#x27;ll learn all about: Theproperties of 石墨烯 Different 生产 methods Possible 石墨烯 applications The latest 石墨烯 研究 The current 市场 for 石墨烯 materials and products The main 石墨烯 challenges Other promising 2D materials The book also provides: A history of 石墨烯 developments A 石墨烯 投资 guide An introduction to 石墨烯 metrology and s</div>
+            </div>
+        </div>
+        <div class="timeline-item" data-tags="电池技术">
+            <span class="timeline-date">2026-04-17</span>
+            <div class="timeline-content">
+                <span class="news-source">Graphene-Info</span>
+                <div class="news-tags"><span class="news-tag">电池技术</span></div>
+                <h3 class="news-title">Solidion 技术 unveils UPS 电池 system for AI data centers</h3>
+                <p class="news-desc">Solidion 技术 unveils UPS 电池 system for AI data centers</p>
+                <a href="https://www.graphene-info.com/solidion-technology-unveils-ups-battery-system-ai-data-centers" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">Share on LinkedIn Solidion 技术 , an 先进 电池 技术 solutions provider, has 宣布 the 开发 of a next-generation Uninterruptible Power Supply (UPS) system designed specifically for the rapidly expanding artificial intelligence (AI) data center 市场. The 新 PEAK Series - short for Power, 能源, 阳极, Knowledge - incorporates Solidion’s award-winning 5500 电池 cell, which leverages the company’s proprietarysilicon-碳 阳极 技术 to deliver superior 能源 density, reliability, and cost 效率. The 技术 seems to use 石墨烯 in its silicon-碳 阳极 技术. Solidion expects 商业化 availability of the PEAK Series in the first quarter of 2026 and is currently engaging with select data center partners for early integration and t</div>
+            </div>
+        </div>
+        <div class="timeline-item" data-tags="投资">
+            <span class="timeline-date">2026-04-17</span>
+            <div class="timeline-content">
+                <span class="news-source">Graphene-Info</span>
+                <div class="news-tags"><span class="news-tag">投资</span></div>
+                <h3 class="news-title">2D Photonics / CamGraphIC 获得融资 €25 百万美元 to advance 石墨烯基 photonics</h3>
+                <p class="news-desc">2D Photonics / CamGraphIC 获得融资 €25 百万美元 to advance 石墨烯基 photonics</p>
+                <a href="https://www.graphene-info.com/2d-photonics-raises-25-million-advance-graphene-based-photonics" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">Share on LinkedIn Frontier IP Group has 宣布 that its portfolio company, 2D Photonics , has raised €25 百万美元 in a Series A 融资 round to advance the 开发 of 石墨烯 photonics transceivers. 2D Photonics is closely related to CamGraPhIC - 2D Photonics is the parent company, with CamGraPhIC&#x27;s operations in both the UK and Italy operating under its umbrella. This 融资 will enable the company to scale up 生产 and establish a试点 manufacturing plant, positioning it at the forefront of next-generation optical 技术. The 投资, backed by major 行业 and financial institutions, underscores the potential of 2D Photonics’ 技术 to transform artificial intelligence and mobile communications by significantly reducing costs, improving 能源 效率, and</div>
+            </div>
+        </div>
+        <div class="timeline-item" data-tags="散热技术,环保技术,石墨烯采暖">
+            <span class="timeline-date">2026-04-17</span>
+            <div class="timeline-content">
+                <span class="news-source">Graphene-Info</span>
+                <div class="news-tags"><span class="news-tag">散热技术</span><span class="news-tag">环保技术</span><span class="news-tag">石墨烯采暖</span></div>
+                <h3 class="news-title">Xiaomi 推出 a 石墨烯 radiator capable of heating a room in a few seconds</h3>
+                <p class="news-desc">Xiaomi 推出 a 石墨烯 radiator capable of heating a room in a few seconds</p>
+                <a href="https://www.graphene-info.com/xiaomi-launches-graphene-radiator-capable-heating-room-few-seconds" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">Share on LinkedIn Xiaomi has released its 新 Xiaomi Mijia 石墨烯 Skirting Board Heater 2, a 石墨烯 radiator that boasts a powerful heating system 2.200W and a foldable format. The Xiaomi Mijia 石墨烯 Skirting Board Heater 2 features a 石墨烯 heating 技术 heater capable of providing heat in just 3 seconds and heating an entire room to the desired temperature in just 15 minutes. In 2022, Xiaomi 推出 the Mijia 石墨烯 BaseboardHeater (Fire Edition) . The device uses two 石墨烯基 heating elements, and has a simulated flame function that uses an integrated humidifier and LEDs to generate the flame appearance. This 新 launch seems to be the next generation in the same product line. In addition, the 新 Xiaomi Mijia 石墨烯 Skirting Board Heater 2 has various cooling</div>
+            </div>
+        </div>
+        <div class="timeline-item" data-tags="行业资讯">
+            <span class="timeline-date">2026-04-17</span>
+            <div class="timeline-content">
+                <span class="news-source">Graphene-Info</span>
+                <div class="news-tags"><span class="news-tag">行业资讯</span></div>
+                <h3 class="news-title">NanoGraf begins 生产 at scale to provide Military with better batteries</h3>
+                <p class="news-desc">NanoGraf begins 生产 at scale to provide Military with better batteries</p>
+                <a href="https://www.graphene-info.com/nanograf-begins-production-scale-provide-military-better-batteries" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">Share on LinkedIn NanoGraf , an 先进 电池 材料 company, 宣布 earlier this month the successful completion of the first large volume 生产 run of its M38 18650 cell for the U.S. military. Nanograf, formerly called SiNode Systems, pursues advances in Lithium-ion 电池 anodes for a wide range of industries from consumer electronics to electric vehicles. NanoGraf explaines that it uses a proprietary silicon alloy-石墨烯材料 architecture to overcome the silicon 阳极 technical hurdles. The combination of silicon-based alloys and a 柔性 3D 石墨烯 network helps stabilize the active 材料 during charge and discharge. The company’s manufacturing process is different from others that rely on expensive and complex vapor deposition-based systems. Instead, a wet c</div>
+            </div>
+        </div>
+        <div class="timeline-item" data-tags="石墨烯材料">
+            <span class="timeline-date">2026-04-17</span>
+            <div class="timeline-content">
+                <span class="news-source">Graphene.tv</span>
+                <div class="news-tags"><span class="news-tag">石墨烯材料</span></div>
+                <h3 class="news-title">Graphene Leaders Canada（GLC）宣布完成性能提升的先进石墨烯增强型EN涂层系统的开发并投入商业应用</h3>
+                <p class="news-desc">Graphene Leaders Canada（GLC）宣布完成性能提升的先进石墨烯增强型EN涂层系统的开发并投入商业应用</p>
+                <a href="http://www.graphene.tv/20260417152818/" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">Graphene Leaders Canada（GLC）宣布完成性能提升的先进石墨烯增强型EN涂层系统的开发并投入商业应用<br>Graphene Leaders Canada<br>•<br>2026年4月17日 04:59<br>•<br>产业新闻<br>•<br>阅读 14<br>通过添加 GLC 的石墨烯，这些优势得到了进一步增强：石墨烯不仅能形成高效的防腐屏障，还能提高耐磨性和抗磨损性。经石墨烯增强的无电解镍（EN）镀层有助于减缓材料劣化速度，在极端条件下保持表面完整性，并在无需更改现有工艺的情况下提升整体镀层性能。<br>阿尔伯塔省埃德蒙顿市——2026年4月15日——加拿大先进材料企业Graphene Leaders Canada（GLC）欣然宣布，其石墨烯增强型无电解镍（EN）镀层添加剂技术已成功研发并投入商业应用。凭借扎实的技术成果、日益增长的行业采用率以及积极的客户互动，该公司现已具备商业化条件。无电镀镍（EN）涂层通过增强关键部件的耐用性和可靠性，为工业制造、石油天然气、汽车、船舶及采矿等面临严苛运行环境的行业创造了显著价值。这项技术进步可延长设备维护周期、提升资产可靠性并显著降低生命周期成本，使EN+石墨烯成为高性能表面保护的下一代解决方案。<br>在石油和天然气等行业，无电镀镍涂层被广泛应用于井下工具、阀门、泵和管道。在腐蚀性流体、高压和磨蚀性条件下，增强的耐腐蚀性可大幅延长设备使用寿命。这直接转化为维护频率降低、计划外停机减少以及更换成本降低——这些正是运营效率和盈利能力的关键驱动因素。<br>通过添加 GLC 的石墨烯，这些优势得到了进一步增强：石墨烯不仅能形成高效的防腐屏障，还能提高耐磨性和抗磨损性。经石墨烯增强的无电解镍（EN）镀层有助于减缓材料劣化速度，在极端条件下保持表面完整性，并在无需更改现有工艺的情况下提升整体镀层性能。<br>经过密集的研发和测试，GLC已获得该产品解决方案的专有知识产权，并成功研制出一种基于石墨烯的添加剂，该添加剂可无缝融入标准无电解镍（EN）电镀工艺，且不会影响电镀液化学成分、电镀速率或操作性能。这一技术进步不仅能被行业立即采用，还能在镀层性能方面带来显著且可量化的提升。<br>基于标准的腐蚀测试和磨蚀性磨损测试结果证明，与标准无电解镍相比，石墨烯在耐腐蚀性和耐磨性方面均实现了具有工业意义的显著提升。近期正在进行的测试结果表明，与传统无电解镍涂层相比，其耐腐蚀性提高了高达65%，耐磨性提高了20%。对于在恶劣和苛刻环境中运营的行业而言，这些结果标志着涂层性能取得了重大进步。<br>“在保持与现有无电解镍系统完全兼容的同时，实现这一水平的性能，是一个重大的技术里程碑，”GLC工程总监安德鲁·米格达尔（Andrew Migdal）表示。“通过对电镀槽内石墨烯分散度的精确控制，我们在不影响电镀槽稳定性、沉积速率或工艺完整性的前提下，成功提升了耐腐蚀性和耐磨性能。这证明了我们的添加剂不仅在技术上可靠，而且在标准的无电解镍（EN）工艺中具有商业可行性。”<br>GLC已成功与多家商业应用商达成合作，首家合作伙伴来自阿尔伯塔省，并正在积极推进北美地区日益扩大的合作项目。公司与一家位于阿尔伯塔省的应用商合作启动了试点项目，这些项目正吸引着多家知名工业企业的关注。这些举措反映出强劲的市场反响，预计将加速产品采用、推动商业化进程，并在2026年全年显著扩大GLC的市场覆盖范围和营收机会。<br>GLC的石墨烯增强型EN技术无需更改现有基础设施，即可延长资产寿命、降低维护成本并提高运行可靠性，从而提供了极具吸引力的价值主张。这种易于集成的特性，加上可量化的性能提升，使该技术成为面向全球市场的可扩展、高影响力的解决方案。<br>随着商业化进程的推进，GLC正致力于扩大生产规模、拓展客户群，并通过许可协议和添加剂供应建立持续性收入。<br>关于Graphene Leaders Canada (GLC) Inc.<br>GLC 是一家加拿大科技公司，致力于在多个领域开发和商业化基于石墨烯的材料及解决方案，涵盖防护涂层、先进材料、环境技术及医疗诊断等领域。GLC 的使命是“让卓越产品更臻完美”。<br>本文来自<br>Graphene Leaders Canada (GLC) Inc.<br>，本文观点不代表石墨烯网立场，转载请联系原作者。<br>功能涂层<br>赞<br>(0)<br>Graphene Leaders Canada<br>0<br>生成海报<br>中原石墨烯实验室弱电系统建设工程（一期）成交公告<br>上一篇<br>2026年4月16日<br>关注第六届消博会丨河北企业“淘金”消博会<br>下一篇<br>2026年4月17日<br>相关推荐<br>山西煤化所纳米领域国际标准取得重要进展<br>2018年6月7日<br>2.0K<br>0<br>0<br>0<br>产业新闻<br>设计四川·制造出彩｜雷迪波尔：戴上“国字号”桂冠12年 让“四川设计”闪耀国际舞台<br>2025年3月5日<br>638<br>0<br>0<br>0<br>产业新闻<br>厦门凯纳石墨烯技术股份有限公司总经理方崇卿:感受到厦门市爱才惜才怜才之心<br>2019年8月2日<br>2.2K<br>0<br>0<br>0<br>产业新闻<br>达人心法－永续不是理想 而是可量化的责任<br>2025年8月16日<br>298<br>0<br>0<br>0<br>产业新闻<br>政企协同 共筑新材高地 | 燕山办事处、北京市先进材料产业促进会一行莅临爱尚家科技昆山生产基地调研交流<br>2025年11月3日<br>212<br>0<br>0<br>0<br>产业新闻<br>平度打造全国知名石墨烯产业聚集区<br>2016年9月28日<br>2.0K<br>0<br>0<br>0<br>产业新闻<br>“黑金”下田：石墨烯如何让农作物“光速”生长？<br>2026年4月9日<br>27<br>0<br>0<br>0<br>产业新闻<br>重庆大学周苗教授来华北理工大学作学术报告<br>2016年3月17日<br>2.5K<br>0<br>0<br>0<br>产业新闻<br>河南烯力申请石墨烯导电浆料专利，石墨烯导电浆料具有多种优异性能<br>2025年3月26日<br>532<br>0<br>0<br>0<br>产业新闻<br>发表回复<br>请登录后评论...<br>登录<br>后才能评论<br>提交</div>
+            </div>
+        </div>
+        <div class="timeline-item" data-tags="行业资讯">
+            <span class="timeline-date">2026-04-17</span>
+            <div class="timeline-content">
+                <span class="news-source">Graphene.tv</span>
+                <div class="news-tags"><span class="news-tag">行业资讯</span></div>
+                <h3 class="news-title">产教融合 人才共育|国家石墨烯创新中心赴宁波技师学院开展招聘宣讲</h3>
+                <p class="news-desc">产教融合 人才共育|国家石墨烯创新中心赴宁波技师学院开展招聘宣讲</p>
+                <a href="http://www.graphene.tv/20260416152807/" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">产教融合 人才共育|国家石墨烯创新中心赴宁波技师学院开展招聘宣讲<br>国家石墨烯创新中心<br>•<br>2026年4月16日 18:18<br>•<br>科普研学<br>•<br>阅读 16<br>徐丹副总经理为在场师生带来一场生动的“石墨烯科普与国家石墨创新中心基本情况介绍”，通过图文展示、科普动画视频、互动交流等方式深入浅出地讲解了石墨烯的基础知识、应用前景以及创新中心在技术研发、成果转化和产业孵化方面的进展。会上，创新中心气凝胶事业部、玻璃烯事业部代表分别就各自项目研发领域和招聘需求进行了介绍。<br>4月15日下午，国家石墨烯创新中心副总经理徐丹一行应邀赴宁波技师学院，开展一场集科普宣讲、人才招募于一体的专场招聘宣讲活动，吸引了宁波技师学院200余名学生参与。<br>徐丹副总经理为在场师生带来一场生动的“石墨烯科普与国家石墨创新中心基本情况介绍”，通过图文展示、科普动画视频、互动交流等方式深入浅出地讲解了石墨烯的基础知识、应用前景以及创新中心在技术研发、成果转化和产业孵化方面的进展。会上，创新中心气凝胶事业部、玻璃烯事业部代表分别就各自项目研发领域和招聘需求进行了介绍。<br>互动交流环节，现场学生结合自身专业围绕石墨烯的应用场景、职业发展路径等进行提问。徐丹及事业部代表进行详细解答，并勉励同学们可以在各个岗位中体会研发、生产、检测等不同实践内容，同时为个人职业发展探寻方向，也激发未来成长潜能。<br>宣讲结束后，徐丹与宁波技师学院副校长洪俊杰及学生就业处相关负责人就学生实习就业、产教融合、校企共建等方面进行了交流，共同谋划如何建设好“石墨烯产业学院”和加快培养产业人才方面工作。<br>此次宣讲活动旨在加强创新中心与本地技能型院校的联动，吸引优秀学生加入石墨烯这一前沿新材料产业，也进一步深化了国家石墨烯创新中心与宁波技师学院之间的交流与合作。<br>本文来自<br>国家石墨烯创新中心<br>，本文观点不代表石墨烯网立场，转载请联系原作者。<br>赞<br>(0)<br>国家石墨烯创新中心<br>0<br>生成海报<br>翱翔于材料与苍穹之间 ——记2025年度利润奖飞行器事业部总经理王晓白<br>上一篇<br>2026年4月16日 18:04<br>中原石墨烯实验室弱电系统建设工程（一期）成交公告<br>下一篇<br>2026年4月16日<br>相关推荐<br>科普教育走进课堂 —— 王建兴博士为青少年解读“材料之王”石墨烯的科技魅力<br>2025年11月24日<br>229<br>0<br>0<br>0<br>科普研学<br>诺贝尔物理学奖得主安德烈·海姆受聘西安交大名誉教授  并作特邀交流报告<br>2026年4月11日<br>33<br>0<br>0<br>0<br>科普研学<br>“墨园学堂”第五十讲开讲！上交大熊定邦研究员、广以孔博副教授应邀作报告<br>2025年8月18日<br>356<br>0<br>0<br>0<br>科普研学<br>“烯创未来 赋能发展”石墨烯科普知识及应用主题讲座走进宁波大学材料科学与化学工程学院<br>2026年4月2日<br>79<br>0<br>0<br>0<br>科普研学<br>探秘“烯”世界 点亮科学梦想<br>2025年9月28日<br>272<br>0<br>0<br>0<br>科普研学<br>国科大学子走进宁波材料所探索新材料科技创新<br>2026年2月12日<br>164<br>0<br>0<br>0<br>科普研学<br>墨园学堂第五十四讲开讲！北京大学王欢教授应邀做报告<br>2026年3月27日<br>103<br>0<br>0<br>0<br>科普研学<br>情系家乡传书香 逐梦未来启新程<br>2026年4月4日<br>52<br>0<br>0<br>0<br>科普研学<br>推动科普教育 刘兆平主任等博士带领家乡学子探秘科技前沿<br>2025年8月18日<br>402<br>0<br>0<br>0<br>科普研学<br>发表回复<br>请登录后评论...<br>登录<br>后才能评论<br>提交</div>
+            </div>
+        </div>
+        <div class="timeline-item" data-tags="石墨烯材料">
+            <span class="timeline-date">2026-04-17</span>
+            <div class="timeline-content">
+                <span class="news-source">Graphene.tv</span>
+                <div class="news-tags"><span class="news-tag">石墨烯材料</span></div>
+                <h3 class="news-title">翱翔于材料与苍穹之间 ——记2025年度利润奖飞行器事业部总经理王晓白</h3>
+                <p class="news-desc">翱翔于材料与苍穹之间 ——记2025年度利润奖飞行器事业部总经理王晓白</p>
+                <a href="http://www.graphene.tv/20260416152804/" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">翱翔于材料与苍穹之间 ——记2025年度利润奖飞行器事业部总经理王晓白<br>北京石墨烯研究院<br>•<br>2026年4月16日 18:04<br>•<br>访谈评论<br>•<br>阅读 33<br>随着蒙烯玻纤材料应用场景的不断拓展，以该材料为主的事业部依据场景拆分，选择自己钟爱的飞行器业务的王晓白工作更加聚焦，热爱的领域，带领团队干劲十足。对于把蒙烯玻纤材料用到各类飞行器上，王晓白有他的应用蓝图“我们要造的不仅是材料，更是中国航空的神经元网络。”<br>当航空情怀遇上新材料革命，在BGI这片创新热土上，王晓白用蒙烯玻纤编织的翅膀，正带着中国航空梦飞向新高度。让我们走近这位兼具工程师理性与创业者激情的跨界先锋，聆听他如何以实验室为战场，在产业化的蓝海上书写新时代的航空传奇。<br>跨越边界的双面人生<br>翱翔于材料与苍穹之间<br>夏日的阳光透过BGI玻璃幕墙折射在BGI石墨烯分子结构模型上。作为BGI-中国航空制造技术研究院联合实验室成立的牵头负责人，王晓白左手握着航空制造技术研究院的科研数据，右手接过BGI的石墨烯材料样本——这个极具象征意义的画面，揭开了他“双栖人生”的序幕。<br>在625所材料中心的四年，这位戴着金边眼镜的航空工程师展现出惊人的跨界天赋。他能在清晨的实验室里与X射线衍射仪对话，也能在下午的商务谈判桌上精准解读技术参数；既有拆解发动机叶片时的工匠专注，也不乏构想产业蓝图时的战略眼光。“王工就像精密仪器里的万能转换器”，老同事的评价道出了他独特的复合型特质。几年里，他带队完成多项航空材料攻关，却在某个加班的深夜突然盯着窗外的航班灯光呢喃：“传统材料快触到天花板了……”这束划过夜空的机翼灯，最终将他引向BGI的大门。<br>冰封时刻的破局者<br>翱翔于材料与苍穹之间<br>2023年冬，某型飞机遭遇“冰封诅咒”——传统除冰系统让机身增重，续航能力断崖式下跌。技术研讨会上，王晓白突然用激光笔圈住PPT上的蒙烯玻纤参数：“给它48小时，我能让冰层在120秒内蒸发。”会议室鸦雀无声，与会专家更是满脸不可思议。接下来的36小时，-20℃的环境模拟舱成了战场，屏幕上跳动的热成像数据在王晓白镜片上投下蓝光。当第N批试样让冰层如春雪消融时，他抓起对讲机的手微微发抖：“成了！热效率远超预期！”这一刻的嘶吼，成为了团队的“胜利宣言”。<br>商务对接时的唇枪舌剑、技术交流中的思维碰撞、样件制作的精雕细琢，以及样机试飞时的忐忑与期待，重重关卡横亘眼前前。团队成员硬是凭借破釜沉舟的决心和众志成城的智慧逐一攻克，2025年初，我们成功登顶——19座电动飞机电热除冰项目成功中标。<br>聚焦蓝海“航线优化”<br>翱翔于材料与苍穹之间<br>随着蒙烯玻纤材料应用场景的不断拓展，以该材料为主的事业部依据场景拆分，选择自己钟爱的飞行器业务的王晓白工作更加聚焦，热爱的领域，带领团队干劲十足。对于把蒙烯玻纤材料用到各类飞行器上，王晓白有他的应用蓝图“我们要造的不仅是材料，更是中国航空的神经元网络。”<br>对于团队，就像稻盛和夫经营的阿米巴，团队灵活多元，王晓白依据飞行器细分领域的特点，将团队划分成4个业务单元，增强工作靶向性，精准定位客户。此外，秉持“小会解决大问题”的理念，通过紧凑高效的小会集中智慧、直击要害，极大提升工作效率，确保每一项工作迅速落地。2024年度BGI总裁奖，是王晓白深耕岗位、扎实付出的最好见证；2025年度利润奖，则是对他带领飞行器事业部团队攻坚克难、再创佳绩的充分认可。他始终将这份荣誉归于集体，认为成绩的取得，离不开团队每一位成员的齐心协力与并肩作战。<br>云端与家庭的共振<br>翱翔于材料与苍穹之间<br>一路走来，在家庭与工作这架天平上王晓白得到了家人莫大理解与支持。他们的包容与关爱，如温暖港湾，让我在忙碌奔波后有安心栖息之所。工作中，营收指标与交付任务的双重压力，如高悬的达摩克利斯之剑，时刻警醒着我。<br>一直以来，我始终坚守“有言必信，无欲则刚；和若春风，肃若秋霜；取象于钱，外圆内方”的人生信条。这一信条指引我在为人处世与工作中坚守原则、灵活应变。同时，刘老师那句“没有怀才不遇，只有怀遇不才”的激励话语，时刻提醒我把握机遇，收获更多成长与成就。<br>“真正的创新者，既要有显微镜般的专注，也要有望远镜般的视野。”如今，王晓白及团队已将蒙烯玻纤材料应用于多个飞行器型号，并在不断地拓展更大的场景。站在BGI顶层的观景台，他常凝视天际线上的航迹云：“每道云痕都是天空的笔记，而我们正在书写新的篇章。”夜幕降临时，实验室的蓝光透过蒙烯试样，在工作人员鬓角投下星辰般的光点——那是属于材料工程师的银河，也是中国航空梦的璀璨星图。<br>关于2025年度利润奖<br>这份荣誉从来不属于我个人，它是飞行器业务部整个团队拼出来、扛下来、一起赢下来的。<br>大家看到的是营收、管理、团队面貌这些亮眼结果，但背后是我们四个小组心往一处想、劲往一处使的日常。有人擅长仿真，有人精通电气，有人深耕客户，我们不搞单打独斗，而是把每个人的长板拼在一起，形成合力。遇到难题一起商量，碰到压力一起顶上，这就是我们最朴素的工作方式。<br>这些年让我最感动的，是团队里那种“有活一起上、有事敞开说”的氛围。遇到紧急攻关、关键节点，没有人推诿、没有人计较，大家主动补位、并肩作战。我们之间只有对技术、对业务、对问题的激烈讨论，只对事、不对人，争论完依然是并肩作战的伙伴。<br>本文来自<br>北京石墨烯研究院<br>，本文观点不代表石墨烯网立场，转载请联系原作者。<br>赞<br>(0)<br>北京石墨烯研究院<br>0<br>生成海报<br>中煤雄安科创园 | gmp建筑师事务所<br>上一篇<br>2026年4月16日 16:41<br>产教融合 人才共育|国家石墨烯创新中心赴宁波技师学院开展招聘宣讲<br>下一篇<br>2026年4月16日 18:18<br>相关推荐<br>石墨烯助力超级电容器发展   本期话题：石墨烯与超级电容器<br>2013年4月3日<br>2.8K<br>0<br>0<br>0<br>访谈评论<br>和General Graphene公司改变我们对石墨烯的看法<br>2022年7月12日<br>1.1K<br>0<br>0<br>0<br>访谈评论<br>石墨烯大爆炸 将超越硅的材料<br>2025年3月7日<br>444<br>0<br>0<br>0<br>访谈评论<br>5G带火了一项高科技，那就是散热垫片，然而材料却由美日垄断<br>2023年2月21日<br>961<br>0<br>0<br>0<br>访谈评论<br>从年入40亿到负债7亿，他靠卖老人鞋还债<br>2024年9月4日<br>637<br>0<br>0<br>0<br>访谈评论<br>8分钟充满电？跑1000km？“电动爹”的未来值得投资吗？<br>2021年1月25日<br>1.9K<br>0<br>0<br>0<br>访谈评论<br>电池技术新突破？小米硅氧负极电池有何玄机？<br>2021年4月4日<br>2.3K<br>0<br>0<br>0<br>访谈评论<br>贴张节油卡就能省30%的油？别再交智商税了<br>2020年10月3日<br>2.4K<br>0<br>0<br>0<br>访谈评论<br>《京华陕北人》讲陕北人的故事！第54期 石墨烯专家 郭守武<br>2018年7月25日<br>800<br>0<br>0<br>0<br>访谈评论<br>发表回复<br>请登录后评论...<br>登录<br>后才能评论<br>提交</div>
+            </div>
+        </div>
+        <div class="timeline-item" data-tags="行业资讯">
+            <span class="timeline-date">2026-04-17</span>
+            <div class="timeline-content">
+                <span class="news-source">Graphene.tv</span>
+                <div class="news-tags"><span class="news-tag">行业资讯</span></div>
+                <h3 class="news-title">14年磨一剑！金阳烯碳凭产学研融合成石墨烯产业“黑马”</h3>
+                <p class="news-desc">14年磨一剑！金阳烯碳凭产学研融合成石墨烯产业“黑马”</p>
+                <a href="http://www.graphene.tv/20260416152798/" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">14年磨一剑！金阳烯碳凭产学研融合成石墨烯产业“黑马”<br>石墨烯网<br>•<br>2026年4月16日 15:55<br>•<br>产业新闻<br>•<br>阅读 18<br>为汇聚创新合力，金阳烯碳与高校共建研发平台、共组科研团队，打造产学研协同创新“强磁场”。联合中南大学、湖南大学成立湖南金阳石墨烯研究院，聘请湖南大学陈小华教授作为“科技副总”，汇聚数十位高校教授与科研骨干，构建起覆盖石墨烯制备、新能源材料应用、PCB行业应用、防腐技术、环保材料等多领域的顶尖专家矩阵。<br>三月暮春，星城长沙细雨蒙蒙，浏阳经开区内，湖南金阳烯碳新材料股份有限公司喜讯频传。<br>企业与湖南大学陈小华教授团队联手攻关的石墨烯PCB孔金属化项目，在顺利完成中试后正式投产上线。这项技术摒弃传统高污染电镀工艺，以石墨烯微孔沉积技术为核心，一举解决行业近八成环保痛点，生产效率提升6倍、生产成本直降50%，为电子信息产业绿色升级注入强劲动能。<br>“2025年企业营收突破2亿元，较2019年的300万元实现跨越式攀升，年均增长率高达114%。”谈及企业一路奋进的历程，金阳烯碳董事长刘建忠感慨良多。这背后，是耐心资本长期陪伴、科研团队坚守深耕，历经14年打磨，走出一条产学研深度融合，科技创新赋能产业升级的高质量发展之路。<br>从“0”到“1”，产学研深度融合闯出自主创新路<br>金阳烯碳的成长故事，始于创始人刘建忠对新材料赛道的敏锐洞察。<br>作为土生土长的浏阳人，上世纪90年代，刘建忠从国企转型创业，深耕新能源电池材料领域，也因此与国内高校新材料领域的专家学者结下深厚渊源。<br>随着国家大力发展新能源产业，被誉为“新材料之王”的石墨烯进入他的视野。<br>中国工程院院士吴明红曾这样形容石墨烯的战略价值：若以材料划分人类文明，从石器、铜器、铁器到硅材料信息时代，下一个碳基量子时代，石墨烯无疑站在材料变革的最前沿。<br>尽管前景广阔，但石墨烯产业门槛高、投入大、周期长，不少业内人士都曾善意劝阻。面对研发难度大、资金压力重、短期难见回报的行业难题，刘建忠没有退缩，坚定选择走产学研协同创新之路。<br>2012年，金阳烯碳与中南大学开启深度合作，成为国内较早布局石墨烯研发的民营企业之一。此后多年，企业持续投入、潜心攻关，巨大的研发投入曾让刘建忠倍感压力，但他始终坚信石墨烯的产业价值，咬定目标不放松。<br>十年沉淀，终迎破冰。2023年，金阳烯碳联合中南大学黄启忠教授团队等顶尖科研力量，依托液相机械剥离法与自主研发的工艺设备，成功突破石墨烯在电池领域的核心技术瓶颈，实现高纯少层石墨烯粉体规模化量产。<br>凭借过硬技术，金阳烯碳成功跻身宁德时代等行业龙头供应链，产品可广泛应用于各类新能源电池，兼具大容量、快充电、长寿命等优势。<br>创新机制破壁垒打通成果转化“最后一公里”<br>“产品的核心竞争力，永远源于技术的硬核支撑。”刘建忠始终将研发创新摆在企业发展首位，近三年，企业研发费用占营收比例稳定在6-9%，持续为技术突破蓄力。<br>为汇聚创新合力，金阳烯碳与高校共建研发平台、共组科研团队，打造产学研协同创新“强磁场”。联合中南大学、湖南大学成立湖南金阳石墨烯研究院，聘请湖南大学陈小华教授作为“科技副总”，汇聚数十位高校教授与科研骨干，构建起覆盖石墨烯制备、新能源材料应用、PCB行业应用、防腐技术、环保材料等多领域的顶尖专家矩阵。<br>针对科技成果转化“最后一公里”难题，企业创新构建“高校研发+企业中试+市场转化”全闭环模式，让实验室成果真正走向生产线、走进大市场：<br>通过设立专业委员会，对校企合作项目开展技术先进性与市场应用性双重评审，筛选优质项目组建联合攻关组，由高校带队联合企业科研团队共同研发、企业投入研发资金与产业化资源，加速技术落地。<br>在中试转化关键阶段，金阳烯碳推出“资金入股+成果奖励+股权孵化”多元激励机制，让科研人员与企业结成利益共同体。<br>项目中试成功后，研发人员可获得加倍资金奖励，更能持有30%原始技术股份，项目组可独立孵化成新公司，最大限度激发科研人员创新活力，让科研成果不再“束之高阁”，快速转化为市场竞争力。<br>如今，企业高纯少层石墨烯粉体年出货量达800吨，稳居国内行业前列。研发领域从基础制备延伸至固态电池、轨道负极、AI导热材料、废旧锂电池负极绿色循环等前沿方向，多个历经三年技术积累的项目，将于2026年集中落地见效。<br>十余载深耕不辍，金阳烯碳以产学研深度融合为核心竞争力，从传统铜铝加工铸造企业，成功转型为国家级专精特新“小巨人”企业。目前累计拥有52项专利，建成全自动化石墨烯与锂离子电池石墨负极材料生产线，生产工艺技术达到国内领先水平。<br>企业发展步履不停，资本规划同步推进。刘建忠透露，金阳烯碳已按照上市标准规范运营，辅导机构皆已进场，已于2022年完成股改，A轮融资已完成，后续加快步伐向着资本市场稳步迈进。<br>展望未来，金阳烯碳将持续深化与高校全方位合作，聚焦新能源、电子信息、环保等领域，拓展石墨烯多元应用场景，不断加大研发投入、完善成果转化机制，力争3至5年巩固国内石墨烯产业领先地位。<br>本文来自<br>创新长沙<br>，本文观点不代表石墨烯网立场，转载请联系原作者。<br>金阳烯碳<br>赞<br>(0)<br>石墨烯网<br>0<br>生成海报<br>将科研经历化作成长启示——诺贝尔奖、图灵奖得主对话香港中学生<br>上一篇<br>2026年4月16日<br>中煤雄安科创园 | gmp建筑师事务所<br>下一篇<br>2026年4月16日<br>相关推荐<br>新平台引领打造石墨烯产业技术新名片丨产业新引擎 制胜新赛道③<br>2023年3月25日<br>2.0K<br>0<br>0<br>0<br>访谈评论<br>浏阳又有11家企业上榜国家级“小巨人”  浏阳致力引导中小企业走”专精特新”高质量发展之路<br>2022年8月10日<br>1.2K<br>0<br>0<br>0<br>产业新闻<br>向高而攀 向新而行——浏阳经开区构筑具有核心竞争力的科技创新高地<br>2023年9月1日<br>852<br>0<br>0<br>0<br>产业新闻<br>浏阳经开区智能装备制造产业加速延链 着力打造储能产业新的增长极<br>2022年12月7日<br>1.0K<br>0<br>0<br>0<br>产业新闻<br>联合中南大学、湖南大学等高校专家团队，在浏阳建“研究院”！<br>2023年5月6日<br>1.1K<br>0<br>0<br>0<br>产业新闻<br>“抓产业，湖南力度大、措施实”——“稳增长20条”在各行各业引发热烈反响<br>2023年2月11日<br>1.0K<br>0<br>0<br>0<br>政策动向<br>金阳烯碳技术子公司“烯顺”成立了！<br>2021年12月11日<br>1.4K<br>0<br>0<br>0<br>产业新闻<br>市统战部周耀辉部长、政协副主席工商联主席陈静一行到金阳烯碳参观调研<br>2021年3月4日<br>1.3K<br>0<br>0<br>0<br>产业新闻<br>湖南金阳石墨烯研究院筹备小组成立会议顺利召开<br>2022年1月4日<br>1.3K<br>0<br>0<br>0<br>产业新闻<br>发表回复<br>请登录后评论...<br>登录<br>后才能评论<br>提交</div>
+            </div>
+        </div>
+        <div class="timeline-item" data-tags="科研进展">
+            <span class="timeline-date">2026-04-17</span>
+            <div class="timeline-content">
+                <span class="news-source">Graphene.tv</span>
+                <div class="news-tags"><span class="news-tag">科研进展</span></div>
+                <h3 class="news-title">将科研经历化作成长启示——诺贝尔奖、图灵奖得主对话香港中学生</h3>
+                <p class="news-desc">将科研经历化作成长启示——诺贝尔奖、图灵奖得主对话香港中学生</p>
+                <a href="http://www.graphene.tv/20260416152810/" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">将科研经历化作成长启示——诺贝尔奖、图灵奖得主对话香港中学生<br>人民网<br>•<br>2026年4月16日 15:04<br>•<br>科普研学<br>•<br>阅读 21<br>“如何用有限的资源和设施去做研究？”高一学生万子晴向康斯坦丁·诺沃肖洛夫提问。康斯坦丁以自己用普通胶带剥离石墨烯的故事分享道，科研未必依赖昂贵设备，关键是多角度思考，懂得跨界合作。<br>人民网香港4月16日电 （吴宇扬扬）“有谁想成为科学家？”“想拿诺贝尔奖的请举手！”“成功路上真的有捷径吗？”……14日，香港培侨中学大礼堂内，诺贝尔奖、图灵奖得主接连抛出“灵魂拷问”，一场别开生面的“我与科学家在一起”交流活动正在进行。<br>当日，2010年诺贝尔物理学奖得主康斯坦丁·诺沃肖洛夫、2020年诺贝尔生理学或医学奖得主哈维·阿尔特、2023年图灵奖得主艾维·维格森走进校园，与学生深入交流。三位顶尖科学家围绕探寻科学初心、怎样付诸实践、科学如何推动人类进步等话题分享见解，将严谨深奥的科学研究历程，化为滋养学生成长的有益启示。<br>“如何用有限的资源和设施去做研究？”高一学生万子晴向康斯坦丁·诺沃肖洛夫提问。康斯坦丁以自己用普通胶带剥离石墨烯的故事分享道，科研未必依赖昂贵设备，关键是多角度思考，懂得跨界合作。<br>作为文科生，万子晴直言这次交流感受深刻。“从科学分享中收获的不只是知识，更是精神上的启发与鼓舞。”她说，未来会带着这份力量，在自己的道路上继续走下去。<br>同校高一学生林欣滢也深有感触。她坦言，有时难免内心脆弱，遇到挫折很容易放弃，而这次对话让她豁然开朗，认识到即便未能成功，过程本身就是宝藏。<br>香港培侨中学校长伍焕杰接受采访时表示，此次活动还邀请粤港澳大湾区其他城市的学生共同到场聆听交流，希望让更多学生受益于此。他认为，香港可充分发挥国际平台优势，在各类活动中为广大青年创造更多学习机会。<br>香港北京高校校友联盟会长李然期冀，将科学的种子播撒在青少年心中，为科研事业培育新一代生力军，助力更多青年投身科学发展。<br>据悉，“我与科学家在一起”主题活动由香港北京高校校友联盟主办，是第三届“香港世界青年科学大会”暨“香江诺贝论坛”的重点活动之一。（视频制作：实习生张雨洁）<br>本文来自<br>人民网-大湾区频道<br>，本文观点不代表石墨烯网立场，转载请联系原作者。<br>赞<br>(0)<br>人民网<br>0<br>生成海报<br>创新爱尚家申请氧化石墨烯与电阻丝复合柔性加热垫专利，有效节约电能<br>上一篇<br>2026年4月16日<br>14年磨一剑！金阳烯碳凭产学研融合成石墨烯产业“黑马”<br>下一篇<br>2026年4月16日<br>相关推荐<br>科普教育走进课堂 —— 王建兴博士为青少年解读“材料之王”石墨烯的科技魅力<br>2025年11月24日<br>229<br>0<br>0<br>0<br>科普研学<br>促进国际交流 拓宽学术视野——钱学森力学科技英才班赴英开展访学活动<br>2025年8月23日<br>344<br>0<br>0<br>0<br>科普研学<br>神奇材料探秘之行|武理学子到访湖北省石墨烯产业技术创新中心<br>2026年1月7日<br>192<br>0<br>0<br>0<br>科普研学<br>石墨烯农业应用领域解析第三篇：技术解密+安全科普！石墨烯农业，靠谱吗？<br>2026年3月24日<br>95<br>0<br>0<br>0<br>科普研学<br>兰州大学王云华副教授应邀来我校访问交流<br>2025年12月3日<br>222<br>0<br>0<br>0<br>科普研学<br>当“星星的孩子”遇见温暖科技<br>2025年9月10日<br>273<br>0<br>0<br>0<br>科普研学<br>兴国县启动2025年全国科普日教育专项行动 助力青少年科学素养提升<br>2025年9月12日<br>306<br>0<br>0<br>0<br>科普研学<br>从“即物穷理”读懂世界 2025科普中国说河南篇“即物穷理”主题科普活动举办<br>2025年9月26日<br>288<br>0<br>0<br>0<br>科普研学<br>国科大学子走进宁波材料所探索新材料科技创新<br>2026年2月12日<br>164<br>0<br>0<br>0<br>科普研学<br>发表回复<br>请登录后评论...<br>登录<br>后才能评论<br>提交</div>
+            </div>
+        </div>
+        <div class="timeline-item" data-tags="复合材料,柔性显示屏">
+            <span class="timeline-date">2026-04-17</span>
+            <div class="timeline-content">
+                <span class="news-source">Graphene.tv</span>
+                <div class="news-tags"><span class="news-tag">复合材料</span><span class="news-tag">柔性显示屏</span></div>
+                <h3 class="news-title">创新爱尚家申请氧化石墨烯与电阻丝复合柔性加热垫专利，有效节约电能</h3>
+                <p class="news-desc">创新爱尚家申请氧化石墨烯与电阻丝复合柔性加热垫专利，有效节约电能</p>
+                <a href="http://www.graphene.tv/20260416152820/" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">创新爱尚家申请氧化石墨烯与电阻丝复合柔性加热垫专利，有效节约电能<br>金融界<br>•<br>2026年4月16日 12:11<br>•<br>产业新闻<br>•<br>阅读 11<br>本发明利用电阻丝作为主发热体提供基础热源，同时通过石墨烯改性层构建高效的三维导热网络。该网络不仅能快速、均匀地分散电阻丝产生的热量，还能将部分热能转化为波长为6‑14μm的远红外辐射。这种复合传热模式极大地提升了整体电热转换效率，使其高达95%以上，远优于传统电阻丝加热垫（60‑70%），有效节约了电能。<br>国家知识产权局信息显示，北京创新爱尚家科技股份有限公司申请一项名为“一种氧化石墨烯与电阻丝复合的柔性加热垫”的专利，公开号CN121865450A，申请日期为2025年12月。<br>专利摘要显示，本发明属于石墨烯技术领域，具体地涉及一种氧化石墨烯与电阻丝复合的柔性加热垫。本发明利用电阻丝作为主发热体提供基础热源，同时通过石墨烯改性层构建高效的三维导热网络。该网络不仅能快速、均匀地分散电阻丝产生的热量，还能将部分热能转化为波长为6‑14μm的远红外辐射。这种复合传热模式极大地提升了整体电热转换效率，使其高达95%以上，远优于传统电阻丝加热垫（60‑70%），有效节约了电能。<br>天眼查资料显示，北京创新爱尚家科技股份有限公司，成立于2013年，位于北京市，是一家以从事批发业为主的企业。企业注册资本2461.3586万人民币。通过天眼查大数据分析，北京创新爱尚家科技股份有限公司共对外投资了5家企业，参与招投标项目10次，财产线索方面有商标信息78条，专利信息88条，此外企业还拥有行政许可3个。<br>本文来自<br>金融界<br>，本文观点不代表石墨烯网立场，转载请联系原作者。<br>赞<br>(0)<br>金融界<br>0<br>生成海报<br>刘忠范院士走进白市驿一中揭秘“新材料之王”，点燃科学新“烯”望<br>上一篇<br>2026年4月16日 09:46<br>将科研经历化作成长启示——诺贝尔奖、图灵奖得主对话香港中学生<br>下一篇<br>2026年4月16日<br>相关推荐<br>2025年年末总结<br>2025年12月31日<br>192<br>0<br>0<br>0<br>产业新闻<br>超级计算机模拟量子比特材料，构建可润湿石墨烯芯片<br>2022年11月14日<br>977<br>0<br>0<br>0<br>产业新闻<br>[互动]先导股份:石墨烯电池研究处实验阶段<br>2015年11月10日<br>1.8K<br>0<br>0<br>0<br>产业新闻<br>国风机甲来袭！骁骑X5Pro i智能护腰电竞椅，开启健康电竞新体验<br>2025年5月1日<br>526<br>0<br>0<br>0<br>产业新闻<br>河北宇天材料科技取得用于电子设备导热的石墨烯均热板结构及制备方法专利<br>2024年12月11日<br>572<br>0<br>0<br>0<br>产业新闻<br>江苏建亚环保科技股份有限公司与济宁新材料产业园区签订石墨烯材料前驱体项目<br>2018年9月2日<br>2.4K<br>0<br>0<br>0<br>产业新闻<br>先进代表谈感想｜郑美玲：以更加饱满的热情和高昂的斗志把每项工作干好干出彩<br>2023年2月28日<br>1.0K<br>0<br>0<br>0<br>产业新闻<br>热烈庆祝山东沃烯获评“2023年度先进企业”/公司总经理杨杰获评“2023年度高质量发展突出贡献企业家“及“创业领军人才”称号<br>2024年2月21日<br>832<br>0<br>0<br>0<br>产业新闻<br>龙游上马石墨烯产业园项目<br>2018年7月31日<br>2.6K<br>0<br>0<br>0<br>产业新闻<br>发表回复<br>请登录后评论...<br>登录<br>后才能评论<br>提交</div>
+            </div>
+        </div>
+        <div class="timeline-item" data-tags="石墨烯材料">
+            <span class="timeline-date">2026-04-17</span>
+            <div class="timeline-content">
+                <span class="news-source">Graphene.tv</span>
+                <div class="news-tags"><span class="news-tag">石墨烯材料</span></div>
+                <h3 class="news-title">刘忠范院士走进白市驿一中揭秘“新材料之王”，点燃科学新“烯”望</h3>
+                <p class="news-desc">刘忠范院士走进白市驿一中揭秘“新材料之王”，点燃科学新“烯”望</p>
+                <a href="http://www.graphene.tv/20260416152795/" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">刘忠范院士走进白市驿一中揭秘“新材料之王”，点燃科学新“烯”望<br>石墨烯网<br>•<br>2026年4月16日 09:46<br>•<br>科普研学<br>•<br>阅读 20<br>4月10日，中国科学院院士、北京石墨烯研究院院长刘忠范走进重庆科学城白市驿第一中学校，以《石墨烯新材料：从胶带撕出来的论文到高科技产品》为题，为师生带来一场兼具科学性、趣味性与启发性的科普盛宴。<br>4月10日，中国科学院院士、北京石墨烯研究院院长刘忠范走进重庆科学城白市驿第一中学校，以《石墨烯新材料：从胶带撕出来的论文到高科技产品》为题，为师生带来一场兼具科学性、趣味性与启发性的科普盛宴。<br>▲科普讲座现场<br>讲座中，刘忠范院士以一张透明胶带为切入点，揭秘石墨烯的“诞生”故事：2004年，两位科学家借助胶带反复剥离石墨，成功获得单层碳原子材料石墨烯，该成果于2010年斩获诺贝尔物理学奖。“如果当年扔掉那卷胶带，可能就扔掉了一个诺奖。”他用诙谐的语言提醒学生，科学奥秘常藏于细微之处。<br>为了让学生更直观地理解石墨烯的“超能力”，刘忠范院士展示了一张大象站立于石墨烯薄膜的图片。他介绍，单层石墨烯厚度仅0.335纳米，强度却是钢铁的200倍，被誉为“新材料之王”。目前，中国已成为全球石墨烯专利与生产大国，多项核心技术实现突破。<br>从新能源汽车电池、风电叶片除冰，到隐身巡航导弹、卫星热管理，刘忠范院士用大量实际案例串联起石墨烯的应用价值。他还分享了自身科研起步的经历与“搞笑诺贝尔奖”的趣味故事，勉励在场学生：聪明是科研的起点，热爱才能支撑你走到终点，永远不要给自己设限，要勇于突破自我。<br>“石墨烯电池什么时候能真正普及？”“魔角石墨烯的超导现象，未来能用于超导输电吗？”互动环节气氛热烈，学生们踊跃提问，一个个问题既具备前沿思考，又满含探索热情。刘忠范院士逐一耐心解答，用通俗易懂的语言拆解专业难题，并对学生们强烈的求知欲和科学思维给予高度肯定，鼓励大家保持好奇、勇于探索。<br>活动期间，刘忠范院士还参观了白市驿历史文化教育基地，了解区域驿道文化与科学城建设发展情况。<br>重庆科学城白市驿第一中学校党支部书记、校长邱义表示，此次院士科普进校园活动，既普及了前沿科技知识，更传递了宝贵的科学精神，在学生们心中播下科学种子。未来，学校将持续开展各类科普教育活动，助力学子在科学的海洋中扬帆远航，成长为兼具科学素养与创新精神的新时代青少年。<br>（钟义菊）<br>本文来自<br>新重庆-重庆日报原创<br>，本文观点不代表石墨烯网立场，转载请联系原作者。<br>赞<br>(0)<br>石墨烯网<br>0<br>生成海报<br>正泰电器申请镍石墨烯材料相关专利，镍层提升石墨烯性能，增强导电材料导电性<br>上一篇<br>2026年4月16日<br>创新爱尚家申请氧化石墨烯与电阻丝复合柔性加热垫专利，有效节约电能<br>下一篇<br>2026年4月16日<br>相关推荐<br>石墨烯农业应用领域解析第三篇：技术解密+安全科普！石墨烯农业，靠谱吗？<br>2026年3月24日<br>95<br>0<br>0<br>0<br>科普研学<br>诺贝尔物理学奖得主安德烈·海姆受聘西安交大名誉教授  并作特邀交流报告<br>2026年4月11日<br>33<br>0<br>0<br>0<br>科普研学<br>22场科普盛宴点亮科学之光 逾万湾区少年逐梦前行<br>2026年4月11日<br>24<br>0<br>0<br>0<br>科普研学<br>海淀创新大讲堂精彩开讲，BGI详解科技成果转化赋权实践<br>2025年8月22日<br>330<br>0<br>0<br>0<br>科普研学<br>产教融合 人才共育|国家石墨烯创新中心赴宁波技师学院开展招聘宣讲<br>2026年4月16日<br>16<br>0<br>0<br>0<br>科普研学<br>从“即物穷理”读懂世界 2025科普中国说河南篇“即物穷理”主题科普活动举办<br>2025年9月26日<br>288<br>0<br>0<br>0<br>科普研学<br>二维材料的光影<br>2026年2月27日<br>132<br>0<br>0<br>0<br>科普研学<br>一起来“浙”citywalk！十条科普研学精品路线发布<br>2025年8月27日<br>375<br>0<br>0<br>0<br>科普研学<br>石墨烯农业应用领域解析第一篇：破局农业新质生产力！石墨烯农业，从实验室走向规模化的关键跨越<br>2026年3月11日<br>80<br>0<br>0<br>0<br>科普研学<br>发表回复<br>请登录后评论...<br>登录<br>后才能评论<br>提交</div>
+            </div>
+        </div>
+        <div class="timeline-item" data-tags="石墨烯材料">
+            <span class="timeline-date">2026-04-17</span>
+            <div class="timeline-content">
+                <span class="news-source">Graphene.tv</span>
+                <div class="news-tags"><span class="news-tag">石墨烯材料</span></div>
+                <h3 class="news-title">正泰电器申请镍石墨烯材料相关专利，镍层提升石墨烯性能，增强导电材料导电性</h3>
+                <p class="news-desc">正泰电器申请镍石墨烯材料相关专利，镍层提升石墨烯性能，增强导电材料导电性</p>
+                <a href="http://www.graphene.tv/20260416152793/" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">正泰电器申请镍石墨烯材料相关专利，镍层提升石墨烯性能，增强导电材料导电性<br>石墨烯网<br>•<br>2026年4月16日 09:36<br>•<br>产业新闻<br>•<br>阅读 24<br>专利摘要显示，本申请实施例公开了一种镍石墨烯复合材料及其制备方法、导电材料及其制备方法，该镍石墨烯复合材料包括层叠设置的多层石墨烯层和设置于相邻所述石墨烯层的层间的镍层。本申请通过在石墨烯层间形成镍层，可以提升石墨烯的润湿性、减轻其团聚现象，从而提升其与金属粉体混合的均匀性，进而提升石墨烯金属导电材料的导电性。<br>4月16日消息，国家知识产权局信息显示，浙江正泰电器股份有限公司申请一项名为“镍石墨烯复合材料及其制备方法、导电材料及其制备方法”的专利。申请公布号为CN121862490A，申请号为CN202512040316.4，申请公布日期为2026年4月14日，申请日期为2025年12月30日，发明人王景凯、李志博、黄辉忠，专利代理机构深圳紫藤知识产权代理有限公司，专利代理师叶荟祺，分类号H01B1/04、H01B1/02、H01B13/00。<br>专利摘要显示，本申请实施例公开了一种镍石墨烯复合材料及其制备方法、导电材料及其制备方法，该镍石墨烯复合材料包括层叠设置的多层石墨烯层和设置于相邻所述石墨烯层的层间的镍层。本申请通过在石墨烯层间形成镍层，可以提升石墨烯的润湿性、减轻其团聚现象，从而提升其与金属粉体混合的均匀性，进而提升石墨烯金属导电材料的导电性。<br>正泰电器成立于1997年8月5日，于2010年1月21日在上海证券交易所上市，注册地址和办公地址均为浙江省。它是国内领先的电气及光伏企业，核心业务涵盖低压电器与光伏产业，拥有全产业链优势，投资价值凸显。<br>正泰电器主营业务包括配电、终端、控制等低压电器及电子电器等产品的研产销，还有太阳能电池组件生产销售、EPC工程总包及电站开发运营等。所属申万行业为电力设备 – 电网设备 – 配电设备，涉及虚拟电厂、BIPV概念等概念板块。<br>2025年，正泰电器营业收入达591.45亿元，在行业9家公司中排名第1，远超行业平均数80.95亿元和中位数12.35亿元，第二名良信股份(10.080, -0.03, -0.30%)仅44.85亿元。其主营业务中，光伏电站工程承包占比33.87%。净利润方面，2025年为61.27亿元，同样排名行业第1，行业平均数为7.49亿元，中位数为9647.48万元，第二名良信股份为2.67亿元。<br>本文来自<br>新浪证券-红岸工作室<br>，本文观点不代表石墨烯网立场，转载请联系原作者。<br>赞<br>(0)<br>石墨烯网<br>0<br>生成海报<br>泰镒新材、正泰电器取得电接触材料相关专利，石墨烯包覆铜增强弥散，减少合金，防熔焊失效<br>上一篇<br>2026年4月16日<br>刘忠范院士走进白市驿一中揭秘“新材料之王”，点燃科学新“烯”望<br>下一篇<br>2026年4月16日<br>相关推荐<br>福纳新材料首席科学家谢素原教授当选中国科学院院士<br>2021年11月19日<br>2.6K<br>0<br>0<br>0<br>产业新闻<br>北京石墨烯研究院&amp;北京大学纳米化学研究中心2022届博士研究生毕业答辩会暨博士后出站考核答辩会精彩呈现<br>2022年6月7日<br>1.4K<br>0<br>0<br>0<br>产业新闻<br>青岛德通纳米技术有限公司股东安德烈•海姆教授回公司交流指导<br>2017年4月17日<br>1.6K<br>0<br>0<br>0<br>产业新闻<br>国家石墨烯创新中心荣获市、区两级工会创新荣誉<br>2025年12月25日<br>228<br>0<br>0<br>0<br>产业新闻<br>龙蟠科技发布国内首家车用IV型储氢瓶企业标准 意图填补中国氢能产业关键空白<br>2020年5月1日<br>2.1K<br>0<br>0<br>0<br>产业新闻<br>鹤岗借石墨转型 接轨科技前沿<br>2017年12月6日<br>2.3K<br>0<br>0<br>0<br>产业新闻<br>武汉低维材料研究院参展第四届军民两用新材料大会<br>2019年5月26日<br>1.6K<br>0<br>0<br>0<br>产业新闻<br>iGii委托Anthesis支持Gii-Sens的筛选生命周期评估（LCA）<br>2025年7月3日<br>332<br>0<br>0<br>0<br>产业新闻<br>德尔未来上半年净利润增逾7倍 打造石墨烯新材料应用产业链<br>2021年8月27日<br>1.9K<br>0<br>0<br>0<br>产业新闻<br>发表回复<br>请登录后评论...<br>登录<br>后才能评论<br>提交</div>
+            </div>
+        </div>
+        <div class="timeline-item" data-tags="石墨烯材料">
+            <span class="timeline-date">2026-04-17</span>
+            <div class="timeline-content">
+                <span class="news-source">Graphene.tv</span>
+                <div class="news-tags"><span class="news-tag">石墨烯材料</span></div>
+                <h3 class="news-title">泰镒新材、正泰电器取得电接触材料相关专利，石墨烯包覆铜增强弥散，减少合金，防熔焊失效</h3>
+                <p class="news-desc">泰镒新材、正泰电器取得电接触材料相关专利，石墨烯包覆铜增强弥散，减少合金，防熔焊失效</p>
+                <a href="http://www.graphene.tv/20260416152800/" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">泰镒新材、正泰电器取得电接触材料相关专利，石墨烯包覆铜增强弥散，减少合金，防熔焊失效<br>石墨烯网<br>•<br>2026年4月16日 09:36<br>•<br>产业新闻<br>•<br>阅读 18<br>本申请通过对铜或铜合金进行石墨烯包覆，可以增强石墨烯弥散程度，同时减少银铜合金的生成量，使得电接触材料在使用至界面处时不易发生熔焊失效。<br>4月16日消息，国家知识产权局信息显示，浙江泰镒新材料科技有限公司、浙江正泰电器股份有限公司申请一项名为“电接触材料及其制备方法、电接触材料焊接件的制备方法和电器元件”的专利，授权公告号CN121551736B，授权公告日为2026年4月10日。申请公布号为CN121551736A，申请号为CN202610079840.4，申请公布日期为2026年4月10日，申请日期为2026年1月21日，发明人马瑜、李宇航、曹函星，专利代理机构深圳紫藤知识产权代理有限公司，专利代理师叶荟祺，分类号B23K1/008、B23K3/00、B23K3/08。<br>专利摘要显示，本申请实施例公开了一种电接触材料及其制备方法、电接触材料焊接件的制备方法和电器元件，该电接触材料包括依次层叠设置的第一材料层、界面层、第二材料层，所述第一材料层的材料包括金属银，所述第二材料层的材料包括石墨烯铜复合材料，所述界面层包括机械啮合的金属银和石墨烯铜复合材料，或，所述界面层包括机械啮合的金属银和石墨烯铜复合材料以及呈点状分布的银铜合金；其中，所述石墨烯铜复合材料包括石墨烯和铜或铜合金，所述石墨烯包覆于所述铜表面或所述铜合金表面。本申请通过对铜或铜合金进行石墨烯包覆，可以增强石墨烯弥散程度，同时减少银铜合金的生成量，使得电接触材料在使用至界面处时不易发生熔焊失效。<br>天眼查数据显示，浙江泰镒新材料科技有限公司成立日期2021年1月13日，法定代表人王国荣，所属行业为科技推广和应用服务业，企业规模为小型，注册资本7500万人民币，实缴资本7500万人民币，注册地址为浙江省温州市乐清市柳市镇长东路1号正泰物联网传感器产业园2号楼6层602室。浙江泰镒新材料科技有限公司共对外投资了0家企业，参与招投标项目8次，财产线索方面有商标信息1条，专利信息7条，拥有行政许可3个。<br>本文来自<br>新浪证券-红岸工作室<br>，本文观点不代表石墨烯网立场，转载请联系原作者。<br>合金<br>赞<br>(0)<br>石墨烯网<br>0<br>生成海报<br>等离子技术降维打击：将石墨烯成本砍掉 90% 的秘密武器<br>上一篇<br>2026年4月16日 07:37<br>正泰电器申请镍石墨烯材料相关专利，镍层提升石墨烯性能，增强导电材料导电性<br>下一篇<br>2026年4月16日<br>相关推荐<br>鹿寨力促石墨烯产业集聚发展<br>2018年7月30日<br>2.0K<br>0<br>0<br>0<br>产业新闻<br>中健国康申请石墨烯填充床垫生产成品质量检测分析方法专利，全面评估石墨烯填充床垫的质量和性能<br>2024年3月23日<br>887<br>0<br>0<br>0<br>产业新闻<br>森麒麟智能制造助跑轮胎行业 推进转型升级<br>2016年11月22日<br>1.4K<br>0<br>0<br>0<br>产业新闻<br>向老寒腿低头！保暖神器又又又升级<br>2021年11月17日<br>1.3K<br>0<br>0<br>0<br>产业新闻<br>KB Element 利用环保型石墨烯技术开拓全球市场 推出非氧化石墨烯及其应用……旨在拓展航空、国防和消费市场<br>2025年3月12日<br>508<br>0<br>0<br>0<br>产业新闻<br>高新区环保局关于对山东希诚新材料科技有限公司年产1万吨石墨烯碳纳米管电子浆料项目环境影响评价文件受理情况的公示<br>2020年12月10日<br>1.7K<br>0<br>0<br>0<br>产业新闻<br>【资讯】年产值高达60亿元的特种工业涂料和树脂项目落户新疆<br>2026年2月6日<br>159<br>0<br>0<br>0<br>产业新闻<br>银川开发区与天津石墨烯储能公司签订协议<br>2017年10月2日<br>2.2K<br>0<br>0<br>0<br>产业新闻<br>道氏技术：汉尧是公司前驱体产品的客户<br>2024年9月2日<br>861<br>0<br>0<br>0<br>产业新闻<br>发表回复<br>请登录后评论...<br>登录<br>后才能评论<br>提交</div>
+            </div>
+        </div>
+        <div class="timeline-item" data-tags="行业资讯">
+            <span class="timeline-date">2026-04-17</span>
+            <div class="timeline-content">
+                <span class="news-source">Graphene.tv</span>
+                <div class="news-tags"><span class="news-tag">行业资讯</span></div>
+                <h3 class="news-title">等离子技术降维打击：将石墨烯成本砍掉 90% 的秘密武器</h3>
+                <p class="news-desc">等离子技术降维打击：将石墨烯成本砍掉 90% 的秘密武器</p>
+                <a href="http://www.graphene.tv/20260416152829/" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">等离子技术降维打击：将石墨烯成本砍掉 90% 的秘密武器<br>石墨烯网<br>•<br>2026年4月16日 07:37<br>•<br>产业新闻<br>•<br>阅读 9<br>公司采用了基于等离子体（Plasma）的非氧化工艺。“我们在常压下产生高能等离子体，并让经过预处理的石墨通过，利用热冲击引发分子层分离，”裴敬正解释道。与行业内专注于单层石墨烯的努力不同，KB Element优先推进多层石墨烯纳米片（Nanoplatelets）的商业化。“单层石墨烯可能具有更优越的特性，但这并不一定是市场所需要的，”裴敬正说。“我们认为，先建立起市场更为重要。”<br>近日韩国<br>KB Element<br>首席执行官表示，公司正在将其<br>非氧化石墨烯（Non-oxidized Graphene）<br>技术扩展到从智能手机热管理到汽车材料等多个行业，并准备于明年通过技术特例方式上市。该公司是一家总部位于韩国坡州的材料科技公司，专注于非氧化石墨烯（Non-oxidized Graphene）的研发与大规模量产。<br>KB Element首席执行官裴敬正（Bae Kyung-jung）。（图片来源：THE ELEC）<br>首席执行官裴敬正表示，在经历了多年市场透明度有限的阶段后，石墨烯的商业化进程正进入一个<br>拐点<br>。“虽然石墨烯已经出现了10到20年，但许多人认为其市场前景不明朗。而现在，一切才刚刚开始，”裴敬正在接受采访时说。“全面商业化始于两三年前，未来市场将显著增长。”<br>颠覆传统：等离子非氧化工艺解决行业痛点<br>石墨烯是一种衍生自石墨的碳纳米材料，以高导热性、导电性和机械强度著称，但其商业化进程此前一直落后于预期。裴敬正将其因于传统生产方法的局限性。“全球广泛使用的氧化还原工艺涉及数十个化学步骤，过程复杂且成本昂贵，”他说。“此外，每生产1公斤石墨烯会产生2到4吨酸性废水，造成了严重的环保挑战。”<br>为了解决这些问题，公司采用了基于<br>等离子体（Plasma）<br>的非氧化工艺。“我们在常压下产生高能等离子体，并让经过预处理的石墨通过，利用热冲击引发分子层分离，”裴敬正解释道。<br>他补充说，简化后的工艺将生产<br>步骤减少到四个<br>，并将价格降至传统方法的<br>约十分之一<br>，同时质量<br>提升了约三倍<br>。<br>与行业内专注于单层石墨烯的努力不同，KB Element优先推进多层<br>石墨烯纳米片（Nanoplatelets）<br>的商业化。“单层石墨烯可能具有更优越的特性，但这并不一定是市场所需要的，”裴敬正说。“我们认为，先建立起市场更为重要。”<br>该公司在坡州（Paju）运营一家年产能约为 21 吨的工厂，这相当于约<br>2,100 吨的油墨产品<br>。目前该厂的产能利用率约为 5%，今年的目标是达到 15%，届时预计将转化约为 100 亿韩元的年营收。<br>市场导向：从智能手机散热到高性能复合材料<br>经过约两年的资质认定，KB Element于2020年开始向韩国国内半导体和显示器公司供货。现在，其石墨烯正被应用到<br>消费品<br>和<br>汽车领域<br>。<br>在服装领域，公司向全球品牌供应复合材料，在聚酰胺（尼龙）中掺入1%至2%的石墨烯，可减轻约14%的重量并提高约60%的耐用性。<br>在智能手机中，石墨烯被用于散热膜和热界面材料（TIM）。“随着设备集成度越来越高，热管理需求也在不断增长，”裴敬正说。<br>在汽车应用方面，公司为吸音材料提供石墨烯粉末，使降噪效果提升约15%。公司还瞄准了具备触屏兼容导电性能的工业手套市场，该市场单一型号的年需求量可达数千万双。<br>裴敬正表示，由于严格的资质审核，商业化通常需要一到两年时间，但一旦获得批准，就会进入标准化采用阶段。<br>谈到竞争，他指出虽然一些海外公司也采用非氧化方法，但很少有公司实现量产。“在韩国，我们实际上是<br>唯一一家<br>同时具备<br>量产能力<br>和<br>商业化供应能力<br>的公司，”他说。<br>资本布局：剑指明年 IPO 与千亿韩元估值<br>KB Element计划于明年第三季度进行技术特例IPO，新韩证券（Shinhan Securities）担任主承销商。公司迄今已融资约<br>240亿韩元<br>，目前正在寻求<br>120亿韩元<br>的B轮融资。<br>“去年缺乏可见的成果，但今年我们交付了实质性的业绩，”裴敬正说。“如果今年能稳步发展，我们认为实现超过1000亿韩元的估值是可以达到的。”<br>他补充说，公司在包括美、日、中、英和欧洲在内的主要市场拥有约62项国际专利，涵盖了设备和工艺技术。<br>展望未来，裴敬正强调了培育市场的重要性。“一旦市场形成，对高质量石墨烯的需求自然会随之而来，”他说。“在韩国石墨烯企业中，我们商业化合作的客户数量最多，在快速增长的同时正产生具有意义的营收。”<br>本文来自<br>THEELEC<br>，本文观点不代表石墨烯网立场，转载请联系原作者。<br>赞<br>(0)<br>石墨烯网<br>0<br>生成海报<br>中超控股：公司现持有常州中超石墨烯电力科技有限公司76.67%股权<br>上一篇<br>2026年4月15日<br>泰镒新材、正泰电器取得电接触材料相关专利，石墨烯包覆铜增强弥散，减少合金，防熔焊失效<br>下一篇<br>2026年4月16日<br>相关推荐<br>中国移动NZONE S7 Pro+开卖：66W超级快充 2299元起<br>2021年8月20日<br>1.4K<br>0<br>0<br>0<br>产业新闻<br>孙兵调研部分重点企业时强调 深入学习贯彻党的二十届三中全会精神 扎实推动经济社会高质量发展<br>2024年8月13日<br>699<br>0<br>0<br>0<br>产业新闻<br>校友企业行–走进雷索新材料(苏州)有限公司<br>2023年8月22日<br>526<br>0<br>0<br>0<br>产业新闻<br>莅临考察 | 市委党校培训班领导赴宇航派蒙考察调研<br>2023年4月26日<br>967<br>0<br>0<br>0<br>产业新闻<br>冠界科技与Energem企业签合并协议　将在那斯达克交易所上市<br>2022年8月1日<br>1.4K<br>0<br>0<br>0<br>产业新闻<br>国产旗舰固态硬盘明日之星！紫光闪存UNIS SSD S2 Ultra现已开售<br>2024年6月18日<br>863<br>0<br>0<br>0<br>产业新闻<br>全国政协原副主席、全国工商联名誉主席黄孟复一行调研圣泉<br>2016年11月14日<br>2.0K<br>0<br>0<br>0<br>产业新闻<br>中国量产全球最高级别单层石墨烯 核心材料不受制于人<br>2019年6月13日<br>2.4K<br>0<br>0<br>0<br>产业新闻<br>兴和县盛华矿业有限公司举行规模制备石墨烯新技术及产品新闻发布会<br>2018年11月1日<br>2.4K<br>0<br>0<br>0<br>产业新闻<br>发表回复<br>请登录后评论...<br>登录<br>后才能评论<br>提交</div>
+            </div>
+        </div>
+        <div class="timeline-item" data-tags="石墨烯材料">
+            <span class="timeline-date">2026-04-17</span>
+            <div class="timeline-content">
+                <span class="news-source">Graphene.tv</span>
+                <div class="news-tags"><span class="news-tag">石墨烯材料</span></div>
+                <h3 class="news-title">德图新材料申请一种石墨烯的制备方法专利，获得尺寸均匀的石墨烯</h3>
+                <p class="news-desc">德图新材料申请一种石墨烯的制备方法专利，获得尺寸均匀的石墨烯</p>
+                <a href="http://www.graphene.tv/20250621142792/" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">德图新材料申请一种石墨烯的制备方法专利，获得尺寸均匀的石墨烯<br>金融界<br>•<br>2025年6月21日 16:13<br>•<br>产业新闻<br>•<br>阅读 424<br>S1.将氧化剂分散于水中，加入石墨粉体，分散均匀后加入气泡稳定剂，分散均匀后得到预分散液；S2.搅拌并超声波震荡预分散液，产生气泡，对石墨进行氧化剥离；S3.结束超声波震荡，得到石墨烯分散液，中和石墨烯分散液，过滤、清洗，干燥得到石墨烯。<br>金融界2025年6月21日消息，国家知识产权局信息显示，广东顺德德图新材料有限公司申请一项名为“一种石墨烯的制备方法”的专利，公开号CN120172398A，申请日期为2025年03月。<br>专利摘要显示，本申请公开了一种石墨烯的制备方法，属于石墨材料生产领域。一种石墨烯的制备方法，包括以下步骤：S1.将氧化剂分散于水中，加入石墨粉体，分散均匀后加入气泡稳定剂，分散均匀后得到预分散液；S2.搅拌并超声波震荡预分散液，产生气泡，对石墨进行氧化剥离；S3.结束超声波震荡，得到石墨烯分散液，中和石墨烯分散液，过滤、清洗，干燥得到石墨烯。<br>天眼查资料显示，广东顺德德图新材料有限公司，成立于2019年，位于佛山市，是一家以从事非金属矿物制品业为主的企业。企业注册资本500万人民币。通过天眼查大数据分析，广东顺德德图新材料有限公司财产线索方面有商标信息4条，专利信息17条，此外企业还拥有行政许可5个。<br>本文来自<br>金融界<br>，本文观点不代表石墨烯网立场，转载请联系原作者。<br>赞<br>(0)<br>金融界<br>0<br>生成海报<br>北京石墨烯研究院产业发展取得二维材料转移装置专利，避免二维材料在转移过程中被挤压变形<br>上一篇<br>2025年6月21日<br>「镇享科学」开启神奇石墨烯实验室科学启蒙之旅<br>下一篇<br>2025年6月21日<br>相关推荐<br>两天内生产1公斤边缘功能化石墨烯——加速能源应用的商业化<br>2023年5月18日<br>1.0K<br>0<br>0<br>0<br>产业新闻<br>聚焦高质量发展，打造装备制造与新兴产业高地哈密高新区今年新入园项目达37个 总投资202亿元<br>2025年11月19日<br>253<br>0<br>0<br>0<br>产业新闻<br>新材料企业“搭”高层次人才项目路演“快车” 道滘现场签约两合作项目<br>2018年12月12日<br>2.3K<br>0<br>0<br>0<br>产业新闻<br>Levidian 和 Southwire 携手探索美国电缆生产的去碳化之路<br>2024年5月16日<br>808<br>0<br>0<br>0<br>产业新闻<br>厦门斯研新材料亮相第26届中国环博会<br>2025年4月25日<br>445<br>0<br>0<br>0<br>产业新闻<br>高质量：“西部瓷都”绿色突围<br>2018年3月26日<br>2.2K<br>0<br>0<br>0<br>产业新闻<br>NanoXplore 2025财年第三季度每股收益低于预期，股价保持稳定<br>2025年5月14日<br>424<br>0<br>0<br>0<br>产业新闻<br>宝泰隆公司石墨烯产品获得国际认证<br>2018年9月25日<br>2.2K<br>0<br>0<br>0<br>产业新闻<br>多国数字经济项目“竞技”两江新区云创赛<br>2020年4月29日<br>2.5K<br>0<br>0<br>0<br>产业新闻<br>发表回复<br>请登录后评论...<br>登录<br>后才能评论<br>提交</div>
+            </div>
+        </div>
+        <div class="timeline-item" data-tags="行业资讯">
+            <span class="timeline-date">2026-04-17</span>
+            <div class="timeline-content">
+                <span class="news-source">Graphene.tv</span>
+                <div class="news-tags"><span class="news-tag">行业资讯</span></div>
+                <h3 class="news-title">科技部等十三部门印发《关于支持女性科技人才在科技创新中发挥更大作用的若干措施》的通知</h3>
+                <p class="news-desc">科技部等十三部门印发《关于支持女性科技人才在科技创新中发挥更大作用的若干措施》的通知</p>
+                <a href="http://www.graphene.tv/2021071942047/" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">科技部等十三部门印发《关于支持女性科技人才在科技创新中发挥更大作用的若干措施》的通知<br>石墨烯网<br>•<br>2021年7月19日 13:14<br>•<br>政策动向<br>•<br>阅读 2944<br>女性科技人才是科技人才队伍的重要组成部分，是我国科技事业十分重要的力量。为进一步激发女性科技人才创新活力，更好发挥女性科技人才在推动创新驱动发展、实现高水平科技自立自强、建设世界科技强国中的重要作用，现提出如下措施。<br>各有关单位：<br>为进一步激发女性科技人才创新活力，更好发挥女性科技人才在推动创新驱动发展、实现高水平科技自立自强、建设世界科技强国中的重要作用，科技部、全国妇联、教育部、工业和信息化部、人力资源社会保障部、卫生健康委、国资委、中科院、工程院、社科院、全国总工会、中国科协、自然科学基金委研究制定了《关于支持女性科技人才在科技创新中发挥更大作用的若干措施》。现印发给你们，请结合实际抓好贯彻落实。<br>科技部　　　　　　　　　　　全国妇联<br>教育部　　　　　　　　工业和信息化部<br>人力资源社会保障部　　　　卫生健康委<br>国资委　　　　　　　　　　　　中科院<br>工程院　　　　　　　　　　　　社科院<br>全国总工会　　　　　　　　　中国科协<br>自然科学基金委<br>2021年6月17日<br>（此件主动公开）<br>关于支持女性科技人才在科技创新中发挥更大作用的若干措施<br>女性科技人才是科技人才队伍的重要组成部分，是我国科技事业十分重要的力量。为进一步激发女性科技人才创新活力，更好发挥女性科技人才在推动创新驱动发展、实现高水平科技自立自强、建设世界科技强国中的重要作用，现提出如下措施。<br>一、深刻认识支持女性科技人才在科技创新中发挥更大作用的重要意义<br>近年来，我国女性科技人才队伍规模逐步扩大、结构不断优化、能力显著提升，在基础理论、应用技术、工程实践等各个方面作出杰出贡献，充分彰显出巾帼力量。但从总体上看，高层次女性科技人才仍较为缺乏，女性科技人才在职业发展中仍面临一些瓶颈问题，符合女性科技人才特点的专项政策不足，女性科技人才在科技创新中的作用尚未得到充分发挥。在“十四五”和今后相当长时期内，要坚持性别平等、机会平等，为女性科技人才成长进步、施展才华、发挥作用创造更好环境，支持女性科技人才坚持“四个面向”，不断向科学技术广度和深度进军，努力造就一批具有世界影响力的顶尖女性科技人才，为建成世界科技强国作出新的更大贡献。<br>二、培养造就高层次女性科技人才<br>1.支持女性科技人才承担科技计划项目。在国家科技计划项目组织实施中，要创造条件吸纳更多女性科技人才参与。在若干国家重点研发计划中探索设立女科学家项目。国家重点研发计划青年科学家项目适当放宽女性申请人年龄限制。继续落实好相关人才项目中放宽女性科研人员申请年龄的政策，进一步统筹研究国家自然科学基金各类人才项目中女性科研人员的申请年龄。鼓励科研单位设立女性科研人员科研专项。<br>2.更好发挥女性科技人才在科技决策咨询中的作用。国家重大科技战略咨询、科技政策制定、科技伦理治理和科技计划项目指南编制等科技活动，提高高层次女性科技人才参与度。在国家科技计划项目、国家科技奖励、国家人才计划等各类评审工作中，逐步提高女性专家参与比例。国家科技专家库等科技评审专家库，鼓励符合条件的女性专家入库。<br>3.支持女性科技人才参与国际科技交流合作。国家留学基金委等积极支持更多女性科技人才出国访学，出国（境）培训计划项目加大对女性科技人才支持力度，鼓励支持更多女性科技人才参与国际科技组织工作，提升其国际影响力和活跃度。<br>4.扩展女性科技人才科研学术网络。科技领域全国性学会、协会、研究会等要提高常务理事、学会负责人、会员以及代表中的女性比例，鼓励设立女科技工作者专门委员会。科技类学术会议要增加女性大会主席、主持人和主要学术报告人的数量，鼓励设立女性专场。加强高层次女性科技人才领导力培训。<br>5.推动落实高级职称女性科技人才退休政策。事业单位要认真落实高级职称女性专业技术人员退休政策，符合条件的女性专业技术人员可自愿选择年满60周岁或年满55周岁退休。年满60周岁的少数具有高级职称的女性专业技术人员，因工作需要延长退休年龄的，执行高级专家离休退休有关政策。国有企业要认真落实高级专家离休退休相关政策，做好女性高级专家退休相关工作。<br>三、大力支持女性科技人才创新创业<br>6.支持女性科技人才投身高质量发展。国家高新技术产业开发区、科技企业孵化器（众创空间等）加强对女性科技创业者的支持力度，培育更多女性科技企业家。支持女性科技人才参加科技人员服务企业专项行动，提升企业技术创新能力。支持更多女性科技人才参加科技特派员行动，深入基层一线服务乡村振兴。<br>7.扎实开展“科技创新巾帼行动”。“科技创新巾帼行动”各参与部门要积极搭建平台，提供服务，支持女性科技人才立足岗位、锐意创新，加强交流合作，产出高水平原创成果，加速科技成果转化。鼓励工会、妇联的基层组织加强对女性科技人才的服务与关怀。广泛开展巾帼科普志愿服务，助力提高全民科学素养。<br>四、完善女性科技人才评价激励机制<br>8.支持女性科技人才入选国家高层次人才计划。国家人才计划适当放宽女性申报人年龄限制，用人单位在同等条件下要优先推荐女性科技人才。中国科学院、中国工程院院士增选中，鼓励提名更多优秀女科学家作为候选人，在同等条件下支持女性优先入选。<br>9.加大对女性科技人才的奖励力度。全国三八红旗手、全国巾帼建功标兵、中国青年科技奖、全国创新争先奖等各类评选表彰中提高女性科技人才的入选比例。在国家科技奖励工作中，鼓励提名女性负责人项目。逐步扩大中国青年女科学家奖规模，鼓励社会力量设立面向女科学家的科技奖项。<br>10.建立有利于女性科技人才发展的评价机制。国家自然科学基金项目评审中，执行同等条件下女性科研人员优先的资助政策。探索在人才计划评审中，向评审专家宣传支持女性科技人才、“同等条件下女性优先”。<br>五、支持孕哺期女性科技人才科研工作<br>11.为孕哺期女性科技人才营造良好科研环境。鼓励科研单位设立女性科研回归基金，资助女性科研人员生育后重返科研岗位。在考核评价、岗位聘用等环节，对孕哺期女性科技人才适当放宽期限要求、延长评聘考核期限。支持高等学校和科研院所商孕哺期女性科研人员在孕哺期保留研究生招生资格。在国家自然科学基金项目实施过程中，允许女性科研人员因生育或处于孕哺期延长结题时间。<br>12.为孕哺期女性科技人才创造生育友好型工作环境。鼓励高等学校和科研院所等通过实行弹性工作制、建设母婴室、提供儿童托管服务等方式，为孕哺期女性科技人才开展科研工作创造条件。对于在生育友好型工作环境创建工作中表现突出的单位，加大表彰奖励力度。<br>六、加强女性后备科技人才培养<br>13.培养女学生的科学兴趣。大力宣传女科学家典型事迹和科技女性卓越贡献，常态化开展女科学家进校园活动，发挥榜样引领作用，培养女学生爱科学、学科学的兴趣和志向。各类科普教育基地和科普活动要提高中小学女学生参与度。鼓励支持女学生参与中小学生科技竞赛活动。<br>14.鼓励女性从事科学技术工作。各级各类学校要广泛开展性别平等教育，高中阶段教育要加强对女学生学科选择和职业发展的引导，消除学科性别刻板观念对女学生专业选择的不利影响。支持高等学校和科研院所设置理工科专业优秀女大学生奖学金，鼓励更多女大学生参</div>
+            </div>
+        </div>
+        <div class="timeline-item" data-tags="传感器,航空航天">
+            <span class="timeline-date">2026-04-17</span>
+            <div class="timeline-content">
+                <span class="news-source">Graphene.tv</span>
+                <div class="news-tags"><span class="news-tag">传感器</span><span class="news-tag">航空航天</span></div>
+                <h3 class="news-title">南京航空航天大学周建新副研究员课题组综述：石墨烯自供能传感系统</h3>
+                <p class="news-desc">南京航空航天大学周建新副研究员课题组综述：石墨烯自供能传感系统</p>
+                <a href="http://www.graphene.tv/2022033162054/" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">南京航空航天大学周建新副研究员课题组综述：石墨烯自供能传感系统<br>物理化学学报<br>•<br>2022年3月31日 11:30<br>•<br>科研进展<br>•<br>阅读 2372<br>本文从自供能器件的基本能量转化原理出发，介绍了石墨烯在电化学、光伏、摩擦电、水伏以及热电、压电、热释电等多种供能类型的自供能传感器件中的应用，并展望了基于石墨烯的自供能传感器件的未来发展、挑战和前景。<br>第一作者：<br>胡聪<br>通讯作者：<br>周建新<br>通讯单位：<br>南京航空航天大学纳米科学研究所，机械结构力学及控制国家重点实验室，纳智能材料器件教育部重点实验室<br>主要亮点<br>本文从自供能器件的基本能量转化原理出发，介绍了石墨烯在电化学、光伏、摩擦电、水伏以及热电、压电、热释电等多种供能类型的自供能传感器件中的应用，并展望了基于石墨烯的自供能传感器件的未来发展、挑战和前景。<br>此综述是<br>石墨烯的功能与应用专刊<br>邀请稿，<br>客座编辑：<br>国家纳米科学中心<br>智林杰<br>研究员、<br>王斌<br>研究员。<br>研究背景<br>随着深度学习人工智能、物联网等技术的快速兴起，智能化的设备对渐趋复杂的传感系统设计提出了更多的要求，如在柔性机电系统中，传感器已从少量的点分布走向类似生物皮肤的“面”和“网”分布方式，传感器的数量几乎指数级增加，给供能系统设计带来了巨大的挑战。传统的供能方式利用外部电源和线缆集中供能，当传感器的广度和密度增加时，将带来设计复杂度和传感系统占比迅速增加等问题，这大大制约了智能传感系统的进一步发展，自供能传感系统则为这些问题的解决提供了途径。近年来，随着自供能传感器件和传感系统的研究展开，石墨烯因其独特的二维结构、优异的电学/力学/热学/光学性能、以及可通过官能化进一步在分子层次进行功能扩展等优势而逐渐得到了广泛的应用。同时，石墨烯本身在传感、能源捕获和存储等方面表现的“多面手”能力也为自供能传感系统的设计带来了很大的便利。基于不同的能量转化方式和供能原理，深入认识石墨烯在各种自供能传感器件中的作用，对于发展新型智能传感系统很有意义。<br>核心内容<br>1<br>电化学供能<br>电化学储能设备具有悠久的历史，长久以来作为稳定可靠的供能储能单元。为进一步满足可穿戴设备和柔性电子产品的需求，可弯曲、拉伸和折叠的柔性电化学储能设备被提出并得到快速的发展。其中，电极是柔性电化学储能设备的关键组成部分，对电化学储能设备的机械柔性和电学性能起着重要的作用。传统的浆料电极在变形过程中会因活性材料分层而导致性能降低，并且反复变形时难以恢复原始状态，因此无法满足柔性电化学储能设备的需求。石墨烯等碳纳米材料具有大的比表面积、良好的化学稳定性、导电性和机械柔韧性，成为了柔性电化学储能设备的理想电极材料。石墨烯基柔性电极不仅能赋予电化学储能设备良好的应变能力，而且能提高其电学性能，如当石墨烯分别作为锂离子电池和电化学双层电容器的活性电极材料时，锂离子储存容量和双电层容量理论上分别能达到744 mAh·g<br>−1<br>和550 F·g<br>−1<br>。相较于碳纳米管、多孔碳，石墨烯的导电性能更优越，且易于微纳加工成各种结构形状。此外，石墨烯对应变、湿度等十分敏感，当其作为电极时能够使电化学储能设备响应压力、湿度等的变化来输出电信号。总而言之，基于石墨烯的柔性电化学储能设备，由于其稳定且持续的直流输出、良好的形变能力以及对外界刺激的响应性，在自供能传感系统中具有重要的应用潜力。<br>图1  石墨烯在电化学自供能传感器中的应用。(a–c) 基于石墨烯泡沫的电化学电池用于触摸传感；(d–f) 锌丝-氯化钠溶液-石墨烯柔性电池用于应变传感；(g，h)纤维锂硫电池响应弯折变形；(i–k) 锂-氧化石墨烯薄膜电化学电池用于湿度传感。<br>2<br>光伏供能<br>石墨烯具有极高的载流子迁移率和优异的光学透明度，使其成为很好的透明导电电极材料并广泛地用于各种光伏器件。与传统的透明导电电极氧化铟锡(ITO)相比，石墨烯更轻薄、透明、导电性优良，而且具有优异的化学稳定性和出色的机械柔韧性，适合柔性结构中应用。此外，石墨烯可以与各种半导体材料，如硅、锗、砷化镓、二氧化钛、过渡族金属硫族化合物等结合形成肖特基结，构成肖特基结光探测器。石墨烯还可以作为功能性添加剂加入到氧化物半导体中，调节其载流子迁移率和费米能级，从而改善其构成的光伏器件的性能。近年来，人们基于石墨烯开发了许多自供能的光伏器件，能够用于光电探测(图2)、化学传感和位置检测(图3)等。<br>图2  基于石墨烯的自供能光伏器件用于光信号探测。(a–d) 石墨烯/硅肖特基结自供能光电探测器；(e–h) 石墨烯/砷化镓肖特基结自供能光电探测器；(i–l) 石墨烯用于异质结自供能光电探测器中。<br>图3  基于石墨烯的自供能光伏器件用于其它信号探测。(a，b) 化学传感；(c，d) 位置传感。<br>3<br>摩擦电供能<br>摩擦起电效应是一种由接触-分离时电荷转移引发的带电效应。石墨烯由于其优异的电学性能和力学性能(断裂强度高达125 GPa)，可以在摩擦发电器件中充当良好的柔性电极材料，并提高其电学输出和力学性能。当化学改性或杂化的石墨烯充当摩擦发电器件的摩擦起电层时，还会赋予其某些特殊的性能。摩擦电供能的传感系统主要分为：<br>1、直接的摩擦电式传感器：摩擦发电器件独立作为自驱动形变传感器，当施加压力发生形变时，形变的大小影响摩擦层之间的有效接触面积，从而导致其输出电流和电压的变化(图4)。<br>2、摩擦电结构驱动其他传感器：如TENG器件将机械能转化为电能，给传统的传感器供能(图5)。<br>图4  基于石墨烯的直接的摩擦电式传感器。(a–d) 接触分离式摩擦发电器件；(e–k) 单电极式摩擦发电器件。<br>图5  摩擦电单元驱动石墨烯传感单元的复合自驱动传感器。摩擦电驱动基于石墨烯的电容式(a–d)和电阻式(e，f)传感单元；摩擦电驱动基于石墨烯的湿度传感器(g)和化学传感器(h)。<br>4<br>水伏供能<br>近年来，人们发现各种形式运动的水与石墨烯等材料表面发生耦合时会直接产生显著的电压和电流，从而出现了一种新的能量转换效应，称之为水伏效应。目前已发现，碳纳米管、多孔碳、石墨烯等碳纳米材料的表面与流动、波动、滴落和蒸发的水作用都会产生电势差，分别称为流动势、波动势、拖曳势和蒸发势。水伏效应在自供能传感中具有非常方便的应用：当水或溶液与石墨烯发生动态作用时，发生电荷转移，通过固-液界面耦合直接在碳纳米材料中产生宏观可测量的电信号，利用电信号输出即可反向推测出固-液界面的性质，继而得知固体或液体的运动速度、运动方向、溶液浓度、湿度等信息(图6)。<br>图6  基于石墨烯水伏效应的自供能传感器。利用水伏效应实现对流体(a，b)、液滴(c，d)和气态水分子(g–k)的探测。<br>5<br>其他供能方式<br>除了以上供能方式外，还有许多其它的供能方式，如热电效应、压电效应、压电光电子效应、热释电效应、热释电光效应等一系列方式(图7)。<br>图7  其它供能方式的石墨烯基自供能传感器。(a，b) 热电效应；(c，d) 压电光电子效应；(e–g) 压电离子效应；(h，i) 热释电效应；(j，k) 热释电光电子学效应。<br>结论与展望<br>当前，基于石墨烯的自供能传感器件和系统的设计思路主要分两种：一是直接将其它能量转化成可测量的电信号，通过该电信号获取信息，如通过摩擦电效应、光伏效应、水伏效应分别实现对触</div>
+            </div>
+        </div>
+        <div class="timeline-item" data-tags="行业资讯">
+            <span class="timeline-date">2026-04-17</span>
+            <div class="timeline-content">
+                <span class="news-source">Graphene.tv</span>
+                <div class="news-tags"><span class="news-tag">行业资讯</span></div>
+                <h3 class="news-title">集空气净化器、除湿器于一体的太阳能空气取水器问世：每天可产出 19 升饮用水</h3>
+                <p class="news-desc">集空气净化器、除湿器于一体的太阳能空气取水器问世：每天可产出 19 升饮用水</p>
+                <a href="http://www.graphene.tv/20240609119440/" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">集空气净化器、除湿器于一体的太阳能空气取水器问世：每天可产出 19 升饮用水<br>IT之家<br>•<br>2024年6月9日 15:02<br>•<br>产业新闻<br>•<br>阅读 929<br>DrinkingMaker 公司表示，得益于高效产水除湿技术 AquaFetch+ 和先进的石墨烯材料，即使在极度干燥的环境下，取水器也能高效运行。“它可以在干旱地区收集水汽，即使在荒漠地区也能确保获得宝贵的饮用水源，”DrinkingMaker 公司说道，“无论您身在何处，DrinkingWater 都能提供源源不断的纯净水。从实验室到灾区，甚至战乱地区，都能确保充足的清洁水源和安心保障。”<br>IT之家 6 月 9 日消息，绿色科技领域正掀起一股新潮流，利用可再生能源从空气或水中提取饮用水的技术备受关注。近日，一家名为 DrinkingMaker 的公司即将推出名为 DrinkingWater 的下一代多功能空气取水器，该设备采用太阳能驱动，可从空气中提取水分。<br>DrinkingMaker 公司从沙漠甲虫和仙人掌身上汲取灵感，研发了 DrinkingWater 这款新型空气取水器。据该公司称，该取水器每天可产生多达 19 升的饮用水，并提供可选的富含矿物质的滤芯，用户可以根据个人需求定制矿泉水。<br>然而，该产品的最大亮点在于其集空气净化器、除湿器和取水器于一体，并且配备太阳能供电系统，即使旅行在外也能轻松使用。DrinkingMaker 公司表示，得益于高效产水除湿技术 AquaFetch+ 和先进的石墨烯材料，即使在极度干燥的环境下，取水器也能高效运行。“它可以在干旱地区收集水汽，即使在荒漠地区也能确保获得宝贵的饮用水源，”DrinkingMaker 公司说道，“无论您身在何处，DrinkingWater 都能提供源源不断的纯净水。从实验室到灾区，甚至战乱地区，都能确保充足的清洁水源和安心保障。”<br>DrinkingWater 还提到，该公司的 AirTrue 技术采用三重过滤屏障：可去除 99.97% 的有害 PM2.5 颗粒物，并有效吸附 99.7% 的颗粒物。该系统可“确保春季和夏季细菌、病毒和过敏原远离您的生活环境，呵护家人的呼吸道健康。”<br>DrinkingWater 这款被称为下一代 3 合 1 空气取水器的产品已经在 Indiegogo 美国众筹网站上发起众筹活动。该产品在 Indiegogo 上似乎获得了相当可观的支持，距离众筹活动结束还有大约两周的时间，其筹资额已经达到目标的 2200% 以上。<br>DrinkingWater 的基础版预售价为 329 美元（IT之家备注：当前约 2387 元人民币），专业版预售价为 339 美元（当前约 2459 元人民币）。需要提醒的是，这些价格仅限于通过 Indiegogo 众筹活动预订。相比之下，市面上其他现有的空气取水器，例如 Kara Water 的 Kara Pure 售价为 797 英镑（当前约 7369 元人民币），而 Majik Water 的 500 升取水器售价更是高达 12500 美元（当前约 90677 元人民币）。DrinkingMaker 的取水器体积小巧，与家用咖啡机大小相当，在价格上更具优势。<br>IT之家需要提醒的是，众筹活动能否成功转化为量产产品仍存在未知，即使 DrinkingMaker 团队已经在 Indiegogo 页面上提供了大量佐证材料，其中包括产品参加香港电子展的照片以及展示其实际使用的视频。<br>本文来自<br>IT之家<br>，本文观点不代表石墨烯网立场，转载请联系原作者。<br>DrinkingMaker<br>光热材料<br>赞<br>(0)<br>IT之家<br>0<br>生成海报<br>加能石墨烯智暖发热膜：带来更多美好与惊喜<br>上一篇<br>2024年6月8日 23:40<br>iPhone 16 电池拥有多层保护 金属外壳有助于实现更好的热传导效果<br>下一篇<br>2024年6月9日 19:57<br>发表回复<br>请登录后评论...<br>登录<br>后才能评论<br>提交</div>
+            </div>
+        </div>
+        <div class="timeline-item" data-tags="电池技术,英国,石墨烯材料">
+            <span class="timeline-date">2026-04-17</span>
+            <div class="timeline-content">
+                <span class="news-source">ProSearch</span>
+                <div class="news-tags"><span class="news-tag">电池技术</span><span class="news-tag">英国</span><span class="news-tag">石墨烯材料</span></div>
+                <h3 class="news-title">First 石墨烯 获得斯旺西大学研究项目资金 石墨烯产业大会纳米材料graphene_网易订阅</h3>
+                <p class="news-desc">First Graphene已获得资金,与斯旺西大学合作研究项目,以确定该公司 Kainos 技术的市场潜力｡ 该资助价值约为130,000 美元,由Innovate UK 提供的第 12 轮创新者分析 (A4i) 第2阶段资助｡该资助专门用于帮助企业利用英国各地领先研究机构的专业知识来克服新技术的生产力或技术障碍,从而为市场做好准备｡ 为期六个月的项目将使人们更深入地了解 First 石墨烯 的...</p>
+                <a href="https://www.163.com/dy/article/JAJAG63105568D7G.html" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">First Graphene已获得资金,与斯旺西大学合作研究项目,以确定该公司 Kainos 技术的市场潜力｡ 该资助价值约为130,000 美元,由Innovate UK 提供的第 12 轮创新者分析 (A4i) 第2阶段资助｡该资助专门用于帮助企业利用英国各地领先研究机构的专业知识来克服新技术的生产力或技术障碍,从而为市场做好准备｡ 为期六个月的项目将使人们更深入地了解 First 石墨烯 的Kainos 技术,以及其利用可扩展的水动力空化制造工艺从石油原料中生产高质量电池级合成石墨和原始石墨烯的能力｡</div>
+            </div>
+        </div>
+        <div class="timeline-item" data-tags="行业资讯,石墨烯材料">
+            <span class="timeline-date">2026-04-17</span>
+            <div class="timeline-content">
+                <span class="news-source">ProSearch</span>
+                <div class="news-tags"><span class="news-tag">行业资讯</span><span class="news-tag">石墨烯材料</span></div>
+                <h3 class="news-title">Gerdau 石墨烯 推动巴西石墨烯标准的采用纳米技术石墨烯材料gerdaugraphene_网易订阅</h3>
+                <p class="news-desc">Graphene公司宣布,巴西已采用国际公认的石墨烯行业标准｡巴西标准由巴西国家标准论坛(ABNT)发布,与现有的国际石墨烯标准相同,该标准是与包括巴西在内的30多个国家合作制定的,根据ISO/TC 229 – 纳米技术｡该标准旨在表征构成石墨烯材料类别的不同产品,从而有助于新技术的发展｡ 此外,Gerdau Graphene于2024年4月8日至12日在巴西圣保罗主办了一个由纳米技术研究人员和行...</p>
+                <a href="https://www.163.com/dy/article/J02NP0VA05119OAR.html" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">Graphene公司宣布,巴西已采用国际公认的石墨烯行业标准｡巴西标准由巴西国家标准论坛(ABNT)发布,与现有的国际石墨烯标准相同,该标准是与包括巴西在内的30多个国家合作制定的,根据ISO/TC 229 – 纳米技术｡该标准旨在表征构成石墨烯材料类别的不同产品,从而有助于新技术的发展｡ 此外,Gerdau Graphene于2024年4月8日至12日在巴西圣保罗主办了一个由纳米技术研究人员和行业领导者组成的国际联盟｡</div>
+            </div>
+        </div>
+        <div class="timeline-item" data-tags="医疗检测,行业资讯,石墨烯材料">
+            <span class="timeline-date">2026-04-17</span>
+            <div class="timeline-content">
+                <span class="news-source">ProSearch</span>
+                <div class="news-tags"><span class="news-tag">医疗检测</span><span class="news-tag">行业资讯</span><span class="news-tag">石墨烯材料</span></div>
+                <h3 class="news-title">GrapheneUP推出用于纺织行业的下一代石墨烯增强配方涂层纺织品材料耐磨性_网易订阅</h3>
+                <p class="news-desc">GrapheneUP????是欧洲领先的石墨烯公司,拥有欧洲最大的多层石墨烯产量,已经开发并推向市场,用于纺织行业的新型石墨烯基产品:INKGUP?该配方已通过抗病毒(ISO 18184:2019)认证,也适用于SARS-CoV-2,抗静电,并具有出色的耐磨性和热调节性能｡使用GrapheneUP????生产的纺织品,旨在提供卓越的热调节｡适用于棉､平纹针织､莱卡等天然和合成面料｡</p>
+                <a href="https://www.163.com/dy/article/HFKKPRRD05119OAR.html" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">GrapheneUP????是欧洲领先的石墨烯公司,拥有欧洲最大的多层石墨烯产量,已经开发并推向市场,用于纺织行业的新型石墨烯基产品:INKGUP?该配方已通过抗病毒(ISO 18184:2019)认证,也适用于SARS-CoV-2,抗静电,并具有出色的耐磨性和热调节性能｡使用GrapheneUP????生产的纺织品,旨在提供卓越的热调节｡适用于棉､平纹针织､莱卡等天然和合成面料｡</div>
+            </div>
+        </div>
+        <div class="timeline-item" data-tags="行业资讯">
+            <span class="timeline-date">2026-04-17</span>
+            <div class="timeline-content">
+                <span class="news-source">ProSearch</span>
+                <div class="news-tags"><span class="news-tag">行业资讯</span></div>
+                <h3 class="news-title">Five 石墨烯 projects settle in Changzhou_我苏网</h3>
+                <p class="news-desc">Changzhou City in Jiangsu Province held a meeting to promote 石墨烯 行业 开发 on April 9, when five 石墨烯 projects agreed to settle down in the city’s Wujin District. 石墨烯,</p>
+                <a href="http://www.ourjiangsu.com/a/20180411/1523430945996.shtml" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">Changzhou City in Jiangsu Province held a meeting to promote 石墨烯 行业 开发 on April 9, when five 石墨烯 projects agreed to settle down in the city’s Wujin District. 石墨烯,</div>
+            </div>
+        </div>
+        <div class="timeline-item" data-tags="电池技术,石墨烯材料">
+            <span class="timeline-date">2026-04-17</span>
+            <div class="timeline-content">
+                <span class="news-source">ProSearch</span>
+                <div class="news-tags"><span class="news-tag">电池技术</span><span class="news-tag">石墨烯材料</span></div>
+                <h3 class="news-title">青岛科技大学《AFM》:Si/SiO2/石墨烯,用于高性能锂离子电池纳米graphenesio_网易订阅</h3>
+                <p class="news-desc">介 由各种功能建筑单元组成的上层结构是硅基材料等具有极端体积变化和结构不稳定性的锂离子电池(LIB)负极的纳米结构｡该结构的成功形成在于由硅纳米颗粒周围的桥接二氧化硅基体形成的强大的三维网络｡ 优化的Si/SiO2@graphene超级结构阳极在500次循环中提供了出色的循环寿命,在2 A g-1时约1180 mAh g-1;更值得注意的是,一系列技术揭示了Si/SiO2@graphene的上层结...</p>
+                <a href="https://www.163.com/dy/article/HOK9H1S80532LW3O.html" target="_blank" class="news-link">阅读原文 →</a>
+                <button class="expand-btn" onclick="toggleContent(this)">展开详情 ▼</button><div class="news-full-content" style="display:none">介 由各种功能建筑单元组成的上层结构是硅基材料等具有极端体积变化和结构不稳定性的锂离子电池(LIB)负极的纳米结构｡该结构的成功形成在于由硅纳米颗粒周围的桥接二氧化硅基体形成的强大的三维网络｡ 优化的Si/SiO2@graphene超级结构阳极在500次循环中提供了出色的循环寿命,在2 A g-1时约1180 mAh g-1;更值得注意的是,一系列技术揭示了Si/SiO2@graphene的上层结构电极可以有效地保持LIBs中电极和电解质之间的薄膜｡</div>
+            </div>
+        </div></div>
+        <footer>
+            <p>📡 数据来源: Graphene-Info | Graphene.tv | Google News</p>
+            <p>🔗 GitHub: <a href="https://github.com/Vincent1026/graphene-news" target="_blank">Vincent1026/graphene-news</a></p>
+            
+            <p>🤖 自动更新于 2026-04-17 15:10:26</p>
+        </footer>
+    </div>
+    <script>
+        function toggleContent(btn) {
+            const c = btn.nextElementSibling;
+            c.style.display = c.style.display === 'none' ? 'block' : 'none';
+            btn.textContent = c.style.display === 'none' ? '展开详情 ▼' : '收起详情 ▲';
+        }
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        const totalCount = document.getElementById('totalCount');
+        const filteredCount = document.getElementById('filteredCount');
+        const noResults = document.getElementById('noResults');
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tag = btn.dataset.tag;
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                let visibleCount = 0;
+                timelineItems.forEach(item => {
+                    const itemTags = item.dataset.tags.split(',');
+                    if (tag === 'all' || itemTags.includes(tag)) {
+                        item.classList.remove('hidden');
+                        visibleCount++;
+                    } else {
+                        item.classList.add('hidden');
+                    }
+                });
+                filteredCount.textContent = visibleCount;
+                noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>
